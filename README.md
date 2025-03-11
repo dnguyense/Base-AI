@@ -36,3 +36,5 @@ Tạo 1 chat mới với Claude 3.7 và add file Instruction.md
 - Luôn sử dụng git
 - Nếu biết cần code hoặc sửa file nào hãy add vào context để AI không phải chạy lòng vòng kiếm file
 - Khi revert bằng IDE có thể bị ảnh hưởng đến file đã chỉnh sửa khác nếu chạy cùng lúc 2 nhiệm vụ
+- Hãy lưu ý trên IDE chỉ revert được đến thao tác trước đó thôi chứ không revert được về trước đó 2 thao tác trở lên, nên khi làm cẩn thận
+- 1 hội thoại không kéo quá dài, thường là xong 1 module thì tạo 1 hội thoại mới
