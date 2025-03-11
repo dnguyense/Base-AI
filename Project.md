@@ -1,0 +1,1 @@
+Ý tưởng về project giải toán bằng AI code bằng android kotlin theo như hướng dẫn API trong API_Document.md, đây là một ứng dụng cho học sinh nên cần đưa ra các bước giải, các phương pháp giải khác nhau, giao diện đẹp mắt thu hút những người trẻ tuổi, sử dụng tối đa các thư viện bên thứ 3 nếu có, ở đây sẽ xử lý ảnh thông qua API AI nên không cần các thư viện LLM hỗ trợ.
