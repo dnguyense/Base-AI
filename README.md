@@ -35,3 +35,4 @@ Tạo 1 chat mới với Claude 3.7 và add file Instruction.md
 - Đừng tiếc code, nếu thấy bất thường là revert luôn về bước trước đó.
 - Luôn sử dụng git
 - Nếu biết cần code hoặc sửa file nào hãy add vào context để AI không phải chạy lòng vòng kiếm file
+- Khi revert bằng IDE có thể bị ảnh hưởng đến file đã chỉnh sửa khác nếu chạy cùng lúc 2 nhiệm vụ
