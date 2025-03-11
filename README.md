@@ -24,3 +24,5 @@ Add file Instruction.md vào và prompt: Hãy code theo hướng dẫn này
 ## Lưu ý:
 - Khi code mà thấy AI sửa lỗi nhiều lần không được ( khoảng 5-6 lần fix mà vẫn lỗi, thì revert về bước trước đó hoặc bản hoàn thiện gần nhất )
 - Dùng 3.7 sonnet thinking đối với các bước cần suy luận, còn bình thường không cần thiết vì nó làm chậm quá trình code.
+- Đừng tiếc code, nếu thấy bất thường là revert luôn về bước trước đó.
+- Luôn sử dụng git
