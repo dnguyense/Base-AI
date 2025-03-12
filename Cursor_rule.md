@@ -9,9 +9,6 @@
 - Maintain consistency with existing components
 - Ngôn ngữ tiếng Việt cho các phần trò chuyện và giải thích một cách hài hước của giới trẻ, ngôn ngữ ứng dụng mặc định là tiếng Anh
 
-# Help
-Sau khi hoàn thiện 1 tính năng hãy mô tả vào file Help.md để sau này tôi có thể hiểu được tính năng và cách hoạt động
-
 ## Code Style & Standards
 - Use English for all code and documentation.
 - Avoid raw types; use generics where appropriate.
@@ -61,9 +58,6 @@ function_a, function_b, function_c
 - Tạo phiên bản backup đơn giản trước thay đổi lớn
 - Không thay đổi đồng thời nhiều file/module quan trọng
 - Đánh giá mức độ ảnh hưởng trước mỗi thay đổi
-
-## Changelog ( Changelog.md )
-Luôn cập nhật Changelog.md, mô tả cụ thể yêu cầu và cách bạn xử lý. Ví dụ: Yêu cầu: bổ sung tính năng User. Tôi đã xây dựng cấu trúc database và .... hãy mô tả ngắn gọn tránh changelog quá dài
 
 ## General Rules:
 Newest changes always go at the top of the file
