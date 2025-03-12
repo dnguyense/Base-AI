@@ -5,6 +5,7 @@ Cấu hình Cursor Rule ( add trong IDE ) theo nội dung trong file Cursor_rule
 
 ## Bước 1: 
 Mô tả về ý tưởng project vào Project.md, về cấu trúc mong muốn, giao diện mong muốn, thư viện mong muốn
+- Phần thư viện này cứ vừa làm vừa cập nhật để tránh AI nó lấy thư viện lung tung.
 
 ## Bước 2: 
 =======
