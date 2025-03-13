@@ -1,44 +1,121 @@
-File để chứa tài liệu hướng dẫn api
-#API_Documentation.md 
+# Base AI Project for Cursor
 
-Cấu hình Cursor Rule ( add trong IDE ) theo nội dung trong file Cursor_rule.md
+Đây là base project để sử dụng với Cursor - trợ lý AI IDE mạnh mẽ. Dự án này cung cấp cấu trúc chuẩn và các rule AI được tối ưu hóa để làm việc hiệu quả với mọi loại dự án.
 
-## Bước 1: 
-Mô tả về ý tưởng project vào Project.md, về cấu trúc mong muốn, giao diện mong muốn, thư viện mong muốn
-- Phần thư viện này cứ vừa làm vừa cập nhật để tránh AI nó lấy thư viện lung tung.
+## Cấu trúc dự án
 
-## Bước 2: 
-=======
-### Project mới: 
-#### Bước 2.1:
-Add Project.md vào context và brainstorm về Project.md để mở rộng ý tưởng
-- hãy brainstorm với tôi về ý tưởng này, sao cho mở rộng nhất có thể về tính năng, cung cấp danh sách các gợi ý hoặc câu hỏi động não liên quan để kích thích tư duy sáng tạo và tạo ra nhiều ý tưởng đa dạng. Bao gồm các câu hỏi mở khuyến khích các giải pháp khám phá và đổi mới. Hãy cân nhắc hỏi về những thách thức, cơ hội tiềm ẩn và những cách tiếp cận độc đáo đối với chủ đề này. Nhằm mục đích truyền cảm hứng cho người tham gia để suy nghĩ sáng tạo và đóng góp những hiểu biết sâu sắc độc đáo. Đưa ra nhiều gợi ý khác nhau để phục vụ cho các phong cách và quan điểm tư duy khác nhau.
+```
+Base-AI-Project/
+├── .cursor/
+│   └── rules/
+│       ├── base-rules.mdc      # Rule cơ bản cho tất cả dự án
+│       ├── javascript-rules.mdc # Rule cho JS/TS/React/Vue/Angular...
+│       ├── python-rules.mdc    # Rule cho Python/Django/Flask/ML...
+│       ├── mobile-rules.mdc    # Rule cho React Native/Flutter/Swift/Kotlin
+│       └── backend-rules.mdc   # Rule cho phát triển backend
+├── API_Documentation.md        # Tài liệu API của dự án
+├── Changelog.md                # Ghi lại các thay đổi của dự án
+├── Codebase.md                 # Tóm tắt cấu trúc code cho AI hiểu
+├── Decisions.md                # Ghi lại các quyết định quan trọng
+├── Diagram.md                  # Sơ đồ kết nối giữa các màn hình
+├── Help.md                     # Hướng dẫn trợ giúp
+├── Instruction.md              # Hướng dẫn chính cho dự án
+├── Project.md                  # Mô tả tổng quan về dự án
+├── README.md                   # File này
+└── Base-AI-Project.code-workspace # Cấu hình VS Code workspace
+```
 
-Sau khi brainstorm xong thì yêu cầu viết vào Instruction.md:
-- Từ kịch bản này hãy thiết kế instruction cho ứng dụng vào Instruction.md ở đây sẽ là instruction tổng quan ( outline ) cho ứng dụng, instruction không tạo quá chi tiết, không bao gồm code, sao cho tiết kiệm tối đa token mà một AI khác vẫn có thể hiểu được
+## Cách sử dụng
 
-#### Bước 2.2:
-- Từ Instruction.md này hãy thiết kế instruction cho từng phần của ứng dụng, bạn có thể tạo instruction cho các module, mỗi phần sẽ có 1 file instruction .md riêng sau đó được liên kết từ Instruction.md chính. Instruction.md sẽ là outline, để 1 AI sẽ thực hiện lần lượt các phần sao cho thành 1 sản phẩm hoàn chỉnh. Theo logic là mỗi lần thực hiện 1 nhiệm vụ nào đó thì AI sẽ đọc file Instruction.md và truy cập vào các instruction con theo từng nhiệm vụ cụ thể. Các instruction cần chia nhỏ ra từng phần và liên kết với nhau thông qua Instruction.md
+### 1. Cài đặt Cursor
 
-=======
-### Đối với project cũ:
-- Tôi cần bạn rà soát từng phần của project và tạo thành các instruction md để 1 AI khác có thể hiểu được, sẽ chia nhiều instruction nhỏ và từ instruction chính ( Instruction.md ) sẽ liên kết đến các instruction của từng module. Ngoài ra cũng có instruction về UI, và 1 instruction liệt kê danh sách các resource và thư viện sẵn có. Bạn cần rà soát từng lớp, trước tiên là cấu trúc thư mục, sau đó bạn xem lại Instruction.md để hiểu được cấu trúc của project và tiếp tục rà soát phần tiếp theo.
+Tải và cài đặt [Cursor](https://cursor.sh/) từ trang chủ.
 
-## Bước 3:
-Tạo 1 chat mới với Claude 3.7 và add file Instruction.md 
-- Code theo hướng dẫn trong instruction này
+### 2. Sử dụng base project
 
-** Lưu ý **: Cần mô tả về code cho ngôn ngữ gì hay nền tảng gì vào Instruction.md
+1. Clone repo này vào máy của bạn:
+```bash
+git clone https://github.com/yourusername/Base-AI-Project.git my-new-project
+cd my-new-project
+```
 
-## Lưu ý:
-- Khi code mà thấy AI sửa lỗi nhiều lần không được ( khoảng 5-6 lần fix mà vẫn lỗi, thì revert về bước trước đó hoặc bản hoàn thiện gần nhất )
-- Dùng 3.7 sonnet thinking đối với các bước cần suy luận, còn bình thường không cần thiết vì nó làm chậm quá trình code.
-- Đừng tiếc code, nếu thấy bất thường là revert luôn về bước trước đó.
-- Luôn sử dụng git
-- Nếu biết cần code hoặc sửa file nào hãy add vào context để AI không phải chạy lòng vòng kiếm file
-- Khi revert bằng IDE có thể bị ảnh hưởng đến file đã chỉnh sửa khác nếu chạy cùng lúc 2 nhiệm vụ
-- Hãy lưu ý trên IDE chỉ revert được đến thao tác trước đó thôi chứ không revert được về trước đó 2 thao tác trở lên, nên khi làm cẩn thận
-- 1 hội thoại không kéo quá dài, thường là xong 1 module thì tạo 1 hội thoại mới
-- Khi cần sửa, xóa hoặc phát triển module liên quan đến các module còn lại thì sẽ yêu cầu AI rà soát + ý tưởng về module mới rồi tạo thành 1 file .md mới sau đó từ file .md đó, sau khi rà soát thấy ổn thì mới bắt đầu cho AI làm
+2. Xóa thư mục .git và khởi tạo repository mới:
+```bash
+rm -rf .git
+git init
+```
 
-# Nhớ là sai nhiều quá thì revert làm lại, không được tiếc
+3. Mở dự án với Cursor:
+```bash
+cursor .
+```
+
+### 3. Tùy chỉnh workspace
+
+1. Chỉnh sửa file `Base-AI-Project.code-workspace`:
+   - Đổi tên "Base-AI-Project" thành tên dự án của bạn
+   - Tùy chỉnh màu sắc theme để phân biệt giữa các dự án
+
+2. Đổi tên file workspace:
+```bash
+mv Base-AI-Project.code-workspace MyProject.code-workspace
+```
+
+## Quy trình làm việc được đề xuất
+
+### Bước 1: Xác định ý tưởng dự án
+Mô tả ý tưởng dự án, cấu trúc, giao diện và thư viện mong muốn vào `Project.md`.
+
+### Bước 2: Brainstorming và tạo hướng dẫn
+- **Dự án mới**: 
+  1. Add `Project.md` vào context và brainstorm để mở rộng ý tưởng
+  2. Từ kết quả brainstorm, tạo instruction tổng quan vào `Instruction.md`
+  3. Thiết kế instruction chi tiết cho từng phần, mỗi phần có file riêng và liên kết từ `Instruction.md`
+
+- **Dự án hiện có**:
+  Rà soát từng phần của dự án và tạo các instruction để AI khác có thể hiểu được cấu trúc dự án.
+
+### Bước 3: Phát triển dự án
+Tạo chat mới với Claude 3.7 và add file `Instruction.md` để bắt đầu code theo hướng dẫn.
+
+## Các rules Cursor
+
+Project sử dụng hệ thống rule mới của Cursor, lưu trong thư mục `.cursor/rules`:
+
+1. **base-rules.mdc**: Các rule chung cho mọi dự án
+2. **javascript-rules.mdc**: Rule cho các dự án JavaScript/TypeScript
+3. **python-rules.mdc**: Rule cho các dự án Python
+4. **mobile-rules.mdc**: Rule cho phát triển ứng dụng di động
+5. **backend-rules.mdc**: Rule cho phát triển backend
+
+## Giải thích file key
+
+- **API_Documentation.md**: Mô tả chi tiết các API endpoints, request/response
+- **Changelog.md**: Ghi lại lịch sử thay đổi của dự án
+- **Codebase.md**: Cung cấp tóm tắt cấu trúc code để AI hiểu nhanh
+- **Decisions.md**: Ghi lại các quyết định quan trọng trong quá trình phát triển
+- **Diagram.md**: Sơ đồ kết nối giữa các màn hình/component
+- **Instruction.md**: Hướng dẫn chính cho toàn bộ dự án
+- **Project.md**: Mô tả tổng quan về dự án, mục tiêu và yêu cầu
+
+## Lưu ý quan trọng
+
+- Khi AI không sửa được lỗi sau 5-6 lần, revert về bản hoàn thiện gần nhất
+- Sử dụng Claude 3.7 Sonnet với chế độ thinking cho các bước cần suy luận phức tạp
+- Đừng tiếc code, revert ngay khi thấy bất thường
+- Luôn sử dụng git để theo dõi thay đổi
+- Add file cần code/sửa vào context để AI làm việc hiệu quả hơn
+- Một hội thoại không nên kéo quá dài, thường là hoàn thành một module rồi tạo hội thoại mới
+- Khi cần phát triển module liên quan đến các module khác, yêu cầu AI rà soát và tạo file .md mô tả ý tưởng trước
+
+## Các quy tắc dành cho AI
+
+- Sử dụng tiếng Việt cho giao tiếp và giải thích
+- Sử dụng tiếng Anh cho code và tài liệu kỹ thuật
+- Tóm tắt các class đã hoàn thiện vào `Codebase.md`
+- Không tự ý tối ưu hoặc xóa code khi không được yêu cầu
+- Dừng ngay nếu không sửa được lỗi sau 3 lần cố gắng
+
+## Đóng góp
+
+Mọi đóng góp cho base project đều được hoan nghênh! Hãy tạo pull request hoặc issue nếu bạn có ý tưởng cải thiện.
