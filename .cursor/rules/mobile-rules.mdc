@@ -1,1 +1,159 @@
- 
+---
+description: Rules for mobile app development with React Native, Flutter, Swift, and Kotlin
+globs: "*.dart,*.swift,*.kt,*.java,*.tsx,*.jsx"
+alwaysApply: false
+---
+# Mobile Development Rules
+description: Rules for mobile app development with React Native, Flutter, Swift, and Kotlin
+globs: "*.dart,*.swift,*.kt,*.java,*.tsx,*.jsx"
+
+## General Mobile Guidelines
+- Design for offline-first experience
+- Implement proper state management
+- Optimize performance for mobile devices
+- Implement proper error handling
+- Use responsive design for different screen sizes
+- Consider accessibility features
+- Implement proper deep linking
+- Optimize battery usage
+- Consider proper permissions management
+- Use proper analytics implementation
+
+## React Native Specific
+- Use functional components with hooks
+- Implement proper navigation (React Navigation)
+- Use proper state management (Redux, MobX, Context API)
+- Optimize list rendering with FlatList
+- Use proper memory management
+- Implement proper native module integration
+- Use proper styling (StyleSheet)
+- Implement proper error boundary
+- Consider using Expo for development
+- Optimize JavaScript bundle size
+
+## Flutter Specific
+- Use StatelessWidget for UI-only components
+- Use StatefulWidget when managing state
+- Implement proper navigation 
+- Use proper state management (Provider, Bloc, Riverpod)
+- Optimize widget tree
+- Use proper asynchronous operations
+- Implement proper error handling
+- Use proper theming
+- Use const constructors for immutable widgets
+- Follow Material/Cupertino design guidelines
+- Organize code with feature-first or layer-first architecture
+- Implement clean architecture with domain, data, and presentation layers
+- Use code generation for JSON serialization (json_serializable)
+- Implement dependency injection with get_it or injectable
+- Use freezed for immutable models
+- Implement proper form validation with form_bloc or reactive_forms
+- Optimize build methods to minimize rebuilds
+- Use extension methods for cleaner code
+- Implement proper localization with intl package
+- Create reusable widgets for common UI patterns
+- Use animations judiciously with AnimationController
+- Optimize image loading with cached_network_image
+- Use DevTools for debugging and performance profiling
+- Implement proper offline caching strategies
+- Follow DRY principles with helper functions
+- Use proper platform checks for platform-specific code
+- Implement proper error reporting with Sentry or Firebase Crashlytics
+- Use proper asset management with .yaml configuration
+- Optimize native plugins usage (method channels)
+- Use proper CI/CD pipelines for Flutter (Codemagic, Bitrise)
+
+## Swift Specific (iOS)
+- Follow Swift style guide
+- Use SwiftUI for new projects when possible
+- Use MVVM or similar architecture
+- Implement proper memory management
+- Use proper error handling
+- Use proper concurrency (GCD, Operations)
+- Implement proper UI state handling
+- Use proper dependency management (Swift Package Manager, CocoaPods)
+- Follow Human Interface Guidelines
+- Optimize for different iOS devices
+
+## Kotlin Specific (Android)
+- Follow Kotlin style guide
+- Use Jetpack Compose for new projects when possible
+- Use MVVM or similar architecture
+- Implement proper coroutines for asynchronous operations
+- Use proper dependency injection (Hilt, Koin)
+- Implement proper navigation (Jetpack Navigation)
+- Use proper permissions handling
+- Follow Material Design guidelines
+- Optimize for different Android devices and versions
+- Use proper view binding or data binding
+- Implement clean architecture with domain, data, and UI layers
+- Use Flow and StateFlow for reactive programming
+- Implement proper database access with Room
+- Use WorkManager for background tasks
+- Implement proper network calls with Retrofit
+- Use proper image loading with Glide or Coil
+- Follow SOLID principles for maintainable code
+- Implement proper error handling with sealed classes
+- Use extension functions for cleaner code
+- Implement proper data caching strategies
+- Optimize UI performance with RecyclerView optimizations
+- Use ViewModels and LiveData correctly
+- Implement proper Fragment management
+- Use Kotlin DSLs for clean and maintainable code
+- Use Kotlin Coroutines correctly for async operations
+- Implement proper memory leak prevention
+- Use proper motion and transition animations
+- Implement proper API versioning strategy
+- Use modularization for large projects (feature modules)
+- Follow proper Gradle dependency management
+- Implement proper ProGuard rules for release builds
+
+## Testing Mobile Apps
+- Write unit tests for business logic
+- Write UI tests for critical flows
+- Implement proper mocking for dependencies
+- Test on multiple device types and sizes
+- Test offline functionality
+- Test performance under different network conditions
+- Test proper error handling
+- Test accessibility features
+- Test deep linking
+- Test proper permissions handling
+
+## Performance Optimization
+- Optimize startup time
+- Minimize main thread work
+- Optimize rendering performance
+- Implement proper caching strategies
+- Optimize network requests
+- Implement proper image loading and caching
+- Use proper memory management
+- Minimize battery usage
+- Optimize animations
+- Use proper code splitting
+
+## Security
+- Implement proper authentication and authorization
+- Store sensitive data securely (Keychain, Keystore)
+- Implement proper certificate pinning
+- Use proper encryption for data at rest and in transit
+- Implement proper session management
+- Prevent common vulnerabilities (XSS, CSRF)
+- Sanitize user input
+- Implement proper app signing
+- Obfuscate code where necessary
+- Keep dependencies updated
+
+## App Store Optimization
+- Optimize app size
+- Provide proper app metadata
+- Create compelling screenshots and videos
+- Write proper app descriptions
+- Implement proper analytics for conversion tracking
+- Consider localization for different markets
+- Implement proper in-app purchases
+- Follow app store guidelines
+- Implement proper ratings and reviews prompts
+- Consider A/B testing for store listing
+
+@file ../README.md 

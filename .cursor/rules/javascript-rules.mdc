@@ -1,1 +1,128 @@
- 
+---
+description: Rules for JavaScript and TypeScript projects including React, Vue, Angular, Node.js
+globs: "*.js,*.jsx,*.ts,*.tsx,*.vue"
+alwaysApply: false
+---
+# JavaScript Project Rules
+description: Rules for JavaScript and TypeScript projects including React, Vue, Angular, Node.js
+globs: "*.js,*.jsx,*.ts,*.tsx,*.vue"
+
+## Code Style
+- Use ES6+ syntax where possible
+- Prefer const over let, avoid var completely
+- Use destructuring for object and array assignments
+- Use arrow functions for anonymous functions
+- Use template literals instead of string concatenation
+- Use async/await instead of promises where possible
+- Use optional chaining (?.) and nullish coalescing (??) operators
+
+## TypeScript Specific
+- Use explicit typing rather than 'any' where possible
+- Use interfaces for object shapes, types for unions/intersections
+- Use enums for related constants
+- Use generics for reusable components
+- Use proper TypeScript utility types (Partial, Readonly, etc.)
+
+## React Specific
+- Use functional components with hooks
+- Use proper hook dependencies in useEffect, useMemo, useCallback
+- Use proper key prop in lists
+- Separate business logic from UI components
+- Use React.lazy for code splitting
+- Consider using React Context for state management
+- Implement proper error boundaries
+
+## Vue Specific
+- Use Composition API for new projects
+- Use proper props validation
+- Use computed properties instead of methods for derived data
+- Use watchers sparingly
+- Implement proper error handling in lifecycle hooks
+- Use slots for flexible component composition
+
+## Angular Specific
+- Follow Angular style guide
+- Use OnPush change detection where appropriate
+- Implement proper lifecycle hooks
+- Use async pipe for observables
+- Use reactive forms over template-driven forms
+- Implement proper error handling
+
+## Node.js Specific
+- Use async/await for asynchronous operations
+- Implement proper error handling with try/catch
+- Use environment variables for configuration
+- Implement proper logging
+- Use middleware for common functionality
+- Implement proper security measures
+- Organize code with a clean architecture pattern (e.g., MVC, Clean Architecture)
+- Implement proper database access with ORM (Prisma, TypeORM, Sequelize)
+- Use dependency injection for testable code
+- Implement proper authentication using JWT or OAuth
+- Use proper validation with libraries like Joi, Zod, or class-validator
+- Implement proper API documentation with Swagger/OpenAPI
+- Use proper process management (PM2, Docker)
+- Implement proper graceful shutdown handling
+- Use clustering to take advantage of multi-core systems
+- Implement proper rate limiting for APIs
+- Use proper caching strategies (Redis, in-memory)
+- Implement proper file upload handling
+- Use proper HTTP status codes
+- Implement proper pagination for list endpoints
+- Use proper request/response validation middleware
+- Implement proper database migration strategy
+- Use proper transaction management
+- Implement proper background job processing (Bull, Agenda)
+- Use proper WebSocket implementation when needed (Socket.io, ws)
+- Implement proper health check endpoints
+- Use proper API versioning
+- Implement proper database connection pooling
+- Use proper schema validation
+- Implement proper monitoring (Prometheus, Grafana)
+- Use proper CI/CD pipelines
+- Implement proper API gateway pattern for microservices
+- Use proper micro-service communication (gRPC, message queues)
+- Implement proper database indexing strategy
+- Use proper circuit breaker patterns
+- Implement proper message queue usage (RabbitMQ, Kafka)
+
+## Testing
+- Write unit tests for business logic
+- Write integration tests for component interaction
+- Write end-to-end tests for critical user flows
+- Use proper mocking for external dependencies
+- Implement proper test coverage
+
+## Performance
+- Optimize bundle size with code splitting
+- Implement proper memoization
+- Avoid unnecessary re-renders
+- Use proper lazy loading for routes and components
+- Implement proper caching strategies
+- Use server-side rendering or static site generation where appropriate
+
+## Security
+- Prevent XSS attacks
+- Implement proper CSRF protection
+- Sanitize user input
+- Use HTTPS
+- Implement proper authentication and authorization
+- Keep dependencies updated
+
+## Accessibility
+- Use semantic HTML
+- Implement proper ARIA attributes
+- Ensure keyboard navigation
+- Provide alternative text for images
+- Ensure proper color contrast
+- Test with screen readers
+
+## SEO
+- Use proper meta tags
+- Implement proper structured data
+- Ensure proper page titles and descriptions
+- Implement proper canonical URLs
+- Ensure proper sitemap
+- Implement proper robots.txt
+
+@file ../README.md 

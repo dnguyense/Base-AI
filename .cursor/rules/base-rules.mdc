@@ -1,1 +1,154 @@
- 
+---
+description: Global rules for all AI interactions in this project
+globs: "*.*"
+alwaysApply: true
+---
+# Base Project Rules
+description: Global rules for all AI interactions in this project
+globs: "*.*"
+
+## Project Management
+- Reference Instruction.md for all feature implementations
+- Reference API_Documentation.md for all API endpoints and their request/response formats
+- Reference Diagram.md for understanding screen connections and flows
+- Ensure new code aligns with defined milestones
+- Follow the established database schema
+- Consider cost optimizations defined in metrics
+- Maintain consistency with existing components
+- Use Vietnamese for conversations and explanations with a modern, youthful tone; default application language is English
+- Sau khi làm xong 1 nhiệm vụ, mô tả ở cuối cùng về nhiệm vụ đã làm
+
+## Code Style & Standards
+- Use English for all code and documentation
+- Avoid raw types; use generics where appropriate
+- Keep methods concise and focused on a single task
+- Test each feature upon completion
+
+## Language Support
+- Always create applications/projects with multilingual structure (English default)
+- Support additional languages as specified in Instruction.md
+
+## Codebase Structure
+- Summarize classes upon code completion in Codebase.md for other AIs to understand
+
+Example format:
+```
+- Module/Package: [Name]
+- [ClassName] (Main functionality)
+  function_a, function_b, function_c
+```
+
+## Instruction Guidelines
+- Keep instructions concise, not overly detailed
+- Exclude code from instructions
+- Minimize token usage while maintaining clarity for other AIs
+
+## Error Resolution Protocol
+- If unable to fix an error after 3 attempts, stop immediately
+- Suggest 2-3 alternative approaches with brief explanations
+- Clearly state: "Tôi đã thử 3 cách nhưng chưa thành công"
+- Do not continue fixing without new guidance
+
+## Change Tracking
+- Briefly store code state before major changes
+- Mark stable checkpoints during development
+- Avoid multiple major changes simultaneously
+
+## Effective Debugging
+- Analyze root causes before fixing
+- Clearly distinguish symptoms from causes
+- List all possible hypotheses when encountering errors
+- Systematically verify hypotheses
+- Change approach entirely after continued failures
+- When identifying an issue, explicitly ask: "Is this really THE issue I'm looking for or just AN issue that I noticed?"
+- Always state: "Let me make sure this is really the issue" and conduct an analysis before writing code
+- Conduct differential diagnosis before attempting bug fixes
+- Only make one major change at a time and test before moving forward
+
+## Optimized Workflow
+- Summarize session beginnings/endings in 2-3 lines
+- Record important decisions in Decisions.md
+- Clearly identify priorities when facing multiple issues
+- Predict potential problems from each change
+
+## Safety Mechanisms
+- Alert when changes carry high risk
+- Create simple backups before major changes
+- Avoid simultaneous changes to multiple critical files/modules
+- Assess impact level before each change
+- Always be careful before deleting a file
+- Be careful when editing files outside the current task
+- Never optimize code automatically; only optimize when requested
+- Never delete unrelated code without explicit permission
+
+## Changelog Conventions
+- Newest changes at the top of the file
+- Versions in descending order (newest to oldest)
+- Group related changes under the same category
+- Use bullet points for each entry
+- Mark completed features in Instruction.md using the Legend tasklist
+
+## Task Status Legend
+- ✅ Completed
+- ⏳ In Progress
+- ❌ Not Started
+
+## Git Practices
+- Commit after each successful run with clear descriptions
+- Only commit after successful tests
+- Follow conventional commits format: <type>[optional scope]: <description>
+- Use lowercase letters in commit messages
+- Keep commit message titles under 60 characters
+- Valid types: feat, fix, docs, style, refactor, test, chore, perf
+- Add detailed body for complex changes using multiple -m flags
+- Reference related issues when applicable
+
+## Code Architecture
+- Follow SOLID principles
+- Implement proper error handling and logging
+- Use dependency injection where appropriate
+- Write unit tests for core functionality
+- Document public APIs and complex logic
+- Maintain clean package structure
+- Use design patterns appropriately
+
+## Communication Style
+- Provide clear explanations when requested
+- Ask for clarification when requirements are unclear
+- Give step-by-step guidance for complex tasks
+- Use Vietnamese for instructions and explanations
+
+## Debugging Approach
+- DO NOT immediately edit code to fix issues
+- Explain issues in simple terms
+- Present multiple solutions and options
+- ALWAYS ask for approval before proceeding with code changes
+
+## Critical Work Practices
+- Stop work when a problem requires fixing
+- Analyze before editing code
+- Use reasoning; don't assume changes will achieve desired results
+- Re-read notes before taking action; update after making changes
+- Check system architecture to prevent redundant functionality
+- When identifying an issue, explicitly verify if it's THE main issue or just AN issue
+- Conduct differential diagnosis before attempting bug fixes
+- Make one major change at a time and test before moving forward
+
+## Best Practices
+- Write self-documenting code with clear naming
+- Include proper exception handling
+- Optimize performance where critical
+- Consider memory management
+- Follow security best practices
+- Write maintainable and extensible code
+
+## Safety Guarantees
+- Exercise caution before deleting files
+- Be careful when editing files outside the current task
+- Never optimize code automatically; only optimize when requested
+- Never delete unrelated code without explicit permission
+- Maintain and always check system architecture document to ensure no redundant functionality
+
+@file ../Instruction.md
+@file ../API_Documentation.md
+@file ../Diagram.md 
