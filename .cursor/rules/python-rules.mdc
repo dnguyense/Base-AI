@@ -1,1 +1,119 @@
- 
+---
+description: Rules for Python projects including Django, Flask, FastAPI, data science, and ML
+globs: "*.py"
+alwaysApply: false
+---
+# Python Project Rules
+description: Rules for Python projects including Django, Flask, FastAPI, data science, and ML
+globs: "*.py"
+
+## Code Style
+- Follow PEP 8 style guide
+- Use 4 spaces for indentation
+- Limit line length to 88 characters (Black formatter default)
+- Use snake_case for variables, functions, methods, and modules
+- Use PascalCase for classes
+- Use UPPER_CASE for constants
+- Use docstrings for documentation
+- Use type hints (PEP 484) for function signatures
+
+## Project Structure
+- Use virtual environments (venv, pipenv, or conda)
+- Use requirements.txt or Pipfile for dependency management
+- Organize code into modules and packages
+- Use __init__.py to expose module functionality
+- Separate business logic from user interface
+
+## Django Specific
+- Follow Django's MVT architecture
+- Use Django's ORM for database operations
+- Use Django forms for input validation
+- Use Django templates for presentation
+- Use Django REST framework for APIs
+- Implement proper authentication and permissions
+- Use proper URL routing
+
+## Flask Specific
+- Use Flask Blueprints for modularity
+- Use Flask-SQLAlchemy for ORM
+- Use Flask-WTF for forms
+- Use Flask-Login for authentication
+- Use proper error handling
+- Use proper configuration management
+
+## FastAPI Specific
+- Use Pydantic models for request/response validation
+- Use Path, Query, Body for parameter validation
+- Use proper dependency injection
+- Implement proper error handling
+- Use proper OpenAPI documentation
+- Use async/await for asynchronous operations
+
+## Data Science Specific
+- Use pandas for data manipulation
+- Use numpy for numerical operations
+- Use matplotlib/seaborn for visualization
+- Use scikit-learn for machine learning
+- Use jupyter notebooks for exploration
+- Use proper data cleaning techniques
+- Implement proper outlier detection
+- Use proper feature engineering
+- Use proper model validation
+
+## ML/AI Specific
+- Use TensorFlow/PyTorch for deep learning
+- Use proper model architecture
+- Use proper data preprocessing
+- Use proper model evaluation
+- Implement proper hyperparameter tuning
+- Use proper model serialization
+- Implement proper model deployment
+- Consider model explainability
+
+## Testing
+- Use pytest for unit testing
+- Use pytest-cov for coverage
+- Mock external dependencies
+- Write tests for both success and failure cases
+- Use fixtures for test setup
+- Use parameterized tests for similar test cases
+- Aim for high test coverage
+
+## Performance
+- Use profiling to identify bottlenecks
+- Use caching where appropriate
+- Use generators for large data sets
+- Use context managers for resource management
+- Use proper database query optimization
+- Consider asynchronous programming for I/O-bound operations
+- Consider multiprocessing for CPU-bound operations
+
+## Security
+- Sanitize user input
+- Use parameterized queries to prevent SQL injection
+- Use proper authentication and authorization
+- Keep dependencies updated
+- Use HTTPS
+- Store secrets securely (environment variables or secret management systems)
+- Implement proper data validation
+- Use proper CSRF protection
+
+## Documentation
+- Write clear and concise docstrings
+- Document function parameters, return types, and exceptions
+- Use type hints
+- Generate API documentation (Sphinx, MkDocs)
+- Provide usage examples
+- Document known limitations
+
+## Best Practices
+- Follow the principle of least surprise
+- Keep functions and classes small and focused
+- Use exceptions for exceptional cases
+- Use context managers for resource cleanup
+- Use property decorators instead of getters and setters
+- Use dataclasses for data containers
+- Avoid global state
+- Use proper error handling
+
+@file ../README.md 

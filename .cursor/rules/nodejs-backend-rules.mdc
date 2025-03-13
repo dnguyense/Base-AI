@@ -1,0 +1,158 @@
+---
+description: Specific rules for Node.js backend development with Express, NestJS, and other frameworks
+globs: "*.js,*.ts"
+alwaysApply: false
+---
+# Node.js Backend Development Rules
+description: Specific rules for Node.js backend development with Express, NestJS, and other frameworks
+globs: "*.js,*.ts"
+
+## Architecture Patterns
+- Use Clean Architecture or Hexagonal Architecture for maintainable code
+- Separate business logic from infrastructure concerns
+- Implement proper dependency injection
+- Use repository pattern for data access
+- Implement service layer for business logic
+- Use DTO pattern for data validation and transformation
+- Follow SOLID principles strictly
+- Use facade pattern for complex subsystems
+- Implement proper error handling with custom error classes
+- Use strategy pattern for algorithms that vary
+
+## Express.js Specific
+- Organize routes using Express Router
+- Use middleware for cross-cutting concerns
+- Implement proper error handling middleware
+- Use async middleware wrapper (express-async-handler)
+- Implement proper request validation middleware
+- Use helmet for security headers
+- Implement proper CORS setup
+- Use compression middleware for response compression
+- Implement proper file upload handling with multer
+- Use proper session management (if applicable)
+- Implement proper rate limiting with express-rate-limit
+- Use proper body parsing middleware
+- Implement proper cookie handling
+- Use morgan or winston for logging
+- Implement proper static file serving
+
+## NestJS Specific
+- Use modules to organize code
+- Implement proper providers with dependency injection
+- Use decorators for metadata and annotations
+- Implement proper interceptors for cross-cutting concerns
+- Use filters for error handling
+- Implement proper guards for authorization
+- Use pipes for input validation and transformation
+- Implement proper custom decorators
+- Use middleware when necessary
+- Implement proper exception filters
+- Use proper module architecture (feature modules)
+- Implement proper controller design
+- Use proper service pattern
+- Implement proper repository pattern
+- Use proper DTO validation with class-validator
+
+## Database Patterns
+- Use proper ORM/ODM (Prisma, TypeORM, Mongoose)
+- Implement proper migration strategy
+- Use proper seeding approach
+- Implement proper transaction management
+- Use proper connection pooling
+- Implement proper database indexing strategy
+- Use proper query optimization
+- Implement proper pagination
+- Use proper soft delete pattern when applicable
+- Implement proper audit logging
+- Use proper schema validation
+- Implement proper relations (associations)
+- Use proper cascade behaviors
+- Implement proper database normalization
+- Use proper NoSQL patterns (if applicable)
+
+## Authentication & Authorization
+- Use proper JWT implementation
+- Implement proper OAuth2 flow (if applicable)
+- Use proper password hashing with bcrypt
+- Implement proper role-based access control
+- Use proper session management (if applicable)
+- Implement proper token refresh mechanism
+- Use proper API key authentication (if applicable)
+- Implement proper multi-factor authentication (if applicable)
+- Use proper cookie security
+- Implement proper CSRF protection
+
+## API Design
+- Follow RESTful principles
+- Use proper HTTP status codes
+- Implement proper versioning strategy
+- Use proper response format
+- Implement proper error response format
+- Use proper pagination for list endpoints
+- Implement proper filtering and sorting
+- Use proper hypermedia links (HATEOAS)
+- Implement proper content negotiation
+- Use proper rate limiting headers
+
+## Testing & Quality Assurance
+- Write proper unit tests with Jest
+- Implement proper integration tests
+- Use proper mocking (jest.mock, Sinon)
+- Implement proper end-to-end tests
+- Use proper test database setup
+- Implement proper test data factories
+- Use proper test hooks (before, after)
+- Implement proper test coverage thresholds
+- Use proper CI setup for testing
+- Implement proper linting with ESLint
+
+## Performance Optimization
+- Use proper caching strategy (Redis, in-memory)
+- Implement proper database query optimization
+- Use proper connection pooling
+- Implement proper response compression
+- Use proper memory management
+- Implement proper load balancing
+- Use proper horizontal scaling
+- Implement proper response time monitoring
+- Use proper database indexing
+- Implement proper CDN integration (if applicable)
+
+## Security Best Practices
+- Follow OWASP top 10 guidelines
+- Implement proper input validation
+- Use proper output encoding
+- Implement proper authorization checks
+- Use proper HTTPS setup
+- Implement proper secrets management
+- Use proper dependency scanning
+- Implement proper security headers
+- Use proper rate limiting
+- Implement proper logging for security events
+
+## Deployment & DevOps
+- Use proper Docker containerization
+- Implement proper CI/CD pipeline
+- Use proper environment configuration
+- Implement proper health checks
+- Use proper process management (PM2)
+- Implement proper logging strategy
+- Use proper monitoring (Prometheus, Grafana)
+- Implement proper backup strategy
+- Use proper disaster recovery plan
+- Implement proper documentation
+
+## Microservices Patterns
+- Use proper service discovery
+- Implement proper API gateway
+- Use proper circuit breaker pattern
+- Implement proper event-driven architecture
+- Use proper message queues (RabbitMQ, Kafka)
+- Implement proper service mesh (if applicable)
+- Use proper distributed tracing
+- Implement proper bulkhead pattern
+- Use proper saga pattern for distributed transactions
+- Implement proper event sourcing (if applicable)
+
+@file ../README.md
+@file ../API_Documentation.md 

@@ -1,0 +1,44 @@
+{
+  "rules": [
+    {
+      "path": "rules/base-rules.mdc",
+      "description": "Global rules for all AI interactions in this project",
+      "globs": ["*.*"]
+    },
+    {
+      "path": "rules/javascript-rules.mdc",
+      "description": "Rules for JavaScript and TypeScript projects including React, Vue, Angular, Node.js",
+      "globs": ["*.js", "*.jsx", "*.ts", "*.tsx", "*.vue"]
+    },
+    {
+      "path": "rules/python-rules.mdc",
+      "description": "Rules for Python projects including Django, Flask, FastAPI, data science, and ML",
+      "globs": ["*.py"]
+    },
+    {
+      "path": "rules/mobile-rules.mdc",
+      "description": "Rules for mobile app development with React Native, Flutter, Swift, and Kotlin",
+      "globs": ["*.dart", "*.swift", "*.kt", "*.java", "*.tsx", "*.jsx"]
+    },
+    {
+      "path": "rules/backend-rules.mdc",
+      "description": "Rules for backend development across different languages and frameworks",
+      "globs": ["*.js", "*.ts", "*.py", "*.go", "*.java", "*.php", "*.rb", "*.cs"]
+    },
+    {
+      "path": "rules/nodejs-backend-rules.mdc",
+      "description": "Specific rules for Node.js backend development with Express, NestJS, and other frameworks",
+      "globs": ["*.js", "*.ts"]
+    },
+    {
+      "path": "rules/flutter-rules.mdc",
+      "description": "Comprehensive rules for Flutter app development",
+      "globs": ["*.dart"]
+    },
+    {
+      "path": "rules/android-rules.mdc",
+      "description": "Comprehensive rules for Android app development with Kotlin and Java",
+      "globs": ["*.kt", "*.java", "*.xml"]
+    }
+  ]
+} 

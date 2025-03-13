@@ -1,1 +1,131 @@
- 
+---
+description: Rules for backend development across different languages and frameworks
+globs: "*.js,*.ts,*.py,*.go,*.java,*.php,*.rb,*.cs"
+alwaysApply: false
+---
+# Backend Development Rules
+description: Rules for backend development across different languages and frameworks
+globs: "*.js,*.ts,*.py,*.go,*.java,*.php,*.rb,*.cs"
+
+## API Design
+- Follow REST or GraphQL principles
+- Use proper HTTP status codes
+- Implement proper request validation
+- Use proper response formats (JSON, XML)
+- Document APIs (OpenAPI, Swagger)
+- Implement proper versioning
+- Use proper error handling
+- Use proper pagination
+- Implement proper filtering, sorting, and searching
+- Use proper authentication and authorization
+
+## Database Design
+- Use proper normalization
+- Implement proper indexing
+- Use proper relationships
+- Implement proper constraints
+- Use migrations for schema changes
+- Optimize queries
+- Implement proper transactions
+- Consider database scaling (sharding, replication)
+- Use appropriate data types
+- Use ORM or query builders when appropriate
+
+## Security
+- Implement proper authentication (JWT, OAuth)
+- Implement proper authorization (RBAC, ABAC)
+- Prevent common vulnerabilities (OWASP Top 10)
+- Sanitize user input
+- Use parameterized queries
+- Implement proper rate limiting
+- Use HTTPS
+- Implement proper logging
+- Keep dependencies updated
+- Use proper secret management
+
+## Performance
+- Implement proper caching (Redis, Memcached)
+- Optimize database queries
+- Use proper connection pooling
+- Implement proper load balancing
+- Consider horizontal scaling
+- Optimize API responses
+- Use proper logging levels
+- Implement proper background jobs
+- Use proper pagination
+- Implement proper timeout handling
+
+## Scalability
+- Design for statelessness
+- Use message queues for asynchronous tasks
+- Implement proper caching strategies
+- Use microservices architecture when appropriate
+- Consider containerization (Docker)
+- Implement proper service discovery
+- Use proper load balancing
+- Consider serverless architecture when appropriate
+- Implement proper database scaling
+- Use proper CDN for static assets
+
+## Reliability
+- Implement proper error handling
+- Use retries with exponential backoff
+- Implement proper logging
+- Use proper monitoring
+- Implement proper alerting
+- Use circuit breakers for external services
+- Implement proper fallbacks
+- Consider fault tolerance
+- Use proper database backups
+- Implement proper disaster recovery
+
+## Testing
+- Write unit tests
+- Write integration tests
+- Write API tests
+- Implement proper mocking
+- Use proper test data
+- Implement proper test coverage
+- Use TDD when appropriate
+- Test edge cases
+- Implement proper CI/CD
+- Use proper environment isolation
+
+## Architecture
+- Follow clean architecture principles
+- Separate business logic from infrastructure
+- Use dependency injection
+- Implement proper logging
+- Use proper error handling
+- Follow SOLID principles
+- Use design patterns appropriately
+- Implement proper configuration management
+- Use proper environment variables
+- Implement proper feature toggles
+
+## DevOps
+- Implement proper CI/CD
+- Use proper environment isolation
+- Implement proper monitoring
+- Use proper logging
+- Implement proper alerting
+- Use proper infrastructure as code
+- Consider containerization
+- Implement proper database migrations
+- Use proper secret management
+- Implement proper backup and restore
+
+## Documentation
+- Document API endpoints
+- Document database schema
+- Document architecture decisions
+- Document deployment processes
+- Document environment variables
+- Document configuration options
+- Provide clear README
+- Document dependencies
+- Document testing procedures
+- Document troubleshooting guides
+
+@file ../README.md
+@file ../API_Documentation.md 

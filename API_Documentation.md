@@ -2,7 +2,8 @@
 Luôn log các thông tin khi request và response để debug.
 
 ## Chat AI
-Sử dụng API chat cho tất cả các tương tác AI. API này hỗ trợ tiếp tục cuộc trò chuyện thông qua conversation_id.
+Sử dụng API chat cho tất cả các tương tác AI. API này hỗ trợ tiếp tục cuộc trò chuyện thông qua conversation_id, nếu là 1 cuộc trò chuyện mới hoặc không có request trước đó thì conversation_id = null.
+Lưu ý: conversation_id chỉ được lấy từ phản hồi từ API chứ không được tự tạo ra
 
 ```
 curl --location 'https://ai.dreamapi.net/v1/chat-messages' \
