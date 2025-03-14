@@ -7,6 +7,8 @@ alwaysApply: false
 description: Comprehensive rules for Android app development with Kotlin and Java
 globs: "*.kt,*.java,*.xml"
 
+## S 
+
 ## Architecture & Project Structure
 - Sử dụng Clean Architecture hoặc MVVM cho projects
 - Tách biệt các layer: presentation, domain, data
