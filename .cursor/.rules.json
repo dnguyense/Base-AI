@@ -39,6 +39,11 @@
       "path": "rules/android-rules.mdc",
       "description": "Comprehensive rules for Android app development with Kotlin and Java",
       "globs": ["*.kt", "*.java", "*.xml"]
+    },
+    {
+      "path": "rules/smali-rules.mdc",
+      "description": "Comprehensive rules for working with Smali code and APK decompilation projects",
+      "globs": ["*.smali", "*.apk", "*.dex", "*.xml", "AndroidManifest.xml", "*.yml", "*.yaml", "*.json"]
     }
   ]
 } 
