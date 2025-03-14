@@ -116,6 +116,12 @@ Project sử dụng hệ thống rule mới của Cursor, lưu trong thư mục 
 - Không tự ý tối ưu hoặc xóa code khi không được yêu cầu
 - Dừng ngay nếu không sửa được lỗi sau 3 lần cố gắng
 
-## Đóng góp
+## Prompt
+### Project mới
+```Từ kịch bản trong README.md này hãy thiết kế instruction cho từng phần của ứng dụng, bạn có thể tạo instruction cho các module, mỗi phần sẽ có 1 file instruction .md riêng sau đó được liên kết từ Instruction.md chính. Instruction.md sẽ là outline, để 1 AI sẽ thực hiện lần lượt các phần sao cho thành 1 sản phẩm hoàn chỉnh. Theo logic là mỗi lần thực hiện 1 nhiệm vụ nào đó thì AI sẽ đọc file Instruction.md và truy cập vào các instruction con theo từng nhiệm vụ cụ thể. Các instruction cần chia nhỏ ra từng phần và liên kết với nhau thông qua Instruction.md```
 
-Mọi đóng góp cho base project đều được hoan nghênh! Hãy tạo pull request hoặc issue nếu bạn có ý tưởng cải thiện.
+### Project cũ
+```Tôi cần bạn rà soát từng phần của project và tạo thành các instruction md để 1 AI khác có thể hiểu được, sẽ chia nhiều instruction nhỏ và từ instruction chính ( Instruction.md ) sẽ liên kết đến các instruction của từng module. Ngoài ra cũng có instruction về UI, và 1 instruction liệt kê danh sách các resource và thư viện sẵn có. Bạn cần rà soát từng lớp, trước tiên là cấu trúc thư mục, sau đó bạn xem lại Instruction.md để hiểu được cấu trúc của project và tiếp tục rà soát phần tiếp theo.```
+
+### Demo
+```Bây giờ tôi cần cập nhật thêm tính năng và giao diện như hình, với icon sử dụng Material Icons, bạn sẽ mô tả instruction tạm gọi là Upgrade instruction md, sau đó link từ instruction chính, hãy rà soát tính năng đang có và mô tả những thứ cần điều chỉnh, những thứ cần thêm. Ngoài ra tôi có bổ sung AI theo như hướng dẫn trong ApiDocument.md bạn hãy rà soát và dựa trên tư duy của developer cho doanh nghiệp thì cần bổ sung tính năng AI gì, kết hợp với các tính năng sẵn có, để đảm bảo giúp cho người dùng nhiều nhất. Bạn cũng có thể học hỏi trong PointInstruction.md để bổ sung tính năng tính point, vì ứng dụng sẽ kiếm tiền chủ yếu nhờ quảng cáo và inapp vậy nên cần tạo 1 Point instruction mới kết hợp các tính năng hiện tại để tối ưu được doanh thu.```
