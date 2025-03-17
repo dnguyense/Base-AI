@@ -30,18 +30,26 @@ globs: "*.*"
 
 ## Codebase Structure
 - Summarize classes upon code completion in Codebase.md for other AIs to understand
+- KHÔNG bao gồm code thực tế trong Codebase.md, chỉ mô tả chức năng
+- Tập trung vào mô tả cấu trúc và mối quan hệ giữa các thành phần
 
 Example format:
 ```
 - Module/Package: [Name]
 - [ClassName] (Main functionality)
-  function_a, function_b, function_c
+  - function_a: Mô tả chức năng, không bao gồm code
+  - function_b: Mô tả chức năng, không bao gồm code
+  - function_c: Mô tả chức năng, không bao gồm code
 ```
 
 ## Instruction Guidelines
 - Keep instructions concise, not overly detailed
 - Exclude code from instructions
 - Minimize token usage while maintaining clarity for other AIs
+- Viết hướng dẫn dưới dạng mô tả chức năng, không bao gồm code
+- Tập trung vào mục đích và cách sử dụng thay vì chi tiết triển khai
+- Sử dụng ngôn ngữ rõ ràng, dễ hiểu cho AI khác
+- Tổ chức nội dung theo cấu trúc logic với các tiêu đề và danh sách
 
 ## Error Resolution Protocol
 - If unable to fix an error after 3 attempts, stop immediately
@@ -148,6 +156,16 @@ Example format:
 - Never optimize code automatically; only optimize when requested
 - Never delete unrelated code without explicit permission
 - Maintain and always check system architecture document to ensure no redundant functionality
+
+## Markdown Documentation Guidelines
+- Tất cả file .md phải được viết dưới dạng hướng dẫn cho AI khác
+- KHÔNG bao gồm code trong file .md, chỉ mô tả chức năng và cách sử dụng
+- Sử dụng ngôn ngữ đơn giản, dễ hiểu cho AI khác
+- Tổ chức nội dung theo cấu trúc rõ ràng với các tiêu đề và danh sách
+- Mô tả mục đích, chức năng, và cách sử dụng của từng thành phần
+- Sử dụng các ví dụ dưới dạng mô tả, không phải code thực tế
+- Tối ưu hóa token bằng cách viết ngắn gọn nhưng đầy đủ thông tin
+- Đảm bảo AI khác có thể hiểu và thực hiện theo hướng dẫn mà không cần xem code
 
 @file ../Instruction.md
 @file ../API_Documentation.md
