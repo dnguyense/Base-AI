@@ -1,0 +1,123 @@
+# Markdown Documentation Rules
+description: Quy tắc tổ chức và viết tài liệu Markdown cho AI trong dự án
+globs: "*.md"
+
+## Nguyên tắc tổng quát
+- Tất cả file .md là tài liệu hướng dẫn cho AI, không phải cho người dùng cuối
+- Tối ưu hóa cấu trúc để AI dễ xử lý thông tin
+- Không bao gồm code thực tế, chỉ mô tả chức năng và cấu trúc
+- Sử dụng tiếng Anh cho tên các thành phần kỹ thuật
+- Tài liệu phải có cấu trúc rõ ràng với các tiêu đề cấp độ phân cấp
+- Tối ưu hóa token bằng cách viết ngắn gọn nhưng đầy đủ thông tin
+
+## Cấu trúc tài liệu
+- Mỗi file .md phải có cấu trúc phân cấp rõ ràng
+- Bắt đầu với tiêu đề chính (h1) mô tả nội dung tổng quan
+- Sử dụng tiêu đề cấp 2 (h2) cho các phần chính
+- Sử dụng tiêu đề cấp 3-4 (h3-h4) cho các chi tiết
+- Sử dụng danh sách (bullet points) để liệt kê các mục ngắn
+- Sử dụng bảng cho dữ liệu có cấu trúc hoặc so sánh
+- Mỗi phần lớn cần một đoạn tóm tắt ngắn gọn
+
+## Nội dung tài liệu
+- Tập trung vào mô tả chức năng, không phải cách triển khai
+- Mô tả tính năng theo góc nhìn người dùng và mục đích sử dụng
+- Sử dụng ngôn ngữ đơn giản, dễ hiểu cho AI khác
+- Tránh sử dụng thuật ngữ chuyên ngành khi không cần thiết
+- Không sao chép code, chỉ mô tả mục đích và chức năng
+
+## Liên kết tài liệu
+- Sử dụng liên kết nội bộ để kết nối các tài liệu liên quan
+- Tham chiếu đến các file khác bằng cú pháp [Tên tài liệu](đường dẫn)
+- Tài liệu tổng quan phải liên kết đến tài liệu chi tiết
+- Tài liệu chi tiết phải có liên kết quay lại tài liệu tổng quan
+- Sử dụng mục lục để dễ dàng điều hướng trong tài liệu dài
+
+## Cấu trúc tổng quan và chi tiết
+- Tài liệu tổng quan (Project.md, README.md):
+  - Mô tả tổng thể dự án và mục tiêu
+  - Liệt kê các thành phần chính và mối quan hệ
+  - Tham chiếu đến các tài liệu chi tiết bằng liên kết
+  - Xác định quy trình làm việc tổng thể
+  - Mô tả kiến trúc hệ thống ở mức cao
+
+- Tài liệu chi tiết (Instruction.md, API_Docs.md, etc.):
+  - Tập trung vào một thành phần hoặc chức năng cụ thể
+  - Mô tả chi tiết yêu cầu và đặc điểm kỹ thuật
+  - Bao gồm liên kết trở lại tài liệu tổng quan
+  - Sử dụng các ví dụ minh họa (không phải code)
+  - Xác định ràng buộc và mối quan hệ với các thành phần khác
+
+## Cấu trúc tài liệu hướng dẫn chi tiết
+- Tiêu đề: Tên chức năng/phần cần triển khai
+- Mô tả: Giải thích ngắn gọn về chức năng
+- Thành phần: Danh sách các phần cần triển khai
+- Yêu cầu chức năng: Các yêu cầu cụ thể mà chức năng phải đáp ứng
+- Ràng buộc: Các giới hạn hoặc quy tắc cần tuân thủ
+- Tham chiếu: Liên kết đến các tài liệu liên quan
+- Tiêu chí hoàn thành: Cách xác định khi nào nhiệm vụ hoàn thành
+
+## Mẫu tài liệu tổng quan
+```
+# [Tên dự án/hệ thống]
+
+## Tổng quan
+[Mô tả ngắn gọn về mục tiêu và chức năng chính]
+
+## Kiến trúc hệ thống
+[Mô tả cấu trúc tổng thể của hệ thống]
+
+## Thành phần chính
+- [Thành phần 1]: [Mô tả ngắn] - [Liên kết đến tài liệu chi tiết]
+- [Thành phần 2]: [Mô tả ngắn] - [Liên kết đến tài liệu chi tiết]
+- [Thành phần 3]: [Mô tả ngắn] - [Liên kết đến tài liệu chi tiết]
+
+## Quy trình làm việc
+[Mô tả quy trình làm việc giữa các thành phần]
+
+## Hướng dẫn phát triển
+[Liên kết đến các tài liệu hướng dẫn chi tiết]
+```
+
+## Mẫu tài liệu chi tiết
+```
+# [Tên chức năng/thành phần]
+
+## Mô tả
+[Mô tả chi tiết về chức năng và mục đích sử dụng]
+
+## Các thành phần con
+- [Thành phần con 1]: [Mô tả]
+- [Thành phần con 2]: [Mô tả]
+
+## Yêu cầu chức năng
+- [Yêu cầu 1]
+- [Yêu cầu 2]
+- [Yêu cầu 3]
+
+## Ràng buộc
+- [Ràng buộc 1]
+- [Ràng buộc 2]
+
+## Tham chiếu
+- [Liên kết đến tài liệu liên quan]
+- [Liên kết đến tài liệu tổng quan]
+
+## Tiêu chí hoàn thành
+- [Tiêu chí 1]
+- [Tiêu chí 2]
+```
+
+## Quy tắc cập nhật tài liệu
+- Cập nhật tài liệu song song với phát triển code
+- Đánh dấu rõ các phần đã hoàn thành và đang thực hiện
+- Ghi chú các thay đổi quan trọng trong tài liệu
+- Đảm bảo tài liệu luôn phản ánh đúng trạng thái hiện tại của dự án
+- Lưu lại các quyết định thiết kế quan trọng trong Decisions.md
+
+## Tối ưu hóa cho AI
+- Sử dụng ngôn ngữ đơn giản, dễ phân tích
+- Cấu trúc tài liệu theo cách nhất quán giữa các file
+- Tránh nội dung trùng lặp giữa các tài liệu
+- Tập trung vào thông tin cần thiết cho AI để thực hiện nhiệm vụ
+- Liệt kê các điểm chính thay vì văn xuôi dài 

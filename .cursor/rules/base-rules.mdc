@@ -1,7 +1,7 @@
 ---
-description: Global rules for all AI interactions in this project
-globs: "*.*"
-alwaysApply: true
+description: 
+globs: 
+alwaysApply: false
 ---
 # Base Project Rules
 description: Global rules for all AI interactions in this project
@@ -9,7 +9,7 @@ globs: "*.*"
 
 ## Project Management
 - Reference Instruction.md for all feature implementations
-- Reference API_Documentation.md for all API endpoints and their request/response formats
+- Reference API_Docs.md for all API endpoints and their request/response formats
 - Reference Diagram.md for understanding screen connections and flows
 - Ensure new code aligns with defined milestones
 - Follow the established database schema
@@ -157,16 +157,9 @@ Example format:
 - Never delete unrelated code without explicit permission
 - Maintain and always check system architecture document to ensure no redundant functionality
 
-## Markdown Documentation Guidelines
-- Tất cả file .md phải được viết dưới dạng hướng dẫn cho AI khác
-- KHÔNG bao gồm code trong file .md, chỉ mô tả chức năng và cách sử dụng
-- Sử dụng ngôn ngữ đơn giản, dễ hiểu cho AI khác
-- Tổ chức nội dung theo cấu trúc rõ ràng với các tiêu đề và danh sách
-- Mô tả mục đích, chức năng, và cách sử dụng của từng thành phần
-- Sử dụng các ví dụ dưới dạng mô tả, không phải code thực tế
-- Tối ưu hóa token bằng cách viết ngắn gọn nhưng đầy đủ thông tin
-- Đảm bảo AI khác có thể hiểu và thực hiện theo hướng dẫn mà không cần xem code
-
-@file ../Instruction.md
-@file ../API_Documentation.md
-@file ../Diagram.md 
+## Documentation Structure
+- Tài liệu phải có cấu trúc phân cấp từ tổng quan đến chi tiết
+- Mỗi tài liệu chi tiết phải được liên kết từ một tài liệu tổng quan
+- Các tài liệu cùng cấp phải có cấu trúc nhất quán
+- Sử dụng liên kết nội bộ để kết nối giữa các tài liệu
+- Tham khảo markdown-rules.mdc để biết thêm chi tiết về cách viết tài liệu 
