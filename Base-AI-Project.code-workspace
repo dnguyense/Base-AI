@@ -7,6 +7,7 @@
   ],
   "settings": {
     // Editor settings
+    "window.title": "Ⓜ️ ====== ${separator} ${activeEditorShort} -- Đổi tên nếu muôn =====",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": false,
     "editor.tabSize": 2,
@@ -58,6 +59,7 @@
     "cursor.features.completions.enabled": true,
 
     // Color coding different workspaces for easier identification
+//Đổi màu ở đây
     "workbench.colorCustomizations": {
       "activityBar.background": "#1E5582",
       "titleBar.activeBackground": "#1E5582",
