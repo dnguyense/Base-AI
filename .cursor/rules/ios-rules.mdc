@@ -1,0 +1,207 @@
+---
+description: Comprehensive rules for iOS app development with Swift and SwiftUI
+globs: "*.swift,*.storyboard,*.xib,*.xcodeproj,*.xcworkspace,*.pbxproj,*.plist"
+alwaysApply: false
+---
+# iOS Development Rules
+description: Comprehensive rules for iOS app development with Swift and SwiftUI
+globs: "*.swift,*.storyboard,*.xib,*.xcodeproj,*.xcworkspace,*.pbxproj,*.plist"
+
+## Architecture & Design Patterns
+- Sử dụng MVVM, Clean Architecture hoặc VIPER cho các dự án mới
+- Tách biệt rõ ràng giữa các layer (Presentation, Domain, Data)
+- Sử dụng Dependency Injection để giảm sự phụ thuộc giữa các module
+- Áp dụng Protocol-Oriented Programming khi phù hợp
+- Sử dụng Factory Pattern cho việc khởi tạo đối tượng phức tạp
+- Áp dụng Coordinator Pattern cho điều hướng màn hình
+- Sử dụng Repository Pattern cho truy cập dữ liệu
+- Tuân thủ nguyên tắc SOLID trong thiết kế
+
+## Swift Best Practices
+- Sử dụng Swift mới nhất và các tính năng hiện đại
+- Ưu tiên sử dụng struct thay vì class khi có thể
+- Sử dụng extension để tổ chức code theo chức năng
+- Áp dụng Protocol Composition thay vì kế thừa
+- Sử dụng enum với associated values cho state management
+- Tận dụng type inference nhưng vẫn chỉ định type khi cần thiết
+- Sử dụng lazy initialization khi phù hợp
+- Áp dụng property observers (didSet, willSet) thay vì setter methods
+- Sử dụng guard để early return và tránh pyramid of doom
+- Tận dụng các tính năng như map, filter, reduce cho collection
+- Sử dụng Result type cho error handling
+- Áp dụng Codable protocol cho JSON parsing
+- Sử dụng weak và unowned references đúng cách để tránh retain cycles
+
+## UI Development
+- Ưu tiên sử dụng SwiftUI cho các dự án mới
+- Sử dụng UIKit khi cần các tính năng chưa có trong SwiftUI
+- Áp dụng Auto Layout với NSLayoutConstraint hoặc DSL
+- Sử dụng UIStackView để layout đơn giản và linh hoạt
+- Tạo UI components có thể tái sử dụng
+- Tuân thủ Human Interface Guidelines của Apple
+- Thiết kế UI responsive cho nhiều kích thước màn hình
+- Sử dụng Dark Mode và Dynamic Type
+- Tối ưu hóa hiệu suất rendering với layer optimization
+- Sử dụng UICollectionViewCompositionalLayout cho layouts phức tạp
+- Áp dụng UIViewControllerTransitioningDelegate cho custom transitions
+
+## Concurrency & Performance
+- Sử dụng Swift Concurrency (async/await) cho code bất đồng bộ
+- Áp dụng Task và TaskGroup cho concurrent operations
+- Sử dụng DispatchQueue khi cần kiểm soát chi tiết
+- Tránh blocking main thread
+- Sử dụng Operation và OperationQueue cho task phức tạp
+- Áp dụng lazy loading cho dữ liệu và UI
+- Tối ưu hóa memory footprint
+- Sử dụng Instruments để phát hiện memory leaks và bottlenecks
+- Áp dụng caching cho network requests và images
+- Tối ưu hóa battery usage
+
+## Networking
+- Sử dụng URLSession cho network requests
+- Áp dụng Combine hoặc async/await cho xử lý bất đồng bộ
+- Tạo abstraction layer cho networking code
+- Xử lý errors và connectivity issues
+- Implement proper retry mechanism
+- Sử dụng certificate pinning cho bảo mật
+- Áp dụng caching và throttling
+- Xử lý cancel operations khi cần thiết
+- Sử dụng pagination cho large data sets
+- Implement proper timeout handling
+
+## Data Management
+- Sử dụng Core Data cho persistent storage phức tạp
+- Áp dụng UserDefaults cho simple preferences
+- Sử dụng Keychain cho sensitive data
+- Implement proper data migration strategies
+- Áp dụng CRUD operations một cách nhất quán
+- Sử dụng FileManager đúng cách
+- Implement proper backup và restore mechanisms
+- Sử dụng CloudKit cho iCloud integration
+- Áp dụng proper data validation
+- Xử lý data conflicts
+
+## Testing
+- Viết unit tests cho business logic
+- Implement UI tests cho critical flows
+- Sử dụng XCTest framework
+- Áp dụng Test-Driven Development khi có thể
+- Sử dụng mocks và stubs cho dependencies
+- Test trên nhiều device và iOS versions
+- Implement snapshot testing cho UI
+- Sử dụng code coverage để đảm bảo test quality
+- Áp dụng continuous integration
+- Viết performance tests khi cần thiết
+
+## Dependency Management
+- Sử dụng Swift Package Manager (SPM) cho dependencies
+- Hoặc sử dụng CocoaPods/Carthage nếu cần thiết
+- Chỉ định version cụ thể cho dependencies
+- Kiểm tra license compatibility
+- Tránh quá nhiều dependencies
+- Cập nhật dependencies thường xuyên
+- Sử dụng vendoring cho critical dependencies
+- Kiểm tra security vulnerabilities
+- Tạo wrappers cho third-party libraries
+- Cân nhắc tự implement thay vì sử dụng thư viện nhỏ
+
+## Build & Deployment
+- Sử dụng xcconfig files cho build configurations
+- Tạo schemes cho các môi trường khác nhau (dev, staging, prod)
+- Sử dụng build phases cho automation
+- Áp dụng code signing đúng cách
+- Implement proper versioning (CFBundleVersion và CFBundleShortVersionString)
+- Sử dụng fastlane cho CI/CD
+- Tối ưu hóa app size
+- Implement proper crash reporting
+- Sử dụng TestFlight cho beta testing
+- Tuân thủ App Store guidelines
+
+## Build Commands
+- Sử dụng Xcode để build và run: Command+R
+- Build từ command line với xcodebuild:
+  ```
+  xcodebuild -project YourProject.xcodeproj -scheme YourScheme -configuration Release
+  ```
+- Build và archive cho distribution:
+  ```
+  xcodebuild -project YourProject.xcodeproj -scheme YourScheme -configuration Release archive -archivePath ./build/YourApp.xcarchive
+  ```
+- Export IPA từ archive:
+  ```
+  xcodebuild -exportArchive -archivePath ./build/YourApp.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath ./build
+  ```
+- Clean build folder:
+  ```
+  xcodebuild clean -project YourProject.xcodeproj -scheme YourScheme
+  ```
+- Build với workspace (CocoaPods):
+  ```
+  xcodebuild -workspace YourWorkspace.xcworkspace -scheme YourScheme -configuration Release
+  ```
+- Run tests từ command line:
+  ```
+  xcodebuild test -project YourProject.xcodeproj -scheme YourScheme -destination 'platform=iOS Simulator,name=iPhone 14'
+  ```
+
+## Security
+- Implement proper authentication và authorization
+- Sử dụng Keychain cho sensitive data
+- Áp dụng App Transport Security (ATS)
+- Implement certificate pinning
+- Sử dụng secure coding practices
+- Sanitize user input
+- Protect against common vulnerabilities
+- Implement proper session management
+- Sử dụng encryption cho data at rest
+- Tuân thủ privacy requirements (GDPR, CCPA)
+
+## Accessibility
+- Sử dụng VoiceOver và Dynamic Type
+- Implement proper accessibility labels và hints
+- Sử dụng Accessibility Inspector
+- Test với VoiceOver
+- Áp dụng proper color contrast
+- Sử dụng semantic UI elements
+- Implement proper focus navigation
+- Sử dụng accessibility traits đúng cách
+- Áp dụng reduced motion khi cần thiết
+- Tuân thủ WCAG guidelines
+
+## Localization
+- Sử dụng NSLocalizedString cho text
+- Implement proper pluralization với Stringsdict
+- Sử dụng Base Internationalization
+- Áp dụng right-to-left (RTL) support
+- Sử dụng Auto Layout cho accommodating text length
+- Implement proper date và number formatting
+- Sử dụng Xcode's localization workflow
+- Test trên multiple locales
+- Áp dụng localized assets khi cần thiết
+- Sử dụng context comments cho translators
+
+## App Store Optimization
+- Tối ưu hóa app size
+- Sử dụng proper keywords
+- Tạo compelling screenshots và app preview videos
+- Viết clear và concise app description
+- Implement in-app ratings và reviews prompt
+- Sử dụng phased releases
+- Áp dụng proper categorization
+- Implement App Analytics
+- Sử dụng TestFlight cho beta testing
+- Tuân thủ App Store Review Guidelines
+
+## Documentation
+- Sử dụng proper comments và documentation
+- Áp dụng Swift Documentation Comments (///)
+- Tạo README và contribution guidelines
+- Document architecture decisions
+- Sử dụng diagrams khi cần thiết
+- Maintain change log
+- Document known issues và workarounds
+- Sử dụng proper version control commit messages
+- Tạo API documentation
+- Maintain project wiki khi cần thiết
+
+@file ../README.md 
