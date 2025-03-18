@@ -111,6 +111,9 @@ Example format:
 - Add detailed body for complex changes using multiple -m flags
 - Reference related issues when applicable
 
+## Weather
+- Đối với các tính năng có thể tích hợp được được dữ liệu thời tiết thì xem trong [weather-basic.md](weather-basic.md)
+
 ## Code Architecture
 - Follow SOLID principles
 - Implement proper error handling and logging
