@@ -8,51 +8,25 @@ Version 1.0.3
 
 Chuẩn bị instruction, đây là giai đoạn quan trọng cần làm chi tiết, vì đây giống như bản thiết kế
 
-1. brainstorm với AI về ý tưởng
-1. tạo khung sườn bằng cách tạo instruction từ README ( ý tưởng ) hoặc brainstorm, tham khảo apk nếu có
-1. tạo instructions chung cho toàn bộ dự án
-1. từ instruction chung yêu cầu AI tạo instruction chi tiết cho từng module
-1. tạo các màn hình từ các instruction đã tạo, nếu cần tham khảo apk thì thêm vào
-1. tạo logic xử lý giữa các màn hình
-1. tạo instructions về quảng cáo và cách sắp xếp quảng cáo, tỷ lệ
-1. instruction về các thư viện sử dụng, các resource ( nếu có )
+1. tạo khung sườn bằng cách tạo instruction từ README hoặc brainstorm, tham khảo apk nếu có
+2. tạo instruction giao diện chung, tiếp tục tham khảo apk nếu là clone
+3. tạo các màn hình từ các instruction đã tạo
+4. tạo logic giữa các màn hình
+5. bổ sung quảng cáo
+6. instruction về các thư viện sử dụng, các resource
 
-## Lưu ý quan trọng
+# Tùy chỉnh workspace
 
-- Khi AI không sửa được lỗi sau 5-6 lần, revert về bản hoàn thiện gần nhất
-- Sử dụng Claude 3.7 Sonnet với chế độ thinking cho các bước cần suy luận phức tạp
-- Đừng tiếc code, revert ngay khi thấy bất thường
-- Luôn sử dụng git để theo dõi thay đổi
-- Add file cần code/sửa vào context để AI làm việc hiệu quả hơn
-- Một hội thoại không nên kéo quá dài, thường là hoàn thành một module rồi tạo hội thoại mới
-- Khi cần phát triển module liên quan đến các module khác, yêu cầu AI rà soát và tạo file .md mô tả ý tưởng
+1. Chỉnh sửa file `Base-AI-Project.code-workspace`:
 
-## Prompt thường dùng
+   - Đổi tên "Base-AI-Project" thành tên dự án của bạn
+   - Tùy chỉnh màu sắc theme để phân biệt giữa các dự án
 
-### Project mới
+2. Đổi tên file workspace:
 
-`Từ kịch bản trong README.md này hãy thiết kế instruction cho từng phần của ứng dụng, bạn có thể tạo instruction cho các module, mỗi phần sẽ có 1 file instruction .md riêng sau đó được liên kết từ Instruction.md chính. Instruction.md sẽ là outline, để 1 AI sẽ thực hiện lần lượt các phần sao cho thành 1 sản phẩm hoàn chỉnh. Theo logic là mỗi lần thực hiện 1 nhiệm vụ nào đó thì AI sẽ đọc file Instruction.md và truy cập vào các instruction con theo từng nhiệm vụ cụ thể. Các instruction cần chia nhỏ ra từng phần và liên kết với nhau thông qua Instruction.md`
-
-### Project cũ
-
-`Tôi cần bạn rà soát từng phần của project và tạo thành các instruction md để 1 AI khác có thể hiểu được, sẽ chia nhiều instruction nhỏ và từ instruction chính ( Instruction.md ) sẽ liên kết đến các instruction của từng module. Ngoài ra cũng có instruction về UI, và 1 instruction liệt kê danh sách các resource và thư viện sẵn có. Bạn cần rà soát từng lớp, trước tiên là cấu trúc thư mục, sau đó bạn xem lại Instruction.md để hiểu được cấu trúc của project và tiếp tục rà soát phần tiếp theo.`
-
-### Tạo các màn hình
-`Từ các instruction chính, bạn hãy rà soát và tạo thành các instruction (.md) về các screen cụ thể vào trong /screen/, ở đây sẽ có về giao diện và các tính năng cụ thể của các màn, sao cho 1 AI khác có thể hiểu được`
-
-`hãy mô tả cách các màn liên kết với nhau, sau đó link đến từ Instruction.md `
-
-### Check lại
-`Tôi vừa tạo xong cấu trúc của dự án, tôi cần bạn rà soát và mô tả lại cho tôi xem cách hiểu của bạn về dự án và cách bạn sẽ thực hiện khi bắt đầu`
-
-### Prompt khác
-`phần phân tích AI cần bổ sung cache với thời gian khác nhau vì có những dữ liệu cần phân tích thường xuyên, có những phần không cần, để tránh tốn chi phí, có những phần không cần thiết phân tích AI mà chỉ cần tính toán theo công thức. Ngoài ra bổ sung thêm màn profile và settings, profile thì sẽ bao gồm các thông tin cá nhân và các thông tin mà AI cần để phân tích cá nhân hóa và chính xác, cùng đó là phần tính điểm. Theo cơ chế gamify của toàn bộ dự án và logic quảng cáo cho tất cả các màn`
-
-
-
-### Demo
-
-`Bây giờ tôi cần cập nhật thêm tính năng và giao diện như hình, với icon sử dụng Material Icons, bạn sẽ mô tả instruction tạm gọi là Upgrade instruction md, sau đó link từ instruction chính, hãy rà soát tính năng đang có và mô tả những thứ cần điều chỉnh, những thứ cần thêm. Ngoài ra tôi có bổ sung AI theo như hướng dẫn trong ApiDocument.md bạn hãy rà soát và dựa trên tư duy của developer cho doanh nghiệp thì cần bổ sung tính năng AI gì, kết hợp với các tính năng sẵn có, để đảm bảo giúp cho người dùng nhiều nhất. Bạn cũng có thể học hỏi trong PointInstruction.md để bổ sung tính năng tính point, vì ứng dụng sẽ kiếm tiền chủ yếu nhờ quảng cáo và inapp vậy nên cần tạo 1 Point instruction mới kết hợp các tính năng hiện tại để tối ưu được doanh thu.`
+```bash
+mv Base-AI-Project.code-workspace MyProject.code-workspace
+```
 
 ## Quy trình làm việc được đề xuất
 
