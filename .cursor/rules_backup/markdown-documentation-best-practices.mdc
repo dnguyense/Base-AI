@@ -1,0 +1,10 @@
+name: markdown-documentation-best-practices.mdc
+description: Best practices for organizing and writing Markdown documentation for AI in the project
+globs: "*.md"
+
+- Use Markdown files exclusively for AI documentation, not for end-users
+- Optimize structure for AI information processing
+- Describe functionality and structure, not actual code
+- Use English for technical component names
+- Ensure clear hierarchical structure with headings
+- Write concisely to optimize token usage while maintaining completeness 

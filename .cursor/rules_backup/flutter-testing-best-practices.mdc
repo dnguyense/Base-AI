@@ -1,0 +1,14 @@
+name: flutter-testing-best-practices.mdc
+description: Best practices for testing in Flutter
+globs: **/*.dart
+
+- Write proper widget tests
+- Implement proper unit tests for business logic
+- Use proper mocking with mocktail
+- Implement proper integration tests
+- Use proper golden tests for UI
+- Implement proper test data factories
+- Use proper test coverage
+- Implement proper CI/CD for tests
+- Use proper test fixtures
+- Implement proper test double strategy 

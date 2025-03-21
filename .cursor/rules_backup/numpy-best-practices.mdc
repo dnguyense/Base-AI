@@ -1,0 +1,9 @@
+name: numpy-best-practices
+description: Best practices for numerical computing with NumPy
+globs: "**/*.py"
+
+- Use vectorized operations instead of explicit loops
+- Leverage NumPy's broadcasting for efficient array operations
+- Use appropriate data types to optimize memory usage
+- Utilize NumPy's random module for reproducible random operations
+- Profile your code to identify and optimize performance bottlenecks 

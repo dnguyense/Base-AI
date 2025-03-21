@@ -1,0 +1,13 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+name: typescript-best-practices
+description: TypeScript coding standards and type safety guidelines
+globs: "**/*.{ts,tsx}"
+
+- Use strict null checks to prevent null/undefined errors
+- Prefer interfaces over type aliases for object shapes
+- Implement type guards and assertions for runtime type checking
+- Use generics for reusable components and utility functions

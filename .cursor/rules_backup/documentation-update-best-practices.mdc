@@ -1,0 +1,9 @@
+name: documentation-update-best-practices.mdc
+description: Best practices for updating Markdown documentation
+globs: "*.md"
+
+- Update documentation concurrently with code development
+- Clearly mark completed and in-progress sections
+- Note significant changes in the documentation
+- Ensure documentation always reflects the current project state
+- Record important design decisions in Decisions.md 

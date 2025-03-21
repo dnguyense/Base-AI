@@ -1,0 +1,17 @@
+name: flutter-performance-optimization-best-practices.mdc
+description: Best practices for performance optimization in Flutter
+globs: **/*.dart
+
+- Use const constructors wherever possible
+- Minimize setState() calls
+- Use ListView.builder for long lists
+- Implement pagination for large data sets
+- Use proper image caching
+- Optimize build methods
+- Use RepaintBoundary when appropriate
+- Implement proper memory management
+- Use DevTools for performance profiling
+- Optimize animations for smooth performance
+- Use proper lazy loading techniques
+- Implement proper widget rebuilding strategies
+- Use ValueNotifier for small state changes 

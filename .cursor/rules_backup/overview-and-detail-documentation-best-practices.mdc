@@ -1,0 +1,17 @@
+name: overview-and-detail-documentation-best-practices.mdc
+description: Best practices for structuring overview and detailed Markdown documents
+globs: "*.md"
+
+- Overview documents (Project.md, README.md):
+  - Describe the project's overall purpose and goals
+  - List main components and their relationships
+  - Reference detailed documents with links
+  - Outline the overall workflow
+  - Describe high-level system architecture
+
+- Detailed documents (Instruction.md, API_Docs.md, etc.):
+  - Focus on a specific component or function
+  - Provide detailed requirements and specifications
+  - Include links back to the overview document
+  - Use illustrative examples (not code)
+  - Define constraints and relationships with other components 

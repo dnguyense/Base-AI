@@ -1,0 +1,18 @@
+name: jetpack-compose-best-practices.mdc
+description: Best practices for UI/UX and Jetpack Compose
+globs: **/*.{kt,xml}
+
+- Follow Material Design guidelines
+- Use Jetpack Compose for new projects
+- Break down UI components into small, reusable composables
+- Use Preview annotation for composables
+- Implement dark and light mode
+- Optimize UI for different device sizes and orientations
+- Use ViewBinding or DataBinding for XML-based UI
+- Separate resources (string, dimen, color) into individual files
+- Implement accessibility features (content descriptions, touch targets)
+- Use ConstraintLayout for complex layouts
+- Avoid nested layouts to optimize performance
+- Implement animations and transitions appropriately
+- Use proper theming for consistency
+- Avoid hardcoding values in layouts 

@@ -1,0 +1,14 @@
+name: flutter-error-handling-logging-best-practices.mdc
+description: Best practices for error handling and logging in Flutter
+globs: **/*.dart
+
+- Implement proper global error handling
+- Use proper logger (logger package)
+- Implement proper error boundaries
+- Use proper crash reporting (Firebase Crashlytics)
+- Implement proper error recovery
+- Use proper user-facing error messages
+- Implement proper network error handling
+- Use proper error tracking
+- Implement proper retry mechanisms
+- Use proper fallback UI for errors 

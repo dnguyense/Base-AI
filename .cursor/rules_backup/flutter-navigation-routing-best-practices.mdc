@@ -1,0 +1,14 @@
+name: flutter-navigation-routing-best-practices.mdc
+description: Best practices for navigation and routing in Flutter
+globs: **/*.dart
+
+- Use proper routing system (Go Router, Auto Route)
+- Implement proper deep linking
+- Use proper route parameters
+- Implement proper route guards
+- Use proper navigation state management
+- Implement proper tab navigation
+- Use proper bottom navigation
+- Implement proper modal and dialog handling
+- Use proper navigation transitions
+- Implement proper web URL strategy (if web app) 

@@ -1,0 +1,8 @@
+name: jwt-best-practices
+description: Best practices for JWT implementation
+globs: "**/*.{js,ts}"
+
+- Use proper JWT implementation
+- Implement proper token refresh mechanism
+- Use proper cookie security
+- Implement proper CSRF protection 

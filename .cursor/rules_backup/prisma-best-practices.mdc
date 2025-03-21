@@ -1,0 +1,17 @@
+name: prisma-best-practices
+description: Best practices for using Prisma ORM
+globs: "**/*.{js,ts}"
+
+- Use proper migration strategy
+- Implement proper seeding approach
+- Use proper transaction management
+- Implement proper connection pooling
+- Use proper database indexing strategy
+- Implement proper query optimization
+- Use proper pagination
+- Implement proper soft delete pattern when applicable
+- Use proper audit logging
+- Implement proper schema validation
+- Use proper relations (associations)
+- Implement proper cascade behaviors
+- Use proper database normalization 

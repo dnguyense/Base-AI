@@ -1,0 +1,9 @@
+name: seaborn-best-practices
+description: Best practices for statistical visualizations with Seaborn
+globs: "**/*.py"
+
+- Use Seaborn's high-level functions for quick and aesthetically pleasing plots
+- Customize Seaborn styles and palettes for consistent visualizations
+- Utilize Seaborn's statistical functions for data exploration
+- Combine Seaborn with Matplotlib for advanced customization
+- Create reusable plotting functions for consistent visualizations 

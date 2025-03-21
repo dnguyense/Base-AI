@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
 # Markdown Documentation No-Code Rules
 description: Quy tắc nghiêm cấm tự động sinh code khi đọc file .md
 globs: "*.md"

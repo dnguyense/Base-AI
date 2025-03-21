@@ -1,0 +1,13 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+name: shadcn-ui-best-practices
+description: Best practices for using Shadcn UI components
+globs: "**/*.{ts,tsx}"
+
+- Follow Shadcn UI's component naming conventions
+- Use Shadcn UI's utility classes for consistent styling
+- Customize components using Shadcn UI's theme system
+- Ensure proper accessibility when using Shadcn UI components

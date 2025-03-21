@@ -1,0 +1,14 @@
+name: flutter-widget-design-best-practices.mdc
+description: Best practices for widget design in Flutter
+globs: **/*.dart
+
+- Keep widgets small and focused
+- Use composition over inheritance
+- Create reusable widgets
+- Use const constructors for immutable widgets
+- Implement proper widget lifecycle management
+- Use proper callback functions
+- Implement proper widget keys when needed
+- Use proper named parameters in constructors
+- Create builder widgets for flexibility
+- Use proper factory constructors 

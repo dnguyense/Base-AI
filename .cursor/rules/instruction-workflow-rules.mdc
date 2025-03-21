@@ -1,0 +1,59 @@
+---
+description: Rules for instruction-first development workflow
+globs: "*.*"
+alwaysApply: true
+---
+# Instruction-First Development Rules
+description: Rules for instruction-first development workflow
+globs: "*.*"
+
+## Quy Trình Instruction-First
+- ***BẮT BUỘC*** tạo instruction (file .md) trước khi bắt đầu phát triển bất kỳ tính năng mới nào
+- ***BẮT BUỘC*** tạo instruction trước khi thực hiện nâng cấp hoặc sửa đổi lớn
+- ***BẮT BUỘC*** đọc và hiểu instruction trước khi bắt đầu code
+- Không bao giờ bắt đầu code khi chưa có instruction đầy đủ
+
+## Tạo Instruction
+- Tạo file instruction trong thư mục instructions/ hoặc thư mục tương ứng
+- Sử dụng định dạng [TenTinhNang]_Instruction.md hoặc [TenModule]_Upgrade.md
+- Mô tả rõ mục tiêu, yêu cầu, và scope của tính năng
+- Xác định các task cụ thể và đánh dấu trạng thái (✅, ⏳, ❌)
+- Định nghĩa ràng buộc và yêu cầu ngoài biên
+- Xác định tiêu chí hoàn thành cho từng task và toàn bộ tính năng
+- Liên kết đến các tài liệu liên quan khác nếu cần
+
+## Sử Dụng Instruction
+- Sử dụng instruction như nguồn thông tin chính để hiểu yêu cầu
+- Sử dụng instruction như bộ nhớ tạm thời để đảm bảo xử lý đồng bộ
+- Cập nhật trạng thái các task trong instruction khi tiến độ thay đổi
+- Thường xuyên cập nhật instruction nếu có thay đổi yêu cầu
+- Sử dụng instruction để track tiến độ phát triển
+- Tham khảo instruction trước khi thực hiện bất kỳ thay đổi lớn nào
+
+## Phân Tích Yêu Cầu
+- Rà soát project để xác định phạm vi ảnh hưởng của tính năng mới
+- Xác định các thành phần cần thay đổi và tạo danh sách trong instruction
+- Phân tích các use cases và edge cases
+- Xác định các dependencies và ràng buộc
+- Đánh giá tác động về performance và security
+- Dự đoán potential issues và thách thức
+
+## Quy Trình Thực Hiện
+1. Phân tích yêu cầu từ user
+2. Rà soát cấu trúc project
+3. Tạo instruction đầy đủ
+4. Xác nhận instruction đã hoàn thiện
+5. Tuân thủ các task trong instruction theo thứ tự
+6. Cập nhật trạng thái task khi hoàn thành
+7. Kiểm tra tất cả tiêu chí hoàn thành
+8. Tổng kết khi hoàn thiện tính năng
+
+## Quản Lý Instruction Files
+- Giữ instruction files trong Git version control
+- Cập nhật instruction khi có thay đổi
+- Đảm bảo mỗi tính năng có ít nhất một instruction file
+- Sử dụng instruction files như documentation cho dự án
+- Tham khảo instruction cũ khi phát triển tính năng mới tương tự
+
+@file ../Instruction.md
+@file ../Project.md 

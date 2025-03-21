@@ -1,0 +1,14 @@
+name: android-architecture-best-practices.mdc
+description: Best practices for Android app architecture and project structure
+globs: **/*.{kt,java,xml}
+
+- Use Clean Architecture or MVVM for projects
+- Separate layers: presentation, domain, data
+- Organize code by feature-first or layer-first
+- Use modularization for large projects (feature-based modules)
+- Implement dependency injection with Hilt or Koin
+- Decouple dependencies between modules using interfaces
+- Create contracts for interfaces between layers
+- Use shared ViewModels for related fragments
+- Adhere to the single responsibility principle for each class
+- Avoid overly complex activities/fragments, move logic outside 

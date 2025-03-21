@@ -1,0 +1,13 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+name: vite-best-practices
+description: Best practices for using Vite as a build tool
+globs: "**/*.{ts,tsx,js,jsx}"
+
+- Use Vite's built-in HMR for faster development
+- Leverage Vite's plugin ecosystem for additional features
+- Optimize build performance with Vite's configuration options
+- Use Vite's environment variables for configuration management 

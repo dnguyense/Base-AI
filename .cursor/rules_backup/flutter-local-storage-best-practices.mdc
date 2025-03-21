@@ -1,0 +1,14 @@
+name: flutter-local-storage-best-practices.mdc
+description: Best practices for local storage in Flutter
+globs: **/*.dart
+
+- Use proper shared preferences for simple data
+- Implement proper secure storage for sensitive data
+- Use proper SQLite with drift for complex data
+- Implement proper Hive for NoSQL storage
+- Use proper file storage
+- Implement proper data migration strategy
+- Use proper data backup strategy
+- Implement proper data encryption
+- Use proper data synchronization
+- Implement proper data versioning 

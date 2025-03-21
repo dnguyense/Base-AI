@@ -1,0 +1,5 @@
+name: docker-best-practices
+description: Best practices for Docker containerization
+globs: "**/*.{js,ts,Dockerfile}"
+
+- Use proper Docker containerization 

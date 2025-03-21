@@ -1,0 +1,14 @@
+name: flutter-forms-validation-best-practices.mdc
+description: Best practices for forms and validation in Flutter
+globs: **/*.dart
+
+- Use proper form validation
+- Implement proper form state management
+- Use proper input decoration
+- Implement proper form submission logic
+- Use proper error messaging
+- Implement proper focus management
+- Use proper keyboard type for inputs
+- Implement proper form field dependencies
+- Use proper reactive forms when needed
+- Implement proper input masking 

@@ -1,0 +1,5 @@
+name: prometheus-best-practices
+description: Best practices for monitoring with Prometheus
+globs: "**/*.{js,ts,yml}"
+
+- Use proper monitoring with Prometheus 

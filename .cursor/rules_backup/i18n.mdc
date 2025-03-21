@@ -12,7 +12,6 @@ alwaysApply: false
 ### Cấu trúc thư mục
 - `/src/locales/en/` - Chứa các file dịch tiếng Anh
 - `/src/locales/vi/` - Chứa các file dịch tiếng Việt
-- `/src/locales/pi/` - Chứa các file dịch tiếng Pali
 
 ### Các namespace
 Dự án sử dụng các namespace riêng biệt để tổ chức các khóa dịch:

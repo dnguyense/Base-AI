@@ -1,0 +1,9 @@
+name: ai-optimization-documentation-best-practices.mdc
+description: Best practices for optimizing Markdown documentation for AI
+globs: "*.md"
+
+- Use simple, analyzable language
+- Maintain consistent structure across files
+- Avoid content duplication between documents
+- Focus on information necessary for AI task execution
+- Use bullet points for key points instead of long prose 

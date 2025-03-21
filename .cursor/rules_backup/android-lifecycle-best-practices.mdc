@@ -1,0 +1,16 @@
+name: android-lifecycle-best-practices.mdc
+description: Best practices for app lifecycle management in Android
+globs: **/*.{kt,java}
+
+- Handle process death correctly
+- Implement proper state saving and restoration
+- Handle app lifecycle events
+- Implement proper resource cleanup
+- Handle configuration changes
+- Implement proper activity/fragment lifecycle handling
+- Follow single source of truth principle
+- Implement graceful error recovery
+- Handle low memory conditions
+- Implement proper app startup initialization
+- Optimize app cold start/warm start times
+- Implement proper crash recovery 

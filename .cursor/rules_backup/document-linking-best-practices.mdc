@@ -1,0 +1,9 @@
+name: document-linking-best-practices.mdc
+description: Guidelines for linking Markdown documents
+globs: "*.md"
+
+- Use internal links to connect related documents
+- Reference other files using @Document Name syntax
+- Overview documents should link to detailed documents
+- Detailed documents should link back to the overview
+- Use a table of contents for easy navigation in long documents 

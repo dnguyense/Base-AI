@@ -1,0 +1,19 @@
+name: android-performance-optimization-best-practices.mdc
+description: Best practices for performance optimization in Android
+globs: **/*.{kt,java,xml}
+
+- Lazy initialize expensive resources
+- Use RecyclerView with proper view recycling
+- Implement ViewHolder pattern correctly
+- Optimize image loading with Glide or Coil
+- Avoid memory leaks (check with LeakCanary)
+- Implement proper background task management
+- Optimize app startup time
+- Reduce APK size with ProGuard/R8
+- Implement proper view lazy loading
+- Use Traceview and Profiler to detect bottlenecks
+- Avoid excessive object allocation
+- Optimize battery usage
+- Implement proper network request batching
+- Use caching appropriately
+- Optimize layout inflation time 

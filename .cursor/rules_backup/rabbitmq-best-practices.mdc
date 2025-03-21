@@ -1,0 +1,5 @@
+name: rabbitmq-best-practices
+description: Best practices for using RabbitMQ in microservices
+globs: "**/*.{js,ts}"
+
+- Use proper message queues with RabbitMQ 

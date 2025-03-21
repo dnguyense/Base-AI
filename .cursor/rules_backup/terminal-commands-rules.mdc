@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
 # Terminal Commands Rules
 description: Quy tắc khi thực hiện các lệnh terminal trong dự án
 globs: ["*.*"]

@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
 # Terminal SSH Rules
 description: Quy tắc khi thực hiện các lệnh SSH trong terminal
 globs: ["*.sh", "*.bash", "*.zsh"]

@@ -1,0 +1,16 @@
+name: android-release-best-practices.mdc
+description: Best practices for release and deployment of Android apps
+globs: **/*.{kt,java,gradle.kts}
+
+- Implement proper versioning (semantic versioning)
+- Use proper signing configuration
+- Implement proper release notes
+- Use Play Store features (in-app updates, app bundle)
+- Implement proper feature flagging
+- Set up proper release pipeline
+- Implement A/B testing when necessary
+- Use Firebase App Distribution for pre-releases
+- Implement proper analytics event tracking
+- Set up crash reporting (Firebase Crashlytics)
+- Implement proper user feedback channels
+- Use phased rollouts for major updates 

@@ -1,0 +1,11 @@
+name: detailed-guidance-documentation-best-practices.mdc
+description: Best practices for structuring detailed guidance Markdown documents
+globs: "*.md"
+
+- Use a clear title for the function/component to be implemented
+- Provide a brief description of the function
+- List components that need to be implemented
+- Specify functional requirements the feature must meet
+- Define constraints or rules to follow
+- Include references to related documents
+- Outline criteria for task completion 
