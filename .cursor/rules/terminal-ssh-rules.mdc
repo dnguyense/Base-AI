@@ -1,0 +1,46 @@
+# Terminal SSH Rules
+description: Quy tắc khi thực hiện các lệnh SSH trong terminal
+globs: ["*.sh", "*.bash", "*.zsh"]
+
+## Quy tắc chính về SSH
+- Luôn sử dụng sshpass cho các lệnh SSH thay vì nhập mật khẩu trực tiếp
+- Tránh lưu mật khẩu trong code hoặc script, sử dụng biến môi trường hoặc file cấu hình
+- Đảm bảo kết nối SSH không bị treo do thiếu xác thực
+
+## Cách sử dụng sshpass
+- Cú pháp cơ bản: `sshpass -p "password" ssh user@host`
+- Với file mật khẩu: `sshpass -f passfile ssh user@host`
+- Với biến môi trường: `export SSHPASS=password && sshpass -e ssh user@host`
+
+## Các tùy chọn SSH bổ sung
+- Luôn thêm `-o StrictHostKeyChecking=no` nếu kết nối đến host mới
+- Sử dụng `-o ConnectTimeout=XX` để đặt thời gian timeout
+- Thêm `-q` (quiet mode) để giảm thông báo không cần thiết
+
+## Ví dụ lệnh SSH an toàn
+```bash
+# Sử dụng sshpass với mật khẩu từ biến môi trường
+export SSHPASS="your_password"
+sshpass -e ssh -o StrictHostKeyChecking=no -o ConnectTimeout=30 user@hostname
+
+# Sử dụng sshpass với file mật khẩu
+sshpass -f ~/.ssh/passfile ssh -o StrictHostKeyChecking=no user@hostname
+
+# Thực thi lệnh từ xa với sshpass
+sshpass -p "your_password" ssh user@hostname "command_to_execute"
+```
+
+## Lưu ý bảo mật
+- Tránh hiển thị mật khẩu trực tiếp trong lệnh terminal
+- Đảm bảo quyền truy cập đúng cho các file chứa mật khẩu (chmod 600)
+- Sử dụng ssh-key khi có thể thay vì sshpass
+- Xóa lịch sử lệnh sau khi sử dụng mật khẩu trực tiếp
+
+## Truyền file qua SSH
+- Sử dụng sshpass với scp: `sshpass -p "password" scp file.txt user@host:/path/`
+- Đối với rsync: `sshpass -p "password" rsync -avz -e ssh source/ user@host:/destination/`
+
+## Xử lý lỗi
+- Kiểm tra mã lỗi sau mỗi lệnh ssh: `echo $?`
+- Thêm lệnh retry cho các kết nối không ổn định
+- Sử dụng timeout để ngăn các lệnh bị treo vô thời hạn 

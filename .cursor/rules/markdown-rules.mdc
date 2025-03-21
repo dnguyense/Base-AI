@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
 # Markdown Documentation Rules
 description: Quy tắc tổ chức và viết tài liệu Markdown cho AI trong dự án
 globs: "*.md"
@@ -28,7 +33,7 @@ globs: "*.md"
 
 ## Liên kết tài liệu
 - Sử dụng liên kết nội bộ để kết nối các tài liệu liên quan
-- Tham chiếu đến các file khác bằng cú pháp [Tên tài liệu](đường dẫn)
+- Tham chiếu đến các file khác bằng cú pháp [Tên tài liệu](mdc:đường dẫn)
 - Tài liệu tổng quan phải liên kết đến tài liệu chi tiết
 - Tài liệu chi tiết phải có liên kết quay lại tài liệu tổng quan
 - Sử dụng mục lục để dễ dàng điều hướng trong tài liệu dài

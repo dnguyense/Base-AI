@@ -1,0 +1,141 @@
+# React 2025 Project Structure Rules
+
+## Project Root Structure
+```
+/my-app
+├── /public/              # Static files served by the browser
+├── /src/                 # Source code
+├── /assets/              # External assets 
+├── .gitignore            # Git ignore file
+├── package.json          # Dependencies and scripts
+├── README.md             # Project documentation
+├── tsconfig.json         # TypeScript configuration
+├── vite.config.js        # Vite configuration
+└── .eslintrc.json        # ESLint configuration
+```
+
+## Detailed Directory Structure
+
+### Public Directory
+```
+/public
+├── index.html            # HTML entry point
+├── favicon.ico           # Website favicon
+└── /images/              # Static images
+```
+
+### Source Directory
+```
+/src
+├── /assets/              # Static resources (images, fonts, etc.)
+├── /components/          # Reusable components
+│   ├── /ui/              # Atomic components (Button, Input, Card...)
+│   ├── /common/          # Complex shared components
+│   └── /compound/        # Components composed of multiple UI components
+├── /features/            # Feature-based modules
+│   ├── /[feature-name]/
+│   │   ├── /components/  # Feature-specific components
+│   │   ├── /hooks/       # Feature-specific custom hooks
+│   │   ├── /api/         # Feature-specific API calls
+│   │   ├── /utils/       # Feature-specific utility functions
+│   │   ├── /types/       # Feature-specific TypeScript types
+│   │   └── index.ts      # Public API exports for the feature
+├── /hooks/               # Shared custom hooks
+├── /layouts/             # Layout components (Header, Footer, Sidebar)
+├── /pages/               # Page components (corresponding to routes)
+├── /services/            # API services and external integrations
+├── /store/               # State management
+│   ├── /slices/          # Redux/Zustand slices
+│   ├── /queries/         # React Query/SWR configurations
+│   └── /providers/       # Context providers
+├── /styles/              # Global styles and themes
+├── /types/               # Shared TypeScript types
+├── /utils/               # Utility functions and helpers
+├── /lib/                 # Shareable code that could become a separate package
+├── /server-components/   # React Server Components
+├── /experiments/         # Experimental features not ready for production
+├── /providers/           # Global context providers
+├── /locales/             # i18n translation files
+├── /app.tsx              # App component
+├── /index.tsx            # Main entry point
+├── /router.tsx           # Routing configuration
+└── /config/              # Configuration files and environment variables
+```
+
+## Feature Directory Example
+```
+/features
+├── /auth/
+│   ├── /components/
+│   │   ├── LoginForm.tsx
+│   │   ├── RegisterForm.tsx
+│   │   └── ForgotPasswordForm.tsx
+│   ├── /hooks/
+│   │   ├── useAuth.ts
+│   │   └── usePermissions.ts
+│   ├── /api/
+│   │   ├── authApi.ts
+│   │   └── userApi.ts
+│   ├── /utils/
+│   │   ├── tokenHelpers.ts
+│   │   └── validators.ts
+│   ├── /types/
+│   │   ├── user.types.ts
+│   │   └── auth.types.ts
+│   └── index.ts
+```
+
+## Component Organization
+Components should be organized in their own directories with related files:
+```
+/components
+├── /ui/Button/
+│   ├── Button.tsx
+│   ├── Button.test.tsx
+│   ├── Button.stories.tsx  # For Storybook
+│   └── index.ts
+```
+
+## Best Practices
+
+1. **Feature-First Organization**: Structure code primarily by features, not by technical types.
+
+2. **Encapsulation**: Each feature should encapsulate its own components, hooks, utilities, and types.
+
+3. **Shallow Import Paths**: Use path aliases to avoid deep relative imports.
+   ```typescript
+   // Bad
+   import Button from '../../../components/ui/Button';
+   
+   // Good (with path aliases)
+   import Button from '@components/ui/Button';
+   ```
+
+4. **Explicit Exports**: Use index.ts files to explicitly control what each module exports.
+
+5. **Separation of Concerns**: Separate UI from business logic, data fetching from rendering.
+
+6. **Avoid Deep Nesting**: Keep directory depth to 3-4 levels maximum.
+
+7. **Co-locate Tests**: Place tests next to the code they're testing.
+
+8. **Module Boundaries**: Treat each feature as if it could become a separate npm package.
+
+9. **Document Interfaces**: Document public API boundaries between features.
+
+10. **Scale Appropriately**: Start with a simpler structure for small projects and adapt as needed.
+
+## State Management Guidelines
+
+1. Use React Query/SWR for server state.
+2. Use Zustand/Redux Toolkit/Jotai for complex client state.
+3. Use React Context for theme/authentication/preferences.
+4. Keep state as close as possible to where it's used.
+
+## Performance Considerations
+
+1. Set up code-splitting by feature or route.
+2. Configure bundle analyzer to monitor bundle sizes.
+3. Implement lazy loading for routes and large components.
+
+These guidelines help create a scalable, maintainable React application architecture for 2025 and beyond. 

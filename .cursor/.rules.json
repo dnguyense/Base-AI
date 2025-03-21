@@ -59,7 +59,30 @@
       "path": "rules/markdown-rules.mdc",
       "description": "Rules for Markdown files",
       "globs": ["*.md", "*.markdown", "*.mdx", "*.mdx", "*.mdx"]
+    },
+    {
+      "path": "rules/md-no-code-rules.mdc",
+      "description": "Quy tắc nghiêm cấm tự động sinh code khi đọc file .md",
+      "globs": ["*.md", "*.markdown", "*.mdx"],
+      "alwaysApply": true
+    },
+    {
+      "path": "rules/terminal-ssh-rules.mdc",
+      "description": "Quy tắc sử dụng sshpass cho các lệnh SSH trong terminal",
+      "globs": ["*.sh", "*.bash", "*.zsh"],
+      "alwaysApply": true
+    },
+    {
+      "path": "rules/terminal-commands-rules.mdc",
+      "description": "Quy tắc sử dụng terminal và lệnh SSH với sshpass",
+      "globs": [],
+      "alwaysApply": true
+    },
+    {
+      "path": "rules/react-2025-rules.mdc",
+      "description": "Cấu trúc thư mục và quy tắc hiện đại cho dự án React 2025",
+      "globs": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+      "alwaysApply": false
     }
-
   ]
 } 
