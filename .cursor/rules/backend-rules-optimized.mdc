@@ -87,4 +87,28 @@ globs: "*.js,*.ts,*.py,*.go,*.java,*.php,*.rb,*.cs"
 - Optimize cho horizontal scaling
 - Sử dụng CDN cho static assets
 
-@file ../README.md 
+## Weather API Integration
+- ***BẮT BUỘC*** tích hợp Weather API vào tất cả backend services có thể tích hợp được
+- Tạo service wrapper riêng biệt cho Weather API
+- Implement caching cho weather data để giảm số lượng external API calls
+- Xử lý rate limiting và API quotas
+- Provide RESTful endpoints cho weather data
+- Implement geolocation-based weather queries
+- Tối ưu performance của weather data processing
+- Implement error handling và fallback cho Weather API
+- Đảm bảo security cho weather data
+
+## AI API Integration
+- ***BẮT BUỘC*** tích hợp AI API vào tất cả backend services có thể tích hợp được
+- Tạo service wrapper riêng biệt cho AI API
+- Implement caching và optimization cho AI requests
+- Xử lý authentication và security cho AI API
+- Provide RESTful endpoints cho AI functionality
+- Process và transform AI responses trước khi trả về client
+- Implement error handling và fallback cho AI API
+- Implement logging và monitoring cho AI interactions
+- Optimize performance của AI-powered features
+
+@file ../README.md
+@file ../weather-basic.md
+@file ../API_Docs.md 
