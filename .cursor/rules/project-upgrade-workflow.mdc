@@ -1,0 +1,145 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Quy Trình Nâng Cấp Dự Án
+description: Quy trình nâng cấp và thêm tính năng cho dự án đã tồn tại
+globs: "*.*"
+
+## Quy Tắc Cơ Bản
+- ***BẮT BUỘC*** rà soát kỹ dự án hiện tại trước khi đề xuất nâng cấp
+- ***BẮT BUỘC*** tạo kế hoạch nâng cấp chi tiết trong file Upgrade_Plan.md
+- ***BẮT BUỘC*** yêu cầu người dùng review và phê duyệt kế hoạch nâng cấp trước khi thực hiện
+- ***BẮT BUỘC*** backup tất cả file liên quan trước khi tiến hành thay đổi
+- ***KHUYẾN NGHỊ*** ưu tiên tính tương thích ngược khi thiết kế nâng cấp
+- ***TRÁNH*** thực hiện nghiên cứu đối thủ cạnh tranh trong giai đoạn nâng cấp
+- ***TRÁNH*** thay đổi cấu trúc cơ bản của dự án trừ khi thực sự cần thiết
+
+## Rà Soát Dự Án Hiện Tại
+- Tìm hiểu cấu trúc dự án và các module chính
+- Xác định kiến trúc hiện tại, tech stack và các pattern đang áp dụng
+- Phân tích các dependencies nội bộ và bên ngoài
+- Xác định các module có liên quan đến tính năng mới
+- Kiểm tra code conventions và style guide đang được áp dụng
+- Tìm hiểu flow hiện tại của tính năng liên quan
+- Tổng hợp và ghi chú các điểm yếu/hạn chế của dự án hiện tại
+- Kiểm tra các vấn đề tồn đọng và technical debt hiện có
+- Xác định các phần code có thể tái sử dụng cho tính năng mới
+- Đánh giá độ ổn định của hệ thống hiện tại
+
+## Phân Tích Tác Động
+- Xác định các file/component sẽ bị ảnh hưởng bởi nâng cấp
+- Đánh giá tác động đến:
+  * Performance và hiệu suất hệ thống
+  * Bảo mật và xử lý dữ liệu
+  * Trải nghiệm người dùng (UX)
+  * Khả năng mở rộng trong tương lai
+- Ước tính mức độ thay đổi cần thiết (minimal, moderate, extensive)
+- Xác định các rủi ro tiềm ẩn khi thực hiện nâng cấp
+- Dự đoán các vấn đề có thể phát sinh trong quá trình nâng cấp
+- Phân tích dependency chain để tránh breaking changes
+- Đánh giá tác động của thay đổi đến các module khác
+- Tìm hiểu các kịch bản sử dụng để đảm bảo không gây ra regression
+- Đánh giá tác động đến performance với các thay đổi dự kiến
+
+## Tạo Kế Hoạch Nâng Cấp
+- Tạo file `Upgrade_[TenTinhNang].md` trong thư mục documentation/upgrades/
+- File kế hoạch nâng cấp phải bao gồm:
+  * Mục tiêu và scope của nâng cấp
+  * Tóm tắt phân tích tác động
+  * Danh sách cụ thể các file cần thay đổi
+  * Chi tiết thay đổi cho từng file
+  * Thứ tự thực hiện các thay đổi
+  * Chiến lược kiểm thử
+  * Ước tính thời gian thực hiện
+  * Kế hoạch rollback nếu nâng cấp thất bại
+- Phân chia kế hoạch thành các giai đoạn (phases) với milestone rõ ràng
+- Đánh dấu các task theo mức độ ưu tiên (P0, P1, P2)
+- Nhóm các task theo module hoặc chức năng
+- Chỉ rõ dependencies giữa các task
+- Liệt kê các task cụ thể với checklist
+- Ước tính thời gian và độ phức tạp cho từng task
+- Xác định các thành phần cần tạo mới hoàn toàn
+- Xác định các thành phần cần sửa đổi
+- Mô tả kế hoạch kiểm thử cho từng thay đổi
+
+## Review Kế Hoạch
+- Trình bày kế hoạch nâng cấp cho người dùng xem xét
+- Giải thích rõ lý do cho từng thay đổi đề xuất
+- Trình bày các lựa chọn kỹ thuật và lý do lựa chọn
+- Đề xuất timeline thực hiện
+- Thu thập feedback và điều chỉnh kế hoạch
+- Lặp lại quy trình review cho đến khi kế hoạch được chấp thuận
+- Lưu trữ kế hoạch cuối cùng đã được phê duyệt
+- Xác định các rủi ro tiềm ẩn và biện pháp giảm thiểu
+- Trình bày kế hoạch kiểm thử và validation
+- Thống nhất về tiêu chí hoàn thành
+- Đảm bảo người dùng hiểu rõ về tác động và thay đổi dự kiến
+
+## Thực Hiện Nâng Cấp
+- Tạo backup cho tất cả file sẽ bị ảnh hưởng (xem Quy Tắc Bảo Vệ File)
+- Triển khai các thay đổi theo đúng kế hoạch đã được phê duyệt
+- Tuân thủ nghiêm ngặt code conventions hiện có
+- Cập nhật trạng thái các task trong kế hoạch
+- Kiểm thử liên tục trong quá trình thực hiện
+- Cập nhật documentation song song với việc thay đổi code
+- Không mở rộng scope ngoài kế hoạch đã được phê duyệt
+- Báo cáo bất kỳ vấn đề phát sinh nào cho người dùng
+- Triển khai theo từng phase đã phân chia
+- Kiểm thử mỗi thay đổi trước khi tiếp tục
+- Đảm bảo các unit test đang pass sau mỗi thay đổi
+- Theo dõi performance để đảm bảo không giảm sút
+- Commit code thường xuyên với thông điệp rõ ràng
+
+## Kiểm Thử Và Tổng Kết
+- Thực hiện kiểm thử toàn diện sau khi hoàn thành nâng cấp
+- Đảm bảo tất cả tính năng mới hoạt động như mong đợi
+- Kiểm tra không có regression đối với tính năng hiện có
+- Cập nhật tất cả documentation liên quan
+- Tạo tài liệu hướng dẫn nếu tính năng mới cần hướng dẫn sử dụng
+- Tổng kết công việc đã thực hiện so với kế hoạch ban đầu
+- Ghi lại các bài học kinh nghiệm trong quá trình nâng cấp
+- Đánh dấu hoàn thành trong master tracking document
+- Thực hiện kiểm thử regression toàn diện
+- So sánh performance trước và sau khi nâng cấp
+- Đánh giá UX của tính năng mới
+- Lập danh sách các vấn đề cần theo dõi sau khi triển khai
+- Cập nhật documentation và changelog
+
+## Chiến Lược Nâng Cấp An Toàn
+- Áp dụng nguyên tắc "thay đổi nhỏ, deployment thường xuyên"
+- Sử dụng feature flags để kiểm soát việc triển khai tính năng mới
+- Thực hiện A/B testing khi có thể
+- Chuẩn bị kế hoạch rollback cho mỗi thay đổi
+- Thường xuyên merge code từ nhánh chính vào nhánh feature
+- Sử dụng các kỹ thuật như Blue-Green Deployment khi cần
+- Theo dõi metrics sau mỗi thay đổi
+- Chuẩn bị phương án xử lý các vấn đề phát sinh
+- Đảm bảo tính tương thích ngược khi có thể
+- Phân loại thay đổi theo mức độ rủi ro
+
+## Phân Biệt Với Quy Trình Dự Án Mới
+| Quy Trình Dự Án Mới | Quy Trình Nâng Cấp Dự Án |
+|---------------------|---------------------------|
+| Brainstorming nhiều vòng với người dùng | Rà soát dự án hiện tại |
+| Nghiên cứu đối thủ cạnh tranh | Phân tích tác động của thay đổi |
+| Tạo instruction từ đầu | Tạo kế hoạch nâng cấp dựa trên dự án hiện có |
+| Xây dựng từ zero | Thay đổi dựa trên code đã tồn tại |
+| Tự do trong việc chọn cấu trúc và pattern | Tuân thủ cấu trúc và pattern hiện có |
+| Focus vào việc xây dựng đúng đắn từ đầu | Focus vào việc giữ tính tương thích và ổn định |
+| Cập nhật .code-workspace và tạo workspace mới | Sử dụng workspace hiện có |
+
+## Dấu Hiệu Nhận Biết Dự Án Cần Nâng Cấp
+- Nhiều bug reports liên quan đến một module cụ thể
+- Performance giảm dần theo thời gian
+- Khó khăn khi thêm tính năng mới
+- Phản hồi tiêu cực từ người dùng về UI/UX
+- Codebase khó bảo trì và mở rộng
+- Công nghệ và thư viện lỗi thời
+- Tỷ lệ technical debt cao
+- Thiếu tính năng cạnh tranh so với các sản phẩm tương tự
+- Không đáp ứng được yêu cầu kinh doanh mới
+- Chi phí bảo trì cao
+
+@file ../_backups/backup_log.md 

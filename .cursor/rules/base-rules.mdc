@@ -23,6 +23,41 @@ globs: "*.*"
 - Tuân thủ nguyên tắc SOLID và xử lý lỗi đúng cách
 - Giải thích vấn đề một cách đơn giản, đề xuất nhiều giải pháp 
 
+## Quản Lý Dữ Liệu Giả Lập
+- Nếu dự án sử dụng bất kỳ dữ liệu giả lập nào, ***BẮT BUỘC*** tạo file MockupData.md
+- Liệt kê chi tiết và cập nhật thường xuyên tất cả các phần của dự án đang sử dụng dữ liệu giả
+- Phân loại dữ liệu giả lập theo mục đích sử dụng:
+  * Dữ liệu demo cho client/stakeholders
+  * Dữ liệu testing cho quá trình phát triển
+  * Dữ liệu thay thế tạm thời cho API chưa sẵn sàng
+  * Dữ liệu mẫu cho hướng dẫn/documentation
+- Cho mỗi phần dữ liệu giả lập, ghi rõ:
+  * Vị trí chính xác của file/code đang sử dụng dữ liệu giả
+  * Cấu trúc dữ liệu của mockup và cấu trúc dữ liệu thật tương ứng
+  * Phương thức khởi tạo và sử dụng dữ liệu giả
+  * Kế hoạch và timeline để chuyển sang dữ liệu thật
+  * Người chịu trách nhiệm cho việc thay thế dữ liệu giả
+- Tạo phần "Chiến lược chuyển đổi" trong file MockupData.md để mô tả:
+  * Điều kiện để chuyển từ dữ liệu giả sang dữ liệu thật
+  * Kế hoạch backup nếu việc chuyển đổi gặp vấn đề
+  * Cách xử lý dữ liệu trong giai đoạn chuyển tiếp
+- Tạo phần "Dữ liệu giả cho API":
+  * Mô tả chi tiết các API endpoints đang được mock
+  * So sánh cấu trúc request/response của API giả và API thật
+  * Xác định các trường hợp lỗi được mô phỏng trong API giả
+- Cập nhật file MockupData.md mỗi khi:
+  * Thêm dữ liệu giả mới vào dự án
+  * Thay đổi cấu trúc dữ liệu giả hiện có
+  * Chuyển đổi từ dữ liệu giả sang dữ liệu thật
+  * Phát hiện sự không nhất quán giữa dữ liệu giả và thật
+- Thiết lập phần "Tiến độ chuyển đổi" với định dạng:
+  ```
+  ## Tiến độ chuyển đổi
+  - [x] Component A - Hoàn thành chuyển đổi ngày DD/MM/YYYY
+  - [ ] Component B - Dự kiến chuyển đổi ngày DD/MM/YYYY
+  - [ ] Component C - Chờ API xyz hoàn thiện
+  ```
+
 ## Task Status Legend
 - ✅ Completed
 - ⏳ In Progress

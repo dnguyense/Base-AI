@@ -33,7 +33,7 @@ pnpm-debug.log*
 /logs
 /tmp
 
-# Android
+# Android 
 *.apk
 *.aab
 *.ap_

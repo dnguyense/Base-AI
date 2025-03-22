@@ -1,7 +1,7 @@
 ---
-description: Rules for instruction-first development workflow
-globs: "*.*"
-alwaysApply: true
+description: 
+globs: 
+alwaysApply: false
 ---
 # Instruction-First Development Rules
 description: Rules for instruction-first development workflow
@@ -29,8 +29,8 @@ globs: "*.*"
 - ***BẮT BUỘC*** cập nhật documentation sau khi hoàn thành
 
 ## Tài Liệu Quy Trình Chi Tiết
-- Tạo dự án mới: Xem file [project-creation-workflow.mdc](mdc:project-creation-workflow.mdc)
-- Nâng cấp dự án: Xem file [project-upgrade-workflow.mdc](mdc:project-upgrade-workflow.mdc)
+- Tạo dự án mới từ ý tưởng hay mô tả: Xem file [project-creation-workflow.mdc](mdc:project-creation-workflow.mdc)
+- Nâng cấp tính năng cho dự án hiện có: Xem file [project-upgrade-workflow.mdc](mdc:project-upgrade-workflow.mdc)
 
 @file ../project-creation-workflow.mdc
-@file ../project-upgrade-workflow.mdc
+@file ../project-upgrade-workflow.mdc 
