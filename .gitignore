@@ -25,6 +25,7 @@ pnpm-debug.log*
 /all_backups
 /api_backups*
 /pg_backups
+/_backups
 /node_modules
 /dist
 /build

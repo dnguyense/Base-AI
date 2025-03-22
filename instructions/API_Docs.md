@@ -14,7 +14,7 @@ Lưu ý: conversation_id chỉ được lấy từ phản hồi từ API chứ k
 
 ```
 curl --location 'https://ai.dreamapi.net/v1/chat-messages' \
---header 'Authorization: Bearer app-rFr7B6vcppZeKTCKLjcPDviE' \
+--header 'Authorization: Bearer app-dify-api-key' \
 --header 'Content-Type: application/json' \
 --data '{
     "query": "Xin chào",
@@ -102,7 +102,7 @@ Example with json format
 ````
 
 curl --location 'https://ai.dreamapi.net/v1/chat-messages' \
---header 'Authorization: Bearer app-rFr7B6vcppZeKTCKLjcPDviE' \
+--header 'Authorization: Bearer app-dify-api-key' \
 --header 'Content-Type: application/json' \
 --data '{
 "inputs": {},

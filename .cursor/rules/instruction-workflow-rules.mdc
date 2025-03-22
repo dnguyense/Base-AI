@@ -10,17 +10,159 @@ globs: "*.*"
 ## Quy Trình Instruction-First
 - ***BẮT BUỘC*** tạo instruction (file .md) trước khi bắt đầu phát triển bất kỳ tính năng mới nào
 - ***BẮT BUỘC*** tạo instruction trước khi thực hiện nâng cấp hoặc sửa đổi lớn
+- ***BẮT BUỘC*** brainstorm kỹ với người dùng trước khi tạo instruction
 - ***BẮT BUỘC*** đọc và hiểu instruction trước khi bắt đầu code
+- ***BẮT BUỘC*** cập nhật .code-workspace sau khi hoàn thành brainstorming
+- ***BẮT BUỘC*** tạo file MockupData.md khi dự án sử dụng bất kỳ dữ liệu giả lập nào
 - Không bao giờ bắt đầu code khi chưa có instruction đầy đủ
+
+## Brainstorming với Người Dùng
+- Đặt câu hỏi để hiểu rõ mục tiêu và tầm nhìn của ý tưởng
+- Chia câu hỏi thành nhiều lần hỏi, không hỏi tất cả trong cùng một lần
+- Hỏi về use cases, user stories và các tình huống sử dụng
+- Xác định đối tượng người dùng và nhu cầu của họ
+- Tìm hiểu ưu tiên và tính năng cốt lõi
+- Khám phá các ràng buộc về kỹ thuật, kinh doanh và người dùng
+- Xác định các yêu cầu chức năng và phi chức năng
+- Tóm tắt hiểu biết sau mỗi vòng hỏi đáp
+- Đề xuất những cách tiếp cận khác nhau để giải quyết vấn đề
+- Kiểm tra xác nhận hiểu biết của bạn với người dùng
+
+## Nghiên Cứu Đối Thủ Cạnh Tranh
+- ***BẮT BUỘC*** tìm kiếm và phân tích ít nhất 3 dự án tương tự trên nền tảng tương ứng
+- Với ứng dụng Android: Tìm kiếm trên Google Play Store các ứng dụng có chức năng tương tự
+- Với ứng dụng iOS: Tìm kiếm trên App Store các ứng dụng có chức năng tương tự
+- Với ứng dụng web: Tìm kiếm trên Google các website có chức năng tương tự
+- Với dự án backend: Tìm các giải pháp open-source tương tự trên GitHub
+- Phân tích điểm mạnh, điểm yếu của từng đối thủ cạnh tranh
+- Tổng hợp các tính năng phổ biến và độc đáo từ các đối thủ
+- Đánh giá reviews/feedback của người dùng về các sản phẩm tương tự
+- Xác định cơ hội để tạo điểm khác biệt và lợi thế cạnh tranh
+- Tổng hợp các insights từ nghiên cứu đối thủ vào quá trình brainstorming
+- Đề xuất các tính năng dựa trên phân tích đối thủ cạnh tranh
+- Cập nhật nghiên cứu định kỳ để theo dõi xu hướng thị trường
+
+## Cấu Hình Workspace
+- Sau khi hoàn thành brainstorming, cập nhật file .code-workspace để định danh dự án
+- Chọn màu sắc workspace và emoji phù hợp để nhanh chóng nhận diện dự án
+- Cập nhật title với emoji phản ánh chủ đề hoặc mục đích của dự án
+- Danh sách emoji gợi ý theo loại dự án:
+  * 🤖 - AI/ML project
+  * 🌦️ - Weather app
+  * 📱 - Mobile app
+  * 🖥️ - Desktop app
+  * 🌐 - Web app
+  * 🎮 - Game
+  * 📊 - Data analytics
+  * 🔒 - Security app
+  * 📝 - Note taking/Document
+  * 🛒 - E-commerce
+  * 📷 - Photo/Video
+  * 🎵 - Music/Audio
+  * 💬 - Chat/Communication
+  * 🗂️ - File management
+  * 🧠 - Education
+- Cấu hình extensions phù hợp với tech stack để đảm bảo nhất quán giữa các thành viên
+- Cấu hình màu sắc workspace để dễ dàng phân biệt khi làm việc với nhiều dự án
+- Màu sắc có thể liên quan đến chủ đề hoặc ngẫu nhiên để dễ phân biệt
+- Ví dụ cấu hình:
+  ```json
+  {
+    "folders": [{ "name": "Project-Name", "path": "." }],
+    "settings": {
+      "window.title": "🤖 ${rootName} | ${activeEditorShort}",
+      "workbench.colorCustomizations": {
+        "activityBar.background": "#4B0082",
+        "titleBar.activeBackground": "#4B0082",
+        "titleBar.activeForeground": "#FFFFFF"
+      }
+    }
+  }
+  ```
+
+## Quản Lý Dữ Liệu Giả Lập
+- Nếu dự án sử dụng bất kỳ dữ liệu giả lập nào, ***BẮT BUỘC*** tạo file MockupData.md
+- Liệt kê chi tiết và cập nhật thường xuyên tất cả các phần của dự án đang sử dụng dữ liệu giả
+- Phân loại dữ liệu giả lập theo mục đích sử dụng:
+  * Dữ liệu demo cho client/stakeholders
+  * Dữ liệu testing cho quá trình phát triển
+  * Dữ liệu thay thế tạm thời cho API chưa sẵn sàng
+  * Dữ liệu mẫu cho hướng dẫn/documentation
+- Cho mỗi phần dữ liệu giả lập, ghi rõ:
+  * Vị trí chính xác của file/code đang sử dụng dữ liệu giả
+  * Cấu trúc dữ liệu của mockup và cấu trúc dữ liệu thật tương ứng
+  * Phương thức khởi tạo và sử dụng dữ liệu giả
+  * Kế hoạch và timeline để chuyển sang dữ liệu thật
+  * Người chịu trách nhiệm cho việc thay thế dữ liệu giả
+- Tạo phần "Chiến lược chuyển đổi" trong file MockupData.md để mô tả:
+  * Điều kiện để chuyển từ dữ liệu giả sang dữ liệu thật
+  * Kế hoạch backup nếu việc chuyển đổi gặp vấn đề
+  * Cách xử lý dữ liệu trong giai đoạn chuyển tiếp
+- Tạo phần "Dữ liệu giả cho API":
+  * Mô tả chi tiết các API endpoints đang được mock
+  * So sánh cấu trúc request/response của API giả và API thật
+  * Xác định các trường hợp lỗi được mô phỏng trong API giả
+- Cập nhật file MockupData.md mỗi khi:
+  * Thêm dữ liệu giả mới vào dự án
+  * Thay đổi cấu trúc dữ liệu giả hiện có
+  * Chuyển đổi từ dữ liệu giả sang dữ liệu thật
+  * Phát hiện sự không nhất quán giữa dữ liệu giả và thật
+- Thiết lập phần "Tiến độ chuyển đổi" với định dạng:
+  ```
+  ## Tiến độ chuyển đổi
+  - [x] Component A - Hoàn thành chuyển đổi ngày DD/MM/YYYY
+  - [ ] Component B - Dự kiến chuyển đổi ngày DD/MM/YYYY
+  - [ ] Component C - Chờ API xyz hoàn thiện
+  ```
 
 ## Tạo Instruction
 - Tạo file instruction trong thư mục instructions/ hoặc thư mục tương ứng
 - Sử dụng định dạng [TenTinhNang]_Instruction.md hoặc [TenModule]_Upgrade.md
+- Tổng hợp tất cả thông tin từ quá trình brainstorm vào instruction
+- Bao gồm kết quả nghiên cứu đối thủ cạnh tranh trong phần phân tích thị trường
 - Mô tả rõ mục tiêu, yêu cầu, và scope của tính năng
 - Xác định các task cụ thể và đánh dấu trạng thái (✅, ⏳, ❌)
 - Định nghĩa ràng buộc và yêu cầu ngoài biên
 - Xác định tiêu chí hoàn thành cho từng task và toàn bộ tính năng
 - Liên kết đến các tài liệu liên quan khác nếu cần
+
+## Phân Cấp Instruction
+- ***BẮT BUỘC*** tạo instruction tổng quan (outline) cho toàn bộ dự án trước tiên
+- ***BẮT BUỘC*** tạo các instruction chi tiết riêng biệt cho từng module/tính năng
+- Đặt tên instruction chi tiết theo cấu trúc: `[TênDựÁn]_[TênModule]_Instruction.md`
+- Trong instruction tổng quan, liệt kê tất cả các module/tính năng cần phát triển
+- Tạo liên kết từ instruction tổng quan đến các instruction chi tiết
+- Cập nhật instruction tổng quan mỗi khi thêm hoặc thay đổi module/tính năng
+- Đảm bảo mỗi instruction chi tiết tham chiếu ngược lại instruction tổng quan
+- Instruction chi tiết phải đủ chi tiết để có thể triển khai độc lập
+- Cấu trúc thư mục instruction nên phản ánh cấu trúc của dự án
+
+## Instruction Chi Tiết Cho Giao Diện
+- ***BẮT BUỘC*** brainstorm lại với người dùng về giao diện họ mong muốn
+- Tạo file instruction riêng cho giao diện với cấu trúc: `[TênDựÁn]_UI_Instruction.md`
+- Thu thập tham khảo hình ảnh, mockups, hoặc wireframes từ người dùng
+- Liệt kê chi tiết các màn hình/components cần được phát triển
+- Mô tả flow chuyển tiếp giữa các màn hình
+- Xác định:
+  * Layout tổng thể (responsive breakpoints nếu cần)
+  * Color scheme và typography
+  * Components chính và cách chúng tương tác
+  * Animations và transitions
+  * States khác nhau của UI (loading, error, empty states)
+  * Responsive behavior (mobile, tablet, desktop)
+- Tạo sitemap hoặc flow diagram cho các ứng dụng phức tạp
+- Sử dụng danh sách các câu hỏi gợi ý để brainstorm về UI:
+  * "Bạn có thể cung cấp ví dụ về UI mà bạn thích không?"
+  * "Màu sắc chủ đạo bạn muốn sử dụng là gì?"
+  * "Bạn ưu tiên thiết kế đơn giản hay phức tạp?"
+  * "Có flow hoặc tương tác cụ thể nào bạn muốn làm nổi bật không?"
+  * "Đối tượng người dùng chính của ứng dụng là ai?"
+- Khi thu thập feedback về UI, tập trung vào:
+  * Mục tiêu của người dùng trên từng màn hình
+  * Thông tin cần hiển thị và mức độ ưu tiên
+  * Các tác vụ phổ biến người dùng cần thực hiện
+  * Những pain points trong UI hiện tại (nếu có)
+- Đính kèm references, mockups, screenshots vào phần phụ lục của instruction
 
 ## Sử Dụng Instruction
 - Sử dụng instruction như nguồn thông tin chính để hiểu yêu cầu
@@ -39,14 +181,18 @@ globs: "*.*"
 - Dự đoán potential issues và thách thức
 
 ## Quy Trình Thực Hiện
-1. Phân tích yêu cầu từ user
-2. Rà soát cấu trúc project
-3. Tạo instruction đầy đủ
-4. Xác nhận instruction đã hoàn thiện
-5. Tuân thủ các task trong instruction theo thứ tự
-6. Cập nhật trạng thái task khi hoàn thành
-7. Kiểm tra tất cả tiêu chí hoàn thành
-8. Tổng kết khi hoàn thiện tính năng
+1. Brainstorm với người dùng qua nhiều vòng hỏi đáp
+2. Nghiên cứu và phân tích đối thủ cạnh tranh
+3. Phân tích yêu cầu từ user
+4. Rà soát cấu trúc project
+5. Tạo instruction đầy đủ
+6. Cập nhật .code-workspace với màu sắc và emoji phù hợp
+7. Tạo file MockupData.md nếu dự án sử dụng dữ liệu giả lập
+8. Xác nhận instruction đã hoàn thiện
+9. Tuân thủ các task trong instruction theo thứ tự
+10. Cập nhật trạng thái task khi hoàn thành
+11. Kiểm tra tất cả tiêu chí hoàn thành
+12. Tổng kết khi hoàn thiện tính năng
 
 ## Quản Lý Instruction Files
 - Giữ instruction files trong Git version control
@@ -56,4 +202,5 @@ globs: "*.*"
 - Tham khảo instruction cũ khi phát triển tính năng mới tương tự
 
 @file ../Instruction.md
-@file ../Project.md 
+@file ../Project.md
+@file ../MockupData.md 

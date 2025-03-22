@@ -1,0 +1,22 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+name: smali-rules
+description: Comprehensive rules for working with Smali code and APK decompilation projects
+globs: "**/*.{smali,apk,dex,xml,yml,yaml,json}"
+
+- Phân tích cấu trúc APK và AndroidManifest.xml trước khi chỉnh sửa
+- Xác định thành phần chính: Activities, Services, Receivers, Providers
+- Sử dụng công cụ phù hợp: apktool, jadx, dex2jar, jd-gui
+- Lưu trữ APK gốc và tạo backup sau mỗi chỉnh sửa lớn
+- Hiểu rõ cú pháp Dalvik bytecode và kiểu dữ liệu trong Smali
+- Duy trì cấu trúc try-catch, .locals, .registers khi chỉnh sửa
+- Thêm comment chi tiết trước mỗi thay đổi trong code
+- Cẩn thận với invoke-* instructions và jump labels
+- Kiểm tra tính nhất quán của tham chiếu và resource IDs
+- Không vô hiệu hóa các cơ chế bảo mật quan trọng
+- Kiểm tra mã trước khi recompile, ký và zipalign APK
+- Sử dụng logcat và các công cụ như Frida để debug
+- Tuân thủ đạo đức và quy định pháp luật về reverse engineering 
