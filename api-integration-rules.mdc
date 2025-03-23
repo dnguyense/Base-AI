@@ -1,8 +1,3 @@
----
-description: Rules for integrating Weather and AI APIs into all compatible applications
-globs: "*.js,*.jsx,*.ts,*.tsx,*.vue,*.py,*.swift,*.kt,*.java,*.cs"
-alwaysApply: true
----
 # API Integration Rules
 description: Rules for integrating Weather and AI APIs into all compatible applications
 globs: "*.js,*.jsx,*.ts,*.tsx,*.vue,*.py,*.swift,*.kt,*.java,*.cs"
@@ -23,22 +18,6 @@ globs: "*.js,*.jsx,*.ts,*.tsx,*.vue,*.py,*.swift,*.kt,*.java,*.cs"
 - Việc tích hợp API không được làm tăng đáng kể kích thước APK
 - Đảm bảo các API không can thiệp vào các tính năng cốt lõi của APK
 
-## API Thời Tiết
-- Tham khảo chi tiết API trong file weather-basic.md
-- Hiển thị thông tin thời tiết theo vị trí hiện tại của người dùng
-- Tạo widget thời tiết có thể tích hợp vào nhiều vị trí trong ứng dụng
-- Lưu cache dữ liệu thời tiết để giảm số lượng request
-- Xử lý các trường hợp offline và lỗi kết nối
-- Cung cấp option cho user tắt/bật tính năng thời tiết
-
-## AI API
-- Tham khảo chi tiết API trong file API_Docs.md
-- Tích hợp trợ lý AI vào các điểm tương tác phù hợp trong ứng dụng
-- Sử dụng AI để cá nhân hóa trải nghiệm người dùng
-- Implement các tính năng gợi ý thông minh dựa trên dữ liệu người dùng
-- Đảm bảo quyền riêng tư và bảo mật khi sử dụng AI API
-- Cung cấp option cho user kiểm soát mức độ tương tác của AI
-
 ## Quy Trình Tích Hợp
 1. Đánh giá mức độ phù hợp của ứng dụng với các API
 2. Đối với APK: Xác nhận yêu cầu tích hợp từ người dùng trước khi tiến hành
@@ -47,21 +26,4 @@ globs: "*.js,*.jsx,*.ts,*.tsx,*.vue,*.py,*.swift,*.kt,*.java,*.cs"
 5. Implement các API service/wrapper riêng biệt
 6. Tích hợp UI components vào ứng dụng
 7. Test kỹ lưỡng trên các môi trường khác nhau
-8. Theo dõi feedback người dùng và tinh chỉnh
-
-## Nguyên Tắc Thiết Kế
-- Tích hợp một cách tự nhiên và không gây phiền toái
-- Thiết kế responsive và thích ứng với nhiều loại thiết bị
-- Hiệu suất cao, tối thiểu hóa tác động đến performance của ứng dụng
-- Trải nghiệm nhất quán trên các nền tảng
-- Khả năng tùy chỉnh cho người dùng
-
-## Yêu Cầu Kỹ Thuật
-- Implement caching để tối ưu số lượng API calls
-- Xử lý graceful degradation khi API không khả dụng
-- Implement retry logic và error handling phù hợp
-- Sử dụng lazy loading cho các tính năng AI nặng
-- Đảm bảo không ảnh hưởng đến thời gian khởi động ứng dụng
-
-@file ../weather-basic.md
-@file ../API_Docs.md 
+8. Theo dõi feedback người dùng và tinh chỉnh 

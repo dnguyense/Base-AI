@@ -1,0 +1,175 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Quy Tắc Làm Việc Với APK
+description: Quy tắc và hướng dẫn khi làm việc với dự án APK
+globs: "*.smali,*.xml,*.yml,AndroidManifest.xml,apktool.yml"
+
+## Nguyên Tắc Cơ Bản
+- ***BẮT BUỘC*** backup APK gốc trước khi bắt đầu chỉnh sửa
+- ***BẮT BUỘC*** theo dõi và ghi lại tất cả thay đổi khi chỉnh sửa APK
+- ***BẮT BUỘC*** thử nghiệm APK trên nhiều thiết bị khác nhau sau khi chỉnh sửa
+- ***KHUYẾN NGHỊ*** sử dụng git để quản lý các thay đổi trong quá trình chỉnh sửa
+
+## Quy Trình Làm Việc
+1. Sao lưu APK gốc
+2. Phân tích cấu trúc và chức năng của APK
+3. Decompile APK sử dụng apktool
+4. Thực hiện các thay đổi cần thiết
+5. Build và ký APK
+6. Kiểm thử APK đã chỉnh sửa
+7. Tạo báo cáo thay đổi
+
+## Xử Lý Files Smali
+- Mỗi file .smali tương ứng với một class Java/Kotlin
+- Tìm hiểu cấu trúc class trước khi chỉnh sửa
+- Chỉ sửa đổi những phần cần thiết
+- Thêm comments để đánh dấu những thay đổi
+- Không thay đổi cấu trúc method (tên, tham số, kiểu trả về) trừ khi cần thiết
+- Cẩn thận khi thay đổi các register trong code smali
+
+```smali
+# Ví dụ một method trong smali
+.method public static final setWindowFocusable(Landroid/app/Activity;Z)V
+    .locals 1
+    
+    // Kiểm tra tham số
+    if-eqz p0, :cond_0
+    
+    // Lấy window từ activity
+    invoke-virtual {p0}, Landroid/app/Activity;->getWindow()Landroid/view/Window;
+    
+    move-result-object v0
+    
+    // Kiểm tra null
+    if-eqz v0, :cond_0
+    
+    // Đặt flags
+    const/16 p0, 0x400
+    
+    if-eqz p1, :cond_1
+    
+    invoke-virtual {v0, p0}, Landroid/view/Window;->clearFlags(I)V
+    
+    goto :goto_0
+    
+    :cond_1
+    invoke-virtual {v0, p0}, Landroid/view/Window;->addFlags(I)V
+    
+    :cond_0
+    :goto_0
+    return-void
+.end method
+```
+
+## Xử Lý AndroidManifest.xml
+- Cẩn thận khi thay đổi package name
+- Giữ nguyên các permission cần thiết
+- Không xóa các component (activity, service, receiver) trừ khi chắc chắn không cần
+- Đảm bảo main activity được khai báo đúng
+- Kiểm tra và cập nhật các intent filter nếu cần
+
+```xml
+<!-- Ví dụ khai báo activity trong AndroidManifest.xml -->
+<activity
+    android:name=".MainActivity"
+    android:exported="true"
+    android:theme="@style/Theme.AppCompat.NoActionBar">
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+</activity>
+```
+
+## Xử Lý apktool.yml
+- Cập nhật phiên bản ứng dụng khi cần thiết
+- Cẩn trọng khi thay đổi các tham số biên dịch
+- Đảm bảo sử dụng đúng phiên bản SDK
+
+```yaml
+# Ví dụ file apktool.yml
+!!brut.androlib.meta.MetaInfo
+apkFileName: example.apk
+compressionType: false
+doNotCompress:
+- resources.arsc
+- png
+isFrameworkApk: false
+packageInfo:
+  forcedPackageId: '127'
+  renameManifestPackage: null
+sdkInfo:
+  minSdkVersion: '21'
+  targetSdkVersion: '30'
+sharedLibrary: false
+sparseResources: false
+unknownFiles: {}
+usesFramework:
+  ids:
+  - 1
+  tag: null
+version: 2.6.0
+versionInfo:
+  versionCode: '10'
+  versionName: '1.0'
+```
+
+## Xử Lý Resources
+- Thay đổi strings.xml để sửa đổi văn bản
+- Cẩn thận khi thay thế hình ảnh (giữ nguyên tên và định dạng)
+- Duy trì cấu trúc thư mục res
+- Không xóa resources trừ khi chắc chắn không sử dụng
+
+```xml
+<!-- Ví dụ file strings.xml -->
+<resources>
+    <string name="app_name">Ứng Dụng Của Tôi</string>
+    <string name="welcome_message">Chào mừng bạn đến với ứng dụng!</string>
+    <string name="action_settings">Cài đặt</string>
+</resources>
+```
+
+## Lỗi Thường Gặp
+1. **Bad method handle type**: Lỗi khi sử dụng lambda trong smali
+2. **Resource ID không hợp lệ**: Cần giữ nguyên ID của resources
+3. **Missing classes**: Thiếu thư viện bên ngoài
+4. **Verification error**: Code smali không hợp lệ
+5. **.DS_Store trong APK**: Cần xóa trước khi build
+
+## Các Lệnh Quan Trọng
+```bash
+# Decode APK
+java -jar apktool.jar d app.apk -o output_dir --force
+
+# Build APK
+java -jar apktool.jar b modified_dir -o new.apk --use-aapt2
+
+# Zipalign APK
+zipalign -p -f -v 4 input.apk output.apk
+
+# Ký APK
+apksigner sign --ks keystore.jks --ks-pass pass:password input.apk
+
+# Cài đặt APK
+adb install -r new.apk
+
+# Xóa .DS_Store
+find . -name ".DS_Store" -delete
+```
+
+## Công Cụ Hữu Ích
+- **jadx-gui**: Decompile APK về Java/Kotlin
+- **dex2jar**: Chuyển APK thành JAR
+- **JD-GUI**: Xem mã nguồn JAR
+- **APK Analyzer (Android Studio)**: Phân tích APK
+- **VS Code + Smali Plugin**: Chỉnh sửa code smali
+
+## Kinh Nghiệm Hay
+- Sử dụng logcat để debug APK đã chỉnh sửa
+- Phân tích kỹ trước khi thay đổi
+- So sánh hành vi của APK gốc và APK đã chỉnh sửa
+- Tạo bản backup cho mỗi giai đoạn chỉnh sửa
+- Test APK trên nhiều thiết bị khác nhau 
