@@ -1,0 +1,97 @@
+---
+name: smali-module-integration
+description: Quy trình tích hợp module từ APK đã decompile vào dự án hiện tại
+globs: "**/*.{smali,apk,dex,xml}"
+alwaysApply: false
+---
+
+# Quy Trình Tích Hợp Module Smali
+description: Hướng dẫn và quy trình tích hợp module smali từ APK đã decompile vào dự án hiện tại
+globs: "**/*.{smali,apk,dex,xml}"
+
+## Nguyên Tắc Cơ Bản
+- ***BẮT BUỘC*** tạo backup trước khi tích hợp module mới
+- ***BẮT BUỘC*** kiểm tra cấu trúc smali_classes hiện có trong dự án
+- ***BẮT BUỘC*** tạo thư mục smali_classes mới nếu cần để tránh xung đột
+- ***KHUYẾN NGHỊ*** kiểm tra các dependencies có thể xung đột trước khi tích hợp
+
+## Quy Trình Tích Hợp Module
+1. **Xác định vị trí module nguồn**: Xác định đường dẫn đến thư mục smali đã decompile của module
+2. **Xác định tên thư mục cần copy**: Xác định chính xác tên thư mục chứa code của module
+3. **Phân tích cấu trúc dự án đích**: Kiểm tra cấu trúc smali_classes hiện có
+4. **Xác định thư mục đích phù hợp**: Chọn thư mục smali_classes tiếp theo (smali_classesx+1)
+5. **Tạo backup**: Tạo backup dự án đích trước khi thay đổi
+6. **Copy module**: Copy thư mục module vào vị trí phù hợp
+7. **Kiểm tra tính tương thích**: Kiểm tra xem có vấn đề về tương thích không
+8. **Biên dịch và test**: Biên dịch lại APK và kiểm tra chức năng
+
+## Bước 1: Phân Tích Cấu Trúc
+```python
+# Giả định dự án đã được mở trong Cursor
+# Phân tích các thư mục smali_classes trong dự án
+smali_folders = [ folder for folder in os.listdir(".") if folder.startswith("smali_classes") or folder == "smali" ]
+smali_folders.sort()
+next_smali_folder = f"smali_classes{len(smali_folders)}" if len(smali_folders) > 1 else "smali_classes2"
+```
+
+## Bước 2: Xác Định Thông Tin Module
+```
+Module Source Path: /path/to/decompiled/module
+Module Folder Name: specific_folder_name (e.g., miui)
+Target Folder: {next_smali_folder}/{module_folder_name}
+```
+
+## Bước 3: Tạo Backup
+```bash
+# Tạo backup của dự án trước khi thực hiện thay đổi
+mkdir -p _backups/$(date +%Y-%m-%d)
+cp -r . _backups/$(date +%Y-%m-%d)/
+```
+
+## Bước 4: Tích Hợp Module
+```bash
+# Tạo thư mục smali mới (nếu cần)
+mkdir -p {next_smali_folder}
+
+# Copy module vào thư mục đích
+cp -r {module_source_path}/{module_folder_name} {next_smali_folder}/
+
+# Xác nhận việc copy thành công
+echo "Module {module_folder_name} đã được tích hợp vào {next_smali_folder}/"
+```
+
+## Bước 5: Kiểm Tra Xung Đột Tiềm Ẩn
+- Kiểm tra các import statement trong module để xác định dependencies
+- Đảm bảo các class được tham chiếu đã có trong dự án
+- Kiểm tra xung đột với các class hiện có
+- Kiểm tra các permissions cần thiết trong AndroidManifest.xml
+
+## Bước 6: Biên Dịch Và Kiểm Tra
+```bash
+# Biên dịch lại APK
+apktool b . -o ../output.apk
+
+# Ký APK (nếu cần)
+jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore path/to/keystore.keystore -storepass password ../output.apk alias_name
+
+# Tối ưu APK
+zipalign -v 4 ../output.apk ../final.apk
+```
+
+## Xử Lý Trường Hợp Đặc Biệt
+- **Multiple smali folders**: Đảm bảo đặt module vào thư mục phù hợp để tránh xung đột
+- **Dependencies**: Kiểm tra và bổ sung các dependencies thiếu
+- **Manifest Merging**: Cập nhật AndroidManifest.xml nếu module yêu cầu
+- **Conflicts**: Xử lý xung đột giữa các phiên bản khác nhau của cùng một class
+
+## Tài Liệu Bổ Sung
+- Xem `tools/apktool/README.md` để biết thêm về công cụ apktool
+- Tham khảo `docs/smali-guide.md` để hiểu về cú pháp smali
+- Kiểm tra `docs/troubleshooting.md` khi gặp vấn đề trong quá trình tích hợp
+
+## Những Lỗi Thường Gặp
+- **ClassNotFoundException**: Thiếu class được tham chiếu trong module
+- **VerifyError**: Không tương thích giữa các phiên bản API
+- **NoClassDefFoundError**: Class không được tìm thấy trong runtime
+- **IllegalAccessError**: Lỗi quyền truy cập vào class/method
+- **NoSuchMethodError**: Method đã thay đổi hoặc không tồn tại 
