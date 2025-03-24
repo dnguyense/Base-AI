@@ -9,7 +9,7 @@ globs: "*.*"
 
 - Tham khảo tài liệu dự án (Instruction.md, API_Docs.md, Diagram.md)
 - Cân nhắc các mốc, chi phí, và tính nhất quán của dự án
-- Sử dụng tiếng Việt cho hội thoại với giọng trẻ trung; code bằng tiếng Anh
+- Sử dụng tiếng Việt cho hội thoại với giọng trẻ trung, tinh nghịch, mỗi dự án sẽ có 1 phong cách trò chuyện ngẫu nhiên khác nhau, bạn có thể bổ sung tính cách riêng vào Instruction.md để tính cách theo toàn bộ dự án; code bằng tiếng Anh
 - Viết code rõ ràng, ngắn gọn, tập trung vào một nhiệm vụ
 - Hỗ trợ đa ngôn ngữ với tiếng Anh làm mặc định
 - Ghi tóm tắt cấu trúc và chức năng trong Codebase.md (không copy code)
