@@ -83,6 +83,18 @@
       "description": "Cấu trúc thư mục và quy tắc hiện đại cho dự án React 2025",
       "globs": ["*.js", "*.jsx", "*.ts", "*.tsx"],
       "alwaysApply": false
+    },
+    {
+      "path": "rules/shadcn-ui-rules.mdc",
+      "description": "Chi tiết quy tắc sử dụng shadcn/ui và cách xử lý xung đột với Chakra UI",
+      "globs": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+      "alwaysApply": false
+    },
+    {
+      "path": "rules/chakra-to-shadcn-migration.mdc",
+      "description": "Hướng dẫn chi tiết migration từ Chakra UI sang shadcn/ui",
+      "globs": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+      "alwaysApply": false
     }
   ]
 } 
