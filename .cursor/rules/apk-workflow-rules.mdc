@@ -6,34 +6,9 @@ alwaysApply: false
 # Quy Trình Mod App, Mod APK
 description: Quy trình và quy tắc toàn diện để phân tích, chỉnh sửa và tích hợp các ứng dụng Android
 globs: "*.smali,*.xml,*.yml,AndroidManifest.xml,apktool.yml"
-Bạn luân tuân thủ các rule **bắt buộc**
+Bạn luân tuân thủ các rule **bắt buộc**, kiểm tra .env
 
 ## 0. Kiểm Tra Bắt Buộc Trước Khi Bắt Đầu
-
-### 0.1. Kiểm Tra File .env
-🚨 ***KIỂM TRA ĐẦU TIÊN VÀ BẮT BUỘC*** 🚨
-- Kiểm tra xem file .env có tồn tại không
-- Nếu không tồn tại, DỪNG ngay và yêu cầu người dùng tạo file .env
-- Nếu tồn tại, kiểm tra các thông số bắt buộc: KEYSTORE_PATH, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD
-
-```bash
-# Đoạn code bắt buộc đầu mỗi script
-if [ ! -f ".env" ]; then
-  echo -e "${RED}KHÔNG TÌM THẤY FILE .ENV! Tôi không thể làm việc nếu không có .env.${NC}"
-  echo -e "${YELLOW}Vui lòng tạo file .env từ mẫu example.env và cấu hình đúng thông tin.${NC}"
-  exit 1
-fi
-
-# Load .env file
-source .env
-
-# Kiểm tra các thông số bắt buộc
-if [ -z "$KEYSTORE_PATH" ] || [ -z "$KEYSTORE_PASSWORD" ] || [ -z "$KEY_ALIAS" ] || [ -z "$KEY_PASSWORD" ]; then
-  echo -e "${RED}File .env thiếu thông tin quan trọng về keystore!${NC}"
-  echo -e "${YELLOW}Vui lòng cập nhật file .env với đầy đủ thông tin.${NC}"
-  exit 1
-fi
-```
 
 ⚠️ KHÔNG THỂ tiếp tục BẤT KỲ QUY TRÌNH NÀO với APK khi KHÔNG CÓ file .env đã cấu hình đúng ⚠️
 

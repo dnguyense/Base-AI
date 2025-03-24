@@ -12,6 +12,7 @@ globs: "*.*"
 - ***BẮT BUỘC*** tạo kế hoạch nâng cấp chi tiết trong file Upgrade_Plan.md
 - ***BẮT BUỘC*** yêu cầu người dùng review và phê duyệt kế hoạch nâng cấp trước khi thực hiện
 - ***BẮT BUỘC*** backup tất cả file liên quan trước khi tiến hành thay đổi
+- ***BẮT BUỘC*** kiểm tra file db-schema.sql trước khi tạo hoặc sửa đổi database
 - ***KHUYẾN NGHỊ*** ưu tiên tính tương thích ngược khi thiết kế nâng cấp
 - ***TRÁNH*** thực hiện nghiên cứu đối thủ cạnh tranh trong giai đoạn nâng cấp
 - ***TRÁNH*** thay đổi cấu trúc cơ bản của dự án trừ khi thực sự cần thiết
@@ -20,6 +21,7 @@ globs: "*.*"
 - Tìm hiểu cấu trúc dự án và các module chính
 - Xác định kiến trúc hiện tại, tech stack và các pattern đang áp dụng
 - Phân tích các dependencies nội bộ và bên ngoài
+- ***BẮT BUỘC*** xem xét file db-schema.sql để hiểu cấu trúc database hiện tại
 - Xác định các module có liên quan đến tính năng mới
 - Kiểm tra code conventions và style guide đang được áp dụng
 - Tìm hiểu flow hiện tại của tính năng liên quan
@@ -28,6 +30,56 @@ globs: "*.*"
 - Xác định các phần code có thể tái sử dụng cho tính năng mới
 - Đánh giá độ ổn định của hệ thống hiện tại
 
+## Quản Lý Database Trong Quá Trình Nâng Cấp
+- ***BẮT BUỘC*** kiểm tra file db-schema.sql trước khi thực hiện bất kỳ thay đổi nào liên quan đến database
+- ***BẮT BUỘC*** cập nhật file db-schema.sql ngay sau khi thực hiện thay đổi cấu trúc database
+- ***BẮT BUỘC*** tạo các script migration khi thay đổi cấu trúc database đã tồn tại
+- ***BẮT BUỘC*** backup dữ liệu trước khi thực hiện thay đổi cấu trúc database
+- ***BẮT BUỘC*** kiểm tra các database hiện có trước khi tạo mới để tránh trùng lặp
+- ***KHUYẾN NGHỊ*** tận dụng lại cấu trúc database hiện có thay vì tạo mới
+- Cập nhật lịch sử thay đổi trong file db-schema.sql theo cú pháp:
+  ```sql
+  -- <ngày> - <người thực hiện> - <mô tả thay đổi>
+  ```
+- Thêm các comment mô tả chi tiết cho từng thay đổi cấu trúc
+- Xác định và ghi rõ tác động của thay đổi database đến chức năng hiện có
+- Kiểm thử kỹ lưỡng sau khi thực hiện thay đổi database
+- Tham khảo thêm tại file `instructions/database-management.md` cho hướng dẫn chi tiết
+
+## Supabase MCP Trong Quá Trình Nâng Cấp
+- ***BẮT BUỘC*** kiểm tra cài đặt Supabase MCP nếu dự án sử dụng Supabase
+  ```bash
+  # Kiểm tra xem đã cài đặt chưa
+  which mcp-server-postgrest
+  
+  # Nếu chưa, cài đặt
+  npm install -g @supabase/mcp-server-postgrest
+  ```
+- ***BẮT BUỘC*** kiểm tra file `.env` chứa đầy đủ cấu hình Supabase:
+  ```
+  SUPABASE_URL=https://your-project-url.supabase.co
+  SUPABASE_ANON_KEY=your-anon-key
+  SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+  ```
+- ***BẮT BUỘC*** yêu cầu người dùng cấu hình các biến thiếu trước khi tiếp tục
+- ***BẮT BUỘC*** sử dụng MCP để kiểm tra tất cả thay đổi liên quan đến database:
+  * Thay đổi cấu trúc bảng
+  * Thay đổi RLS policies
+  * Thay đổi functions
+  * Thay đổi triggers
+  * Tạo mới hoặc thay đổi views
+- ***BẮT BUỘC*** kiểm tra tác động của thay đổi đến hiệu năng thông qua MCP
+- ***BẮT BUỘC*** chạy MCP song song trong suốt quá trình nâng cấp:
+  ```bash
+  mcp-server-postgrest --apiUrl=$SUPABASE_URL/rest/v1 --apiKey=$SUPABASE_ANON_KEY --schema=public
+  # Hoặc nếu script đã được cấu hình trong package.json
+  npm run mcp
+  ```
+- ***KHUYẾN NGHỊ*** sử dụng MCP để xác thực tất cả queries trước khi triển khai
+- ***KHUYẾN NGHỊ*** cập nhật types từ schema database khi có thay đổi
+- ***KHUYẾN NGHỊ*** giữ số lượng database ít nhất có thể, tránh tạo quá nhiều database thử nghiệm
+- Tham khảo thêm tại file `.cursor/rules/supabase-mcp-workflow.mdc` cho hướng dẫn chi tiết
+
 ## Phân Tích Tác Động
 - Xác định các file/component sẽ bị ảnh hưởng bởi nâng cấp
 - Đánh giá tác động đến:
@@ -35,6 +87,7 @@ globs: "*.*"
   * Bảo mật và xử lý dữ liệu
   * Trải nghiệm người dùng (UX)
   * Khả năng mở rộng trong tương lai
+  * Cấu trúc và hiệu suất database
 - Ước tính mức độ thay đổi cần thiết (minimal, moderate, extensive)
 - Xác định các rủi ro tiềm ẩn khi thực hiện nâng cấp
 - Dự đoán các vấn đề có thể phát sinh trong quá trình nâng cấp
@@ -143,3 +196,48 @@ globs: "*.*"
 - Chi phí bảo trì cao
 
 @file ../_backups/backup_log.md 
+
+## Quản Lý Resource Trong Quá Trình Nâng Cấp
+- ***BẮT BUỘC*** kiểm tra và cập nhật các Cursor Rules trước khi bắt đầu nâng cấp dự án
+- ***BẮT BUỘC*** rà soát các icon hiện có và xác định nhu cầu bổ sung icon mới
+- ***BẮT BUỘC*** sử dụng Icon Library API để tìm kiếm và tải về các icon mới cần thiết
+- ***BẮT BUỘC*** backup thư mục assets/icons trước khi thực hiện thay đổi lớn
+- ***KHUYẾN NGHỊ*** duy trì tính nhất quán giữa các icon mới và cũ
+- Quy trình quản lý icon trong nâng cấp dự án:
+  1. Kiểm tra danh sách icon hiện có và style guide
+  2. Xác định nhu cầu icon mới từ kế hoạch nâng cấp
+  3. Tìm kiếm icon phù hợp qua Icon Library API:
+     - Sử dụng `/search` endpoint với từ khóa cụ thể
+     - Sử dụng `/suggest` endpoint với mô tả ngữ cảnh
+  4. Tải icon mới về và đặt trong cấu trúc thư mục phù hợp
+  5. Cập nhật README.md trong thư mục assets/icons với thông tin mới
+  6. Tham chiếu icon mới trong code với đường dẫn tương đối
+- Các trường hợp đặc biệt:
+  * Thay thế icon cũ: Lưu bản sao vào thư mục backup trước khi thay thế
+  * Thay đổi style icon: Thay thế đồng bộ tất cả icon liên quan
+  * Thêm mới bộ icon: Tạo thư mục con phù hợp trong assets/icons
+
+## Cập Nhật Cursor Rules
+- ***BẮT BUỘC*** kiểm tra phiên bản mới nhất của các rules thông qua API endpoint `/rules`
+- ***BẮT BUỘC*** cập nhật các rules hiện có với phiên bản mới nhất
+- ***BẮT BUỘC*** xem xét bổ sung rules mới phù hợp với tính năng nâng cấp
+- ***KHUYẾN NGHỊ*** thực hiện đồng bộ rules trước khi bắt đầu nâng cấp
+- Quy trình cập nhật rules:
+  1. Kiểm tra phiên bản hiện tại của rules trong `.cursor/rules`
+  2. So sánh với phiên bản mới nhất từ API
+  3. Tải về các rules cần cập nhật:
+     ```bash
+     # Tải rules từ server về local
+     npm run rules:download
+     ```
+  4. Cập nhật file `.cursorrc` nếu cần kích hoạt rules mới
+  5. Ghi lại thay đổi trong Changelog.md
+- Khi thêm mới rule cho dự án:
+  1. Tạo file rule mới trong `.cursor/rules` với định dạng .mdc
+  2. Cấu trúc file với metadata và nội dung phù hợp
+  3. Đồng bộ lên server:
+     ```bash
+     # Tải rule mới lên server
+     npm run rules:upload
+     ```
+  4. Cập nhật Changelog.md với thông tin về rule mới 

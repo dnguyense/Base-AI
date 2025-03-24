@@ -1,9 +1,0 @@
-name: pandas-best-practices
-description: Best practices for data manipulation and analysis with pandas
-globs: "**/*.py"
-
-- Use method chaining for data transformations to improve readability
-- Prefer `loc` and `iloc` for explicit data selection
-- Utilize `groupby` for efficient data aggregation
-- Use vectorized operations for better performance
-- Implement data quality checks early in your analysis 

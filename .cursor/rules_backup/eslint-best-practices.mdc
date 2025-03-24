@@ -1,5 +1,0 @@
-name: eslint-best-practices
-description: Best practices for linting with ESLint
-globs: "**/*.{js,ts}"
-
-- Implement proper linting with ESLint 

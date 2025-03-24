@@ -1,5 +1,0 @@
-name: cicd-best-practices
-description: Best practices for CI/CD pipelines
-globs: "**/*.{js,ts,yml}"
-
-- Implement proper CI/CD pipeline 

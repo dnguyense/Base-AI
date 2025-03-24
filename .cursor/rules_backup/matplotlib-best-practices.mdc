@@ -1,9 +1,0 @@
-name: matplotlib-best-practices
-description: Best practices for creating visualizations with Matplotlib
-globs: "**/*.py"
-
-- Use object-oriented interface for better control and reusability
-- Create informative plots with proper labels, titles, and legends
-- Use appropriate color schemes and consider color-blindness accessibility
-- Utilize subplots for multi-panel figures
-- Save figures in appropriate formats for publication or sharing 

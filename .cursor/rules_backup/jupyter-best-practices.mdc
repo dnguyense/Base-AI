@@ -1,9 +1,0 @@
-name: jupyter-best-practices
-description: Best practices for Jupyter Notebook development
-globs: "**/*.ipynb"
-
-- Structure notebooks with clear sections using markdown cells
-- Use meaningful cell execution order for reproducibility
-- Include explanatory text in markdown cells to document analysis steps
-- Keep code cells focused and modular for easier understanding and debugging
-- Use magic commands like `%matplotlib inline` for inline plotting 

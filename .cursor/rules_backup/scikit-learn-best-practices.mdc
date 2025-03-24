@@ -1,9 +1,0 @@
-name: scikit-learn-best-practices
-description: Best practices for machine learning with scikit-learn
-globs: "**/*.py"
-
-- Use pipelines to combine preprocessing and model fitting steps
-- Utilize cross-validation for robust model evaluation
-- Handle imbalanced datasets with appropriate techniques
-- Use feature selection and dimensionality reduction for better model performance
-- Document model assumptions and hyperparameters for reproducibility 

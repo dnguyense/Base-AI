@@ -1,9 +1,0 @@
-name: document-content-best-practices.mdc
-description: Best practices for Markdown document content
-globs: "*.md"
-
-- Focus on describing functionality, not implementation
-- Describe features from a user's perspective and purpose
-- Use simple, AI-friendly language
-- Avoid unnecessary jargon
-- Do not copy code, only describe purpose and functionality 

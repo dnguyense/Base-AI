@@ -1,5 +1,0 @@
-name: bcrypt-best-practices
-description: Best practices for password hashing with bcrypt
-globs: "**/*.{js,ts}"
-
-- Use proper password hashing with bcrypt 

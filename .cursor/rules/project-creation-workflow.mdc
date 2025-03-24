@@ -13,6 +13,7 @@ globs: "*.*"
 - ***BẮT BUỘC*** đọc và hiểu instruction trước khi bắt đầu code
 - ***BẮT BUỘC*** cập nhật .code-workspace sau khi hoàn thành brainstorming
 - ***BẮT BUỘC*** tạo file MockupData.md khi dự án sử dụng bất kỳ dữ liệu giả lập nào
+- ***BẮT BUỘC*** tạo file db-schema.sql khi dự án sử dụng database
 - Không bao giờ bắt đầu code khi chưa có instruction đầy đủ
 
 ## Brainstorming với Người Dùng
@@ -128,6 +129,64 @@ globs: "*.*"
   * Những pain points trong UI hiện tại (nếu có)
 - Đính kèm references, mockups, screenshots vào phần phụ lục của instruction
 
+## Quản Lý Database
+- ***BẮT BUỘC*** tạo file db-schema.sql tại thư mục gốc của dự án
+- ***BẮT BUỘC*** thiết kế cấu trúc database trước khi bắt đầu code
+- ***BẮT BUỘC*** cập nhật db-schema.sql mỗi khi thay đổi cấu trúc database
+- ***BẮT BUỘC*** kiểm tra db-schema.sql trước khi tạo hoặc sử dụng database mới
+- ***BẮT BUỘC*** ghi rõ mục đích của từng database trong db-schema.sql
+- ***BẮT BUỘC*** theo dõi lịch sử thay đổi của database trong file db-schema.sql
+- Thiết kế database theo các best practices của loại database sử dụng
+- Tối ưu hóa cấu trúc database ngay từ đầu để tránh refactoring lớn sau này
+- Tổ chức cấu trúc db-schema.sql theo dạng:
+  ```sql
+  -- DATABASE: <tên_database>
+  -- MỤC ĐÍCH: <mô tả ngắn về mục đích sử dụng>
+  -- NGÀY TẠO: <ngày tạo ban đầu>
+  -- NGƯỜI TẠO: <người tạo ban đầu>
+  -- LỊCH SỬ CẬP NHẬT:
+  -- <ngày> - <người cập nhật> - <mô tả ngắn về thay đổi>
+
+  CREATE DATABASE IF NOT EXISTS <tên_database>;
+  USE <tên_database>;
+
+  -- Định nghĩa bảng và cấu trúc
+  -- ...
+
+  -- Kết thúc định nghĩa database này
+  -- ----------------------------------------
+  ```
+- Tham khảo thêm tại file `instructions/database-management.md` cho hướng dẫn chi tiết
+
+## Supabase và MCP Trong Dự Án Mới
+- ***BẮT BUỘC*** cài đặt Supabase MCP khi làm việc với bất kỳ dự án Supabase nào
+  ```bash
+  npm install -g @supabase/mcp-server-postgrest
+  ```
+- ***BẮT BUỘC*** tạo file `.env` chứa đầy đủ cấu hình kết nối Supabase:
+  ```
+  SUPABASE_URL=https://your-project-url.supabase.co
+  SUPABASE_ANON_KEY=your-anon-key
+  SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+  ```
+- ***BẮT BUỘC*** tạo file `example.env` làm mẫu cho người dùng
+- ***BẮT BUỘC*** thêm script khởi động MCP vào `package.json`:
+  ```json
+  "scripts": {
+    "mcp": "mcp-server-postgrest --apiUrl=$SUPABASE_URL/rest/v1 --apiKey=$SUPABASE_ANON_KEY --schema=public"
+  }
+  ```
+- ***BẮT BUỘC*** kiểm tra cấu hình `.env` trước khi tiếp tục làm việc
+- ***BẮT BUỘC*** sử dụng MCP để kiểm tra mọi thay đổi liên quan đến database
+- ***BẮT BUỘC*** tuân thủ quy trình làm việc với MCP:
+  1. Khởi động MCP server trước khi làm việc với database
+  2. Soạn thảo và kiểm tra queries qua MCP
+  3. Tối ưu hóa dựa trên feedback từ MCP
+  4. Chỉ áp dụng thay đổi vào Supabase sau khi đã kiểm tra kỹ
+- ***KHUYẾN NGHỊ*** tạo types từ schema database khi sử dụng TypeScript
+- ***KHUYẾN NGHỊ*** thiết lập CI/CD pipeline kết hợp với MCP
+- Tham khảo thêm tại file `.cursor/rules/supabase-mcp-workflow.mdc` cho hướng dẫn chi tiết
+
 ## Quy Trình Thực Hiện
 1. Brainstorm với người dùng qua nhiều vòng hỏi đáp
 2. Nghiên cứu và phân tích đối thủ cạnh tranh
@@ -136,11 +195,12 @@ globs: "*.*"
 5. Tạo instruction đầy đủ
 6. Cập nhật .code-workspace với màu sắc và emoji phù hợp
 7. Tạo file MockupData.md nếu dự án sử dụng dữ liệu giả lập
-8. Xác nhận instruction đã hoàn thiện
-9. Tuân thủ các task trong instruction theo thứ tự
-10. Cập nhật trạng thái task khi hoàn thành
-11. Kiểm tra tất cả tiêu chí hoàn thành
-12. Tổng kết khi hoàn thiện tính năng
+8. Tạo file db-schema.sql nếu dự án sử dụng database
+9. Xác nhận instruction đã hoàn thiện
+10. Tuân thủ các task trong instruction theo thứ tự
+11. Cập nhật trạng thái task khi hoàn thành
+12. Kiểm tra tất cả tiêu chí hoàn thành
+13. Tổng kết khi hoàn thiện tính năng
 
 ## Quản Lý Instruction Files
 - Giữ instruction files trong Git version control
@@ -148,6 +208,52 @@ globs: "*.*"
 - Đảm bảo mỗi tính năng có ít nhất một instruction file
 - Sử dụng instruction files như documentation cho dự án
 - Tham khảo instruction cũ khi phát triển tính năng mới tương tự
+
+## Quản Lý Resource
+- ***BẮT BUỘC*** tải các Cursor Rules mới về thư mục .cursor/rules trong quá trình setup dự án
+- ***BẮT BUỘC*** tạo thư mục assets/icons để lưu trữ các icon được sử dụng trong dự án
+- ***BẮT BUỘC*** sử dụng Icon Library API để tìm kiếm và tải về các icon cần thiết
+- ***BẮT BUỘC*** cập nhật file `.gitignore` để loại trừ các file tạm trong quá trình làm việc với resource
+- ***KHUYẾN NGHỊ*** tạo file README.md trong thư mục assets/icons để mô tả nguồn gốc và license của icon
+- Sử dụng API endpoint `/icon-sets` để xem danh sách các bộ icon có sẵn
+- Sử dụng API endpoint `/search` để tìm kiếm icon theo từ khóa cụ thể
+- Sử dụng API endpoint `/suggest` để nhận đề xuất icon dựa trên ngữ cảnh
+- Đặt tên file icon theo convention: `[tên-icon]_[kích-thước].[định-dạng]`
+- Tạo thư mục con theo loại icon nếu số lượng icon lớn (ví dụ: weather/, ui/, social/)
+- Với các icon SVG, cân nhắc sử dụng icon components để đảm bảo tính nhất quán
+- Luôn lưu thông tin về license và nguồn gốc của icon trong file README.md
+- Quy trình tải và sử dụng icon:
+  1. Xác định nhu cầu icon từ instruction
+  2. Tìm kiếm icon phù hợp qua Icon Library API
+  3. Tải icon về thư mục assets/icons
+  4. Ghi lại thông tin về icon trong README.md
+  5. Sử dụng icon trong code với đường dẫn tương đối
+
+## Quy Trình Tải Và Sử Dụng Rules
+- ***BẮT BUỘC*** kiểm tra các rules sẵn có trong dự án thông qua API endpoint `/rules`
+- ***BẮT BUỘC*** tạo thư mục `.cursor/rules` nếu chưa tồn tại
+- ***BẮT BUỘC*** tải các rules phù hợp với loại dự án về thư mục `.cursor/rules`
+- ***BẮT BUỘC*** cập nhật rules khi có phiên bản mới
+- ***KHUYẾN NGHỊ*** tạo file `.cursorrc` để cấu hình các rules được áp dụng tự động
+- Quy trình tải và sử dụng rules:
+  1. Kiểm tra danh sách rules có sẵn thông qua API
+  2. Xác định các rules phù hợp với loại dự án
+  3. Tải rules về thư mục `.cursor/rules`
+  4. Cấu hình file `.cursorrc` để xác định rules áp dụng tự động
+  5. Thực hiện đồng bộ rules giữa local và server nếu cần
+- Các lệnh đồng bộ hóa rules:
+  ```bash
+  # Tải rules từ local lên server
+  npm run rules:upload
+  
+  # Tải rules từ server về local
+  npm run rules:download
+  
+  # Đồng bộ hai chiều
+  npm run rules:sync
+  ```
+- Khi cập nhật rules, ghi lại trong Changelog.md với thông tin phiên bản
+- Áp dụng các rule mới nhất để đảm bảo chất lượng và tính nhất quán của dự án
 
 @file ../Instruction.md
 @file ../Project.md

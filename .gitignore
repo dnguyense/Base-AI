@@ -116,3 +116,13 @@ out/
 *.iml
 *.ipr
 *.iws
+
+# Icon resource temp files
+.icon-download-temp/
+.icon-cache/
+
+# Icon backups
+_backups/icons/
+
+# Cursor sync metadata
+.cursor-sync-metadata.json
