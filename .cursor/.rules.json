@@ -51,11 +51,6 @@
       "globs": ["*.swift", "*.storyboard", "*.xib", "*.xcodeproj", "*.xcworkspace", "*.pbxproj", "*.plist"]
     },
     {
-      "path": "rules/smali-rules.mdc",
-      "description": "Comprehensive rules for working with Smali code and APK decompilation projects",
-      "globs": ["*.smali", "*.apk", "*.dex", "*.xml", "AndroidManifest.xml", "*.yml", "*.yaml", "*.json"]
-    },
-    {
       "path": "rules/i18n.mdc",
       "description": "Rules for internationalization and localization across all projects",
       "globs": ["*.json", "*.yaml", "*.yml", "*.properties", "*.strings", "*.resx", "*.arb"]
