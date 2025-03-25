@@ -1,11 +1,114 @@
 ---
-description: 
-globs: 
+description: Quy trình để nâng cấp dự án hiện có theo cấu trúc 6 tài liệu
+globs: "*.md,instructions/*,docs/*"
 alwaysApply: false
 ---
 # Quy Trình Nâng Cấp Dự Án
-description: Quy trình nâng cấp và thêm tính năng cho dự án đã tồn tại
-globs: "*.*"
+description: Quy trình để nâng cấp dự án hiện có theo cấu trúc 6 tài liệu
+globs: "*.md,instructions/*,docs/*"
+
+## Tổng Quan
+Quy trình nâng cấp dự án áp dụng cấu trúc "6 Docs" cho dự án đã tồn tại, giúp cải thiện tài liệu và tối ưu cho AI làm việc với codebase.
+
+## Các Bước Thực Hiện
+
+### 1. Phân Tích Dự Án Hiện Tại
+- Rà soát codebase và tài liệu hiện có
+- Xác định các khoảng trống trong tài liệu
+- Đánh giá chất lượng và đầy đủ của tài liệu hiện tại
+- Liệt kê các tính năng và chức năng đã triển khai
+
+### 2. Chọn Tính Cách AI
+- Kiểm tra xem dự án đã có file `.project-personality` chưa
+- Nếu chưa có, chọn ngẫu nhiên một tính cách từ danh sách trong project-personality-generator.mdc
+- Tạo file `.project-personality` để lưu trữ thông tin tính cách
+- Thông báo cho người dùng về tính cách được chọn
+- Áp dụng tính cách này trong toàn bộ cuộc hội thoại liên quan đến dự án
+
+### 3. Backup Tài Liệu Hiện Tại
+- Tạo backup toàn bộ tài liệu vào thư mục `_backups`
+- Giữ nguyên cấu trúc thư mục gốc
+- Ghi log backup với thông tin ngày giờ và lý do
+- Đảm bảo backup hoàn thành trước khi tiến hành thay đổi
+
+### 4. Chuyển Đổi và Tích Hợp Tài Liệu
+Tạo thư mục `docs/` với 6 tài liệu, sử dụng thông tin từ tài liệu hiện có:
+```
+docs/
+├── 1-PRD.md               # Project Requirements Doc
+├── 2-AppFlow.md           # App Flow Doc
+├── 3-TechStack.md         # Tech Stack Doc
+├── 4-FrontendGuidelines.md # Frontend Guidelines
+├── 5-BackendStructure.md  # Backend Structure Doc
+└── 6-ImplementationPlan.md # Implementation Plan
+```
+
+### 5. Xây Dựng App Flow
+Trích xuất từ Diagram.md và các tài liệu liên quan:
+- Liệt kê và mô tả từng trang trong ứng dụng
+- Cách người dùng di chuyển giữa các trang
+- Cập nhật theo trạng thái hiện tại của ứng dụng
+- Xác định các luồng chưa được tài liệu hóa
+
+### 6. Tài Liệu Hóa Tech Stack
+Lấy thông tin từ package.json, Dockerfile, và codebase:
+- Liệt kê tất cả packages & dependencies đang sử dụng
+- Cung cấp links đến API docs
+- Xác định các thư viện và công cụ đang dùng
+- Mô tả environments hiện tại
+
+### 7. Xây Dựng Frontend Guidelines
+Trích xuất từ mã nguồn và các tài liệu UI:
+- Fonts và typography đang sử dụng
+- Bảng màu hiện tại
+- Quy tắc spacing & layout
+- Thư viện UI hoặc framework
+- Bộ icon đang dùng
+- Components và design patterns
+
+### 8. Tài Liệu Hóa Backend Structure
+Reverse engineer từ codebase và cơ sở dữ liệu:
+- Schema cơ sở dữ liệu hiện tại
+- Logic xác thực và phân quyền
+- Quy tắc lưu trữ đang áp dụng
+- API endpoints đã triển khai
+- Các edge cases đã xử lý
+
+### 9. Tạo Implementation Plan Mới
+Lập kế hoạch chi tiết cho các tính năng mới hoặc cải tiến:
+- Liệt kê các bước cụ thể để triển khai thay đổi
+- Xác định tác động đến hệ thống hiện tại
+- Đảm bảo tương thích ngược
+- Ước tính thời gian cho mỗi thay đổi
+
+### 10. Triển Khai Nâng Cấp
+- Tuân theo Implementation Plan
+- Cập nhật tài liệu song song với code
+- Ghi lại các quyết định thiết kế mới trong Decisions.md
+- Cập nhật Changelog.md với các thay đổi
+
+## Lưu Ý Quan Trọng
+- ***BẮT BUỘC*** duy trì tính nhất quán với codebase hiện tại
+- ***BẮT BUỘC*** bảo tồn kiến trúc và design patterns hiện có
+- ***BẮT BUỘC*** đảm bảo tương thích ngược
+- ***BẮT BUỘC*** test kỹ lưỡng các thay đổi
+- ***KHUYẾN NGHỊ*** cập nhật tất cả 6 tài liệu song song
+
+## Quản Lý Quá Trình Chuyển Đổi
+- Áp dụng việc chuyển đổi tài liệu theo từng giai đoạn
+- Ưu tiên PRD, Tech Stack và Implementation Plan trước
+- Hoàn thiện các tài liệu còn lại khi có thêm thông tin
+- Duy trì cả tài liệu cũ và mới trong giai đoạn chuyển tiếp
+
+## Tiêu Chí Đánh Giá
+Sau khi hoàn thành chuyển đổi, hãy kiểm tra:
+- ✅ 6 tài liệu phản ánh chính xác trạng thái hiện tại của dự án
+- ✅ Không có mất mát thông tin từ tài liệu cũ
+- ✅ Tài liệu mới cung cấp cái nhìn rõ ràng hơn về dự án
+- ✅ Implementation Plan phù hợp với hướng phát triển tiếp theo
+
+## Mẫu Tài Liệu Tham Khảo
+Xem chi tiết tại: [docs/templates/](mdc:docs/templates)
 
 ## Quy Tắc Cơ Bản
 - ***BẮT BUỘC*** rà soát kỹ dự án hiện tại trước khi đề xuất nâng cấp
@@ -16,6 +119,23 @@ globs: "*.*"
 - ***KHUYẾN NGHỊ*** ưu tiên tính tương thích ngược khi thiết kế nâng cấp
 - ***TRÁNH*** thực hiện nghiên cứu đối thủ cạnh tranh trong giai đoạn nâng cấp
 - ***TRÁNH*** thay đổi cấu trúc cơ bản của dự án trừ khi thực sự cần thiết
+
+## Thiết Lập Tính Cách AI
+- ***BẮT BUỘC*** kiểm tra xem dự án đã có file `.project-personality` chưa
+- ***BẮT BUỘC*** nếu chưa có, khởi tạo tính cách ngẫu nhiên từ danh sách trong project-personality-generator.mdc
+- ***BẮT BUỘC*** tạo file `.project-personality` để lưu trữ thông tin tính cách nếu chưa có
+- ***BẮT BUỘC*** thông báo cho người dùng về tính cách được chọn
+- ***BẮT BUỘC*** áp dụng tính cách này trong toàn bộ cuộc hội thoại liên quan đến dự án
+- ***BẮT BUỘC*** duy trì nhất quán trong việc thể hiện tính cách
+- ***KHUYẾN NGHỊ*** hỏi người dùng nếu họ muốn đổi tính cách
+- ***KHUYẾN NGHỊ*** điều chỉnh mức độ thể hiện tính cách dựa trên phản hồi của người dùng
+- Tham khảo thêm tại file `.cursor/rules/project-personality-generator.mdc` cho hướng dẫn chi tiết
+- Mẫu thông báo khi khởi tạo tính cách mới:
+  ```
+  🎭 Dự án này chưa có tính cách AI! Tính cách đã được chọn: [Tên Tính Cách]! 
+  [Một câu giới thiệu phù hợp với tính cách được chọn]
+  Nếu bạn không thích, cứ báo tôi đổi tính cách khác nhé!
+  ```
 
 ## Rà Soát Dự Án Hiện Tại
 - Tìm hiểu cấu trúc dự án và các module chính

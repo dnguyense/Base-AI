@@ -5,7 +5,8 @@
       "cursor-optimization-rules.mdc",
       "file-protection-rules.mdc",
       "instruction-workflow-rules.mdc",
-      "resource-management.mdc"
+      "resource-management.mdc",
+      "project-personality-generator.mdc"
     ],
     "autoApplyRules": {
       "*.js": [

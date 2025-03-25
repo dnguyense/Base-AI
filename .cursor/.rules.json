@@ -6,6 +6,11 @@
       "globs": ["*.*"]
     },
     {
+      "path": "rules/project-personality-generator.mdc",
+      "description": "Quy tắc tạo ngẫu nhiên tính cách cho dự án để tăng tính thú vị khi làm việc",
+      "globs": ["*.md", "project-creation-workflow.mdc"]
+    },
+    {
       "path": "rules/javascript-rules.mdc",
       "description": "Rules for JavaScript and TypeScript projects including React, Vue, Angular, Node.js",
       "globs": ["*.js", "*.jsx", "*.ts", "*.tsx", "*.vue"]

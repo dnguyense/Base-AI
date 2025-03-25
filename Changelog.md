@@ -4,6 +4,10 @@
 
 ### Added
 
+- Tính năng tạo ngẫu nhiên tính cách AI cho dự án để tăng trải nghiệm thú vị
+- Thêm file project-personality-generator.mdc để quản lý các tính cách
+- Cập nhật quy trình tạo dự án và nâng cấp dự án để bao gồm bước chọn tính cách
+- Hỗ trợ 11 loại tính cách khác nhau với trọng số ưu tiên
 - Bổ sung quy trình quản lý resource (icon và rule) vào workflow tạo dự án
 - Bổ sung quy trình quản lý resource (icon và rule) vào workflow nâng cấp dự án
 - Tích hợp hướng dẫn sử dụng Icon Library API vào quy trình làm việc
@@ -35,3 +39,23 @@
 
 - Nâng cấp quy trình tương tác tích hợp APK
 - Cập nhật tài liệu hướng dẫn
+
+## [2.0.0] - 2024-05-24
+
+### Added
+
+- Cấu trúc tài liệu "6 Docs" mới để giảm thiểu AI hallucination
+- Templates cho 6 tài liệu chính (PRD, App Flow, Tech Stack, Frontend Guidelines, Backend Structure, Implementation Plan)
+- Quy trình tạo dự án mới (project-creation-workflow.mdc)
+- Quy trình nâng cấp dự án (project-upgrade-workflow.mdc)
+- Thư mục docs/ với README.md giải thích về cấu trúc mới
+
+### Changed
+
+- Cập nhật README.md để giới thiệu cấu trúc tài liệu mới
+- Nâng cấp phiên bản lên 2.0.0 do thay đổi lớn trong cấu trúc tài liệu
+- Cải thiện quy trình làm việc để tập trung vào documentation-first approach
+
+### Deprecated
+
+- Quy trình làm việc cũ không sử dụng cấu trúc "6 Docs"
