@@ -1,0 +1,160 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Quy Trình Tạo Dự Án Mới
+description: Chi tiết từng bước để tạo một dự án mới, từ brainstorming đến triển khai
+globs: "*.*"
+
+## Các Nguyên Tắc Bắt Buộc
+- ***BẮT BUỘC*** bắt đầu với ít nhất 3 vòng brainstorming
+- ***BẮT BUỘC*** tạo và xác nhận "6 Docs" trước khi code
+- ***BẮT BUỘC*** liên tục xác nhận với người dùng ở mỗi giai đoạn
+- ***BẮT BUỘC*** tạo backup trước mỗi thay đổi lớn
+- ***BẮT BUỘC*** test kỹ lưỡng sau mỗi giai đoạn triển khai
+
+## Tiến Trình Đầy Đủ (16 Bước)
+
+### Giai Đoạn 1: Brainstorming & Khám Phá (Bước 1-4)
+1. **Đối Thoại Ban Đầu** ⏱️ 1-2 cuộc trao đổi
+   - Hiểu vấn đề cần giải quyết
+   - Xác định mục tiêu chính của sản phẩm
+   - Khám phá đối tượng người dùng
+   - CHECKPOINT: ✋ Xác nhận hiểu đúng vấn đề
+
+2. **Nghiên Cứu Tham Khảo** ⏱️ 1 cuộc trao đổi
+   - Tìm hiểu sản phẩm tương tự trên thị trường
+   - Phân tích điểm mạnh/yếu của đối thủ
+   - Đề xuất các tiêu chuẩn và tính năng quan trọng
+   - CHECKPOINT: ✋ Xác nhận tầm nhìn và điểm khác biệt
+
+3. **Xác Định Tính Năng** ⏱️ 1-2 cuộc trao đổi
+   - Liệt kê tất cả tính năng có thể có
+   - Phân nhóm và thảo luận mức độ ưu tiên
+   - Xác định scope cho MVP
+   - CHECKPOINT: ✋ Xác nhận danh sách tính năng
+
+4. **Brainstorm Giải Pháp Kỹ Thuật** ⏱️ 1 cuộc trao đổi
+   - Thảo luận về tech stack phù hợp
+   - Đánh giá các phương án kiến trúc
+   - Đề xuất các công cụ/framework phù hợp
+   - CHECKPOINT: ✋ Xác nhận hướng tiếp cận kỹ thuật
+
+### Giai Đoạn 2: Lập Kế Hoạch & Tài Liệu (Bước 5-10)
+5. **Tạo PRD** ⏱️ 1-2 cuộc trao đổi
+   - Viết chi tiết yêu cầu sản phẩm
+   - Mô tả user personas và use cases
+   - Xác định KPIs và metrics
+   - CHECKPOINT: ✋ Xác nhận PRD
+
+6. **Thiết Kế AppFlow** ⏱️ 1 cuộc trao đổi
+   - Tạo sơ đồ luồng người dùng
+   - Thiết kế sitemap/screenflow
+   - Tạo wireframes/mockups cho các màn hình chính
+   - CHECKPOINT: ✋ Xác nhận AppFlow
+
+7. **Xác Định TechStack** ⏱️ 1 cuộc trao đổi
+   - Lập danh sách công nghệ sẽ sử dụng
+   - Giải thích lý do lựa chọn
+   - Đánh giá ưu/nhược điểm
+   - CHECKPOINT: ✋ Xác nhận TechStack
+
+8. **Thiết Lập FrontendGuidelines** ⏱️ 1 cuộc trao đổi
+   - Xác định cấu trúc thư mục frontend
+   - Thiết lập coding conventions
+   - Quyết định state management và routing
+   - CHECKPOINT: ✋ Xác nhận FrontendGuidelines
+
+9. **Thiết Kế BackendStructure** ⏱️ 1 cuộc trao đổi
+   - Thiết kế database schema
+   - Xác định API endpoints
+   - Phân chia services/modules
+   - CHECKPOINT: ✋ Xác nhận BackendStructure
+
+10. **Lập ImplementationPlan** ⏱️ 1 cuộc trao đổi
+    - Chia nhỏ thành các giai đoạn triển khai
+    - Ước tính timeline cho từng giai đoạn
+    - Thiết lập testing strategy
+    - CHECKPOINT: ✋ Xác nhận ImplementationPlan
+
+### Giai Đoạn 3: Triển Khai (Bước 11-16)
+11. **Thiết Lập Môi Trường** ⏱️ 1 cuộc trao đổi
+    - Tạo repository
+    - Thiết lập môi trường dev
+    - Cấu hình CI/CD nếu cần
+    - CHECKPOINT: ✋ Xác nhận môi trường đã sẵn sàng
+
+12. **Phát Triển Core Structure** ⏱️ 1-2 cuộc trao đổi
+    - Tạo base code structure
+    - Thiết lập các dependencies cần thiết
+    - Tạo base components/services
+    - CHECKPOINT: ✋ Xác nhận cấu trúc đã đúng
+
+13. **Phát Triển MVP** ⏱️ nhiều cuộc trao đổi
+    - Triển khai từng tính năng theo thứ tự ưu tiên
+    - Demo thường xuyên và nhận feedback
+    - Điều chỉnh dựa trên feedback
+    - CHECKPOINT: ✋ Xác nhận từng tính năng
+
+14. **Testing** ⏱️ 1-2 cuộc trao đổi
+    - Viết và chạy unit tests
+    - Integration tests
+    - E2E và performance tests
+    - CHECKPOINT: ✋ Xác nhận chất lượng
+
+15. **Finalization & Documentation** ⏱️ 1 cuộc trao đổi
+    - Hoàn thiện code
+    - Viết/cập nhật documentation
+    - Chuẩn bị deployment
+    - CHECKPOINT: ✋ Xác nhận sẵn sàng release
+
+16. **Deployment & Retrospective** ⏱️ 1 cuộc trao đổi
+    - Deploy sản phẩm
+    - Review toàn bộ quy trình
+    - Ghi nhận bài học kinh nghiệm
+    - CHECKPOINT: ✋ Xác nhận hoàn thành dự án
+
+## Điểm Dừng Không Được Bỏ Qua
+1. Sau khi hoàn thành brainstorming (Bước 4)
+2. Sau khi hoàn thành "6 Docs" (Bước 10)
+3. Sau khi thiết lập môi trường (Bước 11)
+4. Sau mỗi tính năng quan trọng (Trong Bước 13)
+5. Trước khi deploy (Bước 16)
+
+## Checklist Mỗi Giai Đoạn
+
+### Checklist Brainstorming
+- [ ] Hiểu rõ vấn đề cần giải quyết
+- [ ] Xác định được đối tượng người dùng
+- [ ] Liệt kê được tính năng ưu tiên cho MVP
+- [ ] Thống nhất hướng tiếp cận kỹ thuật
+
+### Checklist "6 Docs"
+- [ ] PRD đầy đủ và được xác nhận
+- [ ] AppFlow với wireframes/mockups
+- [ ] TechStack được lựa chọn với lý do rõ ràng
+- [ ] FrontendGuidelines chi tiết
+- [ ] BackendStructure với schema và API endpoints
+- [ ] ImplementationPlan với timeline
+
+### Checklist Development
+- [ ] Môi trường dev đã sẵn sàng
+- [ ] Core structure đã được thiết lập
+- [ ] Tất cả tính năng MVP đã được triển khai
+- [ ] Tests đầy đủ và pass
+- [ ] Documentation hoàn chỉnh
+
+## Quy Trình Kiểm Tra Cuối Cùng
+1. Đảm bảo không có bugs nghiêm trọng
+2. Kiểm tra UX trên các thiết bị/trình duyệt
+3. Optimized performance
+4. Đảm bảo bảo mật
+5. Documentation đầy đủ
+6. Các công cụ monitoring đã sẵn sàng
+
+## Lưu Ý Quan Trọng
+- Không được tiến hành code trước khi hoàn thành "6 Docs"
+- Luôn backup trước khi thực hiện các thay đổi lớn
+- Thường xuyên cập nhật tài liệu khi có thay đổi
+- Đảm bảo người dùng được tham gia vào mỗi giai đoạn 

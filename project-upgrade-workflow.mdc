@@ -1,0 +1,150 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Quy Trình Nâng Cấp Dự Án
+description: Chi tiết từng bước để nâng cấp dự án hiện có, áp dụng cấu trúc 6 Docs và các best practices
+globs: "*.*"
+
+## Các Nguyên Tắc Bắt Buộc
+- ***BẮT BUỘC*** phân tích kỹ lưỡng dự án hiện tại trước khi thay đổi
+- ***BẮT BUỘC*** tạo backup cho tất cả các file sẽ sửa đổi
+- ***BẮT BUỘC*** tạo tài liệu 6 Docs dựa trên dự án hiện có
+- ***BẮT BUỘC*** đánh giá tác động của thay đổi trước khi triển khai
+- ***BẮT BUỘC*** test kỹ lưỡng sau mỗi giai đoạn nâng cấp
+
+## Tiến Trình Đầy Đủ (12 Bước)
+
+### Giai Đoạn 1: Phân Tích & Đánh Giá (Bước 1-4)
+1. **Phân Tích Dự Án Hiện Tại** ⏱️ 1-2 cuộc trao đổi
+   - Khảo sát codebase hiện tại
+   - Đánh giá kiến trúc và tech stack
+   - Xác định kỹ thuật và patterns đang sử dụng
+   - CHECKPOINT: ✋ Xác nhận hiểu rõ codebase
+
+2. **Phân Tích Yêu Cầu Nâng Cấp** ⏱️ 1 cuộc trao đổi
+   - Liệt kê các yêu cầu nâng cấp
+   - Phân loại theo độ ưu tiên và tác động
+   - Xác định các dependencies và conflicts
+   - CHECKPOINT: ✋ Xác nhận danh sách yêu cầu nâng cấp
+
+3. **Đánh Giá Tài Liệu Hiện Có** ⏱️ 1 cuộc trao đổi
+   - Kiểm tra tài liệu có sẵn và đánh giá độ cập nhật
+   - Xác định các khoảng trống tài liệu
+   - Lên kế hoạch cập nhật tài liệu
+   - CHECKPOINT: ✋ Xác nhận kế hoạch tài liệu
+
+4. **Đánh Giá Rủi Ro** ⏱️ 1 cuộc trao đổi
+   - Xác định các rủi ro tiềm ẩn của việc nâng cấp
+   - Đánh giá tác động đến hiệu suất và UX
+   - Lên kế hoạch giảm thiểu rủi ro
+   - CHECKPOINT: ✋ Xác nhận kế hoạch quản lý rủi ro
+
+### Giai Đoạn 2: Tạo Tài Liệu "6 Docs" (Bước 5-10)
+5. **Tạo/Cập Nhật PRD** ⏱️ 1 cuộc trao đổi
+   - Tạo PRD dựa trên dự án hiện tại
+   - Cập nhật với các yêu cầu mới
+   - Phân biệt rõ features hiện có và features mới
+   - CHECKPOINT: ✋ Xác nhận PRD
+
+6. **Cập Nhật AppFlow** ⏱️ 1 cuộc trao đổi
+   - Map luồng người dùng hiện tại
+   - Cập nhật với các thay đổi luồng mới
+   - So sánh trước/sau để thấy rõ sự thay đổi
+   - CHECKPOINT: ✋ Xác nhận AppFlow
+
+7. **Đánh Giá và Cập Nhật TechStack** ⏱️ 1 cuộc trao đổi
+   - Liệt kê tech stack hiện tại
+   - Đánh giá các thành phần cần update/thay thế
+   - Đề xuất các công nghệ mới cần thêm
+   - CHECKPOINT: ✋ Xác nhận TechStack
+
+8. **Tạo/Cập Nhật FrontendGuidelines** ⏱️ 1 cuộc trao đổi
+   - Ghi lại cấu trúc frontend hiện tại
+   - Đề xuất cải thiện và refactoring
+   - Cập nhật coding standards
+   - CHECKPOINT: ✋ Xác nhận FrontendGuidelines
+
+9. **Tạo/Cập Nhật BackendStructure** ⏱️ 1 cuộc trao đổi
+   - Ghi lại cấu trúc backend và schema hiện tại
+   - Thiết kế các thay đổi schema và API
+   - Đề xuất cải thiện architecture
+   - CHECKPOINT: ✋ Xác nhận BackendStructure
+
+10. **Tạo ImplementationPlan** ⏱️ 1 cuộc trao đổi
+    - Lập kế hoạch chi tiết cho việc nâng cấp
+    - Phân chia thành các giai đoạn và sprint
+    - Xác định các dependency giữa các task
+    - Lên kế hoạch testing và migration dữ liệu
+    - CHECKPOINT: ✋ Xác nhận ImplementationPlan
+
+### Giai Đoạn 3: Triển Khai (Bước 11-12)
+11. **Backup và Thực Hiện Nâng Cấp** ⏱️ nhiều cuộc trao đổi
+    - Tạo backup đầy đủ trước khi bắt đầu
+    - Thực hiện nâng cấp theo từng giai đoạn
+    - Demo và review sau mỗi giai đoạn
+    - Test kỹ lưỡng sau mỗi thay đổi lớn
+    - CHECKPOINT: ✋ Xác nhận từng phần nâng cấp
+
+12. **Đánh Giá và Finalize** ⏱️ 1-2 cuộc trao đổi
+    - Test toàn diện hệ thống sau nâng cấp
+    - Cập nhật tài liệu cuối cùng
+    - Đảm bảo backward compatibility nếu cần
+    - Đánh giá performance sau nâng cấp
+    - CHECKPOINT: ✋ Xác nhận hoàn thành nâng cấp
+
+## Điểm Dừng Không Được Bỏ Qua
+1. Sau khi hoàn thành phân tích dự án (Bước 4)
+2. Sau khi hoàn thành "6 Docs" (Bước 10)
+3. Sau mỗi giai đoạn nâng cấp lớn (Trong Bước 11)
+4. Trước khi finalize (Bước 12)
+
+## Checklist Mỗi Giai Đoạn
+
+### Checklist Phân Tích
+- [ ] Đã hiểu rõ kiến trúc và code hiện tại
+- [ ] Đã xác định rõ các yêu cầu nâng cấp và mức độ ưu tiên
+- [ ] Đã đánh giá tài liệu hiện có
+- [ ] Đã xác định và đánh giá các rủi ro
+
+### Checklist "6 Docs"
+- [ ] PRD đã được cập nhật với requirements mới
+- [ ] AppFlow với các luồng người dùng mới
+- [ ] TechStack đã được đánh giá và cập nhật
+- [ ] FrontendGuidelines phản ánh cấu trúc hiện tại và được cải thiện
+- [ ] BackendStructure với các thay đổi schema và API
+- [ ] ImplementationPlan chi tiết cho việc nâng cấp
+
+### Checklist Triển Khai
+- [ ] Đã backup đầy đủ trước mỗi thay đổi lớn
+- [ ] Đã test kỹ lưỡng sau mỗi thay đổi
+- [ ] Đã cập nhật tài liệu theo các thay đổi
+- [ ] Đã đảm bảo backward compatibility (nếu cần)
+
+## Các Thay Đổi Đòi Hỏi Chú Ý Đặc Biệt
+1. **Thay đổi database schema**
+   - Tạo migration scripts
+   - Backup dữ liệu
+   - Test kỹ lưỡng
+
+2. **Cập nhật dependencies major version**
+   - Kiểm tra breaking changes
+   - Test toàn diện
+   - Cập nhật documentation
+
+3. **Thay đổi API endpoint**
+   - Đảm bảo backward compatibility
+   - Thông báo cho clients
+   - Cân nhắc versioning
+
+4. **Thay đổi UI/UX lớn**
+   - Thông báo trước cho người dùng
+   - Cân nhắc A/B testing
+   - Thu thập feedback
+
+## Lưu Ý Quan Trọng
+- Luôn có kế hoạch rollback cho mỗi thay đổi lớn
+- Test kỹ trên môi trường staging trước khi áp dụng vào production
+- Sử dụng feature flags để kiểm soát việc triển khai tính năng mới
+- Giữ giao tiếp thường xuyên với stakeholders trong suốt quá trình nâng cấp 

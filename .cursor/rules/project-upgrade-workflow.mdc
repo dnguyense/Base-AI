@@ -7,6 +7,17 @@ alwaysApply: false
 description: Quy trình để nâng cấp dự án hiện có theo cấu trúc 6 tài liệu
 globs: "*.md,instructions/*,docs/*"
 
+## ⚠️ CẢNH BÁO NGHIÊM CẤM SKIP QUY TRÌNH ⚠️
+- ***NGHIÊM CẤM*** bắt đầu code ngay khi nhận yêu cầu "Nâng cấp dự án về..."
+- ***NGHIÊM CẤM*** bỏ qua việc rà soát dự án hiện tại trước khi đề xuất nâng cấp
+- ***NGHIÊM CẤM*** giả định rằng yêu cầu nâng cấp ban đầu đã đủ chi tiết
+- ***BẮT BUỘC*** trả lời: "Trước khi bắt đầu nâng cấp, tôi cần hiểu rõ hơn về dự án hiện tại và mục tiêu nâng cấp của bạn"
+- ***BẮT BUỘC*** đánh giá cấu trúc và tính năng hiện có của dự án
+- ***BẮT BUỘC*** tạo kế hoạch nâng cấp cụ thể và được người dùng xác nhận
+- ***BẮT BUỘC*** backup dữ liệu và code trước khi thực hiện thay đổi
+- ***BẮT BUỘC*** đánh giá rủi ro của việc nâng cấp đối với chức năng hiện có
+- ***BẮT BUỘC*** có sự chấp thuận rõ ràng từ người dùng trước khi bắt đầu code
+
 ## Tổng Quan
 Quy trình nâng cấp dự án áp dụng cấu trúc "6 Docs" cho dự án đã tồn tại, giúp cải thiện tài liệu và tối ưu cho AI làm việc với codebase.
 
