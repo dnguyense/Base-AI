@@ -126,3 +126,4 @@ _backups/icons/
 
 # Cursor sync metadata
 .cursor-sync-metadata.json
+.DS_Store
