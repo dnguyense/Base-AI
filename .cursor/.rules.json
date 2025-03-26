@@ -56,14 +56,9 @@
       "globs": ["*.json", "*.yaml", "*.yml", "*.properties", "*.strings", "*.resx", "*.arb"]
     },
     {
-      "path": "rules/markdown-rules.mdc",
-      "description": "Rules for Markdown files",
-      "globs": ["*.md", "*.markdown", "*.mdx", "*.mdx", "*.mdx"]
-    },
-    {
-      "path": "rules/md-no-code-rules.mdc",
-      "description": "Quy tắc nghiêm cấm tự động sinh code khi đọc file .md",
-      "globs": ["*.md", "*.markdown", "*.mdx"],
+      "path": "rules/markdown-unified-rules.mdc",
+      "description": "Quy định thống nhất về Markdown và tài liệu",
+      "globs": ["*.md", "*.markdown", "*.mdx", "Instruction.md", "README*.md", "Decisions.md", "Changelog.md", "Help.md", "Project.md", "Codebase.md"],
       "alwaysApply": true
     },
     {
