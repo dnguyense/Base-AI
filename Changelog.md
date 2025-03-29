@@ -20,11 +20,32 @@
 - Tạo file supabase-mcp-workflow.mdc chứa hướng dẫn chi tiết
 - Cập nhật workflow dự án mới và nâng cấp dự án để tích hợp Supabase MCP
 - Hướng dẫn cài đặt và sử dụng MCP để kiểm tra database changes
+- Tích hợp DALL-E API để tạo và chuyển đổi ảnh vector
+- Bộ script `scripts/dalle` để tạo ảnh từ prompt, phân tích ảnh, và chuyển đổi thành vector SVG
+- Quy trình làm việc mới `dalle-workflow.mdc` cho việc tạo và quản lý ảnh
+- Cấu trúc thư mục `assets/icons`, `assets/images`, và `assets/illustrations`
+- Cải tiến script DALL-E với tính năng tối ưu prompt tự động cho vector, icon, app icon và UI icon set
+- Thêm cảnh báo chi phí sử dụng DALL-E API trước khi tạo ảnh (~0,08$ mỗi ảnh với DALL-E 3)
+- Bổ sung tham số để bỏ qua cảnh báo chi phí và lưu prompt đi kèm với ảnh đã tạo
+- Cập nhật script analyze_image.js để tối ưu hóa cho việc phân tích và tạo prompt cho ảnh vector
+- Cải thiện script vectorize_image.js với xử lý màu sắc thông minh hơn và hỗ trợ nhiều định dạng đầu vào
 
 ### Changed
 
 - Cập nhật cách cài đặt Supabase MCP: sử dụng npm global thay vì cài đặt từ GitHub
 - Bổ sung các tham số cụ thể khi chạy mcp-server-postgrest
+- Nâng cấp quy trình tương tác tích hợp APK
+- Cập nhật tài liệu hướng dẫn
+- Cập nhật README.md để giới thiệu cấu trúc tài liệu mới
+- Nâng cấp phiên bản lên 2.0.0 do thay đổi lớn trong cấu trúc tài liệu
+- Cải thiện quy trình làm việc để tập trung vào documentation-first approach
+- Tích hợp cảnh báo chi phí trong quy trình tạo ảnh DALL-E để tránh chi phí không cần thiết
+- Cải thiện UX của các script DALL-E với giao diện dòng lệnh thân thiện và đầy màu sắc
+- Nâng cấp dalle-workflow.mdc với hướng dẫn chi tiết về tối ưu prompt cho từng loại ảnh
+
+### Deprecated
+
+- Quy trình làm việc cũ không sử dụng cấu trúc "6 Docs"
 
 ## [1.0.1] - 2024-03-23
 

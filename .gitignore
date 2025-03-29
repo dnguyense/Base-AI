@@ -116,6 +116,10 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 # Icon backups
 _backups/icons/
 
+assets/
+
 # Cursor sync metadata
 .cursor-sync-metadata.json
 .DS_Store
+
+scripts/*/node_modules/

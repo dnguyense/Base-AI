@@ -133,6 +133,52 @@ Phương án C được chọn vì:
 - Điều chỉnh cách AI tương tác trong các cuộc hội thoại dựa trên tính cách được chọn
 - Người dùng có thể yêu cầu thay đổi tính cách nếu muốn
 
+## 4. Tích Hợp DALL-E Để Tạo Ảnh Vector - 2024-05-30
+
+### Vấn đề
+
+Dự án cần một cách tiếp cận thống nhất để tạo ra và quản lý tài nguyên hình ảnh, đặc biệt là icon và vector art, nhằm đảm bảo tính nhất quán và hiệu quả trong quy trình thiết kế.
+
+### Phương án được xem xét
+
+1. **Phương án A: Sử dụng thư viện icon có sẵn**:
+
+   - Ưu điểm: Nhanh chóng, không cần phát triển, nhiều lựa chọn có sẵn
+   - Nhược điểm: Thiếu tính cá nhân hóa, chi phí licenses, phụ thuộc vào nhà cung cấp
+
+2. **Phương án B: Thuê designer tạo từng icon/illustration**:
+
+   - Ưu điểm: Chất lượng cao, kiểm soát hoàn toàn về phong cách
+   - Nhược điểm: Chi phí cao, thời gian chờ đợi lâu, khó điều chỉnh nhanh
+
+3. **Phương án C: Tích hợp DALL-E để tạo ảnh và chuyển đổi sang vector**:
+   - Ưu điểm: Tạo nhanh chóng, chi phí hợp lý, linh hoạt trong điều chỉnh, tính nhất quán cao
+   - Nhược điểm: Cần tinh chỉnh prompt, kết quả có thể không hoàn hảo, cần xử lý sau khi tạo
+
+### Quyết định
+
+**Phương án được chọn**: Phương án C - Tích hợp DALL-E để tạo ảnh và chuyển đổi sang vector
+
+### Lý do
+
+Phương án C được chọn vì:
+
+- Cho phép tạo nhanh chóng các tài nguyên hình ảnh mà không cần chờ đợi designer
+- Chi phí hợp lý hơn so với thuê designer cho từng asset
+- Quy trình có thể tự động hóa bằng scripts, giúp quản lý tập trung
+- Dễ dàng tạo biến thể và điều chỉnh dựa trên feedback
+- Đảm bảo tính nhất quán về phong cách giữa các tài nguyên
+- Tận dụng công nghệ AI hiện đại để tăng hiệu quả làm việc
+
+### Tác động
+
+- Phát triển bộ scripts để tạo và xử lý ảnh với DALL-E API
+- Thiết lập cấu trúc thư mục chuẩn để lưu trữ và quản lý tài nguyên
+- Tạo quy định và hướng dẫn sử dụng DALL-E trong dự án
+- Bổ sung quy trình "Tạo ảnh" và "Sửa ảnh" vào các workflow
+- Tạo thư viện icon và illustration nhất quán cho dự án
+- Tiết kiệm thời gian và chi phí trong quá trình phát triển UI
+
 ---
 
 ## 2. [Tên quyết định] - [Ngày]
