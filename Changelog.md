@@ -4,6 +4,12 @@
 
 ### Added
 
+- Tích hợp hệ thống lưu trữ kinh nghiệm dự án với cấu trúc thư mục experiences/
+- Thêm quy tắc experience-system-workflow.mdc để quản lý việc ghi lại và sử dụng kinh nghiệm
+- Tạo template và ví dụ mẫu cho file kinh nghiệm với cấu trúc chuẩn
+- Cấu trúc phân loại kinh nghiệm theo frontend, backend, mobile, devops, testing, AI, và common
+- Tích hợp hệ thống kinh nghiệm vào các quy trình làm việc hiện có
+- Tự động hóa quy trình ghi lại kinh nghiệm sau khi giải quyết vấn đề phức tạp
 - Tính năng tạo ngẫu nhiên tính cách AI cho dự án để tăng trải nghiệm thú vị
 - Thêm file project-personality-generator.mdc để quản lý các tính cách
 - Cập nhật quy trình tạo dự án và nâng cấp dự án để bao gồm bước chọn tính cách
@@ -36,7 +42,7 @@
 - Bổ sung các tham số cụ thể khi chạy mcp-server-postgrest
 - Nâng cấp quy trình tương tác tích hợp APK
 - Cập nhật tài liệu hướng dẫn
-- Cập nhật README.md để giới thiệu cấu trúc tài liệu mới
+- Cập nhật README.md để giới thiệu cấu trúc tài liệu mới và hệ thống kinh nghiệm
 - Nâng cấp phiên bản lên 2.0.0 do thay đổi lớn trong cấu trúc tài liệu
 - Cải thiện quy trình làm việc để tập trung vào documentation-first approach
 - Tích hợp cảnh báo chi phí trong quy trình tạo ảnh DALL-E để tránh chi phí không cần thiết

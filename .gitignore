@@ -33,6 +33,10 @@ pnpm-debug.log*
 /logs
 /tmp
 
+# Experiences system sensitive data
+/experiences/sensitive/
+/experiences/resources/sensitive/
+
 # Android 
 *.apk
 *.aab

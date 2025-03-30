@@ -20,6 +20,31 @@ docs/
 
 Xem thêm chi tiết tại [docs/README.md](docs/README.md)
 
+## Hệ Thống Lưu Trữ Kinh Nghiệm
+
+Dự án này tích hợp hệ thống lưu trữ kinh nghiệm để ghi lại và học hỏi từ quá trình phát triển:
+
+```
+experiences/
+├── frontend/            # Kinh nghiệm về frontend
+├── backend/             # Kinh nghiệm về backend
+├── mobile/              # Kinh nghiệm mobile development
+├── devops/              # DevOps, CI/CD, infrastructure
+├── testing/             # QA, testing strategies
+├── ai/                  # AI-related experiences
+├── common/              # Vấn đề chung (workflow, tools)
+└── index.md             # Tổng hợp tất cả kinh nghiệm
+```
+
+Hệ thống này giúp:
+
+- Lưu trữ cách giải quyết vấn đề một cách có cấu trúc
+- Giảm thời gian giải quyết vấn đề tương tự trong tương lai
+- Học hỏi từ cả thành công và thất bại
+- Tích hợp với quy trình phát triển hiện có
+
+Xem thêm chi tiết tại [experiences/README.md](experiences/README.md) và [experience-system-workflow.mdc](.cursor/rules/experience-system-workflow.mdc)
+
 ## Tính Cách AI
 
 Mỗi dự án được gán một "tính cách AI" ngẫu nhiên, giúp tăng tính thú vị khi làm việc và dễ dàng nhận diện các dự án khi lướt qua lịch sử hội thoại:
