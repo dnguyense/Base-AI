@@ -6,6 +6,12 @@
       "globs": ["*.*"]
     },
     {
+      "path": "rules/project-identification-rules.mdc",
+      "description": "Quy tắc nhận dạng và cảnh báo khi có nhầm lẫn giữa các dự án",
+      "globs": ["*.*"],
+      "alwaysApply": true
+    },
+    {
       "path": "rules/project-personality-generator.mdc",
       "description": "Quy tắc tạo ngẫu nhiên tính cách cho dự án để tăng tính thú vị khi làm việc",
       "globs": ["*.md", "project-creation-workflow.mdc"]
@@ -28,7 +34,16 @@
     {
       "path": "rules/backend-rules.mdc",
       "description": "Rules for backend development across different languages and frameworks",
-      "globs": ["*.js", "*.ts", "*.py", "*.go", "*.java", "*.php", "*.rb", "*.cs"]
+      "globs": [
+        "*.js",
+        "*.ts",
+        "*.py",
+        "*.go",
+        "*.java",
+        "*.php",
+        "*.rb",
+        "*.cs"
+      ]
     },
     {
       "path": "rules/nodejs-backend-rules.mdc",
@@ -48,17 +63,44 @@
     {
       "path": "rules/ios-rules.mdc",
       "description": "Comprehensive rules for iOS app development with Swift and SwiftUI",
-      "globs": ["*.swift", "*.storyboard", "*.xib", "*.xcodeproj", "*.xcworkspace", "*.pbxproj", "*.plist"]
+      "globs": [
+        "*.swift",
+        "*.storyboard",
+        "*.xib",
+        "*.xcodeproj",
+        "*.xcworkspace",
+        "*.pbxproj",
+        "*.plist"
+      ]
     },
     {
       "path": "rules/i18n.mdc",
       "description": "Rules for internationalization and localization across all projects",
-      "globs": ["*.json", "*.yaml", "*.yml", "*.properties", "*.strings", "*.resx", "*.arb"]
+      "globs": [
+        "*.json",
+        "*.yaml",
+        "*.yml",
+        "*.properties",
+        "*.strings",
+        "*.resx",
+        "*.arb"
+      ]
     },
     {
       "path": "rules/markdown-unified-rules.mdc",
       "description": "Quy định thống nhất về Markdown và tài liệu",
-      "globs": ["*.md", "*.markdown", "*.mdx", "Instruction.md", "README*.md", "Decisions.md", "Changelog.md", "Help.md", "Project.md", "Codebase.md"],
+      "globs": [
+        "*.md",
+        "*.markdown",
+        "*.mdx",
+        "Instruction.md",
+        "README*.md",
+        "Decisions.md",
+        "Changelog.md",
+        "Help.md",
+        "Project.md",
+        "Codebase.md"
+      ],
       "alwaysApply": true
     },
     {
@@ -84,12 +126,6 @@
       "description": "Chi tiết quy tắc sử dụng shadcn/ui và cách xử lý xung đột với Chakra UI",
       "globs": ["*.js", "*.jsx", "*.ts", "*.tsx"],
       "alwaysApply": false
-    },
-    {
-      "path": "rules/chakra-to-shadcn-migration.mdc",
-      "description": "Hướng dẫn chi tiết migration từ Chakra UI sang shadcn/ui",
-      "globs": ["*.js", "*.jsx", "*.ts", "*.tsx"],
-      "alwaysApply": false
     }
   ]
-} 
+}

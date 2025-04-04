@@ -1,7 +1,7 @@
 ---
 description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 name: base-rules
 description: Global rules for all AI interactions in this project
@@ -57,6 +57,9 @@ globs: "*.*"
   - [ ] Component B - Dự kiến chuyển đổi ngày DD/MM/YYYY
   - [ ] Component C - Chờ API xyz hoàn thiện
   ```
+
+## Project info
+Luôn kiểm tra .project-identity để biết cấu trúc và ngôn ngữ dự án, nếu chưa có file .project-identity hãy tạo và yêu cầu người dùng bổ sung thêm thông tin
 
 ## Task Status Legend
 - ✅ Completed
