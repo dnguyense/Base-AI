@@ -1,0 +1,145 @@
+---
+description: Quy trình phát triển Android theo blueprint không dùng script
+globs: *.kt,*.java,*.xml
+alwaysApply: false
+---
+
+## Quy Trình Blueprint-First
+- ***BẮT BUỘC*** tạo blueprint trước khi viết code cho mỗi tính năng
+- ***BẮT BUỘC*** kiểm tra module registry để tránh trùng lặp
+- ***BẮT BUỘC*** cập nhật module registry sau khi hoàn thành tính năng
+- ***BẮT BUỘC*** tuân thủ cấu trúc package tiêu chuẩn
+- ***BẮT BUỘC*** sử dụng các base classes đã có
+- ***NGHIÊM CẤM*** tạo code trùng lặp chức năng đã có
+
+## Cấu Trúc Package Chuẩn
+```
+com.base.app/
+├── base/                 # Base classes
+│   ├── activity/         # Base Activities
+│   ├── fragment/         # Base Fragments
+│   ├── viewmodel/        # Base ViewModels
+│   ├── adapter/          # Base Adapters
+│   └── view/             # Base Custom Views
+├── core/                 # Core modules
+│   ├── di/               # Dependency Injection
+│   ├── network/          # Network components
+│   ├── storage/          # Local storage
+│   ├── analytics/        # Analytics tracking
+│   └── utils/            # Utility classes
+├── data/                 # Data layer
+│   ├── repository/       # Repositories implementation
+│   ├── datasource/       # Data sources (remote, local)
+│   ├── model/            # Data models (entities, DTOs)
+│   └── mapper/           # Mappers
+├── domain/               # Domain layer
+│   ├── usecase/          # Use cases (business logic)
+│   ├── model/            # Domain models
+│   └── repository/       # Repository interfaces
+└── ui/                   # UI layer
+    ├── components/       # Shared UI components
+    └── features/         # Feature packages
+        ├── feature1/     # Tính năng 1
+        ├── feature2/     # Tính năng 2
+        └── ...
+```
+
+## Feature Blueprint Template
+```markdown
+# FEATURE BLUEPRINT: [Tên Tính Năng]
+
+## MÔ TẢ
+[Mô tả chi tiết về tính năng]
+
+## DOMAIN LAYER
+- Models:
+  - [Model 1]: [Mô tả]
+  - [Model 2]: [Mô tả]
+- Use Cases:
+  - [UseCase 1]: [Input/Output, mô tả]
+  - [UseCase 2]: [Input/Output, mô tả]
+
+## DATA LAYER
+- Repository: [Tên repository]
+- API Endpoints (nếu có):
+  - [Endpoint 1]: [Method, URL pattern, params]
+- Local Storage (nếu có):
+  - [Entity/Table 1]: [Mô tả]
+
+## UI LAYER
+- ViewModels:
+  - [ViewModel 1]: [States, Events]
+- Screens:
+  - [Screen 1]: [Layout, components]
+- Components:
+  - [Component 1]: [Mục đích, tái sử dụng]
+
+## RESOURCES
+- Strings: [Danh sách string keys]
+- Colors: [Màu sắc cần thêm]
+- Drawables: [Resources cần thiết]
+```
+
+## Quy Trình Làm Việc
+
+### Bước 1: Tạo Feature Blueprint
+1. Tạo file blueprint trong thư mục `blueprint/features/`
+2. Đặt tên file: `[feature-name]-blueprint.md`
+3. Sử dụng Feature Blueprint Template ở trên
+4. Điền đầy đủ thông tin vào các section
+
+### Bước 2: Tạo Cấu Trúc Package
+1. Tạo package theo feature name trong `com.base.app.ui.features`
+2. Tạo các sub-packages:
+   - `ui/features/[feature]/presentation` (fragments, adapters)
+   - `ui/features/[feature]/viewmodel`
+   - `domain/usecase/[feature]` (nếu cần)
+   - `data/repository/[feature]` (nếu cần)
+
+### Bước 3: Triển Khai Theo Layer
+1. Triển khai Domain Layer:
+   - Tạo domain models
+   - Tạo repository interfaces
+   - Tạo use cases
+
+2. Triển khai Data Layer:
+   - Tạo data models
+   - Tạo data sources (remote, local)
+   - Tạo repository implementation
+
+3. Triển khai UI Layer:
+   - Tạo ViewModels
+   - Tạo UI components
+   - Tạo Screens/Fragments
+
+### Bước 4: Cập Nhật Registry
+1. Cập nhật `blueprint/module-registry.md` với các components mới
+2. Cập nhật `blueprint/component-catalog.md` với UI components mới
+
+## Quy Tắc Chống Trùng Lặp Code
+- ***BẮT BUỘC*** trước khi tạo class/function/resource mới:
+  1. Tìm kiếm trong project với pattern: `class/interface/fun [Tên]`
+  2. Kiểm tra module-registry.md
+  3. Kiểm tra component-catalog.md
+  4. Tìm trong package `core/utils` trước khi tạo utility functions
+  5. Tìm trong package `ui/components` trước khi tạo UI components mới
+  6. Ưu tiên mở rộng code hiện có thay vì tạo mới
+
+- ***BẮT BUỘC*** khi gặp logic tương tự ở 2+ nơi:
+  1. Trích xuất vào base class/util class
+  2. Tạo extension function cho code dùng chung
+  3. Cập nhật tất cả occurrences để sử dụng code dùng chung
+
+- ***KHUYẾN NGHỊ*** khi thấy code tương tự nhưng khác biệt nhỏ:
+  1. Tìm mẫu chung và tham số hóa sự khác biệt
+  2. Tạo một version tổng quát có thể tùy chỉnh
+  3. Tái cấu trúc code hiện tại để dùng version tổng quát
+
+## Danh Sách Kiểm Tra Chất Lượng
+- [ ] Code tuân thủ cấu trúc package định nghĩa
+- [ ] Classes được đặt đúng package
+- [ ] Không có code trùng lặp chức năng
+- [ ] Sử dụng các base classes khi thích hợp
+- [ ] UI components được tái sử dụng khi có thể
+- [ ] Blueprint được hoàn thiện trước khi viết code
+- [ ] Module Registry được cập nhật sau khi hoàn thành 

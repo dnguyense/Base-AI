@@ -45,6 +45,26 @@ Hệ thống này giúp:
 
 Xem thêm chi tiết tại [experiences/README.md](experiences/README.md) và [experience-system-workflow.mdc](.cursor/rules/experience-system-workflow.mdc)
 
+## Memory Bank System
+
+Dự án bổ sung hệ thống Memory Bank để theo dõi tiến độ công việc trong mỗi cuộc trò chuyện:
+
+```
+memory_bank/
+├── wf_user_management.md       # Workflow quản lý người dùng
+├── wf_payment_integration.md   # Workflow tích hợp thanh toán
+└── ...                         # Các workflow khác
+```
+
+Hệ thống này giúp:
+
+- AI theo dõi tiến độ công việc giữa nhiều tin nhắn trong một cuộc trò chuyện
+- Lưu trữ kế hoạch, các bước thực hiện, và trạng thái công việc
+- Đảm bảo không bỏ sót nhiệm vụ nào trong quá trình làm việc
+- Liên kết với hệ thống Experience để lưu trữ kinh nghiệm dài hạn
+
+Xem thêm chi tiết tại [memory_bank/README.md](memory_bank/README.md) và [memory-bank-workflow.mdc](.cursor/rules/memory-bank-workflow.mdc)
+
 ## Tính Cách AI
 
 Mỗi dự án được gán một "tính cách AI" ngẫu nhiên, giúp tăng tính thú vị khi làm việc và dễ dàng nhận diện các dự án khi lướt qua lịch sử hội thoại:

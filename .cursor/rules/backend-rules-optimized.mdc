@@ -1,11 +1,8 @@
 ---
 description: Optimized backend development rules for Node.js, Python, and other backend frameworks
-globs: "*.js,*.ts,*.py,*.go,*.java,*.php,*.rb,*.cs"
+globs: *.js,*.ts,*.py,*.go,*.java,*.php,*.rb,*.cs
 alwaysApply: false
 ---
-# Backend Development Rules
-description: Optimized backend development rules for Node.js, Python, and other backend frameworks
-globs: "*.js,*.ts,*.py,*.go,*.java,*.php,*.rb,*.cs"
 
 ## API Design
 - Follow RESTful hoặc GraphQL principles

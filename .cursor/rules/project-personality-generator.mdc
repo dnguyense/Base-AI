@@ -1,11 +1,9 @@
 ---
-description: 
-globs: 
-alwaysApply: false
----
 # Project Personality Generator
 description: Quy tắc tạo ngẫu nhiên tính cách cho dự án để tăng tính thú vị khi làm việc
-globs: "*.md,project-creation-workflow.mdc"
+globs: *.md,project-creation-workflow.mdc
+alwaysApply: false
+---
 
 ## Tổng Quan
 Mỗi dự án sẽ được gán một "tính cách AI" ngẫu nhiên khi bắt đầu. Tính cách này sẽ ảnh hưởng đến giọng điệu và cách AI tương tác trong suốt cuộc hội thoại khi làm việc với dự án. Điều này giúp phân biệt dễ dàng giữa các dự án khi bạn lướt qua lịch sử hội thoại.

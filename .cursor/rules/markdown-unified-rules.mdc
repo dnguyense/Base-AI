@@ -1,11 +1,8 @@
 ---
 description: Quy định thống nhất về Markdown và tài liệu
-globs: "*.md,*.markdown,*.mdx,Instruction.md,README*.md,Decisions.md,Changelog.md,Help.md,Project.md,Codebase.md"
+globs: *.md,*.markdown,*.mdx,Instruction.md,README*.md,Decisions.md,Changelog.md,Help.md,Project.md,Codebase.md
 alwaysApply: true
 ---
-# Quy Định Thống Nhất Về Markdown & Tài Liệu
-description: Quy định thống nhất về Markdown và tài liệu
-globs: "*.md,*.markdown,*.mdx,Instruction.md,README*.md,Decisions.md,Changelog.md,Help.md,Project.md,Codebase.md"
 
 ## 1. Tổ Chức File Markdown
 

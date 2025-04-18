@@ -1,11 +1,8 @@
 ---
 description: Rules for file protection and backup in all projects
-globs: "*.*"
+globs: *.*
 alwaysApply: true
 ---
-# Quy Tắc Bảo Vệ File
-description: Rules for file protection and backup in all projects
-globs: "*.*"
 
 ## Nguyên Tắc Cơ Bản
 - ***BẮT BUỘC*** tạo backup trước khi xóa bất kỳ file hoặc thư mục nào

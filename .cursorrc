@@ -6,7 +6,8 @@
       "file-protection-rules.mdc",
       "instruction-workflow-rules.mdc",
       "resource-management.mdc",
-      "project-personality-generator.mdc"
+      "project-personality-generator.mdc",
+      "memory-bank-workflow.mdc"
     ],
     "autoApplyRules": {
       "*.js": [
@@ -62,4 +63,4 @@
     "syncInterval": 86400,
     "apiEndpoint": "https://icon-library.leejungkiin.workers.dev/rules"
   }
-} 
+}

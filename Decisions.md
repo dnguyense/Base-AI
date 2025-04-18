@@ -179,33 +179,35 @@ Phương án C được chọn vì:
 - Tạo thư viện icon và illustration nhất quán cho dự án
 - Tiết kiệm thời gian và chi phí trong quá trình phát triển UI
 
----
+## Memory Bank System - 2024-05-XX
 
-## 2. [Tên quyết định] - [Ngày]
+### Tổng Quan
 
-### Vấn đề
+Quyết định triển khai Memory Bank System để theo dõi tiến độ công việc giữa các tin nhắn trong cùng một cuộc trò chuyện. Hệ thống này được thiết kế để bổ sung cho Experience System hiện có.
 
-[Mô tả vấn đề cần giải quyết]
+### Lý Do
 
-### Phương án được xem xét
+- AI thường gặp khó khăn trong việc theo dõi tiến độ công việc giữa nhiều lần tương tác trong một cuộc trò chuyện
+- Người dùng muốn biết chính xác những gì đã hoàn thành và còn phải làm
+- Experience System tập trung vào lưu trữ kinh nghiệm dài hạn, không phải theo dõi tiến độ ngắn hạn
+- Cần một cơ chế để đảm bảo không bỏ sót nhiệm vụ nào trong quá trình làm việc
 
-1. **Phương án A**:
+### Giải Pháp
 
-   - Ưu điểm: [Liệt kê ưu điểm]
-   - Nhược điểm: [Liệt kê nhược điểm]
+- Tạo thư mục `memory_bank/` để lưu trữ trạng thái công việc theo từng workflow
+- AI tự động tạo, đọc và cập nhật file memory bank trong cả quá trình trò chuyện
+- Sử dụng định dạng markdown có cấu trúc rõ ràng với các phần: Nhiệm vụ hiện tại, Kế hoạch, Các bước thực hiện, Việc đã hoàn thành, Việc chưa hoàn thành
+- Tích hợp với Experience System để lưu trữ những kinh nghiệm có giá trị sau khi hoàn thành workflow
 
-2. **Phương án B**:
-   - Ưu điểm: [Liệt kê ưu điểm]
-   - Nhược điểm: [Liệt kê nhược điểm]
+### Tác Động
 
-### Quyết định
+- Cải thiện khả năng theo dõi tiến độ công việc của AI
+- Giảm thiểu việc bỏ sót nhiệm vụ
+- Tăng tính minh bạch trong quá trình làm việc
+- Tạo cầu nối giữa quá trình làm việc ngắn hạn và lưu trữ kinh nghiệm dài hạn
 
-**Phương án được chọn**: [Tên phương án]
+### Phương Án Khác Đã Xem Xét
 
-### Lý do
-
-[Giải thích lý do chọn phương án này so với các phương án khác]
-
-### Tác động
-
-[Mô tả tác động của quyết định này đến dự án]
+- **Mở rộng Experience System**: Quá phức tạp và không phù hợp với mục đích theo dõi tiến độ ngắn hạn
+- **Lưu trữ trạng thái trong biến conversation**: Không bền vững và dễ mất thông tin
+- **Sử dụng hệ thống bên ngoài**: Tăng độ phức tạp và phụ thuộc

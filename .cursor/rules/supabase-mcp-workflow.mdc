@@ -1,11 +1,8 @@
 ---
 description: Quy tắc sử dụng Supabase MCP trong workflow
-globs: "*.ts,*.js,*.tsx,*.jsx,*.sql"
+globs: *.ts,*.js,*.tsx,*.jsx,*.sql
 alwaysApply: false
 ---
-# Quy Tắc Sử Dụng Supabase MCP
-description: Quy tắc sử dụng Supabase MCP trong workflow cho các dự án sử dụng Supabase
-globs: "*.ts,*.js,*.tsx,*.jsx,*.sql"
 
 ## Nguyên Tắc Cơ Bản
 - ***BẮT BUỘC*** cài đặt và sử dụng Supabase MCP trong chế độ nhà phát triển

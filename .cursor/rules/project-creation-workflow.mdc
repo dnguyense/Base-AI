@@ -1,11 +1,9 @@
 ---
-description: 
-globs: 
+description: Quy trình phát triển dự án mới từ ý tưởng ban đầu
+globs: *.*
 alwaysApply: false
 ---
 # Quy Trình Tạo Dự Án Mới
-description: Quy trình phát triển dự án mới từ ý tưởng ban đầu
-globs: "*.*"
 
 ## Quy Trình Instruction-First
 - ***BẮT BUỘC*** tạo instruction (file .md) trước khi bắt đầu phát triển dự án mới

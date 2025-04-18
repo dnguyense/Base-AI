@@ -1,11 +1,8 @@
 ---
 description: Rules for optimizing Cursor AI performance in large projects
-globs: "*.*"
+globs: *.*
 alwaysApply: true
 ---
-# Tối Ưu Hoá Cursor Performance
-description: Rules for optimizing Cursor AI performance in large projects
-globs: "*.*"
 
 ## Nguyên Tắc Cơ Bản
 - ***BẮT BUỘC*** giữ file source code dưới 250 dòng - tối ưu cho cơ chế indexing của Cursor

@@ -1,11 +1,8 @@
 ---
-description: 
-globs: 
-alwaysApply: true
----
-name: base-rules
 description: Global rules for all AI interactions in this project
 globs: "*.*"
+alwaysApply: true
+---
 
 - Tham khảo tài liệu dự án (Instruction.md, API_Docs.md, Diagram.md)
 - Cân nhắc các mốc, chi phí, và tính nhất quán của dự án

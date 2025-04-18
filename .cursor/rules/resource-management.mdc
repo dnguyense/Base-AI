@@ -1,11 +1,8 @@
 ---
 description: Quy tắc quản lý tài nguyên trong dự án, bao gồm icons và rules
-globs: "*.*"
+globs: *.*
 alwaysApply: false
 ---
-# Quy Tắc Quản Lý Tài Nguyên
-description: Quy tắc quản lý tài nguyên trong dự án, bao gồm icons và rules
-globs: "*.*"
 
 ## Nguyên Tắc Chung
 - ***BẮT BUỘC*** tổ chức tài nguyên theo cấu trúc thư mục rõ ràng

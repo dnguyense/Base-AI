@@ -1,11 +1,8 @@
 ---
 description: Quy trình để nâng cấp dự án hiện có theo cấu trúc 6 tài liệu
-globs: "*.md,instructions/*,docs/*"
+globs: *.md,instructions/*,docs/*
 alwaysApply: false
 ---
-# Quy Trình Nâng Cấp Dự Án
-description: Quy trình để nâng cấp dự án hiện có theo cấu trúc 6 tài liệu
-globs: "*.md,instructions/*,docs/*"
 
 ## ⚠️ CẢNH BÁO NGHIÊM CẤM SKIP QUY TRÌNH ⚠️
 - ***NGHIÊM CẤM*** bắt đầu code ngay khi nhận yêu cầu "Nâng cấp dự án về..."

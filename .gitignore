@@ -130,3 +130,6 @@ assets/
 .DS_Store
 
 scripts/*/node_modules/
+
+# Memory Bank
+memory_bank/

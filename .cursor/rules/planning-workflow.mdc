@@ -1,12 +1,8 @@
 ---
 description: Quy trình brainstorm và lên kế hoạch dự án có cấu trúc
-globs: "*.md,instructions/*,docs/*"
+globs: *.md,instructions/*,docs/*
 alwaysApply: false
 ---
-# Quy Trình Brainstorm & Lên Kế Hoạch Dự Án
-description: Quy trình brainstorm và lên kế hoạch dự án có cấu trúc
-globs: "*.md,instructions/*,docs/*"
-
 ## Nguyên Tắc Cơ Bản
 - ***BẮT BUỘC*** thực hiện brainstorm kỹ trước khi lên kế hoạch
 - ***BẮT BUỘC*** đặt ít nhất 3 câu hỏi mở để hiểu rõ yêu cầu
@@ -14,6 +10,8 @@ globs: "*.md,instructions/*,docs/*"
 - ***BẮT BUỘC*** tạo tài liệu kế hoạch chi tiết trước khi bắt đầu code
 - ***BẮT BUỘC*** lên kế hoạch thời gian và đánh giá độ phức tạp cho từng task
 - ***BẮT BUỘC*** xác định rõ đầu ra mong muốn và tiêu chí thành công
+- ***BẮT BUỘC*** tuân thủ quy trình 4 vai trò: Planner > Architect > Builder > Tester
+- ***BẮT BUỘC*** không bỏ qua bước Architect để "code cho nhanh"
 - ***KHUYẾN NGHỊ*** chia nhỏ các task phức tạp thành nhiều task nhỏ hơn
 - ***KHUYẾN NGHỊ*** tìm hiểu các giải pháp tương tự để có cái nhìn tổng quan
 - ***NGHIÊM CẤM*** bắt đầu code khi chưa có kế hoạch rõ ràng
@@ -103,6 +101,44 @@ globs: "*.md,instructions/*,docs/*"
 - [Liệt kê tài liệu tham khảo và tài nguyên liên quan]
 ```
 
+## Quy Trình 4 Vai Trò
+- ***BẮT BUỘC*** tuân thủ quy trình 4 bước khi phát triển bất kỳ tính năng nào
+- ***BẮT BUỘC*** không bỏ qua bước Architect để "code cho nhanh"
+- ***BẮT BUỘC*** lập kế hoạch chi tiết trước khi bắt đầu code
+
+### 1. Planner
+- Sử dụng GPT-4o để viết PRD, vẽ user flows, chọn tech stack
+- Xác định rõ scope và các yêu cầu
+- Tạo file .md với đầy đủ thông tin về feature
+- Tham khảo các kinh nghiệm tương tự trong `/experiences/`
+- Thời gian dành cho planning: 15-20% tổng thời gian dự án
+
+### 2. Architect
+- Phân tách features thành các task nhỏ, manageable
+- Định rõ logic cho từng màn hình và chức năng
+- Xác định data flow và cấu trúc component
+- Mô tả rõ API contract và database schema
+- Thời gian dành cho architecture: 20-25% tổng thời gian
+
+### 3. Builder
+- Cung cấp plan và spec cho AI để generate code
+- Kiểm tra code được tạo và đảm bảo tuân thủ rules
+- Áp dụng các code conventions đã định nghĩa
+- Commit code thường xuyên sau mỗi task nhỏ
+- Thời gian dành cho building: 40-50% tổng thời gian
+
+### 4. Tester
+- Sử dụng AI để check bug và optimize code
+- Viết test cases (unit test và integration test)
+- Đánh giá performance và trải nghiệm người dùng
+- Fix các vấn đề được phát hiện
+- Thời gian dành cho testing: 15-20% tổng thời gian
+
+### Hệ Quả Của Việc Bỏ Qua Quy Trình
+- Khi bỏ qua bước Architect: Code không đồng bộ, UI không match với backend
+- Khi bỏ qua planning: Tính năng không đáp ứng đúng nhu cầu, phải làm lại
+- Khi bỏ qua testing: Sản phẩm không ổn định, xuất hiện bug khi sử dụng
+
 ## Rà Soát Codebase
 - ***BẮT BUỘC*** hiểu cấu trúc dự án hiện tại trước khi lên kế hoạch
 - ***BẮT BUỘC*** xác định các module/thành phần sẽ bị ảnh hưởng
@@ -168,4 +204,4 @@ globs: "*.md,instructions/*,docs/*"
 - Sau khi hoàn thành kế hoạch, thu thập phản hồi từ người dùng
 - Đánh giá hiệu quả của quy trình lập kế hoạch
 - Cập nhật quy trình dựa trên bài học kinh nghiệm
-- Ghi chép các lessons learned trong `Decisions.md` 
+- Ghi chép các lessons learned trong `Decisions.md`

@@ -1,11 +1,8 @@
 ---
 description: Quy tắc nhận dạng và cảnh báo khi có nhầm lẫn giữa các dự án
-globs: "*.*"
+globs: *.*
 alwaysApply: true
 ---
-# Quy Tắc Nhận Dạng Dự Án
-description: Quy tắc nhận dạng và cảnh báo khi có nhầm lẫn giữa các dự án
-globs: "*.*"
 
 ## Nguyên Tắc Cơ Bản
 - ***BẮT BUỘC*** nhận diện và phân biệt các dự án khi làm việc song song

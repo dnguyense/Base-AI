@@ -1,11 +1,8 @@
 ---
 description: Chi tiết quy tắc sử dụng shadcn/ui và cách xử lý xung đột với Chakra UI
-globs: "*.js,*.jsx,*.ts,*.tsx"
+globs: *.js,*.jsx,*.ts,*.tsx
 alwaysApply: false
 ---
-# Quy Tắc Sử Dụng shadcn/ui
-description: Chi tiết quy tắc sử dụng shadcn/ui và cách xử lý xung đột với Chakra UI
-globs: "*.js,*.jsx,*.ts,*.tsx"
 
 ## Nguyên Tắc Cơ Bản
 - ***BẮT BUỘC*** sử dụng shadcn/ui cho tất cả dự án React có Tailwind CSS

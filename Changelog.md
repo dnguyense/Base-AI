@@ -35,6 +35,10 @@
 - Bổ sung tham số để bỏ qua cảnh báo chi phí và lưu prompt đi kèm với ảnh đã tạo
 - Cập nhật script analyze_image.js để tối ưu hóa cho việc phân tích và tạo prompt cho ảnh vector
 - Cải thiện script vectorize_image.js với xử lý màu sắc thông minh hơn và hỗ trợ nhiều định dạng đầu vào
+- Memory Bank System để theo dõi tiến độ công việc trong cuộc trò chuyện
+- Tích hợp giữa Memory Bank và Experience System
+- Thêm rule memory-bank-workflow.mdc
+- Thêm cấu trúc thư mục memory_bank và template mẫu
 
 ### Changed
 

@@ -1,18 +1,13 @@
 ---
 description: Rules for frontend development with React, Vue, Angular, and other frameworks
-globs: "*.js,*.jsx,*.ts,*.tsx,*.vue,*.html,*.css,*.scss,*.sass,*.less"
+globs: *.js,*.jsx,*.ts,*.tsx,*.vue,*.html,*.css,*.scss,*.sass,*.less
 alwaysApply: false
 ---
-# Frontend Development Rules
-description: Rules for frontend development with React, Vue, Angular, and other frameworks
-globs: "*.js,*.jsx,*.ts,*.tsx,*.vue,*.html,*.css,*.scss,*.sass,*.less"
 
 ## UI Component Libraries
 - ***BẮT BUỘC*** sử dụng shadcn/ui cho các dự án React có Tailwind CSS
-- ***NGHIÊM CẤM*** mix shadcn/ui và Chakra UI trong cùng một dự án
-- Dự án có sẵn có thể migration dần từ Chakra UI sang shadcn/ui
+- ***NGHIÊM CẤM*** sử dụng Chakra UI
 - Khi migration, áp dụng isolation pattern để tránh conflict
-- Không sử dụng Chakra UI trong các dự án mới có Tailwind CSS
 - Nếu cần component không có trong shadcn/ui, ưu tiên tự custom thay vì import từ Chakra UI
 - Khi cần sử dụng cả hai library (trong trường hợp migration): 
   * Sử dụng namespace scope để tách biệt

@@ -1,11 +1,8 @@
 ---
 description: Hệ thống lưu trữ và áp dụng kinh nghiệm dự án
-globs: "experiences/*,*.md,instructions/*"
+globs: experiences/*,*.md,instructions/*
 alwaysApply: false
 ---
-# Hệ Thống Lưu Trữ Kinh Nghiệm Dự Án
-description: Hệ thống lưu trữ và áp dụng kinh nghiệm dự án
-globs: "experiences/*,*.md,instructions/*"
 
 ## Nguyên Tắc Cơ Bản
 - ***BẮT BUỘC*** ghi lại kinh nghiệm sau khi giải quyết thành công hoặc thất bại một vấn đề

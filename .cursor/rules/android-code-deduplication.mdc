@@ -1,0 +1,45 @@
+---
+description: Quy tắc đảm bảo không trùng lặp code trong dự án Android
+globs: *.kt,*.java,*.xml
+alwaysApply: false
+---
+
+## Nguyên tắc cơ bản
+- ***BẮT BUỘC*** kiểm tra blueprint trước khi tạo component mới
+- ***BẮT BUỘC*** rà soát code hiện tại trước khi viết chức năng mới
+- ***BẮT BUỘC*** tuân thủ nguyên tắc DRY (Don't Repeat Yourself)
+- ***BẮT BUỘC*** cập nhật module-registry.md khi tạo module mới
+- ***BẮT BUỘC*** tất cả các utils, helpers phải đặt trong package shared
+
+## Quy trình kiểm tra trùng lặp
+1. Khi nhận yêu cầu thêm chức năng mới, đầu tiên tìm kiếm các chức năng tương tự đã tồn tại
+2. Tìm kiếm trong module-registry.md và component-catalog.md
+3. Dùng codebase_search để tìm chức năng tương tự
+4. Nếu có chức năng tương tự, hãy tái sử dụng hoặc mở rộng
+5. Nếu cần tạo mới, đăng ký vào module-registry.md
+
+## Pattern ưu tiên
+1. Extension functions cho các chức năng dùng chung
+2. Base classes cho các thành phần lặp lại
+3. Sử dụng abstraction và dependency injection
+4. Component dùng chung trong package shared
+
+## Quy Tắc Xác Định Trùng Lặp
+- Logic tương tự xuất hiện ở 2+ nơi
+- UI elements với style tương tự xuất hiện ở nhiều màn hình
+- Các utility functions tương tự được viết lại ở nhiều nơi
+- Activity/Fragment classes có structure và lifecycle methods tương tự
+
+## Giải Pháp Chống Trùng Lặp
+1. Trích xuất vào base classes
+2. Tạo extension functions dùng chung
+3. Tham số hóa sự khác biệt
+4. Tạo UI components dùng chung
+5. Trích xuất vào utility classes
+
+## Quy Trình Refactor Khi Phát Hiện Trùng Lặp
+1. Xác định pattern chung
+2. Chọn giải pháp phù hợp (base, extension, util)
+3. Trích xuất code dùng chung
+4. Cập nhật toàn bộ occurrences
+5. Cập nhật registry và catalog 

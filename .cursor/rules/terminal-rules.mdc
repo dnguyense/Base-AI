@@ -1,12 +1,8 @@
 ---
 description: Rules for terminal commands, shell scripting, and SSH
-globs: "*.sh,*.bash,*.zsh"
+globs: *.sh,*.bash,*.zsh
 alwaysApply: false
 ---
-# Terminal & Shell Rules
-description: Rules for terminal commands, shell scripting, and SSH
-globs: "*.sh,*.bash,*.zsh"
-
 ## Shell Scripting
 - Bắt đầu scripts với shebang line (#!/bin/bash)
 - Set proper script permissions (chmod +x)

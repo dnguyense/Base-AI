@@ -1,11 +1,8 @@
 ---
 description: Rules for infrastructure, DevOps, CI/CD, containerization, and deployment
-globs: "Dockerfile,docker-compose.yml,*.yaml,*.yml,*.tf,*.sh"
+globs: Dockerfile,docker-compose.yml,*.yaml,*.yml,*.tf,*.sh
 alwaysApply: false
 ---
-# Infrastructure Rules
-description: Rules for infrastructure, DevOps, CI/CD, containerization, and deployment
-globs: "Dockerfile,docker-compose.yml,*.yaml,*.yml,*.tf,*.sh"
 
 ## Docker & Containerization
 - Sử dụng official base images

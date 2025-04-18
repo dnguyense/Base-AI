@@ -1,11 +1,8 @@
 ---
 description: Rules for internationalization and localization in applications
-globs: "*.js,*.jsx,*.ts,*.tsx,*.vue,*.json,*.py,*.html"
+globs: *.js,*.jsx,*.ts,*.tsx,*.vue,*.json,*.py,*.html
 alwaysApply: false
 ---
-# Internationalization (i18n) Rules
-description: Rules for internationalization and localization in applications
-globs: "*.js,*.jsx,*.ts,*.tsx,*.vue,*.json,*.py,*.html"
 
 ## Key Principles
 - Tách tất cả strings từ code vào resource files

@@ -1,11 +1,8 @@
 ---
 description: General development rules applicable across various technologies
-globs: "*.js,*.jsx,*.ts,*.tsx,*.py,*.java,*.go,*.php,*.rb,*.swift,*.kt,*.dart,*.cs"
+globs: *.js,*.jsx,*.ts,*.tsx,*.py,*.java,*.go,*.php,*.rb,*.swift,*.kt,*.dart,*.cs
 alwaysApply: false
 ---
-# Development Rules
-description: General development rules applicable across various technologies
-globs: "*.js,*.jsx,*.ts,*.tsx,*.py,*.java,*.go,*.php,*.rb,*.swift,*.kt,*.dart,*.cs"
 
 ## Code Quality
 - Tuân thủ nguyên tắc SOLID
