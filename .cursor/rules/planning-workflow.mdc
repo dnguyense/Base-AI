@@ -4,8 +4,9 @@ globs: *.md,instructions/*,docs/*
 alwaysApply: false
 ---
 ## Nguyên Tắc Cơ Bản
-- ***BẮT BUỘC*** thực hiện brainstorm kỹ trước khi lên kế hoạch
-- ***BẮT BUỘC*** đặt ít nhất 3 câu hỏi mở để hiểu rõ yêu cầu
+- ***BẮT BUỘC*** kiểm tra file Brainstorm_[TenDuAn].md hoàn chỉnh trước khi lên kế hoạch
+- ***BẮT BUỘC*** chỉ được planning khi brainstorm đã hoàn thành tất cả 3 phases
+- ***BẮT BUỘC*** dựa trên kết quả brainstorm để tạo planning chi tiết
 - ***BẮT BUỘC*** rà soát codebase hiện tại trước khi lên kế hoạch cho tính năng mới
 - ***BẮT BUỘC*** tạo tài liệu kế hoạch chi tiết trước khi bắt đầu code
 - ***BẮT BUỘC*** lên kế hoạch thời gian và đánh giá độ phức tạp cho từng task
@@ -14,6 +15,7 @@ alwaysApply: false
 - ***BẮT BUỘC*** không bỏ qua bước Architect để "code cho nhanh"
 - ***KHUYẾN NGHỊ*** chia nhỏ các task phức tạp thành nhiều task nhỏ hơn
 - ***KHUYẾN NGHỊ*** tìm hiểu các giải pháp tương tự để có cái nhìn tổng quan
+- ***NGHIÊM CẤM*** bắt đầu planning khi chưa có file brainstorm hoàn chỉnh
 - ***NGHIÊM CẤM*** bắt đầu code khi chưa có kế hoạch rõ ràng
 
 ## Quy Trình Brainstorm

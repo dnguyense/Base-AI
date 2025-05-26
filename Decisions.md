@@ -199,6 +199,111 @@ Quyết định triển khai Memory Bank System để theo dõi tiến độ cô
 - Sử dụng định dạng markdown có cấu trúc rõ ràng với các phần: Nhiệm vụ hiện tại, Kế hoạch, Các bước thực hiện, Việc đã hoàn thành, Việc chưa hoàn thành
 - Tích hợp với Experience System để lưu trữ những kinh nghiệm có giá trị sau khi hoàn thành workflow
 
+## 5. Áp Dụng AI Product Builder Workflow - 2024-01-XX
+
+### Vấn đề
+
+Cần một quy trình chặt chẽ để xây dựng sản phẩm phần mềm từ ý tưởng ban đầu, đặc biệt dành cho những người không biết lập trình. Quy trình hiện tại thiếu cấu trúc và AI có thể bỏ qua các bước quan trọng như brainstorm và planning.
+
+### Phương án được xem xét
+
+1. **Phương án A: Quy trình linh hoạt với AI tự quyết định**:
+
+   - Ưu điểm: Nhanh chóng, linh hoạt, không ràng buộc strict
+   - Nhược điểm: Có thể bỏ qua các bước quan trọng, chất lượng không ổn định, khó kiểm soát
+
+2. **Phương án B: Quy trình có cấu trúc nhưng không bắt buộc**:
+
+   - Ưu điểm: Cân bằng giữa cấu trúc và linh hoạt
+   - Nhược điểm: Vẫn có thể bỏ qua các bước, không đảm bảo chất lượng đầu ra
+
+3. **Phương án C: Quy trình bắt buộc 3 giai đoạn với validation nghiêm ngặt**:
+   - Ưu điểm: Đảm bảo chất lượng, không bỏ qua bước nào, phù hợp cho non-technical users
+   - Nhược điểm: Có thể chậm hơn, yêu cầu discipline cao
+
+### Quyết định
+
+**Phương án được chọn**: Phương án C - Quy trình bắt buộc 3 giai đoạn với validation nghiêm ngặt
+
+### Lý do
+
+Phương án C được chọn vì:
+
+- **Target audience là non-technical users**: Cần guidance mạnh mẽ và cấu trúc rõ ràng
+- **Chất lượng sản phẩm cuối**: Quy trình nghiêm ngặt đảm bảo sản phẩm hoàn chỉnh và có thể sử dụng được
+- **Giảm thiểu rủi ro**: Validation ở mỗi bước giảm nguy cơ phải làm lại từ đầu
+- **AI chủ động hỏi**: Đảm bảo thu thập đầy đủ thông tin cần thiết
+- **Scalability**: Quy trình có thể áp dụng cho các loại sản phẩm khác nhau
+
+### Cấu Trúc Quy Trình
+
+#### Giai Đoạn 1: BRAINSTORM (3 cấp độ)
+
+1. **Foundation**: AI hỏi 5 câu hỏi cốt lõi về ý tưởng
+2. **Structure**: AI hỏi 6 câu hỏi về features và cấu trúc
+3. **Advanced Analysis**: AI tự động research competitors + 5 câu hỏi business
+
+#### Giai Đoạn 2: PLANNING
+
+- **Prerequisites**: Brainstorm hoàn chỉnh ✅
+- **Output**: Planning\_[TenDuAn].md với 3 development phases
+- **Validation**: Architecture, timeline, budget approval
+
+#### Giai Đoạn 3: DEVELOPMENT
+
+- **Prerequisites**: Planning approved ✅
+- **Phases**: MVP → Enhanced → Advanced
+- **Control**: Chỉ cho phép development theo phase hiện tại
+
+### Tác động
+
+#### Technical Implementation
+
+- Tạo 3 rules files mới:
+  - `brainstorm-workflow.mdc` - Controls brainstorm process
+  - `planning-validation-rules.mdc` - Validates planning prerequisites
+  - `development-control-rules.mdc` - Controls development phases
+- Tất cả rules đều set `alwaysApply: true` để enforcement nghiêm ngặt
+
+#### File Dependencies
+
+- `Brainstorm_[TenDuAn].md` → Required trước khi planning
+- `Planning_[TenDuAn].md` → Required trước khi development
+- Progressive validation ở mỗi bước
+
+#### AI Behavior Changes
+
+- AI **_BẮT BUỘC_** kiểm tra file dependencies trước mỗi action
+- AI **_BẮT BUỘC_** hỏi từng câu một trong brainstorm, không hỏi hàng loạt
+- AI **_BẮT BUỘC_** thực hiện competitor research tự động
+- AI **_NGHIÊM CẤM_** bỏ qua validation steps
+
+#### Error Handling
+
+- Clear error messages khi thiếu prerequisites
+- Guidance cụ thể về bước tiếp theo cần thực hiện
+- Status tracking rõ ràng cho từng phase
+
+### Kết Quả Mong Đợi
+
+#### For Non-Technical Users
+
+- Có thể tạo sản phẩm phần mềm professional mà không cần biết code
+- Hiểu rõ quy trình và requirements của sản phẩm
+- Có documentation đầy đủ và planning chi tiết
+
+#### For Product Quality
+
+- Sản phẩm match với market needs thông qua competitor research
+- Architecture được thiết kế cẩn thận trước khi implement
+- Risk assessment và mitigation strategies được xác định từ đầu
+
+#### For Development Process
+
+- Code follows best practices và architectural decisions
+- Progress tracking chính xác và transparent
+- Phased development đảm bảo working product ở mỗi milestone
+
 ### Tác Động
 
 - Cải thiện khả năng theo dõi tiến độ công việc của AI

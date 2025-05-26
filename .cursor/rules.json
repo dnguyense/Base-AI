@@ -133,6 +133,47 @@
       "description": "Chi tiết quy tắc sử dụng shadcn/ui và cách xử lý xung đột với Chakra UI",
       "globs": ["*.js", "*.jsx", "*.ts", "*.tsx"],
       "alwaysApply": false
+    },
+    {
+      "path": "rules/brainstorm-workflow.mdc",
+      "description": "Quy trình brainstorm 3 cấp độ với AI chủ động hỏi thông tin",
+      "globs": ["*.md", "Brainstorm_*.md"],
+      "alwaysApply": true
+    },
+    {
+      "path": "rules/planning-validation-rules.mdc",
+      "description": "Quy tắc validate planning chỉ được thực hiện khi có file .md đầy đủ",
+      "globs": [
+        "*.md",
+        "Planning_*.md",
+        "*.js",
+        "*.jsx",
+        "*.ts",
+        "*.tsx",
+        "*.py",
+        "*.dart"
+      ],
+      "alwaysApply": true
+    },
+    {
+      "path": "rules/development-control-rules.mdc",
+      "description": "Quy tắc kiểm soát development chỉ được thực hiện khi có planning hoàn chỉnh",
+      "globs": [
+        "*.js",
+        "*.jsx",
+        "*.ts",
+        "*.tsx",
+        "*.py",
+        "*.dart",
+        "*.java",
+        "*.kt",
+        "*.swift",
+        "*.go",
+        "*.php",
+        "*.rb",
+        "*.cs"
+      ],
+      "alwaysApply": true
     }
   ]
 }
