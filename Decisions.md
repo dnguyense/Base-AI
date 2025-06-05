@@ -1,3 +1,78 @@
+# **JOURNAL QUYẾT ĐỊNH DỰ ÁN VINTAGEVIBE iOS**
+
+## **2024-12-19: Chuyển đổi Platform sang iOS và Rebranding**
+
+### **Quyết định:** Chuyển đổi từ Android/NodeJS sang iOS Native
+
+- **Lý do:**
+  - iOS có ecosystem mạnh mẽ hơn cho computer vision và CoreML
+  - Target user (Maya - Content Creator) chủ yếu sử dụng iPhone cho content creation
+  - iOS có performance tốt hơn cho real-time image processing
+  - App Store có monetization potential cao hơn cho premium features
+
+### **Quyết định:** Rebranding từ "RetroLens AI" thành "VintageVibe"
+
+- **Lý do:**
+  - Tên ngắn gọn, dễ nhớ hơn
+  - "Vibe" phù hợp với target audience Gen Z/Millennials
+  - Tránh confusion với các app có tên "Lens"
+  - Domain và trademark availability tốt hơn
+
+### **Tech Stack Đã Chọn:**
+
+- **Frontend:** SwiftUI (thay vì UIKit) cho modern, declarative UI
+- **Backend:** Supabase iOS SDK (thay vì Node.js backend)
+- **AI/ML:** CoreML + Vision Framework (thay vì cloud APIs)
+- **Camera:** AVFoundation (native iOS camera framework)
+- **Image Processing:** CoreImage + Metal Performance Shaders
+- **Package Management:** Swift Package Manager primary, CocoaPods secondary
+
+### **Architecture Decisions:**
+
+- **MVVM Pattern** với SwiftUI để separation of concerns rõ ràng
+- **On-device AI Processing** ưu tiên thay vì cloud để reduce latency
+- **Modular Architecture** với từng feature là separate module
+- **Repository Pattern** cho data layer abstraction
+
+### **Deployment Target:** iOS 17.0+
+
+- **Lý do:**
+  - Tận dụng latest CoreML và Vision improvements
+  - Target audience sử dụng iPhone đời mới
+  - SwiftUI features mới nhất
+  - Giảm complexity support older iOS versions
+
+## **2024-12-19: Cấu Trúc Project Setup**
+
+### **Folder Structure:**
+
+```
+VintageVibe/
+├── Sources/           # Core business logic
+├── Views/            # SwiftUI views
+├── ViewModels/       # MVVM view models
+├── Services/         # API và data services
+├── ML Models/        # CoreML models
+├── Resources/        # Assets, fonts, etc
+└── Assets.xcassets/  # App icons, images
+```
+
+### **Development Workflow:**
+
+- **Xcode 15.0+** primary IDE
+- **Cursor IDE** for documentation và instruction editing
+- **Git workflow** với feature branches
+- **TestFlight** cho beta testing
+
+### **Dependencies Strategy:**
+
+- **Minimal external dependencies** để reduce app size
+- **Prefer iOS native frameworks** over third-party
+- **CocoaPods for legacy** dependencies if needed
+- **Swift Package Manager** as primary package manager
+
+## **Previous Decisions Archive**
+
 # Quyết định thiết kế
 
 Tài liệu này ghi lại các quyết định thiết kế quan trọng trong dự án. Mỗi quyết định bao gồm ngày, vấn đề, các phương án được xem xét, phương án được chọn và lý do.
