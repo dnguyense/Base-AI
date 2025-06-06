@@ -1,0 +1,20 @@
+rule: "Enforce Planning File for Medium/Large Tasks"
+alwaysApply: true
+
+when:
+  - user_request.type in ["feature_add", "feature_upgrade", "new_module", "major_refactor"]
+  - not file_exists("Planning_[TenDuAn].md")
+
+then:
+  - block_action
+  - show_message: |
+      🚫 KHÔNG THỂ THỰC HIỆN NHIỆM VỤ
+
+      ❌ Chưa có file plan cho nhiệm vụ này (Planning_[TenDuAn].md)
+      ❌ Cần tạo và xác nhận plan trước khi thực hiện
+
+      🔄 Hãy bắt đầu với: "Tôi muốn tạo plan cho [mô tả nhiệm vụ]"
+  - suggest_action: "Tạo plan cho nhiệm vụ này"
+
+unless:
+  - user_request.type in ["minor_fix", "typo", "small_refactor"]

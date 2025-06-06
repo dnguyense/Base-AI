@@ -7,7 +7,7 @@ Luôn log các thông tin khi request và response để debug.
 [weather-basic.md](weather-basic.md) - đây là các api cơ bản, sử dụng trong các ứng dụng đơn giản bổ xung thêm thời tiết
 [weather-detailed.md](weather-detailed.md) - tài liệu api đầy đủ
 
-## Chat AI
+## Chat AI & Generate Text AI
 
 Sử dụng API chat cho tất cả các tương tác AI. API này hỗ trợ tiếp tục cuộc trò chuyện thông qua conversation_id, nếu là 1 cuộc trò chuyện mới hoặc không có request trước đó thì conversation_id = null.
 Lưu ý: conversation_id chỉ được lấy từ phản hồi từ API chứ không được tự tạo ra
@@ -120,7 +120,13 @@ curl --location 'https://ai.dreamapi.net/v1/chat-messages' \
 ```
 
 ### Upload tệp tạm thời
-Method: POST
-Params: file=/path/to/test.jpg
-URL: https://tmpfiles.org/api/v1/upload
+curl --location 'https://temp.ws.pho.to/upload.php' \
+--header 'Host: temp.ws.pho.to' \
+--header 'user-agent: toonMeAndroid-v815' \
+--form 'no_resize="1"' \
+--form 'image=@"/Users/trungkientn/Desktop/Temp/Image 768x1024.png"'
+
+
+Return: 
+https://temp-images.ws.pho.to/bab5f50fb1956ac30254548b659bd6c9065f56c1.png
 ```
