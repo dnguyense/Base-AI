@@ -5,16 +5,20 @@ alwaysApply: true
 ---
 
 ## Nguyên Tắc Cơ Bản
+- ***BẮT BUỘC*** kiểm tra file `.project-identity` trước tiên trong mọi phiên làm việc
 - ***BẮT BUỘC*** nhận diện và phân biệt các dự án khi làm việc song song
 - ***BẮT BUỘC*** cảnh báo người dùng khi có yêu cầu không phù hợp với dự án hiện tại
 - ***BẮT BUỘC*** lưu trữ thông tin nhận dạng dự án trong file `.project-identity` ở root
+- ***BẮT BUỘC*** tạo `.project-identity` nếu chưa tồn tại sử dụng project-identity-template
 - ***KHUYẾN NGHỊ*** sử dụng các dấu hiệu nhận biết rõ ràng để phân biệt dự án
 
 ## Quy Trình Nhận Dạng Dự Án
-1. Kiểm tra các dấu hiệu phân biệt dự án ngay khi nhận yêu cầu từ người dùng
-2. So sánh nội dung yêu cầu với thông tin dự án trong file `.project-identity`
-3. Phát hiện các bất thường hoặc mâu thuẫn giữa yêu cầu và dự án hiện tại
-4. Cảnh báo người dùng khi có dấu hiệu nhầm lẫn dự án
+1. **BƯỚC ĐẦU TIÊN**: Kiểm tra file `.project-identity` ở root directory
+2. Nếu không có `.project-identity`, tự động tạo sử dụng project-identity-template
+3. Load thông tin dự án từ `.project-identity` để hiểu context
+4. So sánh nội dung yêu cầu với thông tin dự án trong file `.project-identity`
+5. Phát hiện các bất thường hoặc mâu thuẫn giữa yêu cầu và dự án hiện tại
+6. Cảnh báo người dùng khi có dấu hiệu nhầm lẫn dự án
 
 ## Cấu Trúc File .project-identity
 ```json

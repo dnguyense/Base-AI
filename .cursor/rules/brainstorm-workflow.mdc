@@ -34,13 +34,19 @@ alwaysApply: false
 ### Cấp Độ 2: Trung Bình (Structure)
 **Mục tiêu**: Xác định features và cấu trúc sản phẩm
 
-**Câu hỏi bắt buộc AI phải hỏi:**
+**Câu hỏi bắt buộc AI phải hỏi (Max 5 cho Mobile Utility Apps):**
+
+**Mobile Utility Apps (Health/Photo/Office) - Use mobile-utility-workflow.mdc:**
+- Sử dụng 5 câu hỏi strategic specific cho từng app category
+- Tự động detect app type và apply appropriate question set
+- Focus vào revenue model và user behavior patterns
+
+**Other App Types (General):**
 1. "Những tính năng nào là MUST-HAVE cho MVP?"
 2. "Những tính năng nào là NICE-TO-HAVE cho tương lai?"
 3. "Bạn có thể mô tả workflow chính của người dùng?"
 4. "Có yêu cầu đặc biệt về performance hay security không?"
-5. "Budget và timeline dự kiến như thế nào?"
-6. "Bạn muốn deploy trên platform nào?"
+5. "Bạn muốn deploy trên platform nào?"
 
 **Output cần thiết:**
 - Feature priority matrix (Must/Should/Could/Won't)

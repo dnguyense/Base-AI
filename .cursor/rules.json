@@ -174,6 +174,36 @@
         "*.cs"
       ],
       "alwaysApply": true
+    },
+    {
+      "path": "rules/ios-workflow.mdc",
+      "description": "Quy trình phát triển iOS theo blueprint không dùng script",
+      "globs": ["*.swift", "*.storyboard", "*.xib", "*.plist"],
+      "alwaysApply": false
+    },
+    {
+      "path": "rules/project-identity-template.mdc",
+      "description": "Template và hướng dẫn tạo file .project-identity cho AI",
+      "globs": [".project-identity", "*.json"],
+      "alwaysApply": true
+    },
+    {
+      "path": "rules/universal-code-deduplication.mdc",
+      "description": "Quy tắc đảm bảo không trùng lặp code áp dụng cho mọi ngôn ngữ lập trình",
+      "globs": ["*.*"],
+      "alwaysApply": true
+    },
+    {
+      "path": "rules/android-project-template.mdc",
+      "description": "Template configuration cho Android project với luồng tự động tối ưu",
+      "globs": ["*.gradle", "*.kt", "*.java"],
+      "alwaysApply": false
+    },
+    {
+      "path": "rules/ios-project-template.mdc",
+      "description": "Template configuration cho iOS project với luồng tự động tối ưu",
+      "globs": ["*.swift", "*.pbxproj", "Podfile", "Package.swift"],
+      "alwaysApply": false
     }
   ]
 }

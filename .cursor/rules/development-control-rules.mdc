@@ -21,6 +21,12 @@ alwaysApply: false
 2. Planning_[TenDuAn].md ✅
 3. .project-identity ✅
 4. Planning approval ✅
+
+# Mobile Utility Apps - Additional Requirements:
+5. TDD test plan completed ✅ (use tdd-mobile-workflow.mdc)
+6. Revenue strategy configured ✅ (use mobile-utility-workflow.mdc)
+7. Regional ad strategy defined ✅
+8. Cross-platform compatibility confirmed ✅
 ```
 
 ### Planning Completion Check
