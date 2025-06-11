@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "appdexer": {
+      "command": "/Users/YOUR_USERNAME/cursor-extensions/appdexer/venv/bin/python",
+      "args": [
+        "/Users/YOUR_USERNAME/cursor-extensions/appdexer/appdexer_mcp.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/Users/YOUR_USERNAME/cursor-extensions/appdexer",
+        "PYTHONUNBUFFERED": "1",
+        "APPDEXER_MODE": "cursor_integration"
+      }
+    }
+  }
+}

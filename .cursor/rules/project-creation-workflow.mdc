@@ -8,11 +8,55 @@ alwaysApply: false
 ## Quy Trình Instruction-First
 - ***BẮT BUỘC*** tạo instruction (file .md) trước khi bắt đầu phát triển dự án mới
 - ***BẮT BUỘC*** brainstorm kỹ với người dùng trước khi tạo instruction
+- ***BẮT BUỘC*** áp dụng quy trình Design-to-prompt khi có design files trong thư mục design/
 - ***BẮT BUỘC*** đọc và hiểu instruction trước khi bắt đầu code
 - ***BẮT BUỘC*** cập nhật .code-workspace sau khi hoàn thành brainstorming
 - ***BẮT BUỘC*** tạo file MockupData.md khi dự án sử dụng bất kỳ dữ liệu giả lập nào
 - ***BẮT BUỘC*** tạo file db-schema.sql khi dự án sử dụng database
 - Không bao giờ bắt đầu code khi chưa có instruction đầy đủ
+
+## Quy Trình Design-to-Prompt (Khi có Design Files)
+- ***BẮT BUỘC*** kiểm tra thư mục design/ để phát hiện các file design (PNG, JPG, PDF, Figma, Sketch)
+- ***BẮT BUỘC*** áp dụng quy trình 2 agents khi phát hiện design files:
+
+### Agent 1 - Phân Tích Design Chi Tiết
+- ***BẮT BUỘC*** phân tích từng màn hình/design để trích xuất:
+  - **Danh sách tính năng**: Tên và mô tả ngắn gọn từng tính năng
+  - **Phân tích chi tiết từng tính năng**:
+    * Mô tả chức năng và cách thức hoạt động
+    * Các màn hình liên quan
+    * Luồng người dùng (User Flow) 
+    * Logic hoạt động và quy tắc
+    * Dữ liệu sử dụng/cung cấp
+    * Yêu cầu cần thiết (permissions, network, etc.)
+  - **Kết nối tính năng**:
+    * Xác định liên kết giữa các tính năng
+    * Phân tích cách kết hợp các tính năng
+    * Đề xuất kết hợp tiềm năng
+    * Các tính năng phụ cần thiết
+    * Tích hợp API bên thứ 3 (weather, currency, etc.)
+    * Phân tích điểm đau người dùng và đề xuất tính năng hỗ trợ
+    * Tham khảo app cùng loại để bổ sung tính năng
+  - **Tiềm năng AI**: Đề xuất cách ứng dụng AI để cải thiện tính năng
+
+### Agent 2 - Phân Tích Marketing & Monetization
+- ***BẮT BUỘC*** phân tích từ góc độ marketing và doanh thu:
+  - Phân tích eCPM theo quốc gia (Mỹ, Châu Âu, Hàn Quốc, Nhật Bản, tier 3)
+  - Đánh giá nhu cầu thực tế thị trường
+  - Tối ưu tính năng cho doanh thu quảng cáo
+  - Cân bằng chi phí vận hành (đặc biệt chi phí AI)
+  - Phân tích thói quen người dùng theo vùng địa lý
+  - Đề xuất gamification để tăng retention
+  - Chiến lược giữ chân người dùng
+
+### Output Design-to-Prompt
+- ***BẮT BUỘC*** tạo file `instructions/Design_Analysis.md` chứa:
+  - Phân tích chi tiết bằng tiếng Việt
+  - Instruction template bằng tiếng Anh trong code block
+  - Danh sách features prioritized theo marketing analysis
+  - User flow và interaction details
+  - Technical requirements và constraints
+  - Monetization strategy và user engagement plan
 
 ## Brainstorming với Người Dùng
 - Đặt câu hỏi để hiểu rõ mục tiêu và tầm nhìn của ý tưởng
@@ -184,6 +228,102 @@ alwaysApply: false
 - ***KHUYẾN NGHỊ*** tạo types từ schema database khi sử dụng TypeScript
 - ***KHUYẾN NGHỊ*** thiết lập CI/CD pipeline kết hợp với MCP
 - Tham khảo thêm tại file `.cursor/rules/supabase-mcp-workflow.mdc` cho hướng dẫn chi tiết
+
+## Tạo Instruction Modular (Cấu Trúc Mới)
+- ***BẮT BUỘC*** tạo `Instruction.md` làm file outline chính
+- ***BẮT BUỘC*** tạo các instruction chi tiết cho từng module riêng biệt
+- ***BẮT BUỘC*** liên kết tất cả instruction modules từ `Instruction.md`
+
+### Cấu Trúc Instruction.md (Outline)
+```markdown
+# [Tên Dự Án] - Instruction Outline
+
+## 📋 Tổng Quan Dự Án
+- Mục tiêu và tầm nhìn
+- Đối tượng người dùng
+- Scope và limitations
+- Tech stack chính
+
+## 🧩 Modules & Instructions
+- [✅/⏳/❌] [Module Auth](mdc:instructions/Auth_Instruction.md) - Authentication & Authorization
+- [✅/⏳/❌] [Module Dashboard](mdc:instructions/Dashboard_Instruction.md) - Main Dashboard UI
+- [✅/⏳/❌] [Module Profile](mdc:instructions/Profile_Instruction.md) - User Profile Management
+- [✅/⏳/❌] [Module Settings](mdc:instructions/Settings_Instruction.md) - App Settings & Preferences
+
+## 🎯 Development Roadmap
+1. **Phase 1**: Core Features (Auth, Dashboard)
+2. **Phase 2**: Advanced Features (Profile, Settings)
+3. **Phase 3**: Integration & Testing
+
+## 📊 Current Status
+- **Completed**: 0/4 modules
+- **In Progress**: 0/4 modules
+- **Not Started**: 4/4 modules
+```
+
+### Quy Tắc Instruction Modules
+- ***BẮT BUỘC*** mỗi module có file instruction riêng trong thư mục `instructions/`
+- ***BẮT BUỘC*** đặt tên theo format: `[ModuleName]_Instruction.md`
+- ***BẮT BUỘC*** mỗi instruction module phải đủ chi tiết để AI có thể implement độc lập
+- ***BẮT BUỘC*** cập nhật trạng thái trong `Instruction.md` khi hoàn thành module
+- ***BẮT BUỘC*** tham chiếu ngược từ instruction module về `Instruction.md`
+
+### Template Instruction Module
+```markdown
+# [Module Name] Instruction
+
+## 🔗 Reference
+- **Parent**: [Instruction.md](mdc:../Instruction.md)
+- **Dependencies**: [List dependent modules]
+- **Dependents**: [List modules that depend on this]
+
+## 🎯 Module Overview
+- **Purpose**: [Mô tả mục đích của module]
+- **Scope**: [Phạm vi chức năng]
+- **Priority**: [High/Medium/Low]
+
+## ✅ Tasks & Status
+- [ ] **Task 1**: [Mô tả task cụ thể]
+- [ ] **Task 2**: [Mô tả task cụ thể]
+- [ ] **Task 3**: [Mô tả task cụ thể]
+
+## 📋 Detailed Requirements
+[Chi tiết requirements, user stories, technical specs]
+
+## 🔄 User Flow
+[Mô tả luồng người dùng cho module này]
+
+## 💾 Data Requirements
+[Database schema, API endpoints, data models]
+
+## 🎨 UI/UX Requirements
+[Interface specifications, design guidelines]
+
+## 🧪 Testing Criteria
+[Acceptance criteria, test cases]
+
+## 📝 Implementation Notes
+[Technical notes, constraints, considerations]
+```
+
+## Workflow Thực Hiện với Design
+1. **Kiểm tra design/** - Tìm file design có sẵn
+2. **Áp dụng Design-to-prompt** - Nếu có design files
+3. **Brainstorm** - Thu thập thêm thông tin từ người dùng
+4. **Nghiên cứu competitor** - Phân tích đối thủ cạnh tranh
+5. **Tạo Design_Analysis.md** - Nếu có design files
+6. **Tạo Instruction.md** - File outline chính
+7. **Tạo instruction modules** - Chi tiết cho từng phần
+8. **Cập nhật workspace** - Màu sắc và emoji
+9. **Setup database & resources** - Theo cần thiết
+10. **Begin implementation** - Theo thứ tự modules
+
+## Quy Trình AI Implementation
+- ***BẮT BUỘC*** AI đọc `Instruction.md` để hiểu tổng quan
+- ***BẮT BUỘC*** AI truy cập instruction module tương ứng với task hiện tại
+- ***BẮT BUỘC*** AI cập nhật trạng thái task khi hoàn thành
+- ***BẮT BUỘC*** AI cập nhật trạng thái module trong `Instruction.md`
+- ***KHUYẾN NGHỊ*** AI kiểm tra dependencies trước khi bắt đầu module mới
 
 ## Quy Trình Thực Hiện
 1. Brainstorm với người dùng qua nhiều vòng hỏi đáp

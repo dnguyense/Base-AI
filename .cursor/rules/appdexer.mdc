@@ -1,0 +1,94 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Base-AI-Project Enhanced Appdexer (Version 3.0)
+
+## Overview  
+This is an enhanced rule that leverages Base-AI-Project conventions with instruction-first workflow and design optimization capabilities. The system uses the Appdexer MCP server with popup interface supporting text, image uploads, speech-to-text functionality, and **instruction design principles** for optimal context management.
+
+## Core Protocol
+Your primary task processing includes a **mandatory final interactive review stage** driven by user input through the Appdexer MCP tool (`review_gate_chat`). You are NOT to consider your overall task complete until this review stage explicitly signals completion. This protocol is enhanced with Base-AI-Project instruction-first workflow and context optimization.
+
+## Design-to-Prompt Integration
+- ***BẮT BUỘC*** Call `appdexer_design_analysis` when starting new projects to detect design files
+- ***BẮT BUỘC*** Apply 2-Agent workflow if design files found in design/ folder
+- ***BẮT BUỘC*** Create modular instruction architecture based on design analysis
+- ***BẮT BUỘC*** Use `appdexer_instruction_status` to track workflow progress
+
+## Enhanced Workflow Protocol
+
+### Phase 1: Project Detection & Setup
+1. **Design Detection**: Call `appdexer_design_analysis` to check for design files
+2. **Project Analysis**: Call `appdexer_auto_setup` for project type detection  
+3. **Instruction Check**: Call `appdexer_instruction_status` to review existing workflow
+4. **Context Setup**: Initialize appropriate instruction architecture
+
+### Phase 2: Primary Task Execution
+1. **Instruction Processing**: Follow modular instruction files if available
+2. **Implementation**: Execute tasks according to Base-AI-Project conventions
+3. **Context Optimization**: Maintain files under 250 lines, use cross-references
+4. **Status Updates**: Update instruction modules and Instruction.md outline
+
+### Phase 3: Mandatory Appdexer Review
+1. **Trigger**: Automatically triggered after completing primary actions
+2. **Action**: Call the `review_gate_chat` MCP tool to open the Appdexer popup dialog.
+3. **Context Package**: 
+   ```json
+   {
+     "message": "Task completed following instruction-first workflow. Please review implementation, provide feedback, refinements, or sub-prompts. The Appdexer popup supports text input, image uploads, and speech-to-text functionality.",
+     "title": "Base-AI-Project Appdexer",
+     "context": "[Include current module status from instruction workflow]"
+   }
+   ```
+4. **Announcement**: "I have completed the primary actions following Base-AI-Project conventions. Opening Appdexer popup for your final review. You can provide feedback via text, images, or voice. Type 'TASK_COMPLETE' when satisfied."
+
+### Phase 4: Interactive Refinement Loop
+- Continue processing user input from Appdexer popup
+- Support design file uploads, screenshots, voice feedback
+- Update instruction files based on refinements
+- Maintain instruction-first discipline throughout iterations
+- Only exit when user explicitly signals completion
+
+## Context-Aware Features Available
+
+### Instruction Management
+- **Design Analysis**: Automatic detection and analysis of design files
+- **Module Tracking**: Real-time status of instruction modules and dependencies
+- **Progress Monitoring**: Track completion across modular instruction architecture
+- **Context Optimization**: File size management and cross-reference strategies
+
+### Multi-Modal Support
+- **Text Input**: Real-time text feedback and refinements
+- **Image Upload**: Support for design mockups, screenshots, architecture diagrams  
+- **Speech-to-Text**: Voice input for hands-free feedback (macOS optimized)
+- **Design Integration**: Process design files through 2-agent analysis workflow
+
+## Protocol Completion Rules
+1. Only after the user has explicitly signaled completion through the Appdexer popup (by responding with "TASK_COMPLETE", "Done", or similar) are you permitted to consider the user's original request fully satisfied.
+2. Always maintain instruction file integrity during refinement cycles
+3. Ensure all module dependencies are satisfied before marking completion
+4. Update instruction status using `appdexer_instruction_status` after major changes
+
+## Available Tools Integration
+- `appdexer_design_analysis` - Detect and analyze design files, create instruction workflow
+- `appdexer_instruction_status` - Track current instruction module progress and status
+- `appdexer_auto_setup` - Auto-detect project type and setup resource management
+- `review_gate_chat` - Open interactive popup for user feedback and refinement
+- Additional Appdexer tools for voice, AI analysis, and project management
+
+## Technical Integration
+- Tool: `review_gate_chat` with enhanced context packaging
+- Timeout: 5 minutes per interaction (extendable based on user activity)  
+- Fallback: Manual completion summary if MCP unavailable
+- State Management: Automatic instruction file updates and progress tracking
+- Context Preservation: Maintains conversation context across refinement cycles
+
+## Error Handling & Fallback
+- If the `review_gate_chat` tool is not available, inform the user that the Appdexer MCP server may not be running and provide a manual completion summary.
+- Always preserve instruction file integrity in case of interruption
+- Maintain recoverable state for long-running instruction workflows
+- Graceful degradation when design files or instruction modules are missing
+
+Your "sense of completion" for the original request is deferred until this interactive review through Appdexer is explicitly confirmed by the user. The system prioritizes instruction-first workflow, context optimization, and design integration for maximum development efficiency.

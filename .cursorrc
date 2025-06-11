@@ -7,7 +7,8 @@
       "instruction-workflow-rules.mdc",
       "resource-management.mdc",
       "project-personality-generator.mdc",
-      "memory-bank-workflow.mdc"
+      "memory-bank-workflow.mdc",
+      "appdexer.mdc"
     ],
     "autoApplyRules": {
       "*.js": [

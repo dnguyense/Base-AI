@@ -1,0 +1,60 @@
+{
+  "name": "appdexer",
+  "displayName": "Appdexer",
+  "description": "Advanced project indexing and design analysis system with MCP integration for Cursor IDE",
+  "version": "3.0.0",
+  "author": "Kiên Lê & Lakshman Turlapati",
+  "publisher": "Kiên Lê & LakshmanTurlapati",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other",
+    "Productivity",
+    "Testing",
+    "Chat"
+  ],
+  "keywords": [
+    "appdexer",
+    "indexing",
+    "design",
+    "analysis",
+    "mcp",
+    "cursor",
+    "feedback",
+    "chat",
+    "popup",
+    "lakshman",
+    "turlapati"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:appdexer.openChat"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "appdexer.openChat",
+        "title": "Open Appdexer",
+        "category": "Appdexer"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "appdexer.openChat",
+        "key": "cmd+shift+a",
+        "mac": "cmd+shift+a",
+        "win": "ctrl+shift+a",
+        "linux": "ctrl+shift+a"
+      }
+    ]
+  },
+  "scripts": {
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.32.0"
+  }
+}
