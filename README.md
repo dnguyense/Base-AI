@@ -128,7 +128,7 @@ python ./review_gate_v2_mcp.py
 
 ```bash
 # Nếu bạn có design files trong thư mục design/
-Sử dụng quy trình design to prompt để phân tích ./design/weather-app-mockup.png
+Sử dụng quy trình design to prompt để phân tích thiết kế ./design/weather-app-mockup.png
 ```
 
 4. **Tạo Instruction Tự Động**
