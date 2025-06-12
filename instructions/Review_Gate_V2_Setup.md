@@ -23,15 +23,6 @@ Review Gate V2 là một công cụ mạnh mẽ tích hợp với Cursor IDE gi�
 4. Chọn file: `/Users/trungkientn/cursor-extensions/review-gate-v2/review-gate-v2-2.6.3.vsix`
 5. Restart Cursor khi được yêu cầu
 
-### Bước 2: Copy Rule Vào Cursor Settings
-
-1. Mở file `tools/Review-Gate/V2/ReviewGateV2.mdc`
-2. Copy toàn bộ nội dung
-3. Mở Cursor Settings (`Cmd+,`)
-4. Tìm mục "Rules" hoặc "AI Rules"
-5. Paste nội dung rule và save
-6. Restart Cursor để rule có hiệu lực
-
 ### Bước 3: Test Hoạt Động
 
 ```bash

@@ -5,45 +5,27 @@ alwaysApply: false
 ---
 # Quy Trình Tạo Dự Án Mới
 
-## Quy Trình Instruction-First với Appdexer Bắt Buộc
-- ***BẮT BUỘC*** setup Appdexer trước khi bắt đầu phát triển dự án mới
-- ***BẮT BUỘC*** chạy script auto-setup-appdexer.sh cho mọi dự án
-- ***BẮT BUỘC*** tạo instruction (file .md) sau khi setup Appdexer
-- ***BẮT BUỘC*** brainstorm kỹ với người dùng sau khi Appdexer hoạt động
+## Quy Trình Instruction-First Bắt Buộc
+- ***BẮT BUỘC*** setup project trước khi bắt đầu phát triển dự án mới
+- ***BẮT BUỘC*** tạo instruction (file .md) sau khi setup
+- ***BẮT BUỘC*** brainstorm kỹ với người dùng sau khi hoạt động
 - ***BẮT BUỘC*** áp dụng quy trình Design-to-prompt khi có design files trong thư mục design/
 - ***BẮT BUỘC*** đọc và hiểu instruction trước khi bắt đầu code
 - ***BẮT BUỘC*** cập nhật .code-workspace sau khi hoàn thành brainstorming
-- ***BẮT BUỘC*** tạo file MockupData.md khi dự án sử dụng bất kỳ dữ liệu giả lập nào
-- ***BẮT BUỘC*** tạo file db-schema.sql khi dự án sử dụng database
-- Không bao giờ bắt đầu code khi chưa có Appdexer và instruction đầy đủ
+- Không bao giờ bắt đầu code khi chưa có instruction đầy đủ
 
 ## Quy Trình Appdexer Auto-Setup (MANDATORY FIRST STEP)
-- ***BẮT BUỘC*** chạy auto-setup-appdexer.sh trước mọi công việc khác
 - ***BẮT BUỘC*** kiểm tra file .project-identity được tạo tự động
-- ***BẮT BUỘC*** verify rằng Appdexer MCP đã được cấu hình trong Cursor
-- ***BẮT BUỘC*** test appdexer_chat tool trước khi tiếp tục
+- ***BẮT BUỘC*** verify rằng Review Gate MCP đã được cấu hình trong Cursor
+- ***BẮT BUỘC*** test review_gate_chat tool trước khi tiếp tục
 - ***BẮT BUỘC*** thiết lập voice commands cho project type được phát hiện
 - ***BẮT BUỘC*** cấu hình resource management tự động
 
-### Setup Commands
-```bash
-# MANDATORY for all new projects
-./scripts/auto-setup-appdexer.sh
-
-# Verify setup
-appdexer_test_voice_system --quick-test
-
-# Test MCP connection  
-@appdexer_chat "test connection"
-```
-
 ## Quy Trình Design-to-Prompt (Khi có Design Files)
 - ***BẮT BUỘC*** kiểm tra thư mục design/ để phát hiện các file design (PNG, JPG, PDF, Figma, Sketch)
-- ***BẮT BUỘC*** sử dụng appdexer_design_analysis thay vì phân tích thủ công
 - ***BẮT BUỘC*** áp dụng quy trình 2 agents khi phát hiện design files:
 
 ### Agent 1 - Phân Tích Design Chi Tiết (với Appdexer)
-- ***BẮT BUỘC*** sử dụng appdexer_design_analysis để phân tích từng màn hình/design
 - ***BẮT BUỘC*** trích xuất tự động:
   - **Danh sách tính năng**: Tên và mô tả ngắn gọn từng tính năng
   - **Phân tích chi tiết từng tính năng**:
@@ -64,8 +46,8 @@ appdexer_test_voice_system --quick-test
   - **Tiềm năng AI**: Đề xuất cách ứng dụng AI để cải thiện tính năng
 
 ### Agent 2 - Phân Tích Marketing & Monetization (với AI Context)
-- ***BẮT BUỘC*** sử dụng appdexer_ai_analyze_context để phân tích từ góc độ marketing và doanh thu:
-  - Phân tích eCPM theo quốc gia (Mỹ, Châu Âu, Hàn Quốc, Nhật Bản, tier 3)
+  - Sử dụng luồng để phân tích từ góc độ marketing và doanh thu:
+  - Phân tích eCPM theo quốc gia
   - Đánh giá nhu cầu thực tế thị trường
   - Tối ưu tính năng cho doanh thu quảng cáo
   - Cân bằng chi phí vận hành (đặc biệt chi phí AI)
@@ -83,7 +65,7 @@ appdexer_test_voice_system --quick-test
   - Monetization strategy và user engagement plan
 
 ## Brainstorming với Người Dùng (Powered by Appdexer)
-- ***BẮT BUỘC*** sử dụng appdexer_chat để tương tác với người dùng
+- ***BẮT BUỘC*** sử dụng review_gate_chat để tương tác với người dùng
 - Đặt câu hỏi để hiểu rõ mục tiêu và tầm nhìn của ý tưởng
 - Chia câu hỏi thành nhiều lần hỏi, không hỏi tất cả trong cùng một lần
 - Hỏi về use cases, user stories và các tình huống sử dụng
@@ -94,10 +76,10 @@ appdexer_test_voice_system --quick-test
 - Tóm tắt hiểu biết sau mỗi vòng hỏi đáp
 - Đề xuất những cách tiếp cận khác nhau để giải quyết vấn đề
 - Kiểm tra xác nhận hiểu biết của bạn với người dùng
-- ***BẮT BUỘC*** sử dụng voice commands khi có thể: "Brainstorm về [topic]"
+- Sử dụng voice commands khi có thể: "Brainstorm về [topic]"
 
 ## Nghiên Cứu Đối Thủ Cạnh Tranh (AI-Powered)
-- ***BẮT BUỘC*** sử dụng appdexer_ai_analyze_context để tìm kiếm và phân tích ít nhất 3 dự án tương tự
+- ***BẮT BUỘC*** Tìm kiếm và phân tích ít nhất 3 dự án tương tự trên google play
 - ***BẮT BUỘC*** tận dụng AI context analysis để:
   * Tìm kiếm trên nền tảng tương ứng (Google Play, App Store, Web)
   * Phân tích điểm mạnh, điểm yếu của từng đối thủ cạnh tranh
@@ -130,7 +112,6 @@ appdexer_test_voice_system --quick-test
   * 🧠 - Education
 
 ## Tạo Instruction với Appdexer Support
-- ***BẮT BUỘC*** sử dụng appdexer_ai_analyze_context để tạo instruction tốt hơn
 - Tạo file instruction trong thư mục instructions/ hoặc thư mục tương ứng
 - Sử dụng định dạng [TenTinhNang]_Instruction.md
 - Tổng hợp tất cả thông tin từ quá trình brainstorm vào instruction
@@ -153,8 +134,7 @@ appdexer_test_voice_system --quick-test
 - Cấu trúc thư mục instruction nên phản ánh cấu trúc của dự án
 
 ## Instruction Chi Tiết Cho Giao Diện (AI-Enhanced)
-- ***BẮT BUỘC*** sử dụng appdexer_chat để brainstorm lại với người dùng về giao diện họ mong muốn
-- ***BẮT BUỘC*** sử dụng appdexer_search_resources để tìm tham khảo UI patterns
+- ***BẮT BUỘC*** sử dụng review_gate_chat để brainstorm lại với người dùng về giao diện họ mong muốn
 - Tạo file instruction riêng cho giao diện với cấu trúc: `[TênDựÁn]_UI_Instruction.md`
 - Thu thập tham khảo hình ảnh, mockups, hoặc wireframes từ người dùng
 - Liệt kê chi tiết các màn hình/components cần được phát triển
@@ -168,32 +148,6 @@ appdexer_test_voice_system --quick-test
   * Responsive behavior (mobile, tablet, desktop)
 - Tạo sitemap hoặc flow diagram cho các ứng dụng phức tạp
 - Sử dụng voice commands để brainstorm về UI: "Phân tích UI design pattern cho [project type]"
-
-## Quản Lý Database với Appdexer
-- ***BẮT BUỘC*** tạo file db-schema.sql tại thư mục gốc của dự án
-- ***BẮT BUỘC*** thiết kế cấu trúc database trước khi bắt đầu code
-- ***BẮT BUỘC*** cập nhật db-schema.sql mỗi khi thay đổi cấu trúc database
-- ***BẮT BUỘC*** kiểm tra db-schema.sql trước khi tạo hoặc sử dụng database mới
-- ***BẮT BUỘC*** ghi rõ mục đích của từng database trong db-schema.sql
-- ***BẮT BUỘC*** theo dõi lịch sử thay đổi của database trong file db-schema.sql
-- ***BẮT BUỘC*** sử dụng appdexer_ai_analyze_context để tối ưu database design
-- Thiết kế database theo các best practices của loại database sử dụng
-- Tối ưu hóa cấu trúc database ngay từ đầu để tránh refactoring lớn sau này
-
-## Appdexer MCP Integration (Mandatory)
-- ***BẮT BUỘC*** cài đặt và cấu hình Appdexer MCP cho tất cả dự án
-- ***BẮT BUỘC*** sử dụng auto-setup-appdexer.sh để cấu hình tự động
-- ***BẮT BUỘC*** kiểm tra MCP connection trước khi tiếp tục:
-  ```bash
-  @appdexer_chat "test project setup"
-  ```
-- ***BẮT BUỘC*** thiết lập các Appdexer tools cho project type:
-  - `appdexer_chat`: Interactive communication
-  - `appdexer_voice_search`: Voice command processing
-  - `appdexer_search_resources`: Resource management
-  - `appdexer_design_analysis`: Design file analysis
-  - `appdexer_ai_analyze_context`: AI context analysis
-  - `appdexer_auto_setup`: Project setup automation
 
 ## Tạo Instruction Modular (Cấu Trúc Mới với Appdexer)
 - ***BẮT BUỘC*** Appdexer tự động tạo `Instruction.md` làm file outline chính
@@ -217,13 +171,12 @@ appdexer_test_voice_system --quick-test
 - AI Analysis: Enabled
 
 ## 🧩 Modules & Instructions
-- [✅/⏳/❌] [Module Auth](mdc:instructions/Auth_Instruction.md) - Authentication & Authorization
 - [✅/⏳/❌] [Module Dashboard](mdc:instructions/Dashboard_Instruction.md) - Main Dashboard UI
 - [✅/⏳/❌] [Module Profile](mdc:instructions/Profile_Instruction.md) - User Profile Management
 - [✅/⏳/❌] [Module Settings](mdc:instructions/Settings_Instruction.md) - App Settings & Preferences
 
 ## 🎯 Development Roadmap
-1. **Phase 1**: Core Features (Auth, Dashboard)
+1. **Phase 1**: Core Features
 2. **Phase 2**: Advanced Features (Profile, Settings)
 3. **Phase 3**: Integration & Testing
 
@@ -241,12 +194,12 @@ appdexer_test_voice_system --quick-test
 ```
 
 ## Workflow Thực Hiện với Appdexer (Updated)
-1. **MANDATORY: Setup Appdexer** - Chạy auto-setup-appdexer.sh
+1. **MANDATORY: Setup Appdexer**
 2. **Test Appdexer** - Verify tất cả tools hoạt động
 3. **Kiểm tra design/** - Tìm file design có sẵn
-4. **Áp dụng Design-to-prompt** - Sử dụng appdexer_design_analysis
-5. **Brainstorm** - Thu thập thêm thông tin từ người dùng qua appdexer_chat
-6. **Nghiên cứu competitor** - Sử dụng appdexer_ai_analyze_context
+4. **Áp dụng Design-to-prompt**
+5. **Brainstorm** - Thu thập thêm thông tin từ người dùng qua review_gate_chat
+6. **Nghiên cứu competitor**
 7. **Tạo Design_Analysis.md** - Nếu có design files
 8. **Tạo Instruction.md** - File outline chính (auto-generated)
 9. **Tạo instruction modules** - Chi tiết cho từng phần
@@ -255,19 +208,18 @@ appdexer_test_voice_system --quick-test
 12. **Begin implementation** - Theo thứ tự modules với voice support
 
 ## Quy Trình AI Implementation với Appdexer
-- ***BẮT BUỘC*** AI sử dụng appdexer_chat để tương tác với người dùng
+- ***BẮT BUỘC*** AI sử dụng review_gate_chat để tương tác với người dùng
 - ***BẮT BUỘC*** AI đọc `Instruction.md` để hiểu tổng quan
 - ***BẮT BUỘC*** AI truy cập instruction module tương ứng với task hiện tại
-- ***BẮT BUỘC*** AI sử dụng appdexer_search_resources khi cần tài nguyên
 - ***BẮT BUỘC*** AI cập nhật trạng thái task khi hoàn thành
 - ***BẮT BUỘC*** AI cập nhật trạng thái module trong `Instruction.md`
 - ***KHUYẾN NGHỊ*** AI sử dụng voice commands khi có thể
 - ***KHUYẾN NGHỊ*** AI kiểm tra dependencies trước khi bắt đầu module mới
 
 ## Quy Trình Thực Hiện (Updated với Appdexer)
-1. **MANDATORY: Setup Appdexer** - auto-setup-appdexer.sh
+1. **MANDATORY: Setup Appdexer**
 2. **Test all Appdexer tools** - verify functionality
-3. **Brainstorm với người dùng** qua appdexer_chat với nhiều vòng hỏi đáp
+3. **Brainstorm với người dùng** qua review_gate_chat với nhiều vòng hỏi đáp
 4. **Nghiên cứu và phân tích đối thủ cạnh tranh** với AI support
 5. **Phân tích yêu cầu từ user** sử dụng AI context analysis
 6. **Rà soát cấu trúc project** với auto-detection
@@ -275,11 +227,11 @@ appdexer_test_voice_system --quick-test
 8. **Auto-update .code-workspace** với màu sắc và emoji phù hợp
 9. **Tạo file MockupData.md** nếu dự án sử dụng dữ liệu giả lập
 10. **Tạo file db-schema.sql** nếu dự án sử dụng database
-11. **Xác nhận instruction đã hoàn thiện** qua appdexer_chat
+11. **Xác nhận instruction đã hoàn thiện** qua review_gate_chat
 12. **Tuân thủ các task trong instruction** theo thứ tự với voice support
 13. **Cập nhật trạng thái task** khi hoàn thành
 14. **Kiểm tra tất cả tiêu chí hoàn thành** với AI validation
-15. **Tổng kết khi hoàn thiện tính năng** qua appdexer_chat
+15. **Tổng kết khi hoàn thiện tính năng** qua review_gate_chat
 
 ## Quản Lý Instruction Files với Appdexer
 - Giữ instruction files trong Git version control
@@ -287,21 +239,19 @@ appdexer_test_voice_system --quick-test
 - Đảm bảo mỗi tính năng có ít nhất một instruction file
 - Sử dụng instruction files như documentation cho dự án
 - Tham khảo instruction cũ khi phát triển tính năng mới tương tự
-- ***BẮT BUỘC*** sử dụng appdexer_ai_analyze_context để cải thiện instruction quality
 
 ## Quản Lý Resource với Appdexer (Auto)
 - ***BẮT BUỘC*** Appdexer tự động tải các Cursor Rules mới về thư mục .cursor/rules
-- ***BẮT BUỘC*** Appdexer tự động tạo thư mục assets/icons và cấu trúc phù hợp
-- ***BẮT BUỘC*** sử dụng appdexer_search_resources để tìm kiếm và tải về các icon cần thiết
+- ***BẮT BUỘC*** Appdexer tự động tạo thư mục và cấu trúc phù hợp
+- ***BẮT BUỘC*** sử dụng tìm kiếm và tải về các icon cần thiết có thể tải từ https://www.svgrepo.com/ 
 - ***BẮT BUỘC*** Appdexer tự động cập nhật file `.gitignore` để loại trừ các file tạm
 - ***KHUYẾN NGHỊ*** sử dụng voice commands: "Tìm icon [description] cho [context]"
 
 ## Voice-First Development với Appdexer
 - ***BẮT BUỘC*** sử dụng voice commands khi có thể thay vì typing
 - ***BẮT BUỘC*** train custom voice commands cho project-specific tasks
-- ***BẮT BUỘC*** sử dụng appdexer_voice_search cho mọi tìm kiếm
 - ***KHUYẾN NGHỊ*** phát triển theo workflow: Voice → AI Analysis → Code Generation
-- ***KHUYẾN NGHỊ*** sử dụng appdexer_chat để clarify requirements thông qua voice
+- ***KHUYẾN NGHỊ*** sử dụng review_gate_chat để clarify requirements thông qua voice
 
 Ví dụ Voice Commands:
 - "Tạo component header với navigation"

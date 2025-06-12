@@ -1,8 +1,8 @@
-﻿# Base AI Project - Intelligent Development Framework 🤖
+﻿# Appdexer Base AI Project - Intelligent Development Framework 🤖
 
 ## Giới Thiệu
 
-**Base AI Project** là một framework phát triển thông minh được tối ưu cho **Cursor IDE** với **Review Gate V2**. Dự án này giúp bạn tăng hiệu quả làm việc với AI lên **5x** thông qua việc tối đa hóa giá trị từ mỗi request và tạo ra các workflow tự động hóa thông minh.
+**Appdexer Base AI Project** là một framework phát triển thông minh được tối ưu cho **Cursor IDE** với **Review Gate V2**. Dự án này giúp bạn tăng hiệu quả làm việc với AI lên **5x** thông qua việc tối đa hóa giá trị từ mỗi request và tạo ra các workflow tự động hóa thông minh.
 
 ## ✨ Tính Năng Chính
 
@@ -48,16 +48,53 @@ cd Base-AI-Project
 
 Cài Extension Review Gate để tiết kiệm request Cursor trong thư mục
 
+1. Mở Cursor IDE
+2. Nhấn `Cmd+Shift+P`
+3. Gõ `Extensions: Install from VSIX`
+4. Chọn file: `/Users/trungkientn/cursor-extensions/review-gate-v2/review-gate-v2-2.6.3.vsix`
+5. Restart Cursor khi được yêu cầu
+
 ```bash
 ./tools/Review-Gate/V2/review-gate-v2-2.6.3.vsix
 ```
 
 Bật MCP Server
+
+```bash
 cd tools/Review-Gate/V2/
 ./install.sh hoặc ./install.bat ( Window )
+```
 
 Bật MCP
+
+```bash
 python ./review_gate_v2_mcp.py
+```
+
+#### Workflow Cơ Bản của Review Gate
+
+1. **Đưa ra yêu cầu chính**: "Tạo một React component với authentication"
+2. **AI thực hiện task**: Coding, analysis, tool calls
+3. **Review Gate popup xuất hiện**: AI chờ feedback từ bạn
+4. **Bạn có thể**:
+   - Gõ text: "Thêm validation cho form"
+   - Upload hình: Screenshot của error cần fix
+   - Nói: Click mic và nói "Add dark mode support"
+   - Kết thúc: Gõ "TASK_COMPLETE" khi hài lòng
+5. **AI tiếp tục**: Thực hiện sub-request và lặp lại
+
+#### Lệnh Kết Thúc
+
+Để kết thúc review loop, gõ một trong các từ:
+
+- `TASK_COMPLETE`
+- `Done`
+- `Quit`
+- `q`
+
+#### Shortcuts Hữu Ích
+
+- `Cmd+Shift+A`: Mở popup thủ công
 
 ### 3. Initialize Your Project
 
@@ -70,10 +107,11 @@ python ./review_gate_v2_mcp.py
 - Tự động
 
 1. **Setup Project Identity**
+   **_Mở android studio tạo project trống đè lên project base_**
+
 2. **Brainstorm với AI**
 
 ```
-
 💬 User: "Tôi muốn tạo app thời tiết cho Android"
 
 🤖 AI: Tuyệt! Tôi sẽ giúp bạn brainstorm ý tưởng này. Trước tiên:
@@ -90,7 +128,7 @@ python ./review_gate_v2_mcp.py
 
 ```bash
 # Nếu bạn có design files trong thư mục design/
-Tham khảo thiết kế trong ./design/weather-app-mockup.png
+Phân tích thiết kế trong ./design/weather-app-mockup.png
 ```
 
 4. **Tạo Instruction Tự Động**
@@ -387,4 +425,51 @@ Start your first project with Review Gate V2 and experience the future of AI-ass
 @review_gate_chat "Tôi muốn tạo app [your-idea] cho [platform]"
 ```
 
-**Happy coding with Review Gate V2! 🎉**
+## 🎯 Tips Sử Dụng Hiệu Quả
+
+### Voice Commands
+
+- Nói rõ ràng và với tốc độ vừa phải
+- Dừng một chút giữa các từ quan trọng
+- Faster-Whisper hoạt động tốt với tiếng Anh tự nhiên
+
+### Image Context
+
+- Upload screenshots khi gặp lỗi visual
+- Chia sẻ mockups hoặc design references
+- Diagrams kiến trúc để AI hiểu được context
+
+### Text Prompts
+
+- Càng cụ thể càng tốt
+- Đề cập đến file/function names nếu có
+- Chia nhỏ requests phức tạp thành nhiều bước
+
+### Popup Không Xuất Hiện
+
+1. Kiểm tra extension đã install chưa
+2. Verify rule đã copy đúng chưa
+3. Restart Cursor hoàn toàn
+4. Test manual trigger: `Cmd+Shift+R`
+
+### Speech-to-Text Lỗi
+
+```bash
+# Test SoX
+sox --version
+sox -d -r 16000 -c 1 test.wav trim 0 3 && rm test.wav
+```
+
+### Extension Lỗi
+
+- Mở F12 trong Cursor để xem browser console
+- Uninstall và reinstall extension nếu cần
+- Check compatibility với Cursor version
+
+## 📊 Lợi Ích
+
+### Tiết Kiệm Requests
+
+- Thay vì 5 requests riêng biệt → 1 request với 5 sub-prompts
+- Tận dụng tối đa 25 tool calls available per request
+- Hiệu quả hơn với monthly limit (~500 requests)
