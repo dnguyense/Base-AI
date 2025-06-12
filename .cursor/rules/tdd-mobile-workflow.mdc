@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: false
 ---
 # TDD Mobile Workflow (Test-Driven Development for Mobile Apps)
@@ -12,7 +12,7 @@ alwaysApply: false
 - ***BẮT BUỘC*** 70% integration test coverage minimum
 - ***BẮT BUỘC*** 100% critical user flow UI test coverage
 - ***BẮT BUỘC*** AI integration tests với fallback scenarios
-- ***BẮT BUỘC*** cross-platform test parity (Android + iOS)
+- ***BẮT BUỘC*** phù hợp với android, ios hoặc flutter
 - ***NGHIÊM CẤM*** implementation code trước khi có failing tests
 
 ## Mobile TDD Cycle

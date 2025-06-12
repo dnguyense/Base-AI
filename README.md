@@ -1,297 +1,390 @@
-﻿# Base-AI-Project 🚀
+﻿# Base AI Project - Intelligent Development Framework 🤖
 
-> Enhanced template framework for Cursor IDE with integrated Appdexer for maximum AI development efficiency and design analysis
+## Giới Thiệu
 
-## ✨ Key Features
+**Base AI Project** là một framework phát triển thông minh được tối ưu cho **Cursor IDE** với **Review Gate V2**. Dự án này giúp bạn tăng hiệu quả làm việc với AI lên **5x** thông qua việc tối đa hóa giá trị từ mỗi request và tạo ra các workflow tự động hóa thông minh.
 
-### 🎯 Appdexer Integration (NEW!)
+## ✨ Tính Năng Chính
 
-- **5x Request Efficiency**: Transform 500 monthly requests into 1500-2500 effective tasks
-- **Design-to-Prompt Workflow**: Automatic design file detection and 2-agent analysis
-- **Multi-Modal Input**: Text, voice (macOS), and image upload support
-- **Interactive AI Loop**: AI waits for your feedback instead of ending prematurely
-- **Advanced Project Analysis**: Technical + Marketing insights for comprehensive development
+### 🎯 Review Gate V2 Integration
 
-### 🛠️ Core Framework Features
+- **Interactive Loop**: AI chờ feedback từ bạn thông qua text, voice, hoặc image upload
+- **5x Request Value**: Một request chính có thể thực hiện công việc của 5 request riêng lẻ
+- **Deep Iteration**: Sử dụng đầy đủ 25 tool calls trong một session
+- **Multi-modal Input**: Hỗ trợ text, voice-to-text, và image analysis
 
-- **Smart Cursor Configuration**: Optimized `.cursorrc` with auto-applying rules
-- **Backup System**: Automatic file protection before major changes
-- **Instruction Workflow**: Structured development with phase-based approach
-- **Project Identity**: Prevents project confusion and maintains context
-- **Memory Bank**: Persistent AI memory across sessions
+### 🏗️ Intelligent Workflows
+
+- **Project Creation**: Workflow tạo dự án mới với MCP
+- **Feature Development**: Quy trình phát triển tính năng theo 4 vai trò (Planner → Architect → Builder → Tester)
+- **Project Upgrade**: Nâng cấp dự án hiện có an toàn với backup và rollback
+- **Multi-platform Support**: Android, iOS, Flutter, React Native, Web
+
+### 🧠 AI-Powered Features
+
+- **Design-to-Prompt**: Tự động phân tích design files và tạo instruction
+- **Competitor Analysis**: AI phân tích đối thủ cạnh tranh và đề xuất tính năng
+- **Smart Resource Management**: Tự động tải icons, cập nhật rules
 
 ## 🚀 Quick Start
 
-### 1. Setup Base Project
+### Prerequisites
+
+- **Cursor IDE** với MCP support
+- **Python >= 3.9** (cho MCP server)
+- **Git**
+- Platform-specific SDK (Android Studio, Xcode, Node.js...)
+
+### 1. Clone & Setup
+
+# Clone dự án
 
 ```bash
-git clone https://github.com/your-repo/Base-AI-Project.git
+git clone https://github.com/babyskill/Base-AI-Project.git
 cd Base-AI-Project
 ```
 
-### 2. Install Appdexer (One-Click Setup)
+### 2.
+
+Cài Extension Review Gate để tiết kiệm request Cursor trong thư mục
 
 ```bash
-# Automated setup for macOS (fully tested)
-./scripts/setup-appdexer.sh
-
-# Quick start server (if needed)
-./scripts/start-appdexer.sh
-
-# Manual steps after script:
-# 1. Restart Cursor completely
-# 2. Test with Cmd+Shift+A
+./tools/Review-Gate/V2/review-gate-v2-2.6.3.vsix
 ```
 
-### 3. Verify Installation
+Bật MCP Server
+cd tools/Review-Gate/V2/
+./install.sh hoặc ./install.bat ( Window )
+
+Bật MCP
+python ./review_gate_v2_mcp.py
+
+### 3. Initialize Your Project
+
+## 📖 Hướng Dẫn Sử Dụng
+
+### 🆕 Tạo Dự Án Mới
+
+#### Ví dụ: Tạo Android Weather App
+
+- Tự động
+
+1. **Setup Project Identity**
+2. **Brainstorm với AI**
+
+```
+
+💬 User: "Tôi muốn tạo app thời tiết cho Android"
+
+🤖 AI: Tuyệt! Tôi sẽ giúp bạn brainstorm ý tưởng này. Trước tiên:
+
+1. App này dành cho đối tượng nào? (học sinh, người đi làm, nông dân...)
+2. Tính năng chính bạn muốn có là gì?
+3. Có muốn tích hợp AI không?
+
+[Review Gate V2 sẽ mở popup để bạn trả lời chi tiết]
+
+```
+
+3. **AI Phân Tích Design (nếu có)**
 
 ```bash
-# Test MCP server
-ps aux | grep appdexer
-
-# Test speech capability (macOS)
-sox --version
-
-# Check configuration
-cat ~/.cursor/mcp.json
+# Nếu bạn có design files trong thư mục design/
+Tham khảo thiết kế trong ./design/weather-app-mockup.png
 ```
 
-## 🎮 How to Use Appdexer
+4. **Tạo Instruction Tự Động**
+   AI sẽ tạo các file instruction modular:
 
-### Automatic Activation
+- `Instruction.md` (outline chính)
+- `instructions/WeatherApp_Core_Instruction.md`
+- `instructions/WeatherApp_UI_Instruction.md`
+- `instructions/WeatherApp_AI_Instruction.md`
 
-1. Give Cursor any complex task (counts as 1 request)
-2. AI completes primary work using available tool calls
-3. **Appdexer popup automatically appears** for feedback
-4. Continue refining via text, voice, or image uploads
-5. Type `TASK_COMPLETE` when satisfied
-
-### Manual Activation
-
-- Press `Cmd+Shift+A` for popup
-- Ask AI: _"Use the appdexer_chat tool to get my feedback"_
-
-### Design Analysis
-
-- Ask AI: _"Use appdexer_design_analysis to analyze design files"_
-- Automatic detection of design files in `design/` folder
-- 2-agent analysis: Technical + Marketing perspectives
-
-### Multi-Modal Capabilities
-
-- **Text**: Type specific feedback and refinements
-- **Voice** (macOS): Click mic → speak naturally → automatic transcription
-- **Images**: Upload screenshots, mockups, architecture diagrams
-
-## 💡 Usage Examples
-
-### Example 1: Code Development with Review Cycles
-
-```
-You: "Create an authentication module with JWT tokens"
-
-AI: [Creates module with 8 tool calls]
-    [Opens Appdexer popup automatically]
-
-You: [In popup] "Add input validation and error handling"
-
-AI: [Adds validation with 4 more tool calls]
-    [Opens popup again]
-
-You: [Upload screenshot] "The error messages should look like this mockup"
-
-AI: [Updates UI with 3 more tool calls]
-    [Opens popup again]
-
-You: "Add comprehensive tests and update documentation"
-
-AI: [Adds tests and docs with 6 more tool calls]
-    [Opens popup again]
-
-You: "TASK_COMPLETE"
-
-Result: 1 request = 21 tool calls + 4 review cycles
-Instead of: 4 separate requests = 14 tool calls total
-```
-
-### Example 2: Multi-Modal Architecture Review
-
-```
-You: "Design a microservices architecture for our e-commerce platform"
-
-AI: [Creates initial architecture with documentation]
-    [Opens Appdexer popup]
-
-You: [Upload architecture diagram] "Integrate with this existing system"
-
-AI: [Modifies design based on visual context]
-    [Opens popup again]
-
-You: [Voice] "Add Redis for caching and consider load balancing"
-
-AI: [Updates architecture and documentation]
-    [Opens popup again]
-
-You: "Document the decision rationale in Decisions.md"
-
-AI: [Updates project documentation]
-
-You: "TASK_COMPLETE"
-```
-
-## 📚 Documentation
-
-### Core Documentation
-
-- [`Codebase.md`](Codebase.md) - Complete project structure overview
-- [`Decisions.md`](Decisions.md) - Architectural decisions and rationale
-- [`instructions/README.md`](instructions/README.md) - Instruction system guide
-
-### Appdexer Documentation
-
-- [`instructions/appdexer/README.md`](instructions/appdexer/README.md) - Basic integration guide
-- [`tools/appdexer/README.md`](tools/appdexer/README.md) - Complete installation and usage guide
-
-### Legacy Review-Gate V2 Documentation
-
-- [`instructions/review-gate/README.md`](instructions/review-gate/README.md) - Basic integration guide
-- [`instructions/review-gate/advanced-usage.md`](instructions/review-gate/advanced-usage.md) - Advanced features and optimization
-
-### Workflow Guides
-
-- [`instructions/API_Docs.md`](instructions/API_Docs.md) - API integration examples
-- [`instructions/database-management.md`](instructions/database-management.md) - Database operations
-- [`scripts/README.md`](scripts/README.md) - Automation scripts guide
-
-## 🔧 Configuration
-
-### Cursor Rules System
-
-The project includes sophisticated rule management:
-
-```json
-// .cursorrc - Always applied rules
-"alwaysApplyRules": [
-  "cursor-optimization-rules.mdc",
-  "file-protection-rules.mdc",
-  "appdexer.mdc",        // NEW: Appdexer integration
-  "project-personality-generator.mdc"
-]
-```
-
-### Project Identity
-
-```json
-// .project-identity - Customize for your project
-{
-  "projectName": "Your Project Name",
-  "projectType": "android|nodejs|react|flutter",
-  "mainLanguages": ["Language1", "Language2"],
-  "keyFeatures": ["Feature1", "Feature2"]
-}
-```
-
-## 🎯 Performance Benefits
-
-### Request Efficiency Comparison
-
-```
-Traditional Workflow:
-├── Request 1: "Create feature" (5 tool calls)
-├── Request 2: "Add tests" (3 tool calls)
-├── Request 3: "Fix bugs" (4 tool calls)
-└── Request 4: "Update docs" (2 tool calls)
-Total: 4 requests, 14 tool calls
-
-Appdexer Workflow:
-└── Request 1: "Create feature"
-    ├── Primary work (8 tool calls)
-    ├── Review 1: Add tests (4 tool calls)
-    ├── Review 2: Fix bugs (5 tool calls)
-    ├── Review 3: Update docs (4 tool calls)
-    └── Review 4: TASK_COMPLETE
-Total: 1 request, 21 tool calls
-```
-
-### Typical Efficiency Gains
-
-- **Simple tasks**: 2x efficiency improvement
-- **Medium complexity**: 3-4x efficiency improvement
-- **Complex workflows**: 5x+ efficiency improvement
-
-## 🛠️ Troubleshooting
-
-### Common Issues
+5. **Begin Development**
 
 ```bash
-# MCP server not responding
-tail -f /tmp/review_gate_v2.log
-
-# Extension not loading
-# Manually install VSIX in Cursor Extensions
-
-# Speech not working (macOS)
-brew install sox
-
-# Popup not appearing
-# Press Cmd+Shift+R for manual test
+# AI bắt đầu implement theo instruction
+# Review Gate V2 sẽ hỗ trợ iterative development
 ```
 
-### Platform Support
+#### Output Example:
 
-- **macOS**: Fully tested and optimized ✅
-- **Windows**: Implemented but less tested ⚠️
-- **Linux**: Should work but not extensively tested
+```
+✅ Project Structure Created
+✅ Android Workflow Applied
+✅ Instruction Files Generated
+✅ Database Schema Created (db-schema.sql)
+✅ UI Components Planned
+✅ AI Features Integrated
+```
+
+### 🔧 Phát Triển Tính Năng Mới
+
+#### Ví dụ: Thêm Voice Search cho Weather App
+
+1. **Planning Phase**
+
+```
+💬 User trong Review Gate: "Thêm tính năng voice search để tìm kiếm thành phố"
+
+🤖 AI (Planner):
+- Phân tích yêu cầu: Voice search cho location
+- Nghiên cứu best practices
+- Tạo plan chi tiết
+
+[AI sẽ tạo file: instructions/VoiceSearch_Feature_Instruction.md]
+```
+
+2. **Architecture Phase**
+
+```
+🤖 AI (Architect):
+- Speech-to-Text integration (Android SpeechRecognizer)
+- Location validation logic
+- UI components (FloatingActionButton + Animation)
+- Error handling cho offline/no-permission cases
+```
+
+3. **Builder Phase**
+
+```
+🤖 AI (Builder):
+- Implement VoiceSearchManager
+- Create UI components
+- Integrate with WeatherRepository
+- Add voice feedback
+```
+
+4. **Tester Phase**
+
+```
+🤖 AI (Tester):
+- Unit tests cho voice recognition
+- UI tests cho voice button
+- Integration tests
+- Performance testing
+```
+
+### ⬆️ Nâng Cấp Dự Án Hiện Có
+
+#### Ví dụ: Nâng cấp Weather App thêm AI Weather Assistant
+
+1. **AI Analysis Current Project**
+
+```
+🤖 AI: Trước khi bắt đầu nâng cấp, tôi cần hiểu rõ hơn về dự án hiện tại:
+
+🔍 Analyzing codebase...
+📁 Current structure: Android MVVM with Repository pattern
+🗃️ Database: Room + SQLite (weather_cache table)
+🌐 APIs: OpenWeatherMap, WeatherAPI
+⚡ Current features: Basic weather, 7-day forecast, location search
+
+Bạn muốn AI assistant có những chức năng gì?
+```
+
+2. **Create Upgrade Plan**
+
+```
+📋 Upgrade Plan: AI Weather Assistant
+├── 🧠 AI Integration (GPT-4 Weather Analysis)
+├── 💬 Chat Interface (Natural language queries)
+├── 🎯 Smart Recommendations (Clothing, activities)
+├── 🔄 Context-aware responses
+└── 🎨 Updated UI for chat interaction
+
+⚠️ Impact Analysis:
+- New dependency: OpenAI SDK
+- Database changes: conversation_history table
+- UI changes: ChatFragment + RecyclerView
+- Performance: API call optimization needed
+```
+
+3. **Safety Backup**
+
+```
+🔒 Creating backup...
+📁 _backups/2024-01-15/
+├── app/src/main/java/com/weather/
+├── app/src/main/res/
+└── app/build.gradle
+
+✅ Backup completed! Proceeding with upgrade...
+```
+
+4. **Incremental Implementation**
+
+```
+Phase 1: AI Integration
+✅ Added OpenAI SDK dependency
+✅ Created AIWeatherAssistant service
+⏳ Implementing chat UI...
+
+[Review Gate V2 cho phép bạn điều chỉnh real-time]
+
+💬 User: "Làm cho chat bubble có animation smooth hơn"
+🤖 AI: Đang cải thiện animation với Material Motion...
+```
+
+## 🎛️ Review Gate V2 Features
+
+### 📝 Text Input
+
+```
+💬 "Thêm dark mode support cho toàn bộ app"
+💬 "Optimize performance cho devices cũ"
+💬 "Add unit tests cho WeatherRepository"
+```
+
+### 🎤 Voice Commands
+
+```
+🗣️ "Setup routing cho settings screen"
+🗣️ "Phân tích design file mới nhất"
+```
+
+### 🖼️ Image Analysis
+
+- Upload mockups để AI analyze và implement
+- Share screenshots của bugs để AI debug
+- Provide reference designs từ apps khác
+
+### 🔄 Interactive Iteration
+
+```
+🤖 AI: Feature implemented!
+
+[Review Gate V2 popup opens]
+
+👤 User options:
+1. "TASK_COMPLETE" → Kết thúc session
+2. "Thêm animation" → Continue iteration
+3. Upload screenshot → Visual feedback
+4. Voice input → Quick adjustments
+```
+
+## 🛠️ Advanced Workflows
+
+### 🎯 Voice-First Development
+
+```bash
+# Common voice commands
+🗣️ "Tạo component header với navigation"
+🗣️ "Thêm dark mode support"
+🗣️ "Tìm weather icons cho mobile app"
+🗣️ "Setup database cho user preferences"
+🗣️ "Fix crash when location permission denied"
+```
+
+## 📁 Project Structure
+
+```
+Base-AI-Project/
+├── .cursor/
+│   ├── rules/                  # Workflow rules (40+ files)
+│   └── ReviewGateV2.mdc       # Main Review Gate configuration
+├── instructions/               # AI instruction files
+│   ├── setup/                 # Project setup guides
+│   ├── android/               # Android-specific instructions
+│   ├── ios/                   # iOS-specific instructions
+│   └── reusable/              # Reusable instruction templates
+├── experiences/               # Knowledge base từ past projects
+├── tools/                     # Development tools & scripts
+├── design/                    # Design files for analysis
+├── assets/                    # Icons, images, resources
+├── scripts/                   # Automation scripts
+├── .project-identity          # Project type detection
+├── .project-personality       # AI personality configuration
+├── db-schema.sql             # Database schema management
+└── README.md                 # This file
+```
+
+## 🎯 Best Practices
+
+### ✅ Do's
+
+- **Always start with brainstorming** - Đừng vội code
+- **Use Review Gate V2** cho mọi development session
+- **Follow 4-role workflow** (Planner → Architect → Builder → Tester)
+- **Voice commands** cho các tác vụ repetitive
+- **Backup before major changes** (automatic với workflow)
+- **Update instructions** song song với code
+
+### ❌ Don'ts
+
+- **Đừng skip planning phase** để "code cho nhanh"
+- **Đừng ignore project identity** khi switch projects
+- **Đừng skip architect phase** - dẫn đến inconsistent code
+- **Đừng quên test** sau mỗi feature
+- **Đừng commit code** mà chưa review qua Review Gate
+
+## 🔧 Troubleshooting
+
+### ❓ Common Issues
+
+**Q: Review Gate V2 không hoạt động?**
+
+```bash
+# Check MCP connection
+@review_gate_chat "test connection"
+
+# Restart MCP server if needed
+npm run mcp:restart
+```
+
+**Q: Voice commands không được nhận diện?**
+
+```bash
+# Test voice system
+appdexer_test_voice_system --quick-test
+
+# Check microphone permissions
+```
+
+**Q: AI không follow instruction?**
+
+```bash
+# Check project identity
+cat .project-identity
+
+# Verify instruction file format
+@appdexer_ai_analyze_context instructions/
+```
 
 ## 🤝 Contributing
 
-### Adding New Features
+### Cách Đóng Góp Workflow Mới
 
-1. Follow Base-AI-Project conventions
-2. Update relevant instruction files
-3. Use Review-Gate for iterative development
-4. Document decisions in `Decisions.md`
+1. Tạo file `.mdc` trong `.cursor/rules/`
+2. Follow cấu trúc có sẵn
+3. Test với ít nhất 2 project types khác nhau
+4. Update documentation
 
-### Rule Development
+### Báo Cáo Bug
 
-1. Place new rules in appropriate category
-2. Add to `.cursorrc` configuration
-3. Test with Review-Gate feedback loop
-4. Document usage patterns
+Sử dụng Review Gate V2 để upload screenshots + mô tả chi tiết.
 
-## 📈 What's Next
+## 📚 Resources & References
 
-### Planned Enhancements
+- **[Review-Gate Original](https://github.com/LakshmanTurlapati/Review-Gate)** - Inspiration source
+- **[Cursor IDE Documentation](https://cursor.sh/docs)** - Official docs
+- **[MCP Protocol](https://modelcontextprotocol.io/)** - Model Context Protocol
+- **Voice Commands Guide**: `instructions/voice-commands.md`
+- **Project Templates**: `docs/templates/`
 
-- Extended voice command vocabulary
-- Project-specific review prompts
-- Integration with additional MCP tools
-- Linux platform optimization
-- Performance metrics dashboard
+## 📄 License
 
-### Community Features
-
-- Share review-gate sessions
-- Template sharing system
-- Best practices repository
-- Community rule marketplace
-
-## ⚡ Getting Help
-
-### Quick Links
-
-- [Setup Guide](instructions/review-gate/README.md)
-- [Advanced Usage](instructions/review-gate/advanced-usage.md)
-- [Troubleshooting](instructions/review-gate/README.md#troubleshooting)
-
-### Support Channels
-
-- GitHub Issues for bugs and feature requests
-- Discussions for questions and community help
-- Review-Gate documentation for integration issues
+MIT License - Feel free to use and modify for your projects.
 
 ---
 
-**Transform your AI development workflow with Base-AI-Project + Review-Gate V2!**
+**🚀 Ready to 5x your development productivity?**
 
-_From 500 requests to 2500 effective tasks - experience the 5x productivity boost._ 🚀
+Start your first project with Review Gate V2 and experience the future of AI-assisted development!
+
+```bash
+@review_gate_chat "Tôi muốn tạo app [your-idea] cho [platform]"
+```
+
+**Happy coding with Review Gate V2! 🎉**

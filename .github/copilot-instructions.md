@@ -1,9 +1,10 @@
 # GitHub Copilot Instructions
 
 > **📋 Base Rules Reference**  
-> Tất cả các quy tắc cơ bản được quản lý tập trung tại:  
-> - [Global Rules](../.appdexer/rules/global-rules.md) - Quy tắc chung cho tất cả projects  
-> - [Project-Specific Rules](../.appdexer/rules/project-specific-rules.md) - Quy tắc riêng cho project này
+> Tất cả các quy tắc cơ bản được quản lý tập trung tại:
+>
+> - [Review-Gate Guide](../tools/Review-Gate/readme.md) - Complete Review-Gate documentation
+> - [Review-Gate Rule](../ReviewGate.mdc) - Rule configuration for Cursor IDE
 >
 > **⚠️ Lưu ý:** Vui lòng tham khảo các file rules chính thức ở trên thay vì nội dung trong file này.
 
