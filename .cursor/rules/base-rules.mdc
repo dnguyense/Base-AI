@@ -62,3 +62,81 @@ Luôn kiểm tra .project-identity để biết cấu trúc và ngôn ngữ dự
 - ✅ Completed
 - ⏳ In Progress
 - ❌ Not Started
+
+## Task List Management
+
+### Nguyên Tắc Tạo Task Lists
+- ***BẮT BUỘC*** tạo task lists trong file markdown ở project root
+- ***BẮT BUỘC*** sử dụng `TASKS.md` hoặc tên mô tả feature cụ thể (VD: `ASSISTANT_CHAT.md`)
+- ***BẮT BUỘC*** bao gồm title rõ ràng và mô tả mục đích của feature
+
+### Cấu Trúc Task List Chuẩn
+```markdown
+# Feature Name Implementation
+
+Mô tả ngắn gọn về feature và mục đích.
+
+## Completed Tasks
+
+- [x] Task 1 đã hoàn thành
+- [x] Task 2 đã hoàn thành
+
+## In Progress Tasks
+
+- [ ] Task 3 đang làm việc
+- [ ] Task 4 sẽ hoàn thành sớm
+
+## Future Tasks
+
+- [ ] Task 5 dự kiến trong tương lai
+- [ ] Task 6 dự kiến trong tương lai
+
+## Implementation Plan
+
+Mô tả chi tiết cách triển khai feature.
+
+### Relevant Files
+
+- path/to/file1.ts - Mô tả mục đích
+- path/to/file2.ts - Mô tả mục đích
+```
+
+### Quy Trình Maintain Task Lists
+- ***BẮT BUỘC*** cập nhật task list sau khi hoàn thành component quan trọng
+- ***BẮT BUỘC*** đánh dấu completed tasks bằng cách đổi `[ ]` thành `[x]`
+- ***BẮT BUỘC*** thêm tasks mới khi phát hiện trong quá trình triển khai
+- ***BẮT BUỘC*** di chuyển tasks giữa các sections phù hợp
+- ***KHUYẾN NGHỊ*** cập nhật section "Relevant Files" với đường dẫn chính xác và mô tả
+
+### Hướng Dẫn Cho AI
+Khi làm việc với task lists, AI phải:
+- Thường xuyên cập nhật file task list sau khi triển khai components quan trọng
+- Đánh dấu [x] cho tasks đã hoàn thành
+- Thêm tasks mới được phát hiện trong quá trình triển khai
+- Maintain section "Relevant Files" với đường dẫn file chính xác và mô tả
+- Document implementation details, đặc biệt cho features phức tạp
+- Kiểm tra task nào cần triển khai tiếp theo trước khi bắt đầu
+- Sau khi triển khai task, cập nhật file để phản ánh tiến độ
+
+### Ví Dụ Cập Nhật Task
+Khi di chuyển task từ "In Progress" sang "Completed":
+
+**Trước:**
+```markdown
+## In Progress Tasks
+- [ ] Implement database schema
+- [ ] Create API endpoints
+
+## Completed Tasks
+- [x] Set up project structure
+```
+
+**Sau:**
+```markdown
+## In Progress Tasks
+- [ ] Create API endpoints
+
+## Completed Tasks
+- [x] Set up project structure
+- [x] Implement database schema
+```
