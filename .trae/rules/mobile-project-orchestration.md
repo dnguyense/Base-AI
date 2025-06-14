@@ -25,21 +25,26 @@ graph TD
 ### Workflow Coordination Rules:
 
 ```markdown
-.cursor/rules Integration:
-□ mobile-utility-workflow.mdc → Primary workflow controller
-□ tdd-mobile-workflow.mdc → Test-driven development enforcement
-□ brainstorm-workflow.mdc → Enhanced with 5-question limit
-□ development-control-rules.mdc → Extended with mobile-specific validations
-□ planning-workflow.mdc → Mobile-aware planning procedures
+🔗 MANDATORY .cursor/rules Integration (PRIMARY SOURCE):
+✅ [mobile-utility-workflow.mdc](../../.cursor/rules/mobile-utility-workflow.mdc) → Primary workflow controller
+✅ [tdd-mobile-workflow.mdc](../../.cursor/rules/tdd-mobile-workflow.mdc) → Test-driven development enforcement
+✅ [brainstorm-workflow.mdc](../../.cursor/rules/brainstorm-workflow.mdc) → Enhanced with 5-question limit
+✅ [development-control-rules.mdc](../../.cursor/rules/development-control-rules.mdc) → Extended with mobile-specific validations
+✅ [planning-workflow.mdc](../../.cursor/rules/planning-workflow.mdc) → Mobile-aware planning procedures
+✅ [android-workflow.mdc](../../.cursor/rules/android-workflow.mdc) → Android development workflow
+✅ [ios-workflow.mdc](../../.cursor/rules/ios-workflow.mdc) → iOS development workflow
+✅ [project-creation-workflow.mdc](../../.cursor/rules/project-creation-workflow.mdc) → Project creation process
 
-.appdexer/rules Integration:
+📋 Secondary .appdexer/rules Reference:
 □ mobile-app-rules.md → App classification and automation
 □ project-specific-rules.md → Enhanced with mobile utility patterns
 □ global-rules.md → Mobile development standards
 
-.trae/rules Integration:
+🔗 .trae/rules Alias Layer (LOWEST PRIORITY):
 □ mobile-project-orchestration.md → This file (coordination controller)
-□ project_rules.md → Updated with mobile workflow integration
+□ project_rules.md → Alias links to .cursor/rules
+
+⚠️ CRITICAL: All workflow execution MUST follow .cursor/rules as PRIMARY SOURCE
 ```
 
 ## Revenue-First Orchestration

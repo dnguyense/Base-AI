@@ -1,15 +1,80 @@
 # Trae AI Project Rules
 
-> **📋 Base Rules Reference**  
-> Tất cả các quy tắc cơ bản được quản lý tập trung tại:  
-> - [Global Rules](../../.appdexer/rules/global-rules.md) - Quy tắc chung cho tất cả projects  
-> - [Project-Specific Rules](../../.appdexer/rules/project-specific-rules.md) - Quy tắc riêng cho project này
->
-> **⚠️ Lưu ý:** Vui lòng tham khảo các file rules chính thức ở trên thay vì nội dung trong file này.
+> **🔗 MANDATORY RULES SYNCHRONIZATION**  
+> **BẮT BUỘC** sử dụng các rules từ `.cursor/rules/` làm nguồn chính thức cho tất cả workflows.  
+> File này chỉ là alias/link đến các rules chính thức trong `.cursor/rules/`
+
+## 🎯 Primary Rules Sources (MANDATORY)
+
+### Core Development Rules
+- **[Base Rules](../../.cursor/rules/base-rules.mdc)** - Quy tắc cơ bản cho tất cả projects
+- **[Development Rules](../../.cursor/rules/development-rules.mdc)** - Quy tắc phát triển chung
+- **[Development Control Rules](../../.cursor/rules/development-control-rules.mdc)** - Kiểm soát quy trình phát triển
+- **[File Protection Rules](../../.cursor/rules/file-protection-rules.mdc)** - Bảo vệ và backup files
+
+### Mobile Development Workflows
+- **[Mobile Utility Workflow](../../.cursor/rules/mobile-utility-workflow.mdc)** - Workflow chính cho mobile apps
+- **[Android Workflow](../../.cursor/rules/android-workflow.mdc)** - Quy trình phát triển Android
+- **[iOS Workflow](../../.cursor/rules/ios-workflow.mdc)** - Quy trình phát triển iOS
+- **[TDD Mobile Workflow](../../.cursor/rules/tdd-mobile-workflow.mdc)** - Test-driven development cho mobile
+
+### Project Management
+- **[Planning Workflow](../../.cursor/rules/planning-workflow.mdc)** - Quy trình lập kế hoạch
+- **[Planning Enforcement](../../.cursor/rules/planning-enforcement.mdc)** - Thực thi kế hoạch
+- **[Planning Validation Rules](../../.cursor/rules/planning-validation-rules.mdc)** - Xác thực kế hoạch
+- **[Brainstorm Workflow](../../.cursor/rules/brainstorm-workflow.mdc)** - Quy trình brainstorm
+
+### Code Quality & Architecture
+- **[Android Code Deduplication](../../.cursor/rules/android-code-deduplication.mdc)** - Tránh trùng lặp code Android
+- **[Universal Code Deduplication](../../.cursor/rules/universal-code-deduplication.mdc)** - Tránh trùng lặp code chung
+- **[Android Project Template](../../.cursor/rules/android-project-template.mdc)** - Template dự án Android
+- **[iOS Project Template](../../.cursor/rules/ios-project-template.mdc)** - Template dự án iOS
+
+### Integration & API
+- **[API Integration Rules](../../.cursor/rules/api-integration-rules.mdc)** - Quy tắc tích hợp API
+- **[Backend Rules](../../.cursor/rules/backend-rules-optimized.mdc)** - Quy tắc backend
+- **[Frontend Rules](../../.cursor/rules/frontend-rules.mdc)** - Quy tắc frontend
+
+### Specialized Workflows
+- **[Git Workflow](../../.cursor/rules/git-workflow.mdc)** - Quy trình Git
+- **[i18n Rules](../../.cursor/rules/i18n-rules.mdc)** - Quốc tế hóa
+- **[Resource Management](../../.cursor/rules/resource-management.mdc)** - Quản lý tài nguyên
+- **[Terminal Rules](../../.cursor/rules/terminal-rules.mdc)** - Quy tắc terminal
+
+### Project Setup & Identity
+- **[Project Creation Workflow](../../.cursor/rules/project-creation-workflow.mdc)** - Tạo dự án mới
+- **[Project Identity Template](../../.cursor/rules/project-identity-template.mdc)** - Template định danh dự án
+- **[Project Identification Rules](../../.cursor/rules/project-identification-rules.mdc)** - Nhận diện dự án
+- **[Tech Stack Selection](../../.cursor/rules/tech-stack-selection.mdc)** - Lựa chọn công nghệ
+
+### Advanced Features
+- **[Memory Bank Workflow](../../.cursor/rules/memory-bank-workflow.mdc)** - Quản lý bộ nhớ
+- **[Experience System Workflow](../../.cursor/rules/experience-system-workflow.mdc)** - Hệ thống kinh nghiệm
+- **[Review Gate V2](../../.cursor/rules/ReviewGateV2.mdc)** - Cổng review code
+- **[Four Role Development](../../.cursor/rules/four-role-development.mdc)** - Phát triển 4 vai trò
+
+## ⚠️ CRITICAL ENFORCEMENT RULES
+
+### Mandatory Compliance
+1. **BẮT BUỘC** tuân thủ 100% các rules trong `.cursor/rules/`
+2. **NGHIÊM CẤM** tạo rules mới trong `.trae/rules/` mà không sync với `.cursor/rules/`
+3. **BẮT BUỘC** cập nhật alias links khi có thay đổi trong `.cursor/rules/`
+4. **BẮT BUỘC** sử dụng relative paths để đảm bảo tính di động
+
+### Synchronization Protocol
+- Mọi thay đổi rules phải được thực hiện trong `.cursor/rules/` trước
+- File này chỉ được cập nhật để sync alias links
+- Không được override hoặc modify nội dung rules gốc
+
+## 🔄 Rules Hierarchy Priority
+1. `.cursor/rules/` - **PRIMARY SOURCE** (Highest Priority)
+2. `.appdexer/rules/` - Secondary reference
+3. `.trae/rules/` - Alias/Link layer only (Lowest Priority)
 
 ## Trae AI Specific Configuration
-- Sử dụng rules từ .appdexer/rules/ làm nguồn chính thức
-- File này chỉ chứa các cấu hình đặc thù cho Trae AI
+- **BẮT BUỘC** sử dụng rules từ `.cursor/rules/` làm nguồn chính thức
+- File này chỉ chứa alias links và không được chứa rules độc lập
+- Mọi customization phải được thực hiện trong `.cursor/rules/`
 
 ## Android Development Workflow
 
