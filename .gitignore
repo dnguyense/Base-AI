@@ -37,9 +37,6 @@ pnpm-debug.log*
 /experiences/sensitive/
 /experiences/resources/sensitive/
 
-# Project identification
-.project-identity
-
 # Android 
 *.apk
 *.aab

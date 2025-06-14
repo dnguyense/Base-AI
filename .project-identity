@@ -1,0 +1,291 @@
+{
+  "projectName": "Tên dự án",
+  "projectType": "android|ios|flutter|react-native|web",
+  "mainLanguages": [
+    "các ngôn ngữ chính"
+  ],
+  "mainFrameworks": [
+    "các framework chính"
+  ],
+  "keyTechnologies": [
+    "các công nghệ chính"
+  ],
+  "keyFeatures": [
+    "các tính năng chính"
+  ],
+  "setupInstructions": {
+    "path": "instructions/setup/project-setup.md",
+    "workflow": [
+      "Brainstorm và Phân Tích Yêu Cầu",
+      "Cấu Hình Project Identity",
+      "Setup Appdexer MCP",
+      "Auto-Setup Project Detection",
+      "Tạo Project Structure",
+      "Platform-Specific Setup",
+      "Development Workflow Setup",
+      "Testing và Validation",
+      "Documentation và Finalization"
+    ],
+    "supportedPlatforms": [
+      "Android (Java/Kotlin)",
+      "iOS (Swift/Objective-C)",
+      "Flutter (Dart)",
+      "React Native (JavaScript/TypeScript)",
+      "Web (JavaScript/TypeScript)"
+    ],
+    "requiredTools": [
+      "Python >= 3.9 (cho MCP server)",
+      "Cursor IDE với MCP support",
+      "Git",
+      "Platform-specific SDK"
+    ],
+    "mcpServerPort": 3001
+  },
+  "workflows": {
+    "android": {
+      "relatedWorkflows": [
+        ".cursor/rules/android-workflow.mdc",
+        ".cursor/rules/tdd-mobile-workflow.mdc",
+        "instructions/android-aso-package-workflow.md"
+      ],
+      "description": "Android development workflow với Blueprint-First approach",
+      "architecture": "MVVM + Clean Architecture với 3 lớp (UI, Domain, Data)",
+      "techStack": {
+        "language": "Kotlin",
+        "ui": "Jetpack Compose",
+        "di": "Hilt",
+        "database": "Room + SQLite",
+        "networking": "Retrofit + OkHttp",
+        "serialization": "kotlinx-serialization-json",
+        "imageLoading": "Coil",
+        "logging": "Timber",
+        "async": "Coroutines"
+      },
+      "structure": {
+        "base": "Base classes (Activity, Fragment, ViewModel, Adapter, View)",
+        "core": "Core modules (DI, Network, Storage, Analytics, Utils)",
+        "data": "Data layer (Repository, DataSource, Model, Mapper)",
+        "domain": "Domain layer (UseCase, Model, Repository interfaces)",
+        "ui": "UI layer (Components, Features)"
+      },
+      "principles": [
+        "Blueprint-First Development",
+        "Module Registry để tránh trùng lặp",
+        "Unidirectional Data Flow",
+        "Code deduplication qua base classes",
+        "Feature package structure"
+      ],
+      "featureBlueprintTemplate": "blueprint/features/[feature-name]-blueprint.md",
+      "buildOptimization": {
+        "minifyEnabled": true,
+        "shrinkResources": true,
+        "proguardFiles": true,
+        "abiFilters": [
+          "armeabi-v7a",
+          "arm64-v8a"
+        ],
+        "enableAppBundle": true,
+        "languageSplit": true
+      }
+    },
+    "ios": {
+      "relatedWorkflows": [
+        ".cursor/rules/ios-workflow.mdc",
+        ".cursor/rules/tdd-mobile-workflow.mdc"
+      ],
+      "description": "iOS development workflow với Blueprint-First approach",
+      "architecture": "MVVM + Clean Architecture với 3 lớp (Presentation, Domain, Data)",
+      "techStack": {
+        "language": "Swift",
+        "ui": "SwiftUI",
+        "async": "Combine",
+        "di": "Swinject hoặc Factory",
+        "networking": "Alamofire",
+        "serialization": "Codable (built-in) + AnyCodable",
+        "database": "Core Data hoặc SQLite.swift",
+        "imageLoading": "Nuke",
+        "logging": "swift-log",
+        "keychain": "keychain-swift",
+        "animations": "Lottie (optional)"
+      },
+      "structure": {
+        "presentation": "SwiftUI Views + ViewModels",
+        "domain": "Use Cases + Models + Repository Protocols",
+        "data": "Repository Implementations + Data Sources",
+        "base": "Base classes (BaseViewModel, BaseUseCase, BaseRepository)",
+        "core": "Core services và utilities"
+      },
+      "principles": [
+        "Blueprint-First Development",
+        "Module Registry để tránh trùng lặp",
+        "Unidirectional Data Flow",
+        "@MainActor cho UI updates",
+        "Error handling với Result pattern"
+      ],
+      "buildOptimization": {
+        "enableBitcode": true,
+        "swiftCompilationMode": "wholemodule",
+        "swiftOptimizationLevel": "-O",
+        "gccOptimizationLevel": "s",
+        "enableOnDemandResources": true,
+        "stripInstalledProduct": true,
+        "compressPngFiles": true,
+        "assetOptimization": "SF Symbols + Asset Catalog + App Thinning"
+      }
+    },
+    "flutter": {
+      "description": "Flutter development workflow (cross-platform mobile)",
+      "note": "Flutter workflow được tích hợp trong mobile-utility-workflow và TDD mobile workflow",
+      "relatedWorkflows": [
+        ".cursor/rules/mobile-utility-workflow.mdc",
+        ".cursor/rules/tdd-mobile-workflow.mdc"
+      ],
+      "architecture": "Clean Architecture + BLoC pattern",
+      "techStack": {
+        "language": "Dart",
+        "ui": "Flutter Widgets",
+        "stateManagement": "BLoC/Cubit hoặc Riverpod",
+        "di": "get_it + injectable",
+        "networking": "dio + retrofit",
+        "serialization": "json_annotation + json_serializable",
+        "database": "floor (SQLite) hoặc drift",
+        "imageLoading": "cached_network_image",
+        "routing": "go_router",
+        "testing": "flutter_test + mockito"
+      },
+      "crossPlatformConsiderations": {
+        "sharedBackend": "Firebase/Supabase",
+        "aiApis": "Same cloud endpoints for all platforms",
+        "designSystem": "Material Design 3 + Cupertino (iOS-style)",
+        "analytics": "Unified Firebase events",
+        "remoteConfig": "Firebase config for feature flags"
+      }
+    },
+    "mobileUtility": {
+      "path": ".cursor/rules/mobile-utility-workflow.mdc",
+      "description": "Mobile utility app workflow (Android-first, iOS-compatible)",
+      "supportedCategories": [
+        "Health & Fitness Apps",
+        "Photo Editing Apps",
+        "Office Utility Apps"
+      ],
+      "principles": [
+        "Android-first development, iOS-compatible architecture",
+        "Revenue-optimized design từ planning phase",
+        "TDD approach với comprehensive coverage",
+        "AI integration tự động",
+        "Smart API usage với caching và batching",
+        "Manual control ad strategies via Firebase Remote Config",
+        "Regional ad strategy support",
+        "Full automation workflow"
+      ],
+      "reusableInstructions": {
+        "location": "instructions/reusable/",
+        "categories": [
+          "Feature Instructions",
+          "Architecture Instructions",
+          "UI/UX Instructions",
+          "Performance Instructions",
+          "Testing Instructions"
+        ]
+      },
+      "revenueOptimization": {
+        "phase1": "Strategic Foundation (Auto + 5 Questions)",
+        "phase2": "Complete App Development (Pre-Revenue Integration)",
+        "phase3": "Smart Revenue Integration (Post-Complete App)",
+        "adStrategies": "Firebase Remote Config với regional overrides"
+      }
+    },
+    "tddMobile": {
+      "path": ".cursor/rules/tdd-mobile-workflow.mdc",
+      "description": "Test-Driven Development workflow cho mobile apps",
+      "coverage": {
+        "unitTests": "85% minimum",
+        "integrationTests": "70% minimum",
+        "uiTests": "100% critical user flows",
+        "aiTests": "100% AI integration với fallback scenarios"
+      },
+      "tddCycle": {
+        "red": "Write failing tests (Unit -> Integration -> UI -> AI-specific)",
+        "green": "Minimal implementation (Business Logic -> Data Layer -> UI Layer -> AI Features)",
+        "refactor": "Optimize & Clean (Code Quality -> Test Quality -> Architecture)"
+      },
+      "androidTestStack": [
+        "JUnit 5",
+        "Mockito/MockK",
+        "Coroutines Test",
+        "Espresso",
+        "Compose UI Test",
+        "Room Testing",
+        "MockWebServer"
+      ],
+      "iosTestStack": [
+        "XCTest",
+        "XCUITest",
+        "Cuckoo (mocking)",
+        "Core Data Testing"
+      ],
+      "flutterTestStack": [
+        "flutter_test",
+        "mockito",
+        "integration_test",
+        "flutter_driver"
+      ]
+    }
+  },
+  "projectStructure": {
+    "instructions": "Setup và usage instructions",
+    "tools/appdexer": "Appdexer MCP server và tools",
+    "scripts": "Automation scripts",
+    "assets": "Static assets và resources",
+    "design": "Design files cho analysis",
+    "templates": "Project templates"
+  },
+  "projectIdentifiers": [
+    "tools/appdexer/appdexer_mcp.py",
+    "scripts/auto-setup-appdexer.sh",
+    "instructions/setup/project-setup.md",
+    ".project-identity",
+    ".project-personality"
+  ],
+  "projectPaths": {
+    "core": "./tools/appdexer",
+    "scripts": "./scripts",
+    "assets": "./assets",
+    "instructions": "./instructions",
+    "templates": "./templates"
+  },
+  "uniquePatterns": [
+    "appdexer_mcp.py",
+    "auto-setup-appdexer.sh",
+    "appdexer_chat",
+    "appdexer_voice_search",
+    "appdexer_search_resources",
+    "appdexer_design_analysis",
+    "appdexer_ai_analyze_context"
+  ],
+  "features": {
+    "aiContextAnalysis": true,
+    "voiceCommands": true,
+    "resourceManagement": true,
+    "designAnalysis": true,
+    "autoProjectDetection": true,
+    "mcpIntegration": true
+  },
+  "mcpConfiguration": {
+    "serverPath": "tools/appdexer/appdexer_mcp.py",
+    "defaultPort": 3001,
+    "tools": [
+      "appdexer_chat",
+      "appdexer_voice_search",
+      "appdexer_search_resources",
+      "appdexer_design_analysis",
+      "appdexer_ai_analyze_context",
+      "appdexer_auto_setup"
+    ]
+  },
+  "dependencies": {
+    "python": ">=3.9.0",
+    "cursor": "with MCP support"
+  }
+}
