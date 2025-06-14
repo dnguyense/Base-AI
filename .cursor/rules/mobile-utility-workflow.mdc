@@ -49,31 +49,45 @@ alwaysApply: false
 - ***BẮT BUỘC*** tạo instruction template cho từng app category
 - ***BẮT BUỘC*** lưu trữ instruction trong thư mục `instructions/reusable/`
 
+### Nguyên Tắc Thiết Kế Instruction
+- ***BẮT BUỘC*** instruction chỉ chứa các chỉ dẫn, hướng dẫn và yêu cầu
+- ***NGHIÊM CẤM*** bao gồm code thực tế trong instruction files (.md)
+- ***BẮT BUỘC*** mô tả logic, flow và requirements thay vì implementation
+- ***BẮT BUỘC*** sử dụng pseudocode hoặc flowchart khi cần minh họa logic
+- ***BẮT BUỘC*** tập trung vào "what" và "why" thay vì "how" cụ thể
+- ***BẮT BUỘC*** để AI tự quyết định implementation details dựa trên instruction
+
 ### Reusable Instruction Template Structure:
 ```markdown
 # [App Category] - [Feature Name] Instruction
 
 ## Platform Requirements
-- **Android**: [Specific requirements]
-- **iOS**: [Specific requirements]
-- **Shared**: [Common requirements]
+- **Android**: [Specific requirements and constraints]
+- **iOS**: [Specific requirements and constraints]
+- **Shared**: [Common requirements across platforms]
 
 ## Feature Overview
-[Platform-agnostic description]
+[Platform-agnostic description of what needs to be built]
 
-## Implementation Guide
-### Phase 1: Core Logic (Platform Independent)
-[Business logic, algorithms, data structures]
+## Business Logic & Flow
+### Core Requirements
+[Detailed description of business rules and logic flow]
 
-### Phase 2: Platform-Specific Implementation
-#### Android Implementation:
-[Android-specific code structure, libraries, patterns]
+### User Journey & Interactions
+[Step-by-step user experience flow]
 
-#### iOS Implementation:
-[iOS-specific code structure, frameworks, patterns]
+### Data Flow & State Management
+[How data should flow through the application]
 
-### Phase 3: Testing Strategy
-[Common testing approaches for both platforms]
+## Platform-Specific Considerations
+#### Android Guidelines:
+[Architecture patterns, design principles, and platform conventions to follow]
+
+#### iOS Guidelines:
+[Architecture patterns, design principles, and platform conventions to follow]
+
+## Testing Requirements
+[What should be tested and validation criteria]
 
 ## Reusable Components
 [List of components that can be shared between projects]

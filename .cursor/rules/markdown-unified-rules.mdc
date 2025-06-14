@@ -127,6 +127,13 @@ instructions/
 - ***BẮT BUỘC*** giữ code block dưới 10 dòng
 - ***BẮT BUỘC*** đảm bảo file markdown dưới 250 dòng để tối ưu cho Cursor
 
+### 8.1.1 Nguyên Tắc Đặc Biệt Cho Instruction Files
+- ***BẮT BUỘC*** instruction files chỉ chứa chỉ dẫn và yêu cầu
+- ***NGHIÊM CẤM*** bao gồm code implementation trong instruction files
+- ***BẮT BUỘC*** mô tả logic và flow bằng natural language
+- ***BẮT BUỘC*** sử dụng pseudocode hoặc flowchart thay vì real code
+- ***BẮT BUỘC*** tập trung vào "what" và "why" thay vì "how" cụ thể
+
 ### 8.2 Tối Ưu Mô Tả
 - ***BẮT BUỘC*** mô tả ý tưởng/thuật toán thay vì code cụ thể
 - ***BẮT BUỘC*** sử dụng tham chiếu đến file code thay vì copy code
@@ -148,4 +155,4 @@ instructions/
 - File markdown với nhiều code dễ vượt quá giới hạn context window của AI
 - AI có khả năng hiểu mô tả ngôn ngữ tự nhiên tốt hơn code lớn
 - Tách biệt code giúp dễ dàng cập nhật mà không ảnh hưởng đến tài liệu
-- Tối ưu không gian và tốc độ xử lý của AI đồng thời giảm chi phí 
+- Tối ưu không gian và tốc độ xử lý của AI đồng thời giảm chi phí

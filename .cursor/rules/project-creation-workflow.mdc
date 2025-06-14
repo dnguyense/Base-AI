@@ -58,11 +58,18 @@ alwaysApply: false
 ### Output Design-to-Prompt với Appdexer
 - ***BẮT BUỘC*** tạo file `instructions/Design_Analysis.md` chứa:
   - Phân tích chi tiết bằng tiếng Việt
-  - Instruction template bằng tiếng Anh trong code block
+  - Instruction template bằng tiếng Anh trong code block (chỉ chứa chỉ dẫn, không chứa code)
   - Danh sách features prioritized theo marketing analysis
   - User flow và interaction details
   - Technical requirements và constraints
   - Monetization strategy và user engagement plan
+
+### Nguyên Tắc Thiết Kế Instruction (.md) trong Design-to-Prompt
+- ***BẮT BUỘC*** instruction template chỉ chứa mô tả yêu cầu và hướng dẫn
+- ***NGHIÊM CẤM*** bao gồm code implementation trong instruction
+- ***BẮT BUỘC*** tập trung vào business logic và user requirements
+- ***BẮT BUỘC*** mô tả "what to build" thay vì "how to build"
+- ***BẮT BUỘC*** sử dụng natural language để describe functionality
 
 ## Brainstorming với Người Dùng (Powered by Appdexer)
 - ***BẮT BUỘC*** sử dụng review_gate_chat để tương tác với người dùng
@@ -262,4 +269,4 @@ Ví dụ Voice Commands:
 
 @file ../Instruction.md
 @file ../Project.md
-@file ../MockupData.md 
+@file ../MockupData.md
