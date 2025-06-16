@@ -14,12 +14,12 @@ Tài liệu này hướng dẫn cách sử dụng GitHub Copilot trong dự án 
 
 ## Danh sách hướng dẫn chi tiết
 
-- [AI Product Builder Workflow](../instructions/AI-Product-Builder-Workflow.md): Quy trình xây dựng sản phẩm AI dành cho người không biết lập trình, gồm 3 giai đoạn và nhiều cấp độ.
-- [API Docs](../instructions/API_Docs.md): Hướng dẫn sử dụng các API, bao gồm cả API thời tiết và API chat AI.
-- [Database Management](../instructions/database-management.md): Quy tắc quản lý, sử dụng và cập nhật database trong dự án.
-- [Validate Workflow](../instructions/validate-workflow.md): Script và quy trình kiểm thử, xác thực tuân thủ workflow AI Product Builder.
-- [Weather Basic](../instructions/weather-basic.md): Hướng dẫn tích hợp nhanh các API thời tiết cơ bản.
-- [Weather Detailed](../instructions/weather-detailed.md): Hướng dẫn chi tiết về các API thời tiết nâng cao, phù hợp cho sản phẩm chuyên sâu.
+- [AI Product Builder Workflow](../.cursor/rules/ai-product-builder-workflow.mdc): Quy trình xây dựng sản phẩm AI dành cho người không biết lập trình, gồm 3 giai đoạn và nhiều cấp độ.
+- [TDD Guidelines](../.cursor/rules/tdd-guidelines.mdc): Hướng dẫn Test-Driven Development cho mobile apps, bao gồm unit tests, integration tests và UI tests.
+- [Database Management](../.cursor/rules/database-management.mdc): Quy tắc quản lý, sử dụng và cập nhật database trong dự án.
+- [Validate Workflow](../.cursor/rules/validate-workflow.mdc): Script và quy trình kiểm thử, xác thực tuân thủ workflow AI Product Builder.
+- [Weather Basic](../.cursor/rules/weather-basic-workflow.mdc): Hướng dẫn tích hợp nhanh các API thời tiết cơ bản.
+- [Weather Detailed](../.cursor/rules/weather-detailed-workflow.mdc): Hướng dẫn chi tiết về các API thời tiết nâng cao, phù hợp cho sản phẩm chuyên sâu.
 
 ## Quy trình kiểm soát trong thư mục `.cursor/`
 

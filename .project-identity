@@ -16,9 +16,8 @@
   "setupInstructions": {
     "path": "instructions/setup/project-setup.md",
     "workflow": [
-      "Brainstorm và Phân Tích Yêu Cầu",
+      "MANDATORY: Brainstorm Workflow (3-Phase Process)",
       "Cấu Hình Project Identity",
-      "Setup Appdexer MCP",
       "Auto-Setup Project Detection",
       "Tạo Project Structure",
       "Platform-Specific Setup",
@@ -26,6 +25,23 @@
       "Testing và Validation",
       "Documentation và Finalization"
     ],
+    "mandatoryBrainstormWorkflow": {
+      "description": "BẮT BUỘC thực hiện brainstorm workflow trước khi khởi tạo bất kỳ dự án mới nào",
+      "workflowFile": ".cursor/rules/brainstorm-workflow.mdc",
+      "detailedWorkflowFile": ".cursor/rules/brainstorm-detailed-workflow.mdc",
+      "enforcementRules": [
+        "NGHIÊM CẤM bắt đầu planning khi chưa hoàn thành brainstorm",
+        "BẮT BUỘC tạo file Brainstorm_[TenDuAn].md trước khi tiếp tục",
+        "BẮT BUỘC hoàn thành tất cả 3 phases: Foundation → Structure → Advanced",
+        "BẮT BUỘC xác nhận với người dùng trước khi chuyển sang planning"
+      ],
+      "triggerConditions": [
+        "Người dùng có ý tưởng mới",
+        "Khởi động dự án trống",
+        "Không tồn tại file Brainstorm_[TenDuAn].md",
+        "Yêu cầu tạo dự án mới từ đầu"
+      ]
+    },
     "supportedPlatforms": [
       "Android (Java/Kotlin)",
       "iOS (Swift/Objective-C)",
@@ -42,11 +58,43 @@
     "mcpServerPort": 3001
   },
   "workflows": {
+    "base": {
+      "description": "Base workflow cho tất cả dự án mới - BẮT BUỘC bắt đầu với Brainstorm Workflow",
+      "workflow": [
+        "PHASE 1: MANDATORY Brainstorm Workflow (3-Phase Process)",
+        "PHASE 2: Cấu Hình Project Identity",
+        "PHASE 3: Auto-Setup Project Detection",
+        "PHASE 4: Tạo Project Structure",
+        "PHASE 5: Platform-Specific Setup",
+        "PHASE 6: Development Workflow Setup",
+        "PHASE 7: Testing và Validation",
+        "PHASE 8: Documentation và Finalization"
+      ],
+      "mandatoryFirstStep": {
+        "name": "Brainstorm Workflow",
+        "description": "BẮT BUỘC thực hiện trước khi tiếp tục bất kỳ bước nào khác",
+        "workflowFiles": [
+          ".cursor/rules/brainstorm-workflow.mdc",
+          ".cursor/rules/brainstorm-detailed-workflow.mdc"
+        ],
+        "completionCriteria": [
+          "File Brainstorm_[TenDuAn].md được tạo",
+          "Hoàn thành 3 phases: Foundation → Structure → Advanced",
+          "Người dùng xác nhận thông tin brainstorm",
+          "Risk assessment được thực hiện"
+        ],
+        "blockingRules": [
+          "Không được chuyển sang PHASE 2 khi chưa hoàn thành brainstorm",
+          "Không được tạo planning khi chưa có file Brainstorm_[TenDuAn].md",
+          "Không được bắt đầu development khi brainstorm chưa được xác nhận"
+        ]
+      }
+    },
     "android": {
       "relatedWorkflows": [
         ".cursor/rules/android-workflow.mdc",
         ".cursor/rules/tdd-mobile-workflow.mdc",
-        "instructions/android-aso-package-workflow.md"
+        ".cursor/rules/android-aso-package-workflow.mdc"
       ],
       "description": "Android development workflow với Blueprint-First approach",
       "architecture": "MVVM + Clean Architecture với 3 lớp (UI, Domain, Data)",
@@ -233,17 +281,65 @@
       ]
     }
   },
+  "workflowIntegration": {
+    "description": "Tích hợp brainstorm workflow với tất cả các workflow khác trong hệ thống",
+    "globalEnforcementRules": {
+      "newProjectDetection": {
+        "triggers": [
+          "Người dùng đề cập 'ý tưởng mới'",
+          "Người dùng nói 'tạo dự án mới'",
+          "Không tồn tại file Brainstorm_[TenDuAn].md trong project",
+          "Người dùng yêu cầu 'khởi tạo từ đầu'",
+          "Project folder trống hoặc chỉ có template files"
+        ],
+        "mandatoryAction": "Redirect to Brainstorm Workflow",
+        "blockingMessage": "🚫 PHÁT HIỆN DỰ ÁN MỚI - BẮT BUỘC THỰC HIỆN BRAINSTORM TRƯỚC\n\n✅ Hãy bắt đầu với: 'Tôi muốn brainstorm ý tưởng [mô tả ngắn]'\n\n📋 Workflow sẽ thực hiện:\n1. Foundation Questions (5 câu hỏi cơ bản)\n2. Structure Analysis (features & architecture)\n3. Advanced Analysis (competitors & risks)\n\n⚠️ Không thể tiếp tục development khi chưa hoàn thành brainstorm."
+      },
+      "workflowValidation": {
+        "beforePlanning": "Check Brainstorm_[TenDuAn].md exists and complete",
+        "beforeDevelopment": "Validate brainstorm confirmation status",
+        "beforeArchitecture": "Ensure technical requirements from brainstorm",
+        "beforeImplementation": "Verify feature priorities from brainstorm"
+      }
+    },
+    "workflowFileReferences": {
+      "primary": ".cursor/rules/brainstorm-workflow.mdc",
+      "detailed": ".cursor/rules/brainstorm-detailed-workflow.mdc",
+      "validation": ".cursor/rules/planning-validation-rules.mdc",
+      "enforcement": ".cursor/rules/development-control-rules.mdc",
+      "planning": ".cursor/rules/planning-workflow.mdc"
+    },
+    "integrationWithExistingWorkflows": {
+      "android": {
+        "modification": "Android workflow MUST start with brainstorm validation",
+        "requirement": "Blueprint-First approach requires brainstorm foundation"
+      },
+      "ios": {
+        "modification": "iOS workflow MUST start with brainstorm validation",
+        "requirement": "Architecture decisions require brainstorm insights"
+      },
+      "flutter": {
+        "modification": "Flutter workflow MUST start with brainstorm validation",
+        "requirement": "Cross-platform strategy requires brainstorm analysis"
+      },
+      "mobileUtility": {
+        "modification": "Mobile utility workflow already includes 5 strategic questions",
+        "requirement": "Revenue optimization requires brainstorm foundation"
+      },
+      "tddMobile": {
+        "modification": "TDD workflow MUST validate brainstorm before test creation",
+        "requirement": "Test scenarios require brainstorm user stories"
+      }
+    }
+  },
   "projectStructure": {
     "instructions": "Setup và usage instructions",
-    "tools/appdexer": "Appdexer MCP server và tools",
     "scripts": "Automation scripts",
     "assets": "Static assets và resources",
     "design": "Design files cho analysis",
     "templates": "Project templates"
   },
   "projectIdentifiers": [
-    "tools/appdexer/appdexer_mcp.py",
-    "scripts/auto-setup-appdexer.sh",
     "instructions/setup/project-setup.md",
     ".project-identity",
     ".project-personality"
@@ -255,15 +351,6 @@
     "instructions": "./instructions",
     "templates": "./templates"
   },
-  "uniquePatterns": [
-    "appdexer_mcp.py",
-    "auto-setup-appdexer.sh",
-    "appdexer_chat",
-    "appdexer_voice_search",
-    "appdexer_search_resources",
-    "appdexer_design_analysis",
-    "appdexer_ai_analyze_context"
-  ],
   "features": {
     "aiContextAnalysis": true,
     "voiceCommands": true,
@@ -271,18 +358,6 @@
     "designAnalysis": true,
     "autoProjectDetection": true,
     "mcpIntegration": true
-  },
-  "mcpConfiguration": {
-    "serverPath": "tools/appdexer/appdexer_mcp.py",
-    "defaultPort": 3001,
-    "tools": [
-      "appdexer_chat",
-      "appdexer_voice_search",
-      "appdexer_search_resources",
-      "appdexer_design_analysis",
-      "appdexer_ai_analyze_context",
-      "appdexer_auto_setup"
-    ]
   },
   "dependencies": {
     "python": ">=3.9.0",

@@ -4,8 +4,8 @@ Luôn log các thông tin khi request và response để debug.
 
 ## Weather API
 
-[weather-basic.md](weather-basic.md) - đây là các api cơ bản, sử dụng trong các ứng dụng đơn giản bổ xung thêm thời tiết
-[weather-detailed.md](weather-detailed.md) - tài liệu api đầy đủ
+[weather-basic-workflow.mdc](../.cursor/rules/weather-basic-workflow.mdc) - đây là các api cơ bản, sử dụng trong các ứng dụng đơn giản bổ xung thêm thời tiết
+[weather-detailed-workflow.mdc](../.cursor/rules/weather-detailed-workflow.mdc) - tài liệu api đầy đủ
 
 ## Chat AI & Generate Text AI
 

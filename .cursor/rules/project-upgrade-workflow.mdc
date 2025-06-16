@@ -172,7 +172,7 @@ Xem chi tiết tại: [docs/templates/](mdc:docs/templates)
 - Thêm các comment mô tả chi tiết cho từng thay đổi cấu trúc
 - Xác định và ghi rõ tác động của thay đổi database đến chức năng hiện có
 - Kiểm thử kỹ lưỡng sau khi thực hiện thay đổi database
-- Tham khảo thêm tại file `instructions/database-management.md` cho hướng dẫn chi tiết
+- Tham khảo thêm tại file `.cursor/rules/database-management.mdc` cho hướng dẫn chi tiết
 
 ## Supabase MCP Trong Quá Trình Nâng Cấp
 - ***BẮT BUỘC*** kiểm tra cài đặt Supabase MCP nếu dự án sử dụng Supabase
@@ -368,4 +368,4 @@ Xem chi tiết tại: [docs/templates/](mdc:docs/templates)
      # Tải rule mới lên server
      npm run rules:upload
      ```
-  4. Cập nhật Changelog.md với thông tin về rule mới 
+  4. Cập nhật Changelog.md với thông tin về rule mới
