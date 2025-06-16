@@ -15,21 +15,36 @@ import urllib3
 from pathlib import Path
 from typing import Optional, Dict, Any
 
+# Import configuration from config file
+try:
+    from scripts.config.telegram_config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, SOCKS5_PROXY
+except ImportError:
+    # Try relative import for when script is run directly
+    try:
+        import sys
+        from pathlib import Path
+        # Add parent directory to path to allow imports
+        script_dir = Path(__file__).parent
+        sys.path.append(str(script_dir))
+        from config.telegram_config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, SOCKS5_PROXY
+    except ImportError as e:
+        print(f"Error importing telegram config: {e}")
+        print("Falling back to environment variables")
+        # Fallback to environment variables
+        from dotenv import load_dotenv
+        load_dotenv()
+        TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+        TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+        SOCKS5_PROXY = None
+
 # Disable SSL warnings for proxy connections
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# Telegram Configuration
-TELEGRAM_BOT_TOKEN = "1639409631:AAFQy3iXYOCEowCeffRsg3p84QgY_sBrB-Y"
-TELEGRAM_CHAT_ID = "-1001824251833"
+# Telegram API URL
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
 
-# SOCKS5 Proxy Configuration
-# Note: For SOCKS5 support, you may need to install: pip install requests[socks]
-# If installation fails, the script will fallback to direct connection
-SOCKS5_PROXY = {
-    'http': 'socks5://sd08bv8p:YSA9bBs2qpamqyMl@74.222.17.92:52071',
-    'https': 'socks5://sd08bv8p:YSA9bBs2qpamqyMl@74.222.17.92:52071'
-}
+# SOCKS5 Proxy Configuration is now imported from config file
+# If config import fails, SOCKS5_PROXY will be None and direct connection will be used
 
 class TelegramNotifier:
     def __init__(self, use_proxy: bool = True):

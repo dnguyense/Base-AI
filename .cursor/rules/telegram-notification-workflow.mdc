@@ -27,19 +27,6 @@ This workflow provides automated Telegram notifications for work completion with
   - Auto-installation of Python packages
   - Default parameter handling
 
-## Configuration
-
-### Telegram Settings
-```bash
-TELEGRAM_BOT_TOKEN="1639409631:AAFQy3iXYOCEowCeffRsg3p84QgY_sBrB-Y"
-TELEGRAM_CHAT_ID="-1001824251833"
-```
-
-### SOCKS5 Proxy Configuration
-- Server: 74.222.17.92:52071
-- Authentication: Username/password based
-- Auto-fallback to direct connection if proxy fails
-
 ## Usage Examples
 
 ### Basic Notification

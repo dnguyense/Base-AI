@@ -5,8 +5,14 @@
 **Appdexer Base AI Project** là một framework phát triển thông minh được tối ưu cho **Cursor IDE** với **Review Gate V2**. Dự án này giúp bạn tăng hiệu quả làm việc với AI lên **5x** thông qua việc tối đa hóa giá trị từ mỗi request và tạo ra các workflow tự động hóa thông minh.
 
 ## Nguyên tắc
+
 - Fix các bug nhỏ, code giao diện -> TRAE
 - Code phức tạp, code sâu -> Cursor
+
+## Cấu hình .env
+
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=
 
 ## ✨ Tính Năng Chính
 

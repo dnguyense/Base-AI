@@ -8,6 +8,11 @@ This directory contains utility scripts for the Base AI Project.
 
 A comprehensive notification system that sends work completion reports to Telegram with screenshots.
 
+#### Cấu hình
+Telegram Bot hiện sử dụng file cấu hình riêng tại `scripts/config/telegram_config.py` thay vì .env. Điều này giúp bạn có thể tái sử dụng cấu hình giữa các dự án mà không cần cấu hình lại.
+
+Xem thêm chi tiết tại [Config README](./config/README.md).
+
 #### Features
 - **SOCKS5 Proxy Support**: Built-in proxy configuration for network access
 - **Screenshot Capture**: Automatic desktop screenshots
