@@ -60,7 +60,7 @@ Cài Extension Review Gate để tiết kiệm request Cursor trong thư mục
 1. Mở Cursor IDE
 2. Nhấn `Cmd+Shift+P`
 3. Gõ `Extensions: Install from VSIX`
-4. Chọn file: `/Users/trungkientn/cursor-extensions/review-gate-v2/review-gate-v2-2.6.3.vsix`
+4. Chọn file: `./tools/Review-Gate/V2/review-gate-v2-2.6.3.vsix`
 5. Restart Cursor khi được yêu cầu
 
 ```bash
