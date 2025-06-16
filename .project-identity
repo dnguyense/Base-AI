@@ -1,29 +1,100 @@
 {
   "projectName": "Tên dự án",
-  "projectType": "template|android|ios|flutter|react-native|web|desktop",
-  "projectStage": "setup|brainstorm|development|production",
-  "mainLanguages": [],
-  "mainFrameworks": [],
-  "keyTechnologies": [],
-  "keyFeatures": [],
-  "projectLifecycle": {
-    "stage1_brainstorm": {
-      "description": "Giai đoạn brainstorm và lên ý tưởng",
-      "workflowRules": [
-        ".cursor/rules/brainstorm-workflow.mdc",
-        ".cursor/rules/brainstorm-detailed-workflow.mdc"
+  "projectType": "android|ios|flutter|react-native|web",
+  "mainLanguages": [
+    "các ngôn ngữ chính"
+  ],
+  "mainFrameworks": [
+    "các framework chính"
+  ],
+  "keyTechnologies": [
+    "các công nghệ chính"
+  ],
+  "keyFeatures": [
+    "các tính năng chính"
+  ],
+  "setupInstructions": {
+    "path": "instructions/setup/project-setup.md",
+    "workflow": [
+      "MANDATORY: Brainstorm Workflow (3-Phase Process)",
+      "Cấu Hình Project Identity",
+      "Auto-Setup Project Detection",
+      "Tạo Project Structure",
+      "Platform-Specific Setup",
+      "Development Workflow Setup",
+      "Testing và Validation",
+      "Documentation và Finalization"
+    ],
+    "mandatoryBrainstormWorkflow": {
+      "description": "BẮT BUỘC thực hiện brainstorm workflow trước khi khởi tạo bất kỳ dự án mới nào",
+      "workflowFile": ".cursor/rules/brainstorm-workflow.mdc",
+      "detailedWorkflowFile": ".cursor/rules/brainstorm-detailed-workflow.mdc",
+      "enforcementRules": [
+        "NGHIÊM CẤM bắt đầu planning khi chưa hoàn thành brainstorm",
+        "BẮT BUỘC tạo file Brainstorm_[TenDuAn].md trước khi tiếp tục",
+        "BẮT BUỘC hoàn thành tất cả 3 phases: Foundation → Structure → Advanced",
+        "BẮT BUỘC xác nhận với người dùng trước khi chuyển sang planning"
       ],
-      "requiredOutputs": [
-        "Brainstorm_[ProjectName].md",
-        "Updated .project-identity with basic info"
-      ],
-      "nextStage": "stage2_setup"
+      "triggerConditions": [
+        "Người dùng có ý tưởng mới",
+        "Khởi động dự án trống",
+        "Không tồn tại file Brainstorm_[TenDuAn].md",
+        "Yêu cầu tạo dự án mới từ đầu"
+      ]
     },
-    "stage2_setup": {
-      "description": "Giai đoạn setup dự án và cấu trúc",
-      "workflowRules": [
-        ".cursor/rules/project-creation-workflow.mdc",
-        ".cursor/rules/planning-workflow.mdc"
+    "supportedPlatforms": [
+      "Android (Java/Kotlin)",
+      "iOS (Swift/Objective-C)",
+      "Flutter (Dart)",
+      "React Native (JavaScript/TypeScript)",
+      "Web (JavaScript/TypeScript)"
+    ],
+    "requiredTools": [
+      "Python >= 3.9 (cho MCP server)",
+      "Cursor IDE với MCP support",
+      "Git",
+      "Platform-specific SDK"
+    ],
+    "mcpServerPort": 3001
+  },
+  "workflows": {
+    "base": {
+      "description": "Base workflow cho tất cả dự án mới - BẮT BUỘC bắt đầu với Brainstorm Workflow",
+      "workflow": [
+        "PHASE 1: MANDATORY Brainstorm Workflow (3-Phase Process)",
+        "PHASE 2: Cấu Hình Project Identity",
+        "PHASE 3: Auto-Setup Project Detection",
+        "PHASE 4: Tạo Project Structure",
+        "PHASE 5: Platform-Specific Setup",
+        "PHASE 6: Development Workflow Setup",
+        "PHASE 7: Testing và Validation",
+        "PHASE 8: Documentation và Finalization"
+      ],
+      "mandatoryFirstStep": {
+        "name": "Brainstorm Workflow",
+        "description": "BẮT BUỘC thực hiện trước khi tiếp tục bất kỳ bước nào khác",
+        "workflowFiles": [
+          ".cursor/rules/brainstorm-workflow.mdc",
+          ".cursor/rules/brainstorm-detailed-workflow.mdc"
+        ],
+        "completionCriteria": [
+          "File Brainstorm_[TenDuAn].md được tạo",
+          "Hoàn thành 3 phases: Foundation → Structure → Advanced",
+          "Người dùng xác nhận thông tin brainstorm",
+          "Risk assessment được thực hiện"
+        ],
+        "blockingRules": [
+          "Không được chuyển sang PHASE 2 khi chưa hoàn thành brainstorm",
+          "Không được tạo planning khi chưa có file Brainstorm_[TenDuAn].md",
+          "Không được bắt đầu development khi brainstorm chưa được xác nhận"
+        ]
+      }
+    },
+    "android": {
+      "relatedWorkflows": [
+        ".cursor/rules/android-workflow.mdc",
+        ".cursor/rules/tdd-mobile-workflow.mdc",
+        ".cursor/rules/android-aso-package-workflow.mdc"
       ],
       "requiredOutputs": [
         "Project structure created",
