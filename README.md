@@ -1,8 +1,11 @@
-﻿# Appdexer Base AI Project - Intelligent Development Framework 🤖
+﻿# Appdexer - Vibe Coding 🤖
 
 ## Ví dụ:
+
 `Tôi muốn kiểm tra quy trình của bạn, giả sử tôi có ý tưởng làm ứng dụng học tập, thì các bước của bạn sẽ làm gì?`
+
 `Tôi có ý tưởng làm ứng dụng thời tiết AI hãy brainstorm`
+
 `Từ project hiện tại tôi muốn nâng cấp tính năng AI hãy rà soát và lên kế hoạch`
 `Phân tích các thiết kế trong design/ theo quy trình design-to-prompt`
 
