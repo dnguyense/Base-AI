@@ -9,10 +9,9 @@
 - Fix các bug nhỏ, code giao diện -> TRAE
 - Code phức tạp, code sâu -> Cursor
 
-## Cấu hình .env
+## Cấu hình telegram
 
-TELEGRAM_BOT_TOKEN=
-TELEGRAM_CHAT_ID=
+scripts/config/telegram_config.py
 
 ## ✨ Tính Năng Chính
 
