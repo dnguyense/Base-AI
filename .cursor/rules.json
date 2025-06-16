@@ -204,6 +204,24 @@
       "description": "Template configuration cho iOS project với luồng tự động tối ưu",
       "globs": ["*.swift", "*.pbxproj", "Podfile", "Package.swift"],
       "alwaysApply": false
+    },
+    {
+      "path": "rules/project-stage-manager.mdc",
+      "description": "Quản lý các giai đoạn dự án: brainstorm → setup → development",
+      "globs": ["*.*"],
+      "alwaysApply": true
+    },
+    {
+      "path": "rules/platform-workflow-selector.mdc",
+      "description": "Chọn workflow phù hợp theo platform và tech stack",
+      "globs": ["*.*"],
+      "alwaysApply": false
+    },
+    {
+      "path": "rules/integration-management.mdc",
+      "description": "Quản lý tích hợp Telegram, MCP tools, AI APIs và resource management",
+      "globs": ["*.*"],
+      "alwaysApply": false
     }
   ]
 }
