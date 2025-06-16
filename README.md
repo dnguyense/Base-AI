@@ -1,8 +1,15 @@
 ﻿# Appdexer Base AI Project - Intelligent Development Framework 🤖
 
-## Giới Thiệu
+## Ví dụ:
 
-**Appdexer Base AI Project** là một framework phát triển thông minh được tối ưu cho **Cursor IDE** với **Review Gate V2**. Dự án này giúp bạn tăng hiệu quả làm việc với AI lên **5x** thông qua việc tối đa hóa giá trị từ mỗi request và tạo ra các workflow tự động hóa thông minh.
+- Tôi có ý tưởng làm ứng dụng thời tiết AI hãy brainstorm
+- Từ project hiện tại tôi muốn nâng cấp tính năng AI hãy rà soát và lên kế hoạch
+- Phân tích các thiết kế trong design/ theo quy trình design-to-prompt
+- Tạo các file instruction cho từng module
+
+```bash
+README.md Từ kịch bản này hãy thiết kế instruction cho từng phần của ứng dụng, bạn có thể tạo instruction cho các module, mỗi phần sẽ có 1 file instruction .md riêng sau đó được liên kết từ Instruction.md chính. Instruction.md sẽ là outline, để 1 AI sẽ thực hiện lần lượt các phần sao cho thành 1 sản phẩm hoàn chỉnh. Theo logic là mỗi lần thực hiện 1 nhiệm vụ nào đó thì AI sẽ đọc file Instruction.md và truy cập vào các instruction con theo từng nhiệm vụ cụ thể. Các instruction cần chia nhỏ ra từng phần và liên kết với nhau thông qua Instruction.md
+```
 
 ## ⚠️⚠️⚠️ Cảnh Báo
 
@@ -31,13 +38,6 @@ scripts/config/telegram_config.py
 - **5x Request Value**: Một request chính có thể thực hiện công việc của 5 request riêng lẻ
 - **Deep Iteration**: Sử dụng đầy đủ 25 tool calls trong một session
 - **Multi-modal Input**: Hỗ trợ text, voice-to-text, và image analysis
-
-### 🏗️ Intelligent Workflows
-
-- **Project Creation**: Workflow tạo dự án mới với MCP
-- **Feature Development**: Quy trình phát triển tính năng theo 4 vai trò (Planner → Architect → Builder → Tester)
-- **Project Upgrade**: Nâng cấp dự án hiện có an toàn với backup và rollback
-- **Multi-platform Support**: Android, iOS, Flutter, React Native, Web
 
 ### 🧠 AI-Powered Features
 
@@ -113,7 +113,7 @@ python ./review_gate_v2_mcp.py
 
 #### Shortcuts Hữu Ích
 
-- `Cmd+Shift+A`: Mở popup thủ công
+- `Cmd+Shift+P`: Mở popup thủ công
 
 ### 3. Initialize Your Project
 
@@ -183,7 +183,7 @@ Sử dụng quy trình design to prompt để phân tích thiết kế ./design/
 1. **Planning Phase**
 
 ```
-💬 User trong Review Gate: "Thêm tính năng voice search để tìm kiếm thành phố"
+💬 "Thêm tính năng voice search để tìm kiếm thành phố"
 
 🤖 AI (Planner):
 - Phân tích yêu cầu: Voice search cho location
