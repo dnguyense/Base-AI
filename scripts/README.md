@@ -1,100 +1,128 @@
-# Công Cụ Quản Lý Backup
+# Scripts Directory
 
-Bộ công cụ này giúp quản lý việc backup file thay vì xóa trực tiếp, đề phòng phát sinh vấn đề xóa nhầm hoặc cần phục hồi sau này.
+This directory contains utility scripts for the Base AI Project.
 
-## 💡 Nguyên Tắc Chung
+## Available Scripts
 
-- Thay vì xóa file trực tiếp, hãy di chuyển file vào thư mục `_backups`
-- Duy trì cấu trúc thư mục khi backup để dễ dàng phục hồi
-- Ghi log mỗi khi backup hoặc phục hồi file
-- Nén các backup cũ để tiết kiệm không gian
-- Backup là biện pháp bổ sung, không thay thế Git
+### 1. Telegram Notifier (`telegram_notifier.py`)
 
-## 🛠️ Các Công Cụ Có Sẵn
+A comprehensive notification system that sends work completion reports to Telegram with screenshots.
 
-### 📥 backup_file.sh
+#### Features
+- **SOCKS5 Proxy Support**: Built-in proxy configuration for network access
+- **Screenshot Capture**: Automatic desktop screenshots
+- **Work Reports**: Formatted project status reports
+- **Git Integration**: Branch and commit information
+- **Cross-platform**: macOS, Linux, Windows support
+- **Auto-fallback**: Direct connection if proxy fails
 
-Script thực hiện backup file thay vì xóa trực tiếp.
+#### SOCKS5 Proxy Configuration
+```
+Server: 74.222.17.92:52071
+Username: sd08bv8p
+Password: YSA9bBs2qpamqyMl
+Protocol: SOCKS5
+```
+
+#### Usage
+```bash
+# Basic usage
+python3 telegram_notifier.py "Task Name" "completed" "Optional details"
+
+# Without screenshot
+python3 telegram_notifier.py "Task Name" "completed" "Details" --no-screenshot
+
+# Different status options
+python3 telegram_notifier.py "Setup" "started"
+python3 telegram_notifier.py "Development" "in_progress" "50% complete"
+python3 telegram_notifier.py "Testing" "failed" "Unit tests failing"
+```
+
+#### Dependencies
+- Python 3.6+
+- requests library
+- urllib3 library
+- Optional: PySocks for enhanced SOCKS5 support
+
+### 2. Shell Wrapper (`notify.sh`)
+
+Convenience wrapper for the Telegram notifier.
 
 ```bash
-./scripts/backup_file.sh path/to/file_or_directory "Lý do xóa" "Người thực hiện"
+# Make executable
+chmod +x notify.sh
+
+# Usage
+./notify.sh "Task completed" completed "All tests passing"
 ```
 
-**Ví dụ:**
+### 3. File Management Scripts
 
-```bash
-./scripts/backup_file.sh src/components/OldButton.js "Thay thế bằng NewButton" "TrungKien"
-```
+#### Backup Script (`backup_file.sh`)
+- Creates timestamped backups of files
+- Maintains directory structure
+- Logs backup operations
 
-### 📤 restore_file.sh
+#### Restore Script (`restore_file.sh`)
+- Restores files from backup directory
+- Lists available backups
+- Preserves file permissions
 
-Script phục hồi file từ backup.
+#### Cleanup Script (`cleanup_backups.sh`)
+- Removes old backup files
+- Configurable retention period
+- Safe cleanup with confirmation
 
-```bash
-# Tìm kiếm file trong backup
-./scripts/restore_file.sh find "tên file cần tìm"
+## Network Configuration
 
-# Phục hồi file từ backup
-./scripts/restore_file.sh path/to/backup_file path/to/destination_file
-```
+### SOCKS5 Proxy Setup
+The Telegram notifier is pre-configured with SOCKS5 proxy settings:
 
-**Ví dụ:**
+- **Automatic Detection**: Tests proxy connection on startup
+- **Graceful Fallback**: Switches to direct connection if proxy fails
+- **Error Handling**: Comprehensive error messages and recovery
+- **Security**: Credentials are embedded but can be externalized
 
-```bash
-# Tìm tất cả file button trong backup
-./scripts/restore_file.sh find "Button"
+### Troubleshooting
 
-# Phục hồi file
-./scripts/restore_file.sh _backups/2024-05-10/src/components/Button.js src/components/Button.js
-```
+1. **Proxy Connection Issues**:
+   ```bash
+   # Test proxy manually
+   curl --socks5 sd08bv8p:YSA9bBs2qpamqyMl@74.222.17.92:52071 https://api.telegram.org/bot<token>/getMe
+   ```
 
-### 🧹 cleanup_backups.sh
+2. **Missing Dependencies**:
+   ```bash
+   # Install required packages
+   pip3 install --user requests urllib3
+   
+   # Optional SOCKS5 support
+   pip3 install --user PySocks
+   ```
 
-Script dọn dẹp các backup cũ.
+3. **Screenshot Issues**:
+   - macOS: Ensure screencapture is available
+   - Linux: Install gnome-screenshot
+   - Windows: PowerShell screenshot method
 
-```bash
-# Hiển thị thống kê backup
-./scripts/cleanup_backups.sh --stats
+## Security Notes
 
-# Nén backup cũ hơn 7 ngày và xóa backup cũ hơn 90 ngày
-./scripts/cleanup_backups.sh --zip-older-than 7 --delete-older-than 90
-```
+- Proxy credentials are currently hardcoded
+- Consider using environment variables for production
+- Bot token should be rotated regularly
+- Screenshots may contain sensitive information
 
-## 📂 Cấu Trúc Thư Mục Backup
+## Integration with Workflows
 
-```
-_backups/
-  ├── backup_log.md           # File log ghi lại tất cả hoạt động backup và restore
-  ├── 2024-05-10/             # Backup theo ngày
-  │   └── src/components/     # Giữ nguyên cấu trúc thư mục
-  │       └── Button.js
-  ├── 2024-05-09/
-  │   └── ...
-  └── 2024-05-01.zip          # Backup cũ đã được nén lại
-```
+These scripts are integrated into the project's workflow system:
+- Referenced in `.project-identity`
+- Documented in `.cursor/rules/telegram-notification-workflow.mdc`
+- Used by various development workflows
 
-## 📝 File Log Backup
+## Future Enhancements
 
-File log (`_backups/backup_log.md`) ghi lại tất cả hoạt động backup với định dạng:
-
-```markdown
-## 2024-05-10 - 15:30:45
-
-- File: `src/components/Button.js`
-- Backup: `_backups/2024-05-10/src/components/Button.js`
-- Lý do: Thay thế bằng component mới
-- Người thực hiện: TrungKien
-```
-
-## 💻 Tích Hợp Vào Quy Trình Làm Việc
-
-1. **Trước khi xóa file:** Sử dụng script backup_file.sh
-2. **Khi cần khôi phục file:** Sử dụng script restore_file.sh
-3. **Định kỳ dọn dẹp backup:** Sử dụng script cleanup_backups.sh
-
-## ⚠️ Lưu Ý Quan Trọng
-
-- Thư mục `_backups` đã được thêm vào `.gitignore` để không theo dõi trong Git
-- Để đánh dấu backup quan trọng, thêm từ khóa "IMPORTANT" vào log
-- Backup duy trì trong 90 ngày trước khi bị xóa tự động
-- Nếu file quá lớn, xem xét sử dụng Git LFS thay vì backup thông thường
+- [ ] Environment variable configuration
+- [ ] Multiple proxy server support
+- [ ] Encrypted credential storage
+- [ ] Custom notification templates
+- [ ] Integration with CI/CD pipelines

@@ -1,366 +1,132 @@
 {
-  "projectName": "Tên dự án",
-  "projectType": "android|ios|flutter|react-native|web",
-  "mainLanguages": [
-    "các ngôn ngữ chính"
-  ],
-  "mainFrameworks": [
-    "các framework chính"
-  ],
-  "keyTechnologies": [
-    "các công nghệ chính"
-  ],
-  "keyFeatures": [
-    "các tính năng chính"
-  ],
-  "setupInstructions": {
-    "path": "instructions/setup/project-setup.md",
-    "workflow": [
-      "MANDATORY: Brainstorm Workflow (3-Phase Process)",
-      "Cấu Hình Project Identity",
-      "Auto-Setup Project Detection",
-      "Tạo Project Structure",
-      "Platform-Specific Setup",
-      "Development Workflow Setup",
-      "Testing và Validation",
-      "Documentation và Finalization"
-    ],
-    "mandatoryBrainstormWorkflow": {
-      "description": "BẮT BUỘC thực hiện brainstorm workflow trước khi khởi tạo bất kỳ dự án mới nào",
-      "workflowFile": ".cursor/rules/brainstorm-workflow.mdc",
-      "detailedWorkflowFile": ".cursor/rules/brainstorm-detailed-workflow.mdc",
-      "enforcementRules": [
-        "NGHIÊM CẤM bắt đầu planning khi chưa hoàn thành brainstorm",
-        "BẮT BUỘC tạo file Brainstorm_[TenDuAn].md trước khi tiếp tục",
-        "BẮT BUỘC hoàn thành tất cả 3 phases: Foundation → Structure → Advanced",
-        "BẮT BUỘC xác nhận với người dùng trước khi chuyển sang planning"
+  "projectName": "Base AI Project",
+  "projectType": "template|android|ios|flutter|react-native|web|desktop",
+  "projectStage": "setup|brainstorm|development|production",
+  "mainLanguages": [],
+  "mainFrameworks": [],
+  "keyTechnologies": [],
+  "keyFeatures": [],
+  "projectLifecycle": {
+    "stage1_brainstorm": {
+      "description": "Giai đoạn brainstorm và lên ý tưởng",
+      "workflowRules": [
+        ".cursor/rules/brainstorm-workflow.mdc",
+        ".cursor/rules/brainstorm-detailed-workflow.mdc"
       ],
-      "triggerConditions": [
-        "Người dùng có ý tưởng mới",
-        "Khởi động dự án trống",
-        "Không tồn tại file Brainstorm_[TenDuAn].md",
-        "Yêu cầu tạo dự án mới từ đầu"
-      ]
+      "requiredOutputs": [
+        "Brainstorm_[ProjectName].md",
+        "Updated .project-identity with basic info"
+      ],
+      "nextStage": "stage2_setup"
     },
-    "supportedPlatforms": [
-      "Android (Java/Kotlin)",
-      "iOS (Swift/Objective-C)",
-      "Flutter (Dart)",
-      "React Native (JavaScript/TypeScript)",
-      "Web (JavaScript/TypeScript)"
-    ],
-    "requiredTools": [
-      "Python >= 3.9 (cho MCP server)",
-      "Cursor IDE với MCP support",
-      "Git",
-      "Platform-specific SDK"
-    ],
-    "mcpServerPort": 3001
-  },
-  "workflows": {
-    "base": {
-      "description": "Base workflow cho tất cả dự án mới - BẮT BUỘC bắt đầu với Brainstorm Workflow",
-      "workflow": [
-        "PHASE 1: MANDATORY Brainstorm Workflow (3-Phase Process)",
-        "PHASE 2: Cấu Hình Project Identity",
-        "PHASE 3: Auto-Setup Project Detection",
-        "PHASE 4: Tạo Project Structure",
-        "PHASE 5: Platform-Specific Setup",
-        "PHASE 6: Development Workflow Setup",
-        "PHASE 7: Testing và Validation",
-        "PHASE 8: Documentation và Finalization"
+    "stage2_setup": {
+      "description": "Giai đoạn setup dự án và cấu trúc",
+      "workflowRules": [
+        ".cursor/rules/project-creation-workflow.mdc",
+        ".cursor/rules/planning-workflow.mdc"
       ],
-      "mandatoryFirstStep": {
-        "name": "Brainstorm Workflow",
-        "description": "BẮT BUỘC thực hiện trước khi tiếp tục bất kỳ bước nào khác",
-        "workflowFiles": [
-          ".cursor/rules/brainstorm-workflow.mdc",
-          ".cursor/rules/brainstorm-detailed-workflow.mdc"
+      "requiredOutputs": [
+        "Project structure created",
+        "Technical stack selected",
+        "Development environment ready"
+      ],
+      "nextStage": "stage3_development"
+    },
+    "stage3_development": {
+      "description": "Giai đoạn phát triển chính",
+      "workflowRules": "Based on projectType",
+      "platformSpecificRules": {
+        "android": [
+          ".cursor/rules/android-workflow.mdc",
+          ".cursor/rules/android-code-deduplication.mdc",
+          ".cursor/rules/tdd-mobile-workflow.mdc"
         ],
-        "completionCriteria": [
-          "File Brainstorm_[TenDuAn].md được tạo",
-          "Hoàn thành 3 phases: Foundation → Structure → Advanced",
-          "Người dùng xác nhận thông tin brainstorm",
-          "Risk assessment được thực hiện"
+        "ios": [
+          ".cursor/rules/ios-workflow.mdc",
+          ".cursor/rules/tdd-mobile-workflow.mdc"
         ],
-        "blockingRules": [
-          "Không được chuyển sang PHASE 2 khi chưa hoàn thành brainstorm",
-          "Không được tạo planning khi chưa có file Brainstorm_[TenDuAn].md",
-          "Không được bắt đầu development khi brainstorm chưa được xác nhận"
+        "flutter": [
+          ".cursor/rules/mobile-utility-workflow.mdc",
+          ".cursor/rules/tdd-mobile-workflow.mdc"
+        ],
+        "web": [
+          ".cursor/rules/frontend-rules.mdc",
+          ".cursor/rules/backend-rules-optimized.mdc"
         ]
       }
-    },
-    "android": {
-      "relatedWorkflows": [
-        ".cursor/rules/android-workflow.mdc",
-        ".cursor/rules/tdd-mobile-workflow.mdc",
-        ".cursor/rules/android-aso-package-workflow.mdc"
-      ],
-      "description": "Android development workflow với Blueprint-First approach",
-      "architecture": "MVVM + Clean Architecture với 3 lớp (UI, Domain, Data)",
-      "techStack": {
-        "language": "Kotlin",
-        "ui": "Jetpack Compose",
-        "di": "Hilt",
-        "database": "Room + SQLite",
-        "networking": "Retrofit + OkHttp",
-        "serialization": "kotlinx-serialization-json",
-        "imageLoading": "Coil",
-        "logging": "Timber",
-        "async": "Coroutines"
-      },
-      "structure": {
-        "base": "Base classes (Activity, Fragment, ViewModel, Adapter, View)",
-        "core": "Core modules (DI, Network, Storage, Analytics, Utils)",
-        "data": "Data layer (Repository, DataSource, Model, Mapper)",
-        "domain": "Domain layer (UseCase, Model, Repository interfaces)",
-        "ui": "UI layer (Components, Features)"
-      },
-      "principles": [
-        "Blueprint-First Development",
-        "Module Registry để tránh trùng lặp",
-        "Unidirectional Data Flow",
-        "Code deduplication qua base classes",
-        "Feature package structure"
-      ],
-      "featureBlueprintTemplate": "blueprint/features/[feature-name]-blueprint.md",
-      "buildOptimization": {
-        "minifyEnabled": true,
-        "shrinkResources": true,
-        "proguardFiles": true,
-        "abiFilters": [
-          "armeabi-v7a",
-          "arm64-v8a"
-        ],
-        "enableAppBundle": true,
-        "languageSplit": true
-      }
-    },
-    "ios": {
-      "relatedWorkflows": [
-        ".cursor/rules/ios-workflow.mdc",
-        ".cursor/rules/tdd-mobile-workflow.mdc"
-      ],
-      "description": "iOS development workflow với Blueprint-First approach",
-      "architecture": "MVVM + Clean Architecture với 3 lớp (Presentation, Domain, Data)",
-      "techStack": {
-        "language": "Swift",
-        "ui": "SwiftUI",
-        "async": "Combine",
-        "di": "Swinject hoặc Factory",
-        "networking": "Alamofire",
-        "serialization": "Codable (built-in) + AnyCodable",
-        "database": "Core Data hoặc SQLite.swift",
-        "imageLoading": "Nuke",
-        "logging": "swift-log",
-        "keychain": "keychain-swift",
-        "animations": "Lottie (optional)"
-      },
-      "structure": {
-        "presentation": "SwiftUI Views + ViewModels",
-        "domain": "Use Cases + Models + Repository Protocols",
-        "data": "Repository Implementations + Data Sources",
-        "base": "Base classes (BaseViewModel, BaseUseCase, BaseRepository)",
-        "core": "Core services và utilities"
-      },
-      "principles": [
-        "Blueprint-First Development",
-        "Module Registry để tránh trùng lặp",
-        "Unidirectional Data Flow",
-        "@MainActor cho UI updates",
-        "Error handling với Result pattern"
-      ],
-      "buildOptimization": {
-        "enableBitcode": true,
-        "swiftCompilationMode": "wholemodule",
-        "swiftOptimizationLevel": "-O",
-        "gccOptimizationLevel": "s",
-        "enableOnDemandResources": true,
-        "stripInstalledProduct": true,
-        "compressPngFiles": true,
-        "assetOptimization": "SF Symbols + Asset Catalog + App Thinning"
-      }
-    },
-    "flutter": {
-      "description": "Flutter development workflow (cross-platform mobile)",
-      "note": "Flutter workflow được tích hợp trong mobile-utility-workflow và TDD mobile workflow",
-      "relatedWorkflows": [
-        ".cursor/rules/mobile-utility-workflow.mdc",
-        ".cursor/rules/tdd-mobile-workflow.mdc"
-      ],
-      "architecture": "Clean Architecture + BLoC pattern",
-      "techStack": {
-        "language": "Dart",
-        "ui": "Flutter Widgets",
-        "stateManagement": "BLoC/Cubit hoặc Riverpod",
-        "di": "get_it + injectable",
-        "networking": "dio + retrofit",
-        "serialization": "json_annotation + json_serializable",
-        "database": "floor (SQLite) hoặc drift",
-        "imageLoading": "cached_network_image",
-        "routing": "go_router",
-        "testing": "flutter_test + mockito"
-      },
-      "crossPlatformConsiderations": {
-        "sharedBackend": "Firebase/Supabase",
-        "aiApis": "Same cloud endpoints for all platforms",
-        "designSystem": "Material Design 3 + Cupertino (iOS-style)",
-        "analytics": "Unified Firebase events",
-        "remoteConfig": "Firebase config for feature flags"
-      }
-    },
-    "mobileUtility": {
-      "path": ".cursor/rules/mobile-utility-workflow.mdc",
-      "description": "Mobile utility app workflow (Android-first, iOS-compatible)",
-      "supportedCategories": [
-        "Health & Fitness Apps",
-        "Photo Editing Apps",
-        "Office Utility Apps"
-      ],
-      "principles": [
-        "Android-first development, iOS-compatible architecture",
-        "Revenue-optimized design từ planning phase",
-        "TDD approach với comprehensive coverage",
-        "AI integration tự động",
-        "Smart API usage với caching và batching",
-        "Manual control ad strategies via Firebase Remote Config",
-        "Regional ad strategy support",
-        "Full automation workflow"
-      ],
-      "reusableInstructions": {
-        "location": "instructions/reusable/",
-        "categories": [
-          "Feature Instructions",
-          "Architecture Instructions",
-          "UI/UX Instructions",
-          "Performance Instructions",
-          "Testing Instructions"
-        ]
-      },
-      "revenueOptimization": {
-        "phase1": "Strategic Foundation (Auto + 5 Questions)",
-        "phase2": "Complete App Development (Pre-Revenue Integration)",
-        "phase3": "Smart Revenue Integration (Post-Complete App)",
-        "adStrategies": "Firebase Remote Config với regional overrides"
-      }
-    },
-    "tddMobile": {
-      "path": ".cursor/rules/tdd-mobile-workflow.mdc",
-      "description": "Test-Driven Development workflow cho mobile apps",
-      "coverage": {
-        "unitTests": "85% minimum",
-        "integrationTests": "70% minimum",
-        "uiTests": "100% critical user flows",
-        "aiTests": "100% AI integration với fallback scenarios"
-      },
-      "tddCycle": {
-        "red": "Write failing tests (Unit -> Integration -> UI -> AI-specific)",
-        "green": "Minimal implementation (Business Logic -> Data Layer -> UI Layer -> AI Features)",
-        "refactor": "Optimize & Clean (Code Quality -> Test Quality -> Architecture)"
-      },
-      "androidTestStack": [
-        "JUnit 5",
-        "Mockito/MockK",
-        "Coroutines Test",
-        "Espresso",
-        "Compose UI Test",
-        "Room Testing",
-        "MockWebServer"
-      ],
-      "iosTestStack": [
-        "XCTest",
-        "XCUITest",
-        "Cuckoo (mocking)",
-        "Core Data Testing"
-      ],
-      "flutterTestStack": [
-        "flutter_test",
-        "mockito",
-        "integration_test",
-        "flutter_driver"
-      ]
     }
   },
-  "workflowIntegration": {
-    "description": "Tích hợp brainstorm workflow với tất cả các workflow khác trong hệ thống",
-    "globalEnforcementRules": {
-      "newProjectDetection": {
-        "triggers": [
-          "Người dùng đề cập 'ý tưởng mới'",
-          "Người dùng nói 'tạo dự án mới'",
-          "Không tồn tại file Brainstorm_[TenDuAn].md trong project",
-          "Người dùng yêu cầu 'khởi tạo từ đầu'",
-          "Project folder trống hoặc chỉ có template files"
-        ],
-        "mandatoryAction": "Redirect to Brainstorm Workflow",
-        "blockingMessage": "🚫 PHÁT HIỆN DỰ ÁN MỚI - BẮT BUỘC THỰC HIỆN BRAINSTORM TRƯỚC\n\n✅ Hãy bắt đầu với: 'Tôi muốn brainstorm ý tưởng [mô tả ngắn]'\n\n📋 Workflow sẽ thực hiện:\n1. Foundation Questions (5 câu hỏi cơ bản)\n2. Structure Analysis (features & architecture)\n3. Advanced Analysis (competitors & risks)\n\n⚠️ Không thể tiếp tục development khi chưa hoàn thành brainstorm."
-      },
-      "workflowValidation": {
-        "beforePlanning": "Check Brainstorm_[TenDuAn].md exists and complete",
-        "beforeDevelopment": "Validate brainstorm confirmation status",
-        "beforeArchitecture": "Ensure technical requirements from brainstorm",
-        "beforeImplementation": "Verify feature priorities from brainstorm"
-      }
+  "coreRules": {
+    "always_applied": [
+      ".cursor/rules/base-rules.mdc",
+      ".cursor/rules/development-rules.mdc",
+      ".cursor/rules/markdown-unified-rules.mdc",
+      ".cursor/rules/cursor-optimization-rules.mdc"
+    ],
+    "project_management": [
+      ".cursor/rules/planning-workflow.mdc",
+      ".cursor/rules/project-personality-generator.mdc",
+      ".cursor/rules/resource-management.mdc"
+    ],
+    "quality_assurance": [
+      ".cursor/rules/tdd-guidelines.mdc",
+      ".cursor/rules/review-gate-v2-setup.mdc"
+    ]
+  },
+  "integrations": {
+    "telegram_notifications": {
+      "description": "Gửi thông báo đến Telegram khi hoàn thành công việc",
+      "rule": ".cursor/rules/telegram-notification-workflow.mdc",
+      "scripts": [
+        "./scripts/notify.sh",
+        "./scripts/telegram_notifier.py"
+      ]
     },
-    "workflowFileReferences": {
-      "primary": ".cursor/rules/brainstorm-workflow.mdc",
-      "detailed": ".cursor/rules/brainstorm-detailed-workflow.mdc",
-      "validation": ".cursor/rules/planning-validation-rules.mdc",
-      "enforcement": ".cursor/rules/development-control-rules.mdc",
-      "planning": ".cursor/rules/planning-workflow.mdc"
+    "ai_apis": {
+      "rule": ".cursor/rules/api-integration-rules.mdc"
     },
-    "integrationWithExistingWorkflows": {
-      "android": {
-        "modification": "Android workflow MUST start with brainstorm validation",
-        "requirement": "Blueprint-First approach requires brainstorm foundation"
-      },
-      "ios": {
-        "modification": "iOS workflow MUST start with brainstorm validation",
-        "requirement": "Architecture decisions require brainstorm insights"
-      },
-      "flutter": {
-        "modification": "Flutter workflow MUST start with brainstorm validation",
-        "requirement": "Cross-platform strategy requires brainstorm analysis"
-      },
-      "mobileUtility": {
-        "modification": "Mobile utility workflow already includes 5 strategic questions",
-        "requirement": "Revenue optimization requires brainstorm foundation"
-      },
-      "tddMobile": {
-        "modification": "TDD workflow MUST validate brainstorm before test creation",
-        "requirement": "Test scenarios require brainstorm user stories"
-      }
+    "mcp_tools": {
+      "review_gate": true,
+      "browser_debug": true
     }
   },
   "projectStructure": {
-    "instructions": "Setup và usage instructions",
-    "scripts": "Automation scripts",
-    "assets": "Static assets và resources",
-    "design": "Design files cho analysis",
-    "templates": "Project templates"
+    "instructions/": "Project documentation và workflows",
+    "scripts/": "Automation scripts",
+    "assets/": "Static resources",
+    "design/": "Design files for analysis",
+    ".cursor/rules/": "Development rules và workflows",
+    "_backups/": "File backups (git-ignored)"
   },
   "projectIdentifiers": [
-    "instructions/setup/project-setup.md",
     ".project-identity",
-    ".project-personality"
+    ".project-personality",
+    "Instruction.md",
+    "Brainstorm_*.md"
   ],
-  "projectPaths": {
-    "core": "./tools/appdexer",
-    "scripts": "./scripts",
-    "assets": "./assets",
-    "instructions": "./instructions",
-    "templates": "./templates"
+  "workflowEnforcement": {
+    "newProjectDetection": {
+      "triggers": [
+        "Empty project folder",
+        "No Brainstorm_*.md files exist",
+        "User mentions 'ý tưởng mới' or 'dự án mới'"
+      ],
+      "mandatoryFirstStep": "stage1_brainstorm",
+      "blockingMessage": "🚫 DỰ ÁN MỚI PHÁT HIỆN - BẮT BUỘC BRAINSTORM TRƯỚC\n✅ Hãy bắt đầu: 'Tôi muốn brainstorm ý tưởng...'"
+    },
+    "stageProgression": {
+      "cannot_skip_stages": true,
+      "require_completion_confirmation": true,
+      "auto_update_project_stage": true
+    }
   },
   "features": {
-    "aiContextAnalysis": true,
-    "voiceCommands": true,
-    "resourceManagement": true,
-    "designAnalysis": true,
-    "autoProjectDetection": true,
-    "mcpIntegration": true
-  },
-  "dependencies": {
-    "python": ">=3.9.0",
-    "cursor": "with MCP support"
+    "ai_context_analysis": true,
+    "voice_commands": true,
+    "resource_management": true,
+    "design_analysis": true,
+    "auto_project_detection": true,
+    "mcp_integration": true,
+    "telegram_notifications": true
   }
 }
