@@ -1,154 +1,234 @@
-# Project Requirements Document (PRD)
+# PRD: [Project Name]
 
-<!-- Template cho tài liệu PRD (Project Requirements Document) -->
+<!-- Enhanced PRD Template - Integrated with Brainstorm Workflow -->
 
-## 1. Tổng Quan Ứng Dụng
+## 📋 Document Metadata
+- **Based on**: `Brainstorm_[ProjectName].md`
+- **Created**: [Date]
+- **Last Updated**: [Date]
+- **Status**: [Draft/Review/Approved]
+- **Project Stage**: [brainstorm/setup/development]
+- **Approval**: [ ] Technical Lead [ ] Product Owner [ ] Stakeholder
 
-### 1.1 Mục Đích
+## ✅ Pre-PRD Validation Checklist
+- [ ] `Brainstorm_[ProjectName].md` completed (all 3 phases)
+- [ ] Phase 1: Foundation completed ✅
+- [ ] Phase 2: Structure completed ✅
+- [ ] Phase 3: Advanced Analysis completed ✅
+- [ ] Problem statement is clear and validated
+- [ ] Target audience identified with personas
+- [ ] Feature priority matrix defined (Must/Should/Could/Won't)
+- [ ] Competitor analysis completed (min 3 competitors)
+- [ ] Risk assessment completed
+- [ ] User confirmation obtained
 
-<!-- Mô tả ngắn gọn mục đích chính của ứng dụng trong 1-2 câu -->
+## 🎯 Executive Summary (from Brainstorm)
 
-### 1.2 Mô Tả
+### Problem Statement
+<!-- Copy từ Brainstorm Phase 1 - Foundation -->
+<!-- Mô tả vấn đề cốt lõi mà sản phẩm giải quyết -->
 
-<!-- Mô tả chi tiết hơn về ứng dụng, giải quyết vấn đề gì, đối tượng người dùng là ai -->
+### Solution Overview
+<!-- Copy từ Brainstorm Phase 2 - Structure -->
+<!-- Tóm tắt giải pháp và value proposition -->
 
-### 1.3 Định Vị Thị Trường
+### Target Audience
+<!-- Copy từ Brainstorm Phase 1 - Foundation -->
+<!-- Đối tượng người dùng chính và personas -->
 
-<!-- Ứng dụng này khác biệt gì so với các giải pháp hiện có -->
+### Market Analysis
+<!-- Copy từ Brainstorm Phase 3 - Advanced Analysis -->
+<!-- Phân tích thị trường và đối thủ cạnh tranh -->
 
-## 2. User Flows Chính
+## 🎯 Core Features & Priority Matrix
 
-### 2.1 Flow 1: [Tên Flow]
+### Feature Priority (from Brainstorm Phase 2)
+<!-- Copy từ Brainstorm Phase 2 - Structure -->
 
-<!-- Mô tả từng bước trong flow này, sử dụng ngôn ngữ đơn giản -->
+#### Must-Have (MVP)
+- [ ] Feature 1: [Description]
+- [ ] Feature 2: [Description]
+- [ ] Feature 3: [Description]
 
+#### Should-Have (Enhanced)
+- [ ] Feature 4: [Description]
+- [ ] Feature 5: [Description]
+
+#### Could-Have (Advanced)
+- [ ] Feature 6: [Description]
+- [ ] Feature 7: [Description]
+
+#### Won't-Have (Out of Scope)
+- Feature X: [Reason for exclusion]
+- Feature Y: [Reason for exclusion]
+
+## 🔄 User Flows & Journey Mapping
+
+### Primary User Journey
+<!-- Based on Brainstorm Phase 2 workflow analysis -->
+
+1. **Entry Point**: Người dùng...
+2. **Core Action**: Hệ thống...
+3. **Value Delivery**: Người dùng...
+4. **Retention**: Hệ thống...
+
+### Secondary Flows
+
+#### Flow 1: [Tên Flow]
 1. Người dùng...
 2. Hệ thống...
 3. Người dùng...
 
-### 2.2 Flow 2: [Tên Flow]
-
-<!-- Mô tả từng bước trong flow này, sử dụng ngôn ngữ đơn giản -->
-
+#### Flow 2: [Tên Flow]
 1. Người dùng...
 2. Hệ thống...
 3. Người dùng...
 
-<!-- Thêm các flow khác nếu cần -->
+## 🏗️ Technical Architecture
 
-## 3. Tech Stack & APIs
+### Recommended Tech Stack (from Brainstorm Analysis)
+<!-- Based on Brainstorm Phase 3 technical requirements -->
 
-### 3.1 Frontend
+#### Frontend
+- **Framework**: [Recommended based on project type]
+- **State Management**: [Redux/Zustand/Context API]
+- **UI Library**: [Material-UI/Tailwind/Styled Components]
+- **Testing**: [Jest/React Testing Library]
+- **Build Tool**: [Vite/Webpack/Next.js]
 
-<!-- Liệt kê công nghệ frontend dự kiến sử dụng -->
+#### Backend
+- **Runtime**: [Node.js/Python/Go]
+- **Framework**: [Express/FastAPI/Gin]
+- **Database**: [PostgreSQL/MongoDB/Firebase]
+- **Authentication**: [Auth0/Firebase Auth/Custom JWT]
+- **Hosting**: [Vercel/AWS/Google Cloud]
 
-- Framework:
-- State Management:
-- UI Library:
-- Other:
+#### Mobile (if applicable)
+- **Platform Strategy**: [Native/Cross-platform]
+- **Framework**: [React Native/Flutter/Native]
+- **State Management**: [Redux Toolkit/Riverpod]
+- **Backend Integration**: [REST API/GraphQL]
 
-### 3.2 Backend
+### System Architecture
+<!-- High-level architecture diagram description -->
 
-<!-- Liệt kê công nghệ backend dự kiến sử dụng -->
+```
+[Client] ↔ [API Gateway] ↔ [Backend Services] ↔ [Database]
+                ↓
+        [External Integrations]
+```
 
-- Framework:
-- Database:
-- Authentication:
-- Other:
+### Integration Requirements
+<!-- Based on Brainstorm Phase 3 analysis -->
+- **External APIs**: [List required integrations]
+- **Third-party Services**: [Payment/Analytics/Notifications]
+- **Data Sources**: [Internal/External data requirements]
 
-### 3.3 External APIs
+## 📱 Mobile-Specific Requirements (if applicable)
 
-<!-- Liệt kê các API bên ngoài sẽ tích hợp -->
+### Platform Strategy
+- [ ] iOS Native (Swift)
+- [ ] Android Native (Kotlin)
+- [ ] Cross-platform (Flutter/React Native)
+- [ ] Progressive Web App (PWA)
 
-- [Tên API 1]: [Mục đích sử dụng]
-- [Tên API 2]: [Mục đích sử dụng]
+### Monetization Strategy
+<!-- Based on Brainstorm Phase 3 business analysis -->
+- [ ] Freemium Model
+- [ ] Subscription (Monthly/Yearly)
+- [ ] Ad-supported
+- [ ] One-time Purchase
+- [ ] In-app Purchases
 
-## 4. Tính Năng Cốt Lõi
+### Regional Considerations
+- **Target Markets**: [List primary markets]
+- **Localization**: [Languages to support]
+- **Compliance**: [GDPR/CCPA/Regional requirements]
+- **App Store Optimization**: [ASO strategy]
 
-### 4.1 [Tên Tính Năng 1]
+## 📊 Success Metrics & KPIs
 
-<!-- Mô tả chi tiết về tính năng -->
+### Business Metrics
+- **Primary KPI**: [Main success metric]
+- **User Acquisition**: [Target user growth]
+- **Retention**: [D1/D7/D30 retention targets]
+- **Revenue**: [Monetization targets]
+- **Engagement**: [Usage frequency/session duration]
 
-- **Mô tả**:
-- **Người dùng**:
-- **Yêu cầu chức năng**:
-  - Yêu cầu 1
-  - Yêu cầu 2
-- **Ràng buộc**:
-  - Ràng buộc 1
-  - Ràng buộc 2
+### Technical Metrics
+- **Performance**: [Load time < 2s, 99.9% uptime]
+- **Scalability**: [Concurrent users capacity]
+- **Security**: [Security audit compliance]
+- **Quality**: [Bug rate < 1%, crash rate < 0.1%]
 
-### 4.2 [Tên Tính Năng 2]
+## ⚠️ Risk Management
 
-<!-- Mô tả chi tiết về tính năng -->
+### Identified Risks (from Brainstorm Phase 3)
+<!-- Copy từ brainstorm risk assessment -->
 
-- **Mô tả**:
-- **Người dùng**:
-- **Yêu cầu chức năng**:
-  - Yêu cầu 1
-  - Yêu cầu 2
-- **Ràng buộc**:
-  - Ràng buộc 1
-  - Ràng buộc 2
+#### Technical Risks
+- **Risk 1**: [Description]
+  - **Impact**: [High/Medium/Low]
+  - **Probability**: [High/Medium/Low]
+  - **Mitigation**: [Strategy]
 
-<!-- Thêm các tính năng khác nếu cần -->
+#### Business Risks
+- **Risk 2**: [Description]
+  - **Impact**: [High/Medium/Low]
+  - **Probability**: [High/Medium/Low]
+  - **Mitigation**: [Strategy]
 
-## 5. Phạm Vi Dự Án
+#### Market Risks
+- **Risk 3**: [Description]
+  - **Impact**: [High/Medium/Low]
+  - **Probability**: [High/Medium/Low]
+  - **Mitigation**: [Strategy]
 
-### 5.1 Trong Phạm Vi (In-Scope)
+### Contingency Plans
+- **Plan A**: [Primary approach]
+- **Plan B**: [Fallback option]
+- **Plan C**: [Emergency option]
 
-<!-- Liệt kê các tính năng, chức năng nằm trong phạm vi dự án hiện tại -->
+## 🚀 Development Phases
 
-- Tính năng 1
-- Tính năng 2
-- Tính năng 3
+### Phase 1: MVP Development (Must-Have Features)
+- **Duration**: [Timeline]
+- **Features**: [List from Must-Have section]
+- **Success Criteria**: [Specific metrics]
+- **Deliverables**: [Working MVP]
 
-### 5.2 Ngoài Phạm Vi (Out-of-Scope)
+### Phase 2: Enhanced Features (Should-Have)
+- **Duration**: [Timeline]
+- **Features**: [List from Should-Have section]
+- **Success Criteria**: [Specific metrics]
+- **Deliverables**: [Enhanced product]
 
-<!-- Liệt kê rõ ràng các tính năng, chức năng KHÔNG nằm trong phạm vi dự án hiện tại -->
+### Phase 3: Advanced Features (Could-Have)
+- **Duration**: [Timeline]
+- **Features**: [List from Could-Have section]
+- **Success Criteria**: [Specific metrics]
+- **Deliverables**: [Production-ready product]
 
-- Tính năng A
-- Tính năng B
-- Tính năng C
+## 🔄 Review & Approval Process
 
-## 6. Các Ràng Buộc & Yêu Cầu Phi Chức Năng
+### Review Gate V2 Sessions
+- [ ] **Technical Review**: Architecture & feasibility
+- [ ] **Business Review**: Market fit & monetization
+- [ ] **UX Review**: User experience & flows
+- [ ] **Stakeholder Review**: Strategic alignment
+- [ ] **Final Approval**: Go/No-go decision
 
-### 6.1 Hiệu Suất
+### Approval Signatures
+- **Technical Lead**: _________________ Date: _______
+- **Product Owner**: _________________ Date: _______
+- **Business Stakeholder**: __________ Date: _______
 
-<!-- Mô tả các yêu cầu về hiệu suất -->
+## 📚 Reference Documents
+- **Brainstorm File**: `Brainstorm_[ProjectName].md`
+- **App Flow Document**: `AppFlow_[ProjectName].md`
+- **Technical Specification**: `TechSpec_[ProjectName].md`
+- **Project Identity**: `.project-identity`
 
-- Thời gian phản hồi
-- Khả năng mở rộng
-- Số lượng người dùng đồng thời
+---
 
-### 6.2 Bảo Mật
-
-<!-- Mô tả các yêu cầu về bảo mật -->
-
-- Xác thực
-- Phân quyền
-- Bảo vệ dữ liệu
-
-### 6.3 Trải Nghiệm Người Dùng
-
-<!-- Mô tả các yêu cầu về UX -->
-
-- Dễ sử dụng
-- Khả năng tiếp cận
-- Responsive design
-
-## 7. Định Nghĩa Thành Công
-
-<!-- Mô tả các tiêu chí để đánh giá sự thành công của dự án -->
-
-- Tiêu chí 1
-- Tiêu chí 2
-- Tiêu chí 3
-
-## 8. Lịch Trình Dự Kiến
-
-<!-- Cung cấp lịch trình dự kiến cho việc phát triển -->
-
-- Milestone 1: [Ngày] - [Mô tả]
-- Milestone 2: [Ngày] - [Mô tả]
-- Milestone 3: [Ngày] - [Mô tả]
+**Note**: This PRD is a living document and should be updated as the project evolves. All changes must be reviewed and approved by the designated stakeholders.

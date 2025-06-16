@@ -4,6 +4,16 @@
 
 **Appdexer Base AI Project** là một framework phát triển thông minh được tối ưu cho **Cursor IDE** với **Review Gate V2**. Dự án này giúp bạn tăng hiệu quả làm việc với AI lên **5x** thông qua việc tối đa hóa giá trị từ mỗi request và tạo ra các workflow tự động hóa thông minh.
 
+## ⚠️⚠️⚠️ Cảnh Báo
+
+- Các thư mục chính là .cursor, .github, .appdexer, .trae và tools, scripts sẽ được cập nhật thường xuyên, chỉ cần copy đè lên là xong.
+
+## Extension bổ sung
+
+https://marketplace.cursorapi.com/items?itemName=iganbold.yoyo-ai-versioning
+
+- Quản lý version local, hỗ trợ thêm khi code bằng AI
+
 ## Nguyên tắc
 
 - Fix các bug nhỏ, code giao diện -> TRAE
