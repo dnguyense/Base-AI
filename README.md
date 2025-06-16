@@ -1,11 +1,12 @@
 ﻿# Appdexer Base AI Project - Intelligent Development Framework 🤖
 
 ## Ví dụ:
+`Tôi muốn kiểm tra quy trình của bạn, giả sử tôi có ý tưởng làm ứng dụng học tập, thì các bước của bạn sẽ làm gì?`
+`Tôi có ý tưởng làm ứng dụng thời tiết AI hãy brainstorm`
+`Từ project hiện tại tôi muốn nâng cấp tính năng AI hãy rà soát và lên kế hoạch`
+`Phân tích các thiết kế trong design/ theo quy trình design-to-prompt`
 
-- Tôi có ý tưởng làm ứng dụng thời tiết AI hãy brainstorm
-- Từ project hiện tại tôi muốn nâng cấp tính năng AI hãy rà soát và lên kế hoạch
-- Phân tích các thiết kế trong design/ theo quy trình design-to-prompt
-- Tạo các file instruction cho từng module
+### Tạo các file instruction cho từng module
 
 ```bash
 README.md Từ kịch bản này hãy thiết kế instruction cho từng phần của ứng dụng, bạn có thể tạo instruction cho các module, mỗi phần sẽ có 1 file instruction .md riêng sau đó được liên kết từ Instruction.md chính. Instruction.md sẽ là outline, để 1 AI sẽ thực hiện lần lượt các phần sao cho thành 1 sản phẩm hoàn chỉnh. Theo logic là mỗi lần thực hiện 1 nhiệm vụ nào đó thì AI sẽ đọc file Instruction.md và truy cập vào các instruction con theo từng nhiệm vụ cụ thể. Các instruction cần chia nhỏ ra từng phần và liên kết với nhau thông qua Instruction.md
