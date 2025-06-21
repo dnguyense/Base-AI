@@ -59,6 +59,7 @@
   "coreRules": {
     "always_applied": [
       ".cursor/rules/base-rules.mdc",
+      ".cursor/rules/context7-auto-workflow.mdc",
       ".cursor/rules/development-rules.mdc",
       ".cursor/rules/markdown-unified-rules.mdc",
       ".cursor/rules/cursor-optimization-rules.mdc"

@@ -36,6 +36,13 @@ Thư mục này chứa các hướng dẫn và tài liệu **cụ thể cho từ
 - Hướng dẫn deployment cụ thể
 - Requirements và specifications
 
+## Workflows
+
+### Base Workflows
+- [Base Workflows](workflows/base-workflows.md) - Quy trình cơ bản cho tất cả dự án
+- [Context7 Auto-Check](workflows/context7-implementation-guide.md) - Tự động kiểm tra context dự án
+- [Context7 Demo Example](workflows/context7-demo-example.md) - Ví dụ thực tế về auto context check
+
 ## Lợi ích của cấu trúc mới
 
 1. **Đồng bộ hóa**: Tất cả workflows chung đều ở một nơi

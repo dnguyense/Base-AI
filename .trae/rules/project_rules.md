@@ -50,6 +50,7 @@
 ### Advanced Features
 - **[Memory Bank Workflow](../../.cursor/rules/memory-bank-workflow.mdc)** - Quản lý bộ nhớ
 - **[Experience System Workflow](../../.cursor/rules/experience-system-workflow.mdc)** - Hệ thống kinh nghiệm
+- **[Context7 Auto Workflow](../../.cursor/rules/context7-auto-workflow.mdc)** - Tự động kiểm tra context dự án
 - **[Review Gate V2](../../.cursor/rules/ReviewGateV2.mdc)** - Cổng review code
 - **[Four Role Development](../../.cursor/rules/four-role-development.mdc)** - Phát triển 4 vai trò
 

@@ -24,6 +24,28 @@
 README.md Từ kịch bản này hãy thiết kế instruction cho từng phần của ứng dụng, bạn có thể tạo instruction cho các module, mỗi phần sẽ có 1 file instruction .md riêng sau đó được liên kết từ Instruction.md chính. Instruction.md sẽ là outline, để 1 AI sẽ thực hiện lần lượt các phần sao cho thành 1 sản phẩm hoàn chỉnh. Theo logic là mỗi lần thực hiện 1 nhiệm vụ nào đó thì AI sẽ đọc file Instruction.md và truy cập vào các instruction con theo từng nhiệm vụ cụ thể. Các instruction cần chia nhỏ ra từng phần và liên kết với nhau thông qua Instruction.md
 ```
 
+### 🤖 Context7 Auto-Check Workflow
+
+**Tự động kiểm tra context dự án mà không cần yêu cầu cụ thể**
+
+```bash
+# Workflow sẽ tự động:
+# 1. Scan tech stack từ package files
+# 2. Query Context7 MCP cho latest docs & best practices  
+# 3. Cache context cho session hiện tại
+# 4. Apply context-aware suggestions
+# 5. Update project knowledge base
+
+# Ví dụ sử dụng:
+"Tôi muốn thêm authentication cho app React này"
+# → Auto detect React version & related libraries
+# → Query Context7 cho React auth patterns
+# → Suggest best practices cho current stack
+# → Provide up-to-date implementation guide
+```
+
+**Xem chi tiết**: [Context7 Implementation Guide](instructions/workflows/context7-implementation-guide.md)
+
 ## ⚠️⚠️⚠️ Cảnh Báo
 
 - Các thư mục chính là .cursor, .github, .appdexer, .trae và tools, scripts sẽ được cập nhật thường xuyên, chỉ cần copy đè lên là xong.
