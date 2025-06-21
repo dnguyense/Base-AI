@@ -6,22 +6,6 @@
   "mainFrameworks": [],
   "keyTechnologies": [],
   "keyFeatures": [],
-  "iDERules": [
-    "🎯 Stage-based Development Workflow - Phát triển theo giai đoạn có kiểm soát",
-    "🔄 Auto Project Detection - Tự động phát hiện loại và giai đoạn dự án",
-    "📋 Blueprint-First Development - Thiết kế trước, code sau",
-    "🛡️ File Protection & Backup System - Bảo vệ và sao lưu file tự động",
-    "🧠 Context7 Integration - Tích hợp tài liệu thư viện tự động",
-    "🔍 Code Deduplication Engine - Tránh trùng lặp code thông minh",
-    "📊 TDD Mobile Workflow - Test-driven development cho mobile",
-    "🎨 Design-to-Code Analysis - Phân tích design thành code",
-    "📢 Telegram Notifications - Thông báo tiến độ qua Telegram",
-    "🔧 MCP Tools Integration - Tích hợp công cụ MCP mở rộng",
-    "📝 Auto Documentation - Tự động tạo và cập nhật tài liệu",
-    "🚦 Review Gate System - Hệ thống kiểm duyệt code tự động",
-    "🌐 i18n Ready - Sẵn sàng đa ngôn ngữ từ đầu",
-    "⚡ Performance Optimization - Tối ưu hiệu suất tự động"
-  ],
   "projectLifecycle": {
     "stage1_brainstorm": {
       "description": "Giai đoạn brainstorm và lên ý tưởng",
@@ -52,6 +36,9 @@
       "description": "Giai đoạn phát triển chính",
       "workflowRules": "Based on projectType",
       "platformSpecificRules": {
+        "base": [
+          ".cursor/rules/design-to-prompt.mdc"
+        ],
         "android": [
           ".cursor/rules/android-workflow.mdc",
           ".cursor/rules/android-code-deduplication.mdc",
