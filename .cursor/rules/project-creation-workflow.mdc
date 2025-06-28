@@ -85,6 +85,14 @@ alwaysApply: false
 - Kiểm tra xác nhận hiểu biết của bạn với người dùng
 - Sử dụng voice commands khi có thể: "Brainstorm về [topic]"
 
+## Template Selection Integration
+- ***BẮT BUỘC*** thực hiện template selection ngay sau planning phase
+- ***BẮT BUỘC*** áp dụng template-selection-workflow.mdc
+- ***BẮT BUỘC*** tạo Template_Selection.md với rationale cho mỗi template
+- ***BẮT BUỘC*** cấu hình workspace với templates đã chọn
+- ***KHUYẾN NGHỊ*** tham khảo Template-Selection-Guide.md trong docs/templates/
+- ***NGHIÊM CẤM*** bỏ qua bước template selection để "tiết kiệm thời gian"
+
 ## Nghiên Cứu Đối Thủ Cạnh Tranh (AI-Powered)
 - ***BẮT BUỘC*** Tìm kiếm và phân tích ít nhất 3 dự án tương tự trên google play
 - ***BẮT BUỘC*** tận dụng AI context analysis để:
