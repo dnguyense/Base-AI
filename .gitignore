@@ -305,3 +305,5 @@ temp/
 .vscode/
 *.sublime-project
 *.sublime-workspace
+.cursor/.DS_Store
+.DS_Store

@@ -8,6 +8,10 @@
         "PYTHONUNBUFFERED": "1",
         "REVIEW_GATE_MODE": "cursor_integration"
       }
+    },
+    "lucide-icons": {
+      "command": "npx",
+      "args": ["lucide-icons-mcp", "--stdio"]
     }
   }
 }

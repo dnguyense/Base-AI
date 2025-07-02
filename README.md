@@ -24,14 +24,67 @@
 README.md Từ kịch bản này hãy thiết kế instruction cho từng phần của ứng dụng, bạn có thể tạo instruction cho các module, mỗi phần sẽ có 1 file instruction .md riêng sau đó được liên kết từ Instruction.md chính. Instruction.md sẽ là outline, để 1 AI sẽ thực hiện lần lượt các phần sao cho thành 1 sản phẩm hoàn chỉnh. Theo logic là mỗi lần thực hiện 1 nhiệm vụ nào đó thì AI sẽ đọc file Instruction.md và truy cập vào các instruction con theo từng nhiệm vụ cụ thể. Các instruction cần chia nhỏ ra từng phần và liên kết với nhau thông qua Instruction.md
 ```
 
-### 🤖 Context7 Auto-Check Workflow
+## Global Rules
+
+Cấu hình trong IDE Cursor:
+
+````# Global Rules for All Projects
+
+## Communication Style
+- Sử dụng tiếng Việt cho trò chuyện và giải thích với giọng điệu hài hước kiểu giới trẻ
+- Trả lời rõ ràng, đầy đủ nhưng không dài dòng
+- Luôn hỏi làm rõ khi yêu cầu không rõ ràng
+- Thông báo khi bạn không chắc chắn về cách giải quyết
+- Mỗi khi cần phản hồi của người dùng hãy gọi review gate chat, nếu không gọi được review gate chat thì kiểm tra nhiệm vụ trong file, nếu đã hoàn thành rồi thì cập nhật trạng thái và tiếp tục làm các công việc còn lại
+
+## Icon resource
+- Khi cần icon hãy tìm kiếm thông qua mcp lucide-icons, tùy theo dự án mà sử dụng các loại icon khác nhau
+
+## Planning
+- Luôn tạo kế hoạch cho các nhiệm vụ lớn vào file .md sau đó thực hiện theo kế hoạch và cập nhật conversion plan sau khi thực hiện xong
+
+## Language
+- Luôn kiểm tra và thêm các chuỗi dịch hoặc resource khi tạo
+- Luôn sử dụng tiếng Anh làm ngôn ngữ chính
+
+## Core Working Principles
+- Luôn phân tích kỹ trước khi chỉnh sửa code
+- Tập trung vào vấn đề chính, không lạc đề
+- Xác định rõ nguyên nhân gốc rễ (root cause) trước khi sửa lỗi
+- Chỉ thực hiện một thay đổi lớn mỗi lần và kiểm tra kỹ trước khi tiếp tục
+
+## Problem Solving
+- Ngừng ngay khi gặp vấn đề cần giải quyết
+- Không nhảy vội vào việc sửa code khi gặp lỗi
+- Luôn đưa ra 2-3 phương án khi giải quyết vấn đề phức tạp
+- Dừng và xin hướng dẫn sau 3 lần thử không thành công
+
+## Quality Standards
+- Sử dụng tiếng Anh cho tất cả code và tài liệu kỹ thuật
+- Viết code tự giải thích với tên biến/hàm rõ ràng
+- Tuân thủ các nguyên tắc SOLID
+- Implement xử lý lỗi một cách đúng đắn
+
+## Documentation
+- Ghi lại mọi quyết định quan trọng vào Decisions.md
+- Cập nhật Codebase.md mỗi khi hoàn thiện một phần
+- Đánh dấu các task đã hoàn thành trong Instruction.md
+- Kết thúc mỗi nhiệm vụ với mô tả ngắn gọn về công việc đã làm
+
+## Safety Measures
+- Không tự ý tối ưu code khi không được yêu cầu
+- Không xóa code không liên quan khi không được yêu cầu
+- Cẩn thận khi xóa file hoặc chỉnh sửa file ngoài nhiệm vụ chính
+- Tạo backup đơn giản trước những thay đổi lớn```
+
+### 🤖 Context7 Auto-Check Workflow (Trae)
 
 **Tự động kiểm tra context dự án mà không cần yêu cầu cụ thể**
 
 ```bash
 # Workflow sẽ tự động:
 # 1. Scan tech stack từ package files
-# 2. Query Context7 MCP cho latest docs & best practices  
+# 2. Query Context7 MCP cho latest docs & best practices
 # 3. Cache context cho session hiện tại
 # 4. Apply context-aware suggestions
 # 5. Update project knowledge base
@@ -42,7 +95,7 @@ README.md Từ kịch bản này hãy thiết kế instruction cho từng phần
 # → Query Context7 cho React auth patterns
 # → Suggest best practices cho current stack
 # → Provide up-to-date implementation guide
-```
+````
 
 **Xem chi tiết**: [Context7 Implementation Guide](instructions/workflows/context7-implementation-guide.md)
 
@@ -124,31 +177,6 @@ Bật MCP
 ```bash
 python ./review_gate_v2_mcp.py
 ```
-
-#### Workflow Cơ Bản của Review Gate
-
-1. **Đưa ra yêu cầu chính**: "Tạo một React component với authentication"
-2. **AI thực hiện task**: Coding, analysis, tool calls
-3. **Review Gate popup xuất hiện**: AI chờ feedback từ bạn
-4. **Bạn có thể**:
-   - Gõ text: "Thêm validation cho form"
-   - Upload hình: Screenshot của error cần fix
-   - Nói: Click mic và nói "Add dark mode support"
-   - Kết thúc: Gõ "TASK_COMPLETE" khi hài lòng
-5. **AI tiếp tục**: Thực hiện sub-request và lặp lại
-
-#### Lệnh Kết Thúc
-
-Để kết thúc review loop, gõ một trong các từ:
-
-- `TASK_COMPLETE`
-- `Done`
-- `Quit`
-- `q`
-
-#### Shortcuts Hữu Ích
-
-- `Cmd+Shift+P`: Mở popup thủ công
 
 ### 3. Initialize Your Project
 
