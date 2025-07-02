@@ -3,25 +3,25 @@
 # Cursor Base Control Manager - Bash Version
 # Script để set và check cursor base control bằng curl
 
+# Load environment variables from .env file
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/.env" ]; then
+    source "$SCRIPT_DIR/.env"
+else
+    echo "❌ Không tìm thấy file .env trong thư mục scripts!"
+    echo "💡 Vui lòng tạo file .env với các biến môi trường cần thiết."
+    exit 1
+fi
+
 echo "🚀 Bắt đầu quản lý Cursor Base Control..."
 echo "================================================"
 
-# Cookie - CẬP NHẬT COOKIE NÀY TRƯỚC KHI CHẠY
-COOKIE="IndrX2ZuSmZramJSX0NIYUZoRzRzUGZ0cENIVHpHNXk0VE0ya2ZiUkVzQU14X2Fub255bW91c1VzZXJJZCI%3D=IjVhODFmYzY3LTI2NTUtNDFhMy05NjkzLTNlMGE1MjJhNzEyYyI=; WorkosCursorSessionToken=user_01JTNDY0GQ93FFV3CWHV9V3MGC%3A%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnb29nbGUtb2F1dGgyfHVzZXJfMDFKVE5EWTBHUTkzRkZWM0NXSFY5VjNNR0MiLCJ0aW1lIjoiMTc1MTQyNDIyMSIsInJhbmRvbW5lc3MiOiJmN2ZjZWJhNS00ZmFjLTQ4ODQiLCJleHAiOjE3NTY2MDgyMjEsImlzcyI6Imh0dHBzOi8vYXV0aGVudGljYXRpb24uY3Vyc29yLnNoIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCBvZmZsaW5lX2FjY2VzcyIsImF1ZCI6Imh0dHBzOi8vY3Vyc29yLmNvbSIsInR5cGUiOiJ3ZWIifQ.DLf1_IFyUNcREUYho4ePdgcZUg0IM89bz_9r6lBNuVQ; _dd_s=aid=9d5b2ee6-6f66-41aa-9d3f-3bbc976bc0d4^&rum=1^&id=81aacc8b-dadc-441c-a375-df5e2c0ab92b^&created=1751424222410^&expire=1751426372603"
-
-# Common headers
-USER_AGENT="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:140.0) Gecko/20100101 Firefox/140.0"
-ACCEPT="*/*"
-ACCEPT_LANGUAGE="vi-VN,vi;q=0.8,en-US;q=0.5,en;q=0.3"
-ACCEPT_ENCODING="gzip, deflate, br, zstd"
-REFERER="https://cursor.com/dashboard?tab=settings"
-CONTENT_TYPE="application/json"
-ORIGIN="https://cursor.com"
-CONNECTION="keep-alive"
-SEC_FETCH_DEST="empty"
-SEC_FETCH_MODE="cors"
-SEC_FETCH_SITE="same-origin"
-TE="trailers"
+# Kiểm tra xem COOKIE có được load từ .env không
+if [ -z "$COOKIE" ]; then
+    echo "❌ Biến COOKIE không được định nghĩa trong file .env!"
+    echo "💡 Vui lòng cập nhật COOKIE trong file .env"
+    exit 1
+fi
 
 echo "📤 Bước 1: Thiết lập base control..."
 echo "------------------------------"

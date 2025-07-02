@@ -90,6 +90,7 @@ yarn-error.log
 .env
 .env.test
 .env.production
+scripts/.env
 .serverless/
 .fusebox/
 .dynamodb/
