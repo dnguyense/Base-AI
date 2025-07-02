@@ -9,14 +9,18 @@ alwaysApply: false
 - ***BẮT BUỘC*** dựa trên kết quả brainstorm để tạo planning chi tiết
 - ***BẮT BUỘC*** rà soát codebase hiện tại trước khi lên kế hoạch cho tính năng mới
 - ***BẮT BUỘC*** tạo tài liệu kế hoạch chi tiết trước khi bắt đầu code
+- ***BẮT BUỘC*** thực hiện template selection ngay sau khi hoàn thành planning
+- ***BẮT BUỘC*** tạo file Template_Selection.md với templates được chọn và loại bỏ
 - ***BẮT BUỘC*** lên kế hoạch thời gian và đánh giá độ phức tạp cho từng task
 - ***BẮT BUỘC*** xác định rõ đầu ra mong muốn và tiêu chí thành công
 - ***BẮT BUỘC*** tuân thủ quy trình 4 vai trò: Planner > Architect > Builder > Tester
 - ***BẮT BUỘC*** không bỏ qua bước Architect để "code cho nhanh"
 - ***KHUYẾN NGHỊ*** chia nhỏ các task phức tạp thành nhiều task nhỏ hơn
 - ***KHUYẾN NGHỊ*** tìm hiểu các giải pháp tương tự để có cái nhìn tổng quan
+- ***KHUYẾN NGHỊ*** bắt đầu với template tối giản và thêm dần khi cần thiết
 - ***NGHIÊM CẤM*** bắt đầu planning khi chưa có file brainstorm hoàn chỉnh
 - ***NGHIÊM CẤM*** bắt đầu code khi chưa có kế hoạch rõ ràng
+- ***NGHIÊM CẤM*** sử dụng quá nhiều template gây phức tạp không cần thiết
 
 ## Quy Trình Brainstorm
 1. **Hiểu Bối Cảnh**
@@ -83,7 +87,17 @@ alwaysApply: false
 - **Thiết Kế & Kiến Trúc**: [Mô tả cấu trúc và các thành phần chính]
 - **Công Nghệ & Thư Viện**: [Liệt kê công nghệ và thư viện sẽ sử dụng]
 
-## 4. Kế Hoạch Triển Khai
+## 4. Template Selection & Configuration
+- **Platform Analysis**: [Xác định platform chính và tech stack]
+- **Template Requirements**: [Liệt kê templates cần thiết dựa trên features]
+- **Selected Templates**:
+  - Core Templates: [Danh sách core templates bắt buộc]
+  - Platform Templates: [Templates specific cho platform]
+  - Feature Templates: [Templates cho tính năng cụ thể]
+- **Excluded Templates**: [Templates bị loại bỏ và lý do]
+- **Integration Plan**: [Kế hoạch tích hợp templates vào workspace]
+
+## 5. Kế Hoạch Triển Khai
 - **Các Bước Thực Hiện**:
   1. [Bước 1] - [Mô tả] - [Ước tính thời gian]
   2. [Bước 2] - [Mô tả] - [Ước tính thời gian]
@@ -94,7 +108,7 @@ alwaysApply: false
   - P1: [Task ưu tiên cao]
   - P2: [Task ưu tiên trung bình]
 
-## 5. Kiểm Thử & Đánh Giá
+## 6. Kiểm Thử & Đánh Giá
 - **Kế Hoạch Kiểm Thử**: [Mô tả cách kiểm thử]
 - **Tiêu Chí Thành Công**: [Xác định rõ khi nào tính năng được coi là hoàn thành]
 - **Rủi Ro & Giảm Thiểu**: [Liệt kê rủi ro tiềm ẩn và cách giảm thiểu]
