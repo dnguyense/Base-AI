@@ -1,19 +1,64 @@
 # Global Rules for All Projects
 
-### Core Development Rules
+## 🔥 HIGHEST PRIORITY RULES (Trọng số cao nhất)
 
-- **[Project Identity Enforcement](../../.cursor/rules/project-identity-enforcement.mdc)** - 🔴 BẮT BUỘC kiểm tra .project-identity trước mọi task
-- **[Base Rules](../../.cursor/rules/base-rules.mdc)** - Quy tắc cơ bản cho tất cả projects
-- **[Development Rules](../../.cursor/rules/development-rules.mdc)** - Quy tắc phát triển chung
-- **[Development Control Rules](../../.cursor/rules/development-control-rules.mdc)** - Kiểm soát quy trình phát triển
-- **[File Protection Rules](../../.cursor/rules/file-protection-rules.mdc)** - Bảo vệ và backup files
-
-## Communication Style
-
+### Communication Style
 - Sử dụng tiếng Việt cho trò chuyện và giải thích với giọng điệu hài hước kiểu giới trẻ
 - Trả lời rõ ràng, đầy đủ nhưng không dài dòng
 - Luôn hỏi làm rõ khi yêu cầu không rõ ràng
 - Thông báo khi bạn không chắc chắn về cách giải quyết
+- **🔴 BẮT BUỘC: Mỗi khi cần phản hồi của người dùng hãy gọi review gate chat, nếu không gọi được review gate chat thì kiểm tra nhiệm vụ trong file, nếu đã hoàn thành rồi thì cập nhật trạng thái và tiếp tục làm các công việc còn lại**
+
+### Icon Resource
+- **🔴 BẮT BUỘC: Khi cần icon hãy tìm kiếm thông qua mcp lucide-icons, tùy theo dự án mà sử dụng các loại icon khác nhau**
+
+### Planning
+- **🔴 BẮT BUỘC: Luôn tạo kế hoạch cho các nhiệm vụ lớn vào file .md sau đó thực hiện theo kế hoạch và cập nhật conversion plan sau khi thực hiện xong**
+
+### Language
+- **🔴 BẮT BUỘC: Luôn kiểm tra và thêm các chuỗi dịch hoặc resource khi tạo**
+- **🔴 BẮT BUỘC: Luôn sử dụng tiếng Anh làm ngôn ngữ chính**
+
+### Core Working Principles
+- **🔴 BẮT BUỘC: Luôn phân tích kỹ trước khi chỉnh sửa code**
+- **🔴 BẮT BUỘC: Tập trung vào vấn đề chính, không lạc đề**
+- **🔴 BẮT BUỘC: Xác định rõ nguyên nhân gốc rễ (root cause) trước khi sửa lỗi**
+- **🔴 BẮT BUỘC: Chỉ thực hiện một thay đổi lớn mỗi lần và kiểm tra kỹ trước khi tiếp tục**
+
+### Problem Solving
+- **🔴 BẮT BUỘC: Ngừng ngay khi gặp vấn đề cần giải quyết**
+- **🔴 BẮT BUỘC: Không nhảy vội vào việc sửa code khi gặp lỗi**
+- **🔴 BẮT BUỘC: Luôn đưa ra 2-3 phương án khi giải quyết vấn đề phức tạp**
+- **🔴 BẮT BUỘC: Dừng và xin hướng dẫn sau 3 lần thử không thành công**
+
+### Quality Standards
+- **🔴 BẮT BUỘC: Sử dụng tiếng Anh cho tất cả code và tài liệu kỹ thuật**
+- **🔴 BẮT BUỘC: Viết code tự giải thích với tên biến/hàm rõ ràng**
+- **🔴 BẮT BUỘC: Tuân thủ các nguyên tắc SOLID**
+- **🔴 BẮT BUỘC: Implement xử lý lỗi một cách đúng đắn**
+
+### Documentation
+- **🔴 BẮT BUỘC: Ghi lại mọi quyết định quan trọng vào Decisions.md**
+- **🔴 BẮT BUỘC: Cập nhật Codebase.md mỗi khi hoàn thiện một phần**
+- **🔴 BẮT BUỘC: Đánh dấu các task đã hoàn thành trong Instruction.md**
+- **🔴 BẮT BUỘC: Kết thúc mỗi nhiệm vụ với mô tả ngắn gọn về công việc đã làm**
+
+### Safety Measures
+- **🔴 BẮT BUỘC: Không tự ý tối ưu code khi không được yêu cầu**
+- **🔴 BẮT BUỘC: Không xóa code không liên quan khi không được yêu cầu**
+- **🔴 BẮT BUỘC: Cẩn thận khi xóa file hoặc chỉnh sửa file ngoài nhiệm vụ chính**
+- **🔴 BẮT BUỘC: Tạo backup đơn giản trước những thay đổi lớn**
+
+---
+
+### Core Development Rules
+
+- **[Project Identity Enforcement](../../.cursor/rules/project-identity-enforcement.mdc)** - 🔴 BẮT BUỘC kiểm tra .project-identity trước mọi task
+- **[File Organization Rules](../../.cursor/rules/file-organization-rules.mdc)** - 🔴 BẮT BUỘC tổ chức file .md trong docs/project/
+- **[Base Rules](../../.cursor/rules/base-rules.mdc)** - Quy tắc cơ bản cho tất cả projects
+- **[Development Rules](../../.cursor/rules/development-rules.mdc)** - Quy tắc phát triển chung
+- **[Development Control Rules](../../.cursor/rules/development-control-rules.mdc)** - Kiểm soát quy trình phát triển
+- **[File Protection Rules](../../.cursor/rules/file-protection-rules.mdc)** - Bảo vệ và backup files
 
 ## Language
 
@@ -88,9 +133,22 @@
 
 ## Documentation
 
-- Ghi lại mọi quyết định quan trọng vào Decisions.md
-- Cập nhật Codebase.md mỗi khi hoàn thiện một phần
-- Đánh dấu các task đã hoàn thành trong Instruction.md
+### File Organization Rules
+
+- **🔴 BẮT BUỘC: Tất cả file .md phải được đặt trong thư mục `docs/project/`**
+- **NGHIÊM CẤM** tạo file .md ở root directory
+- Sử dụng cấu trúc thư mục chuẩn:
+  - `docs/project/` - Tất cả file documentation (.md)
+  - `docs/templates/` - Template files
+  - `instructions/` - Workflow và API docs
+  - `.cursor/rules/` - Development rules (nguồn chính thức)
+  - `.trae/rules/` - Alias/link đến .cursor/rules
+
+### Documentation Standards
+
+- Ghi lại mọi quyết định quan trọng vào docs/project/Decisions.md
+- Cập nhật docs/project/Codebase.md mỗi khi hoàn thiện một phần
+- Đánh dấu các task đã hoàn thành trong docs/project/Instruction.md
 - Kết thúc mỗi nhiệm vụ với mô tả ngắn gọn về công việc đã làm
 
 ## Safety Measures

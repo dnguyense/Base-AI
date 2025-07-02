@@ -101,11 +101,14 @@
     }
   },
   "projectStructure": {
-    "instructions/": "Project documentation và workflows",
+    "docs/project/": "Project documentation files (.md) - BẮT BUỘC đặt tất cả file .md ở đây",
+    "docs/templates/": "Template files for project setup",
+    "instructions/": "Project workflows and API documentation",
     "scripts/": "Automation scripts",
     "assets/": "Static resources",
     "design/": "Design files for analysis",
     ".cursor/rules/": "Development rules và workflows",
+    ".trae/rules/": "Trae AI specific rules (alias to .cursor/rules)",
     "_backups/": "File backups (git-ignored)"
   },
   "projectIdentifiers": [
