@@ -66,6 +66,7 @@
       "Áp dụng workflow rules phù hợp với stage hiện tại"
     ],
     "always_applied": [
+      ".cursor/rules/project-identity-enforcement.mdc",
       ".cursor/rules/base-rules.mdc",
       ".cursor/rules/context7-auto-workflow.mdc",
       ".cursor/rules/development-rules.mdc",
@@ -114,6 +115,27 @@
     "Brainstorm_*.md"
   ],
   "workflowEnforcement": {
+    "mandatoryProjectIdentityCheck": {
+      "description": "BẮT BUỘC kiểm tra .project-identity trước khi bắt đầu bất kỳ nhiệm vụ nào",
+      "triggers": [
+        "Mọi yêu cầu từ người dùng",
+        "Bắt đầu session mới",
+        "Thực hiện bất kỳ công việc nào"
+      ],
+      "checkList": [
+        "Đọc và hiểu projectType, projectStage, mainLanguages, mainFrameworks",
+        "Xác định workflow rules phù hợp với stage hiện tại",
+        "Áp dụng platformSpecificRules nếu có",
+        "Kiểm tra integrations và features được bật",
+        "Tuân thủ coreRules.always_applied"
+      ],
+      "mandatoryActions": [
+        "Load appropriate workflow rules từ .cursor/rules/",
+        "Kiểm tra Context7 memories liên quan đến project",
+        "Áp dụng project-specific constraints và requirements",
+        "Cập nhật projectStage nếu cần thiết"
+      ]
+    },
     "newProjectDetection": {
       "triggers": [
         "Empty project folder",

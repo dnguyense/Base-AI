@@ -1,8 +1,82 @@
 # Scripts Directory
 
-This directory contains utility scripts for the Base AI Project.
+This directory contains utility scripts for the project.
 
 ## Available Scripts
+
+### Backup and Restore
+- `backup_file.sh` - Script to backup files
+- `restore_file.sh` - Script to restore files from backup
+- `cleanup_backups.sh` - Script to clean up old backup files
+
+### Notifications
+- `notify.sh` - Shell script for sending notifications
+- `telegram_notifier.py` - Python script for Telegram notifications
+
+### Cursor Management
+- `cursor_limit_manager.py` - Comprehensive script to manage Cursor hard limits with detailed logging
+- `quick_cursor_limit.py` - Quick and simple script to set and check Cursor hard limits
+- `cursor_limit.sh` - Bash version for quick execution without Python dependencies
+- `update_cursor_cookie.py` - Utility to update cookie tokens in cursor scripts
+
+### Configuration
+- `config/` - Configuration files for scripts
+  - `telegram_config.py` - Telegram bot configuration
+
+## Usage
+
+### General Setup
+Make sure scripts are executable:
+```bash
+chmod +x *.sh
+```
+
+For Python scripts, ensure you have the required dependencies:
+```bash
+pip install -r ../requirements.txt
+```
+
+### Cursor Limit Management
+
+#### Using the comprehensive Python manager:
+```bash
+python3 cursor_limit_manager.py
+```
+
+#### Using the quick Python script:
+```bash
+python3 quick_cursor_limit.py
+```
+
+#### Using the bash script (no Python required):
+```bash
+./cursor_limit.sh
+```
+
+#### Updating cookie tokens:
+```bash
+python3 update_cursor_cookie.py 'your_new_cookie_here'
+```
+
+**Note**: You need to update the Cookie header with your current Cursor session token before running any script.
+
+**What these scripts do**:
+1. Set hard limit to 0 with `noUsageBasedAllowed: true`
+2. Verify the setting by getting current hard limit
+3. Check if `noUsageBasedAllowed` is `true` (success condition)
+
+**Requirements**:
+- For Python scripts: `requests` library (`pip install requests`)
+- For bash script: `curl` command (usually pre-installed)
+- Valid Cursor session cookie
+
+**Getting your cookie**:
+1. Open browser and go to https://cursor.com/dashboard
+2. Open Developer Tools (F12)
+3. Go to Network tab
+4. Refresh the page
+5. Find any request to cursor.com
+6. Copy the entire Cookie header value
 
 ### 1. Telegram Notifier (`telegram_notifier.py`)
 

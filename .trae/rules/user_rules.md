@@ -1,5 +1,13 @@
 # Global Rules for All Projects
 
+### Core Development Rules
+
+- **[Project Identity Enforcement](../../.cursor/rules/project-identity-enforcement.mdc)** - 🔴 BẮT BUỘC kiểm tra .project-identity trước mọi task
+- **[Base Rules](../../.cursor/rules/base-rules.mdc)** - Quy tắc cơ bản cho tất cả projects
+- **[Development Rules](../../.cursor/rules/development-rules.mdc)** - Quy tắc phát triển chung
+- **[Development Control Rules](../../.cursor/rules/development-control-rules.mdc)** - Kiểm soát quy trình phát triển
+- **[File Protection Rules](../../.cursor/rules/file-protection-rules.mdc)** - Bảo vệ và backup files
+
 ## Communication Style
 
 - Sử dụng tiếng Việt cho trò chuyện và giải thích với giọng điệu hài hước kiểu giới trẻ
@@ -13,6 +21,7 @@
 
 ## Core Working Principles
 
+- **🔴 BẮT BUỘC: Luôn kiểm tra .project-identity trước khi bắt đầu bất kỳ nhiệm vụ nào**
 - **Luôn suy luận yêu cầu của người dùng trước khi thực hiện**
 - Phân tích ý định thực sự đằng sau yêu cầu
 - Luôn kiểm tra bộ nhớ bằng Context7 để tìm thông tin liên quan
@@ -20,6 +29,41 @@
 - Tập trung vào vấn đề chính, không lạc đề
 - Xác định rõ nguyên nhân gốc rễ (root cause) trước khi sửa lỗi
 - Chỉ thực hiện một thay đổi lớn mỗi lần và kiểm tra kỹ trước khi tiếp tục
+
+
+
+#### Mandatory Project Identity Check Protocol
+
+**🚨 CRITICAL: Thực hiện checklist này trước khi bắt đầu bất kỳ công việc nào:**
+
+1. **Đọc và phân tích .project-identity**:
+   - `projectType`: Xác định loại dự án (android, ios, web, flutter, etc.)
+   - `projectStage`: Hiểu giai đoạn hiện tại (setup, brainstorm, development, production)
+   - `mainLanguages`: Ngôn ngữ lập trình chính
+   - `mainFrameworks`: Framework và công nghệ chính
+   - `keyFeatures`: Tính năng quan trọng của dự án
+
+2. **Load Workflow Rules phù hợp**:
+   - Áp dụng `coreRules.always_applied` cho mọi task
+   - Load `platformSpecificRules` dựa trên projectType
+   - Tuân thủ workflow rules của stage hiện tại từ `projectLifecycle`
+
+3. **Kiểm tra Context và Memory**:
+   - Sử dụng Context7 để tìm thông tin liên quan đến project
+   - Áp dụng kinh nghiệm từ các dự án tương tự
+   - Kiểm tra integrations và features được bật
+
+4. **Validation và Enforcement**:
+   - Đảm bảo không skip stages trong `stageProgression`
+   - Kiểm tra `newProjectDetection` triggers nếu là dự án mới
+   - Cập nhật `projectStage` nếu cần thiết
+
+**❌ NGHIÊM CẤM bắt đầu công việc mà không thực hiện checklist trên**
+
+**✅ Chỉ tiếp tục sau khi đã:**
+- Hiểu rõ project context và requirements
+- Load đúng workflow rules
+- Xác định approach phù hợp với project type và stage
 
 ## User Intent Analysis
 
