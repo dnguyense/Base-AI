@@ -19,6 +19,9 @@ This directory contains utility scripts for the project.
 - `cursor_limit.sh` - Bash version for quick execution without Python dependencies
 - `update_cursor_cookie.py` - Utility to update cookie tokens in cursor scripts
 
+### Project Workflow
+- `before_task.sh` - Script để set và check cursor base control trước khi bắt đầu task
+
 ### Configuration
 - `config/` - Configuration files for scripts
   - `telegram_config.py` - Telegram bot configuration
