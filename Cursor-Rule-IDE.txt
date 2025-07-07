@@ -1,0 +1,64 @@
+# Global Rules for All Projects
+
+## 🔥 Core Principles
+
+### Communication
+- Sử dụng tiếng Việt cho trò chuyện, tiếng Anh cho code/docs
+- Trả lời rõ ràng, hỏi làm rõ khi cần
+- Phân tích yêu cầu trước khi thực hiện
+
+### Project Identity
+- **🔴 BẮT BUỘC: Kiểm tra .project-identity trước mọi task**
+- Load workflow rules phù hợp với projectType và projectStage
+
+### Development Standards
+- Phân tích kỹ trước khi chỉnh sửa code
+- Tập trung vào vấn đề chính, xác định root cause
+- Thực hiện từng thay đổi lớn một cách cẩn thận
+- Tuân thủ SOLID principles và clean code
+
+### Safety & Documentation
+- Tạo backup trước thay đổi lớn
+- Ghi lại quyết định quan trọng vào docs/project/
+- Cập nhật Codebase.md và Instruction.md
+- Không tự ý tối ưu code ngoài yêu cầu
+
+## 📁 File Organization
+
+- **🔴 BẮT BUỘC: File .md trong `docs/project/`**
+- `.cursor/rules/` - Development rules (nguồn chính thức)
+- `instructions/` - Workflow và API docs
+- `docs/templates/` - Template files
+
+## 🔗 Specialized Rules
+
+Các quy tắc chi tiết được định nghĩa trong:
+
+### Core Development
+- **[Project Identity Enforcement](.cursor/rules/project-identity-enforcement.mdc)**
+- **[Base Rules](.cursor/rules/base-rules.mdc)**
+- **[Development Rules](.cursor/rules/development-rules.mdc)**
+- **[File Protection Rules](.cursor/rules/file-protection-rules.mdc)**
+
+### Platform Specific
+- **[Android Workflow](.cursor/rules/android-workflow.mdc)**
+- **[iOS Workflow](.cursor/rules/ios-workflow.mdc)**
+- **[Mobile Utility Workflow](.cursor/rules/mobile-utility-workflow.mdc)**
+
+### Project Management
+- **[Planning Workflow](.cursor/rules/planning-workflow.mdc)**
+- **[Brainstorm Workflow](.cursor/rules/brainstorm-detailed-workflow.mdc)**
+- **[Memory Bank Workflow](.cursor/rules/memory-bank-workflow.mdc)**
+
+### Quality & Testing
+- **[TDD Mobile Workflow](.cursor/rules/tdd-mobile-workflow.mdc)**
+- **[Code Deduplication](.cursor/rules/universal-code-deduplication.mdc)**
+- **[Review Gate V2](.cursor/rules/ReviewGateV2.mdc)**
+
+> **📋 Xem danh sách đầy đủ trong `.cursor/rules/` directory**
+
+## ⚠️ Enforcement
+
+- **BẮT BUỘC** tuân thủ 100% rules trong `.cursor/rules/`
+- **NGHIÊM CẤM** tạo rules mới mà không sync với `.cursor/rules/`
+- Mọi customization phải được thực hiện trong `.cursor/rules/`
