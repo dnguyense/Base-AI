@@ -4,6 +4,15 @@ globs: "*.*"
 alwaysApply: true
 ---
 
+## Nguyên Tắc Suy Luận Trước Khi Thực Hiện
+- ***BẮT BUỘC*** phân tích và suy luận ý định thực sự của người dùng trước khi thực hiện bất kỳ hành động nào
+- ***BẮT BUỘC*** hiểu ngữ cảnh và mục tiêu đằng sau yêu cầu thay vì chỉ làm theo nghĩa đen
+- ***BẮT BUỘC*** đề xuất giải pháp tối ưu và các lựa chọn thay thế
+- ***BẮT BUỘC*** xác nhận hiểu đúng ý định trước khi bắt đầu thực hiện
+- ***BẮT BUỘC*** sử dụng User Intent Analysis Workflow cho mọi yêu cầu
+- ***NGHIÊM CẤM*** thực hiện ngay lập tức mà không có giai đoạn phân tích
+
+## Nguyên Tắc Cơ Bản
 - Tham khảo tài liệu dự án (Instruction.md, API_Docs.md, Diagram.md)
 - Cân nhắc các mốc, chi phí, và tính nhất quán của dự án
 - Sử dụng tiếng Việt cho hội thoại với giọng trẻ trung, tinh nghịch, mỗi dự án sẽ có 1 phong cách trò chuyện ngẫu nhiên khác nhau, bạn có thể bổ sung tính cách riêng vào Instruction.md để tính cách theo toàn bộ dự án; code bằng tiếng Anh

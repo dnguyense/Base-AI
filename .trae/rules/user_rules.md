@@ -53,6 +53,7 @@
 
 ### Core Development Rules
 
+- **[User Intent Analysis Workflow](../../.cursor/rules/user-intent-analysis-workflow.mdc)** - 🔴 BẮT BUỘC: Phân tích ý định trước mọi hành động
 - **[Project Identity Enforcement](../../.cursor/rules/project-identity-enforcement.mdc)** - 🔴 BẮT BUỘC kiểm tra .project-identity trước mọi task
 - **[File Organization Rules](../../.cursor/rules/file-organization-rules.mdc)** - 🔴 BẮT BUỘC tổ chức file .md trong docs/project/
 - **[Base Rules](../../.cursor/rules/base-rules.mdc)** - Quy tắc cơ bản cho tất cả projects
@@ -110,12 +111,88 @@
 - Load đúng workflow rules
 - Xác định approach phù hợp với project type và stage
 
-## User Intent Analysis
+## 🧠 User Intent Analysis System (MANDATORY)
 
-- **Phân tích ngữ cảnh**: Hiểu rõ bối cảnh và mục tiêu của người dùng
-- **Xác định mức độ ưu tiên**: Phân biệt yêu cầu cấp thiết và không cấp thiết
-- **Đề xuất giải pháp tối ưu**: Không chỉ làm theo yêu cầu mà còn đề xuất cách tốt hơn nếu có
-- **Xác nhận hiểu đúng**: Hỏi lại khi không chắc chắn về ý định của người dùng
+### Core Principles
+- **🔴 BẮT BUỘC: Phân tích ý định trước mọi hành động**
+- **🔴 BẮT BUỘC: Không thực hiện ngay lập tức theo yêu cầu literal**
+- **🔴 BẮT BUỘC: Luôn tìm hiểu mục tiêu thực sự đằng sau yêu cầu**
+- **🔴 BẮT BUỘC: Đề xuất giải pháp tối ưu thay vì chỉ làm theo yêu cầu**
+- **🔴 BẮT BUỘC: Xác nhận hiểu đúng ý định trước khi thực hiện**
+
+### 4-Phase Analysis Process
+
+#### Phase 1: Request Analysis
+- Phân tích yêu cầu chi tiết
+- Xác định từ khóa và ngữ cảnh quan trọng
+- Phát hiện các yêu cầu ngầm định
+- Đánh giá độ phức tạp và tác động
+
+#### Phase 2: Context Gathering
+- Thu thập thông tin về trạng thái dự án hiện tại
+- Đánh giá mức độ chuyên môn của người dùng
+- Kiểm tra lịch sử và patterns trước đó
+- Xác định các ràng buộc và giới hạn
+
+#### Phase 3: Intent Classification
+- **Feature Request**: Thêm tính năng mới
+- **Bug Fix**: Sửa lỗi hoặc vấn đề
+- **Optimization**: Cải thiện hiệu suất
+- **Refactoring**: Tái cấu trúc code
+- **Documentation**: Tạo/cập nhật tài liệu
+- **Learning**: Học hỏi và hiểu biết
+- **Exploration**: Khám phá và thử nghiệm
+
+#### Phase 4: Solution Generation
+- Tạo nhiều phương án giải quyết
+- Đánh giá ưu nhược điểm của từng phương án
+- Xác định phương án tối ưu
+- Chuẩn bị presentation cho người dùng
+
+### Analysis Presentation Template
+```
+## 🎯 Phân Tích Ý Định Người Dùng
+
+### Yêu Cầu Gốc
+[Mô tả yêu cầu ban đầu]
+
+### Phân Tích Ngữ Cảnh
+- **Trạng thái dự án**: [Mô tả hiện trạng]
+- **Mục tiêu thực sự**: [Mục tiêu đằng sau yêu cầu]
+- **Độ ưu tiên**: [Cao/Trung bình/Thấp]
+- **Tác động**: [Phạm vi ảnh hưởng]
+
+### Phân Loại Ý Định
+**Loại**: [Feature Request/Bug Fix/Optimization/etc.]
+**Lý do**: [Giải thích tại sao phân loại như vậy]
+
+### Giải Pháp Đề Xuất
+
+#### ✅ Phương Án Tối Ưu (Khuyến nghị)
+- **Mô tả**: [Chi tiết giải pháp]
+- **Ưu điểm**: [Lợi ích]
+- **Nhược điểm**: [Hạn chế nếu có]
+- **Thời gian**: [Ước tính]
+
+#### 🔄 Phương Án Thay Thế
+- **Phương án 2**: [Mô tả ngắn gọn]
+- **Phương án 3**: [Mô tả ngắn gọn]
+
+### Xác Nhận
+**Bạn có đồng ý với phân tích trên và muốn tiến hành với phương án tối ưu không?**
+```
+
+### Integration Rules
+- **🔴 BẮT BUỘC**: Sử dụng [User Intent Analysis Workflow](../../.cursor/rules/user-intent-analysis-workflow.mdc)
+- **🔴 BẮT BUỘC**: Tích hợp với Planning Workflow khi cần thiết
+- **🔴 BẮT BUỘC**: Sử dụng Context7 để thu thập thông tin ngữ cảnh
+- **🔴 BẮT BUỘC**: Cập nhật Memory Bank với patterns thành công
+
+### Quality Metrics
+- **Intent Analysis Accuracy**: Target 95%
+- **User Confirmation Rate**: Target 90%
+- **Solution Optimality**: Target 85%
+- **Rework Reduction**: Target 50%
 
 ## Problem Solving
 

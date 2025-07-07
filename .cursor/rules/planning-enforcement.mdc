@@ -1,4 +1,4 @@
-rule: "Enhanced Planning File Enforcement with Logic Reasoning"
+rule: "Enhanced Planning File Enforcement with User Intent Analysis & Logic Reasoning"
 alwaysApply: true
 
 when:
@@ -6,6 +6,12 @@ when:
   - not file_exists("Planning_[TenDuAn].md")
 
 then:
+  - trigger_user_intent_analysis
+  - analyze_real_user_intent
+  - identify_underlying_goals
+  - generate_solution_alternatives
+  - present_intent_analysis_to_user
+  - get_user_confirmation_on_approach
   - analyze_request_complexity
   - if complexity.level >= "medium":
       - trigger_logic_reasoning
@@ -30,6 +36,7 @@ then:
 
 unless:
   - user_request.type in ["minor_fix", "typo", "small_refactor"]
+  - user_explicitly_skips_analysis: true
 
 ## Enhanced Planning Enforcement Rules
 

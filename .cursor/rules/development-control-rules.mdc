@@ -6,11 +6,15 @@ alwaysApply: false
 # Development Control Rules
 
 ## Nguyên Tắc Cơ Bản
+- ***BẮT BUỘC*** áp dụng User Intent Analysis trước khi bắt đầu bất kỳ development task nào
+- ***BẮT BUỘC*** phân tích ý định thực sự đằng sau yêu cầu development
+- ***BẮT BUỘC*** đề xuất approach tối ưu và xác nhận với user trước khi proceed
 - ***BẮT BUỘC*** kiểm tra Planning_[TenDuAn].md trước khi bắt đầu development
 - ***BẮT BUỘC*** validate planning approval trước khi viết code
 - ***BẮT BUỘC*** tuân thủ architecture được định nghĩa trong planning
 - ***BẮT BUỘC*** follow development phases theo thứ tự (MVP → Enhanced → Advanced)
 - ***NGHIÊM CẤM*** code khi chưa có planning hoàn chỉnh và được approve
+- ***NGHIÊM CẤM*** bắt đầu development mà không phân tích ý định user trước
 
 ## Pre-Development Validation
 
@@ -125,9 +129,42 @@ Missing sections:
 
 ## AI Development Workflow
 
-### 1. Pre-Code Validation
+### 1. User Intent Analysis (MANDATORY FIRST STEP)
 ```python
-def validate_development_request():
+def analyze_user_intent(user_request):
+    # Phase 1: Parse request and gather context
+    explicit_requirements = extract_explicit_requirements(user_request)
+    implicit_needs = identify_implicit_needs(user_request)
+    project_context = gather_project_context()
+    
+    # Phase 2: Classify intent and analyze
+    intent_category = classify_intent(user_request)
+    root_cause = identify_root_cause(user_request, project_context)
+    business_goal = extract_business_goal(user_request)
+    
+    # Phase 3: Generate solutions and alternatives
+    primary_solution = generate_primary_solution(explicit_requirements)
+    alternatives = generate_alternative_solutions(root_cause, business_goal)
+    recommendation = select_best_approach(primary_solution, alternatives)
+    
+    # Phase 4: Present analysis and get confirmation
+    analysis_result = present_intent_analysis({
+        'user_request': explicit_requirements,
+        'real_intent': root_cause,
+        'recommended_approach': recommendation,
+        'alternatives': alternatives
+    })
+    
+    user_confirmation = request_user_confirmation(analysis_result)
+    if not user_confirmation:
+        return request_clarification()
+    
+    return proceed_with_validated_intent(recommendation)
+```
+
+### 2. Pre-Code Validation
+```python
+def validate_development_request(validated_intent):
     # Check required files
     if not file_exists("Brainstorm_[TenDuAn].md"):
         return error_no_brainstorm()
@@ -143,12 +180,20 @@ def validate_development_request():
     if not planning.is_approved():
         return error_not_approved()
     
-    return proceed_to_development()
+    # Validate intent alignment with planning
+    if not validate_intent_alignment(validated_intent, planning):
+        return error_intent_planning_mismatch()
+    
+    return proceed_to_development(validated_intent)
 ```
 
-### 2. Task Execution Control
+### 3. Task Execution Control
 ```python
-def execute_development_task(task, current_phase):
+def execute_development_task(task, current_phase, validated_intent):
+    # Validate task alignment with analyzed intent
+    if not task.aligns_with_intent(validated_intent):
+        return error_task_intent_mismatch(task, validated_intent)
+    
     # Validate task belongs to current phase
     if not task.is_valid_for_phase(current_phase):
         return error_wrong_phase(task, current_phase)
@@ -157,8 +202,8 @@ def execute_development_task(task, current_phase):
     if not check_phase_prerequisites(current_phase):
         return error_prerequisites_not_met()
     
-    # Execute task
-    return implement_task(task)
+    # Execute task with intent context
+    return implement_task_with_context(task, validated_intent)
 ```
 
 ### 3. Quality Gates
