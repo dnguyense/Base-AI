@@ -55,6 +55,7 @@
 
 - **[User Intent Analysis Workflow](../../.cursor/rules/user-intent-analysis-workflow.mdc)** - 🔴 BẮT BUỘC: Phân tích ý định trước mọi hành động
 - **[Project Identity Enforcement](../../.cursor/rules/project-identity-enforcement.mdc)** - 🔴 BẮT BUỘC kiểm tra .project-identity trước mọi task
+- **[Auto Task Execution](../../.cursor/rules/auto-task-execution.mdc)** - 🔴 BẮT BUỘC: Tự động thực hiện task khi có kế hoạch đầy đủ
 - **[File Organization Rules](../../.cursor/rules/file-organization-rules.mdc)** - 🔴 BẮT BUỘC tổ chức file .md trong docs/project/
 - **[Base Rules](../../.cursor/rules/base-rules.mdc)** - Quy tắc cơ bản cho tất cả projects
 - **[Development Rules](../../.cursor/rules/development-rules.mdc)** - Quy tắc phát triển chung

@@ -1,0 +1,121 @@
+# Auto Task Execution Rule
+
+## Mục đích
+Rule này định nghĩa quy trình tự động thực hiện các task trong kế hoạch khi người dùng yêu cầu thực hiện mà không cần xác nhận lại từng task.
+
+## Điều kiện áp dụng
+
+### Khi nào áp dụng Auto Task Execution
+- **BẮT BUỘC** có kế hoạch đầy đủ với danh sách task chi tiết
+- **BẮT BUỘC** người dùng yêu cầu "thực hiện", "implement", "làm theo kế hoạch" hoặc tương tự
+- **BẮT BUỘC** các task trong kế hoạch phải rõ ràng và có thể thực hiện được
+- **BẮT BUỘC** không có task nào yêu cầu input bổ sung từ người dùng
+
+### Khi nào KHÔNG áp dụng
+- Kế hoạch chưa đầy đủ hoặc thiếu chi tiết
+- Có task yêu cầu quyết định từ người dùng (ví dụ: lựa chọn design, API endpoints)
+- Task có rủi ro cao (xóa dữ liệu, thay đổi cấu trúc lớn)
+- Người dùng chỉ hỏi về kế hoạch mà không yêu cầu thực hiện
+
+## Quy trình thực hiện
+
+### Bước 1: Xác nhận điều kiện
+1. Kiểm tra kế hoạch có đầy đủ task không
+2. Xác định tất cả task đều có thể thực hiện tự động
+3. Đánh giá mức độ rủi ro của từng task
+
+### Bước 2: Thông báo bắt đầu
+- Thông báo ngắn gọn về việc bắt đầu thực hiện kế hoạch
+- Liệt kê số lượng task sẽ được thực hiện
+- Không yêu cầu xác nhận từ người dùng
+
+### Bước 3: Thực hiện tuần tự
+- Thực hiện từng task theo thứ tự trong kế hoạch
+- Cập nhật trạng thái task (✅ Completed)
+- Ghi log ngắn gọn cho mỗi task hoàn thành
+- Tiếp tục task tiếp theo mà không dừng
+
+### Bước 4: Báo cáo kết quả
+- Tóm tắt những gì đã hoàn thành
+- Liệt kê file đã tạo/chỉnh sửa
+- Thông báo nếu có task nào không thể hoàn thành
+
+## Xử lý ngoại lệ
+
+### Khi gặp lỗi trong quá trình thực hiện
+- Dừng ngay task đang gặp lỗi
+- Báo cáo lỗi chi tiết
+- Hỏi người dùng có muốn tiếp tục với task tiếp theo không
+- Không tự động skip task bị lỗi
+
+### Khi task yêu cầu input bổ sung
+- Dừng và yêu cầu input từ người dùng
+- Giải thích rõ cần input gì và tại sao
+- Sau khi có input, tiếp tục với task hiện tại
+
+## Nguyên tắc an toàn
+
+### File Protection
+- **BẮT BUỘC** tạo backup trước khi xóa/thay đổi file quan trọng
+- **BẮT BUỘC** kiểm tra file tồn tại trước khi thao tác
+- **KHUYẾN NGHỊ** commit code sau mỗi task lớn
+
+### Validation
+- Kiểm tra syntax sau khi tạo/chỉnh sửa code
+- Validate cấu trúc project sau những thay đổi lớn
+- Test basic functionality nếu có thể
+
+## Ví dụ sử dụng
+
+### Tình huống 1: Kế hoạch đầy đủ
+```
+User: "Thực hiện kế hoạch đã lập"
+AI: "Bắt đầu thực hiện 5 task trong kế hoạch..."
+→ Thực hiện tất cả task tự động
+```
+
+### Tình huống 2: Kế hoạch thiếu chi tiết
+```
+User: "Implement theo plan"
+AI: "Kế hoạch hiện tại thiếu một số chi tiết. Tôi cần làm rõ..."
+→ Yêu cầu bổ sung thông tin trước
+```
+
+### Tình huống 3: Task có rủi ro
+```
+User: "Làm theo kế hoạch"
+AI: "Task 3 sẽ xóa database. Bạn có chắc chắn muốn tiếp tục?"
+→ Yêu cầu xác nhận cho task rủi ro cao
+```
+
+## Tích hợp với các rule khác
+
+### Planning Workflow
+- **BẮT BUỘC** sử dụng [Planning Workflow](planning-workflow.mdc) để đảm bảo kế hoạch chất lượng
+- **BẮT BUỘC** áp dụng [Planning Validation Rules](planning-validation-rules.mdc) để validate trước khi thực hiện
+- **BẮT BUỘC** tuân thủ [Planning Enforcement](planning-enforcement.mdc) trong quá trình thực hiện
+
+### File Protection Rules
+- **BẮT BUỘC** tuân thủ [File Protection Rules](file-protection-rules.mdc) cho mọi thao tác file
+- **BẮT BUỘC** áp dụng backup strategy trước những thay đổi lớn
+
+### Development Control
+- **BẮT BUỘC** theo [Development Control Rules](development-control-rules.mdc) để kiểm soát quy trình
+- **BẮT BUỘC** đảm bảo code quality theo [Development Rules](development-rules.mdc)
+- **KHUYẾN NGHỊ** sử dụng [User Intent Analysis Workflow](user-intent-analysis-workflow.mdc) để hiểu rõ yêu cầu trước khi thực hiện
+
+## Metrics và Tracking
+
+### Theo dõi hiệu suất
+- Thời gian thực hiện mỗi task
+- Tỷ lệ thành công/thất bại
+- Số lần cần input bổ sung
+
+### Cải thiện liên tục
+- Phân tích các task thường gặp lỗi
+- Tối ưu quy trình cho các pattern phổ biến
+- Cập nhật rule dựa trên feedback
+
+---
+
+**Lưu ý quan trọng**: Rule này nhằm tăng hiệu quả làm việc nhưng không được hy sinh tính an toàn và chất lượng code. Khi có nghi ngờ, luôn ưu tiên hỏi người dùng thay vì thực hiện tự động.
