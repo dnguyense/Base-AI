@@ -5,6 +5,8 @@ alwaysApply: false
 ---
 
 ## Code Quality
+- ***BẮT BUỘC*** implement code theo acceptance criteria định nghĩa trong Kiro tasks
+- ***BẮT BUỘC*** validate implementation với task requirements trước khi commit
 - Tuân thủ nguyên tắc SOLID
 - Tạo unit tests cho tất cả chức năng quan trọng
 - Sử dụng tên biến/hàm mô tả rõ ràng mục đích
@@ -58,8 +60,13 @@ alwaysApply: false
 - Tuân thủ JSON standards
 
 ## Development Workflow
+- ***BẮT BUỘC*** kiểm tra `.kiro/specs/{project}/tasks.md` trước khi bắt đầu development
+- ***BẮT BUỘC*** thực hiện tasks theo thứ tự ưu tiên trong Kiro specifications
+- ***BẮT BUỘC*** cập nhật task status trong `.kiro/specs/{project}/tasks.md` khi bắt đầu và hoàn thành
+- ***BẮT BUỘC*** reference task IDs trong commit messages (format: `feat(TASK-001): implement feature`)
+- ***BẮT BUỘC*** validate acceptance criteria trước khi mark task completed
 - Sử dụng version control (Git)
-- Follow conventional commits (feat, fix, chore, docs)
+- Follow conventional commits với Kiro task references
 - Code reviews cho mọi non-trivial changes
 - Continuous Integration/Continuous Deployment
 - Đảm bảo backwards compatibility khi có thể
@@ -71,4 +78,4 @@ alwaysApply: false
 - Sử dụng default values hợp lý
 - Documentation đầy đủ về config options
 
-@file ../README.md 
+@file ../README.md

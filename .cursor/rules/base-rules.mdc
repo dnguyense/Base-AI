@@ -82,9 +82,24 @@ Luôn kiểm tra .project-identity để biết cấu trúc và ngôn ngữ dự
 
 ## Task List Management
 
-### Nguyên Tắc Tạo Task Lists
-- ***BẮT BUỘC*** tạo task lists trong file markdown ở project root
-- ***BẮT BUỘC*** sử dụng `TASKS.md` hoặc tên mô tả feature cụ thể (VD: `ASSISTANT_CHAT.md`)
+### Kiro Task System Integration
+- ***BẮT BUỘC*** sử dụng `.kiro/specs/{project}/tasks.md` làm nguồn task chính thức
+- ***BẮT BUỘC*** tuân thủ Kiro task format với ID, status, priority, dependencies
+- ***BẮT BUỘC*** validate project structure và tạo `.kiro/specs/{project}/` nếu chưa tồn tại
+- ***BẮT BUỘC*** kiểm tra Kiro tasks trước khi thực hiện bất kỳ development task nào
+- ***NGHIÊM CẤM*** tạo task lists ở nơi khác ngoài Kiro system
+
+### Kiro Fallback Workflow
+- ***BẮT BUỘC*** kiểm tra sự tồn tại của files: `requirements.md`, `design.md`, `tasks.md` trong `.kiro/specs/{project}/`
+- ***BẮT BUỘC*** kích hoạt [Kiro Fallback Workflow](kiro-fallback-workflow.mdc) khi thiếu bất kỳ file nào
+- ***KHUYẾN NGHỊ*** ưu tiên việc tạo bằng Kiro tools trước khi sử dụng fallback workflow
+- ***BẮT BUỘC*** thực hiện quy trình: Brainstorm → Requirements → Design → Tasks khi fallback
+- ***BẮT BUỘC*** đảm bảo generated files tuân thủ Kiro specifications
+- ***BẮT BUỘC*** validate compatibility với Kiro execution system sau khi tạo files
+
+### Legacy Task Lists (Deprecated)
+- ***BẮT BUỘC*** migrate existing task lists sang Kiro format
+- ***BẮT BUỘC*** sử dụng `TASKS.md` hoặc tên mô tả feature cụ thể (VD: `ASSISTANT_CHAT.md`) chỉ cho legacy projects
 - ***BẮT BUỘC*** bao gồm title rõ ràng và mô tả mục đích của feature
 
 ### Cấu Trúc Task List Chuẩn
@@ -118,22 +133,24 @@ Mô tả chi tiết cách triển khai feature.
 - path/to/file2.ts - Mô tả mục đích
 ```
 
-### Quy Trình Maintain Task Lists
-- ***BẮT BUỘC*** cập nhật task list sau khi hoàn thành component quan trọng
-- ***BẮT BUỘC*** đánh dấu completed tasks bằng cách đổi `[ ]` thành `[x]`
-- ***BẮT BUỘC*** thêm tasks mới khi phát hiện trong quá trình triển khai
-- ***BẮT BUỘC*** di chuyển tasks giữa các sections phù hợp
-- ***KHUYẾN NGHỊ*** cập nhật section "Relevant Files" với đường dẫn chính xác và mô tả
+### Quy Trình Maintain Kiro Tasks
+- ***BẮT BUỘC*** cập nhật task status trong `.kiro/specs/{project}/tasks.md` khi bắt đầu và hoàn thành
+- ***BẮT BUỘC*** validate acceptance criteria trước khi mark task completed
+- ***BẮT BUỘC*** thêm tasks mới theo Kiro format khi phát hiện trong quá trình triển khai
+- ***BẮT BUỘC*** cập nhật dependencies khi task order thay đổi
+- ***BẮT BUỘC*** reference task IDs trong commit messages
+- ***KHUYẾN NGHỊ*** cập nhật implementation notes với technical details
 
 ### Hướng Dẫn Cho AI
-Khi làm việc với task lists, AI phải:
-- Thường xuyên cập nhật file task list sau khi triển khai components quan trọng
-- Đánh dấu [x] cho tasks đã hoàn thành
-- Thêm tasks mới được phát hiện trong quá trình triển khai
-- Maintain section "Relevant Files" với đường dẫn file chính xác và mô tả
-- Document implementation details, đặc biệt cho features phức tạp
-- Kiểm tra task nào cần triển khai tiếp theo trước khi bắt đầu
-- Sau khi triển khai task, cập nhật file để phản ánh tiến độ
+Khi làm việc với Kiro tasks, AI phải:
+- ***BẮT BUỘC*** kiểm tra `.kiro/specs/{project}/tasks.md` trước khi bắt đầu bất kỳ development work nào
+- ***BẮT BUỘC*** thực hiện tasks theo thứ tự ưu tiên và dependencies
+- ***BẮT BUỘC*** cập nhật task status: "Not Started" → "In Progress" → "Completed"
+- ***BẮT BUỘC*** validate tất cả acceptance criteria trước khi mark completed
+- ***BẮT BUỘC*** thêm tasks mới theo Kiro format khi phát hiện requirements mới
+- ***BẮT BUỘC*** document implementation details trong task notes
+- ***BẮT BUỘC*** reference task IDs trong commit messages (format: `feat(TASK-001): description`)
+- ***BẮT BUỘC*** identify next executable task dựa trên dependencies
 
 ### Ví Dụ Cập Nhật Task
 Khi di chuyển task từ "In Progress" sang "Completed":

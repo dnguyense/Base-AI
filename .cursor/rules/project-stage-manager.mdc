@@ -44,10 +44,12 @@ alwaysApply: false
 - Chọn tech stack phù hợp
 - Cấu hình development environment
 - Tạo project documentation
+- Thiết lập Kiro task system
 
 ### Required Workflows
 - `.cursor/rules/project-creation-workflow.mdc`
 - `.cursor/rules/planning-workflow.mdc`
+- `.cursor/rules/kiro-task-execution.mdc`
 - Platform-specific setup rules
 
 ### Completion Criteria
@@ -55,6 +57,8 @@ alwaysApply: false
 - [x] Tech stack được xác định
 - [x] Development environment ready
 - [x] `Instruction.md` được tạo với roadmap
+- [x] `.kiro/specs/{project}/` directory structure được tạo
+- [x] `.kiro/specs/{project}/tasks.md` được tạo với initial tasks
 
 ### Stage Transition
 ```json
@@ -68,10 +72,15 @@ alwaysApply: false
 
 ## Stage 3: Development
 ### Mục Tiêu
-- Thực hiện phát triển theo instruction
-- Implement features theo priority
+- Thực hiện phát triển theo Kiro tasks
+- Implement features theo priority và dependencies
 - Testing và quality assurance
 - Documentation và deployment
+
+### Required Workflows
+- `.cursor/rules/kiro-task-execution.mdc` (Primary)
+- `.cursor/rules/auto-task-execution.mdc`
+- `.cursor/rules/development-rules.mdc`
 
 ### Platform-Specific Rules
 - **Android**: `.cursor/rules/android-workflow.mdc`
@@ -80,6 +89,7 @@ alwaysApply: false
 - **Web**: `.cursor/rules/frontend-rules.mdc` + `.cursor/rules/backend-rules-optimized.mdc`
 
 ### Continuous Rules
+- Kiro task status tracking
 - TDD workflows
 - Code quality checks
 - Regular progress reports
@@ -129,8 +139,12 @@ function detectCurrentStage() {
 - Project structure validation
 - Tech stack compatibility check
 - Development environment ready
+- Kiro task system initialized
+- Initial tasks defined in `.kiro/specs/{project}/tasks.md`
 
 ### Within Stage 3
+- Kiro task completion tracking
 - Regular milestone checks
 - Code quality gates
 - Testing coverage validation
+- Task dependency validation

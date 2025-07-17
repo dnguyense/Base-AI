@@ -6,10 +6,11 @@ Rule này định nghĩa quy trình tự động thực hiện các task trong k
 ## Điều kiện áp dụng
 
 ### Khi nào áp dụng Auto Task Execution
-- **BẮT BUỘC** có kế hoạch đầy đủ với danh sách task chi tiết
+- **BẮT BUỘC** có file `.kiro/specs/{project}/tasks.md` với task list đầy đủ
 - **BẮT BUỘC** người dùng yêu cầu "thực hiện", "implement", "làm theo kế hoạch" hoặc tương tự
-- **BẮT BUỘC** các task trong kế hoạch phải rõ ràng và có thể thực hiện được
+- **BẮT BUỘC** các Kiro task phải có status "Not Started" và acceptance criteria rõ ràng
 - **BẮT BUỘC** không có task nào yêu cầu input bổ sung từ người dùng
+- **BẮT BUỘC** dependencies của task đã được resolved hoặc completed
 
 ### Khi nào KHÔNG áp dụng
 - Kế hoạch chưa đầy đủ hoặc thiếu chi tiết
@@ -20,9 +21,10 @@ Rule này định nghĩa quy trình tự động thực hiện các task trong k
 ## Quy trình thực hiện
 
 ### Bước 1: Xác nhận điều kiện
-1. Kiểm tra kế hoạch có đầy đủ task không
-2. Xác định tất cả task đều có thể thực hiện tự động
-3. Đánh giá mức độ rủi ro của từng task
+1. Kiểm tra file `.kiro/specs/{project}/tasks.md` tồn tại và có task list
+2. Validate Kiro task format (ID, status, priority, dependencies, acceptance criteria)
+3. Xác định task nào có thể thực hiện dựa trên dependencies
+4. Đánh giá mức độ rủi ro của từng task
 
 ### Bước 2: Thông báo bắt đầu
 - Thông báo ngắn gọn về việc bắt đầu thực hiện kế hoạch
@@ -30,8 +32,10 @@ Rule này định nghĩa quy trình tự động thực hiện các task trong k
 - Không yêu cầu xác nhận từ người dùng
 
 ### Bước 3: Thực hiện tuần tự
-- Thực hiện từng task theo thứ tự trong kế hoạch
-- Cập nhật trạng thái task (✅ Completed)
+- Thực hiện task theo thứ tự ưu tiên và dependencies trong Kiro tasks
+- Cập nhật task status: "Not Started" → "In Progress" → "Completed"
+- Validate acceptance criteria trước khi mark completed
+- Reference task ID trong commit messages (format: `feat(TASK-001): description`)
 - Ghi log ngắn gọn cho mỗi task hoàn thành
 - Tiếp tục task tiếp theo mà không dừng
 
@@ -89,6 +93,13 @@ AI: "Task 3 sẽ xóa database. Bạn có chắc chắn muốn tiếp tục?"
 ```
 
 ## Tích hợp với các rule khác
+
+### Tích hợp với các rule khác
+
+### Kiro Task System
+- **BẮT BUỘC** sử dụng [Kiro Task Execution](kiro-task-execution.mdc) làm engine chính
+- **BẮT BUỘC** tuân thủ Kiro task format và validation rules
+- **BẮT BUỘC** cập nhật task status trong `.kiro/specs/{project}/tasks.md`
 
 ### Planning Workflow
 - **BẮT BUỘC** sử dụng [Planning Workflow](planning-workflow.mdc) để đảm bảo kế hoạch chất lượng

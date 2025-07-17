@@ -9,9 +9,12 @@ alwaysApply: false
 - ***BẮT BUỘC*** dựa trên kết quả brainstorm để tạo planning chi tiết
 - ***BẮT BUỘC*** rà soát codebase hiện tại trước khi lên kế hoạch cho tính năng mới
 - ***BẮT BUỘC*** tạo tài liệu kế hoạch chi tiết trước khi bắt đầu code
+- ***BẮT BUỘC*** tạo tasks trong `.kiro/specs/{project}/tasks.md` theo Kiro specification
+- ***BẮT BUỘC*** validate project structure và tạo `.kiro/specs/{project}/` nếu chưa tồn tại
 - ***BẮT BUỘC*** thực hiện template selection ngay sau khi hoàn thành planning
 - ***BẮT BUỘC*** tạo file Template_Selection.md với templates được chọn và loại bỏ
 - ***BẮT BUỘC*** lên kế hoạch thời gian và đánh giá độ phức tạp cho từng task
+- ***BắT BUỘC*** format tasks theo Kiro task structure với dependencies và acceptance criteria
 - ***BẮT BUỘC*** xác định rõ đầu ra mong muốn và tiêu chí thành công
 - ***BẮT BUỘC*** tuân thủ quy trình 4 vai trò: Planner > Architect > Builder > Tester
 - ***BẮT BUỘC*** không bỏ qua bước Architect để "code cho nhanh"
@@ -20,6 +23,7 @@ alwaysApply: false
 - ***KHUYẾN NGHỊ*** bắt đầu với template tối giản và thêm dần khi cần thiết
 - ***NGHIÊM CẤM*** bắt đầu planning khi chưa có file brainstorm hoàn chỉnh
 - ***NGHIÊM CẤM*** bắt đầu code khi chưa có kế hoạch rõ ràng
+- ***NGHIÊM CẤM*** tạo tasks ở nơi khác ngoài `.kiro/specs/{project}/tasks.md`
 - ***NGHIÊM CẤM*** sử dụng quá nhiều template gây phức tạp không cần thiết
 
 ## Quy Trình Brainstorm
@@ -98,15 +102,21 @@ alwaysApply: false
 - **Integration Plan**: [Kế hoạch tích hợp templates vào workspace]
 
 ## 5. Kế Hoạch Triển Khai
+- **Kiro Task Integration**:
+  - Tạo `.kiro/specs/{project}/tasks.md` với format chuẩn Kiro
+  - Mỗi task phải có ID duy nhất, status, priority, dependencies
+  - Định nghĩa acceptance criteria rõ ràng cho từng task
+  - Link tasks với requirements và design specifications
+
 - **Các Bước Thực Hiện**:
-  1. [Bước 1] - [Mô tả] - [Ước tính thời gian]
-  2. [Bước 2] - [Mô tả] - [Ước tính thời gian]
+  1. [Bước 1] - [Mô tả] - [Ước tính thời gian] - [Task ID: TASK-001]
+  2. [Bước 2] - [Mô tả] - [Ước tính thời gian] - [Task ID: TASK-002]
   ...
 
 - **Ưu Tiên & Phụ Thuộc**:
-  - P0: [Task ưu tiên cao nhất]
-  - P1: [Task ưu tiên cao]
-  - P2: [Task ưu tiên trung bình]
+  - P0: [Task ưu tiên cao nhất] - [Dependencies: None]
+  - P1: [Task ưu tiên cao] - [Dependencies: TASK-001]
+  - P2: [Task ưu tiên trung bình] - [Dependencies: TASK-001, TASK-002]
 
 ## 6. Kiểm Thử & Đánh Giá
 - **Kế Hoạch Kiểm Thử**: [Mô tả cách kiểm thử]

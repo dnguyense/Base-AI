@@ -1,0 +1,242 @@
+---
+description: Quy trình dự phòng cho Kiro system khi chưa có requirements/design/tasks
+globs: *.*
+alwaysApply: false
+---
+# Kiro Fallback Workflow - Quy Trình Dự Phòng
+
+## Mục Đích
+Quy trình này được kích hoạt khi hệ thống Kiro chưa có đầy đủ các file cần thiết (requirements, design, tasks) và cần tạo chúng từ đầu thông qua quy trình brainstorm.
+
+## Điều Kiện Kích Hoạt
+- ***BẮT BUỘC*** kiểm tra sự tồn tại của `.kiro/specs/{project}/` directory
+- ***BẮT BUỘC*** kiểm tra các file: `requirements.md`, `design.md`, `tasks.md`
+- ***BẮT BUỘC*** kích hoạt khi thiếu bất kỳ file nào trong 3 file trên
+- ***KHUYẾN NGHỊ*** ưu tiên việc tạo bằng Kiro tool trước khi sử dụng fallback workflow
+
+## Quy Trình Fallback: Brainstorm → Requirements → Design → Tasks
+
+### Phase 1: Brainstorm (Foundation)
+- ***BẮT BUỘC*** sử dụng [Brainstorm Detailed Workflow](brainstorm-detailed-workflow.mdc)
+- ***BẮT BUỘC*** thực hiện 3 giai đoạn brainstorm: Foundation → Structure → Advanced
+- ***BẮT BUỘC*** tạo file `Brainstorm_{ProjectName}.md` với đầy đủ insights
+- ***BẮT BUỘC*** xác định project scope, objectives, và target users
+- ***BẮT BUỘC*** phân tích competitors và market research
+- ***BẮT BUỘC*** định nghĩa core features và user stories
+
+### Phase 2: Requirements Generation
+- ***BẮT BUỘC*** tạo `.kiro/specs/{project}/requirements.md` từ brainstorm results
+- ***BẮT BUỘC*** convert brainstorm insights thành structured requirements
+- ***BẮT BUỘC*** định nghĩa functional và non-functional requirements
+- ***BẮT BUỘC*** xác định acceptance criteria cho mỗi requirement
+- ***BẮT BUỘC*** prioritize requirements theo MoSCoW method (Must, Should, Could, Won't)
+
+#### Requirements Structure Template
+```markdown
+# Project Requirements
+
+## 1. Project Overview
+- Project Name: [Name]
+- Project Type: [Type]
+- Target Platform: [Platform]
+- Timeline: [Timeline]
+
+## 2. Functional Requirements
+### FR-001: [Requirement Name]
+- **Description**: [Detailed description]
+- **Priority**: Must/Should/Could/Won't
+- **Acceptance Criteria**:
+  - [ ] Criterion 1
+  - [ ] Criterion 2
+- **Dependencies**: [Other requirements]
+- **Source**: [Brainstorm insight reference]
+
+## 3. Non-Functional Requirements
+### NFR-001: [Requirement Name]
+- **Category**: Performance/Security/Usability/etc.
+- **Description**: [Detailed description]
+- **Metrics**: [Measurable criteria]
+- **Priority**: Must/Should/Could/Won't
+
+## 4. Constraints
+- Technical constraints
+- Business constraints
+- Time constraints
+- Resource constraints
+
+## 5. Assumptions
+- List of assumptions made during requirements gathering
+```
+
+### Phase 3: Design Generation
+- ***BẮT BUỘC*** tạo `.kiro/specs/{project}/design.md` từ requirements
+- ***BẮT BUỘC*** định nghĩa system architecture và component design
+- ***BẮT BUỘC*** tạo user interface design specifications
+- ***BẮT BUỘC*** định nghĩa data models và database schema
+- ***BẮT BUỘC*** xác định API endpoints và integration points
+- ***BẮT BUỘC*** tạo user flow diagrams và wireframes (text-based)
+
+#### Design Structure Template
+```markdown
+# Project Design Specification
+
+## 1. System Architecture
+### 1.1 High-Level Architecture
+- Architecture pattern: [MVC/MVVM/Clean Architecture/etc.]
+- Technology stack: [Technologies]
+- Deployment architecture: [Cloud/On-premise/Hybrid]
+
+### 1.2 Component Design
+- Component 1: [Description and responsibilities]
+- Component 2: [Description and responsibilities]
+
+## 2. User Interface Design
+### 2.1 Design Principles
+- Design system: [Material Design/Human Interface Guidelines/Custom]
+- Color scheme: [Primary/Secondary colors]
+- Typography: [Font families and sizes]
+
+### 2.2 Screen Specifications
+#### Screen 1: [Screen Name]
+- **Purpose**: [What this screen does]
+- **Layout**: [Description of layout]
+- **Components**: [List of UI components]
+- **User Interactions**: [Available actions]
+- **Navigation**: [How users navigate to/from this screen]
+
+## 3. Data Design
+### 3.1 Data Models
+```
+Entity: [EntityName]
+- field1: [type] - [description]
+- field2: [type] - [description]
+```
+
+### 3.2 Database Schema
+- Database type: [SQL/NoSQL]
+- Tables/Collections: [List and relationships]
+
+## 4. API Design
+### 4.1 Endpoints
+```
+GET /api/endpoint
+- Purpose: [Description]
+- Parameters: [List parameters]
+- Response: [Response format]
+```
+
+## 5. Integration Points
+- External APIs: [List and purpose]
+- Third-party services: [List and integration method]
+```
+
+### Phase 4: Task Generation
+- ***BẮT BUỘC*** tạo `.kiro/specs/{project}/tasks.md` từ design specifications
+- ***BẮT BUỘC*** convert design components thành executable tasks
+- ***BẮT BUỘC*** sử dụng Kiro task format với ID, status, priority, dependencies
+- ***BẮT BUỘC*** định nghĩa acceptance criteria cho mỗi task
+- ***BẮT BUỘC*** xác định task dependencies và execution order
+- ***BẮT BUỘC*** estimate effort và complexity cho mỗi task
+
+#### Task Generation Rules
+- Mỗi design component tương ứng với 1-3 tasks
+- Tasks phải có thể thực hiện độc lập (với dependencies được resolve)
+- Mỗi task không nên vượt quá 1 ngày công việc
+- Tasks phải có acceptance criteria rõ ràng và measurable
+
+## Validation và Quality Gates
+
+### Requirements Validation
+- ***BẮT BUỘC*** review requirements với stakeholders (nếu có)
+- ***BẮT BUỘC*** đảm bảo requirements SMART (Specific, Measurable, Achievable, Relevant, Time-bound)
+- ***BẮT BUỘC*** kiểm tra consistency giữa functional và non-functional requirements
+- ***BẮT BUỘC*** validate feasibility với technical constraints
+
+### Design Validation
+- ***BẮT BUỘC*** đảm bảo design satisfy tất cả requirements
+- ***BẮT BUỘC*** kiểm tra architectural consistency
+- ***BẮT BUỘC*** validate scalability và maintainability
+- ***BẮT BUỘC*** review security considerations
+
+### Task Validation
+- ***BẮT BUỘC*** đảm bảo tasks cover toàn bộ design specifications
+- ***BắT BUỘC*** kiểm tra task dependencies không có circular references
+- ***BẮT BUỘC*** validate task acceptance criteria
+- ***BẮT BUỘC*** estimate total effort và timeline
+
+## Integration với Kiro System
+
+### File Structure Compliance
+- ***BẮT BUỘC*** tạo files theo đúng Kiro directory structure
+- ***BẮT BUỘC*** sử dụng Kiro naming conventions
+- ***BẮT BUỘC*** format files theo Kiro specifications
+- ***BẮT BUỘC*** maintain traceability links giữa các files
+
+### Handoff to Kiro Execution
+- ***BẮT BUỘC*** validate file format compatibility với Kiro tools
+- ***BẮT BUỘC*** test task execution với [Kiro Task Execution](kiro-task-execution.mdc)
+- ***BẮT BUỘC*** ensure seamless transition từ fallback workflow sang Kiro workflow
+
+## Error Handling và Recovery
+
+### Incomplete Brainstorm
+- Nếu brainstorm không đầy đủ → yêu cầu bổ sung thông tin
+- Nếu thiếu user stories → trigger additional brainstorm sessions
+- Nếu unclear requirements → request clarification từ stakeholders
+
+### Design Issues
+- Nếu design không feasible → revise requirements
+- Nếu technical constraints conflict → escalate to technical lead
+- Nếu UI/UX concerns → request design review
+
+### Task Generation Problems
+- Nếu tasks quá lớn → break down thành smaller tasks
+- Nếu dependencies phức tạp → simplify architecture
+- Nếu unclear acceptance criteria → refine requirements
+
+## Monitoring và Metrics
+
+### Process Metrics
+- Time từ brainstorm đến completed tasks
+- Number of iterations cần thiết cho mỗi phase
+- Quality của generated artifacts
+
+### Success Criteria
+- Tất cả 4 files được tạo thành công
+- Tasks có thể execute được bằng Kiro system
+- Zero blocking issues trong task execution
+- Stakeholder approval cho requirements và design
+
+## Best Practices
+
+### Documentation
+- ***BẮT BUỘC*** maintain traceability từ brainstorm đến tasks
+- ***BẮT BUỘC*** document assumptions và decisions
+- ***BẮT BUỘC*** version control tất cả generated files
+- ***KHUYẾN NGHỊ*** tạo summary document cho quick reference
+
+### Collaboration
+- ***BẮT BUỘC*** involve stakeholders trong requirements review
+- ***KHUYẾN NGHỊ*** peer review cho design specifications
+- ***BẮT BUỘC*** validate tasks với development team
+
+### Continuous Improvement
+- ***BẮT BUỘC*** collect feedback sau mỗi fallback workflow execution
+- ***BẮT BUỘC*** update templates dựa trên lessons learned
+- ***KHUYẾN NGHỊ*** maintain knowledge base của common patterns
+
+## Tích Hợp với Existing Workflows
+
+### Planning Workflow Integration
+- ***BẮT BUỘC*** sử dụng [Planning Workflow](planning-workflow.mdc) sau khi có tasks
+- ***BẮT BUỘC*** apply planning validation rules
+- ***BẮT BUỘC*** integrate với project stage management
+
+### Development Workflow Integration
+- ***BẮT BUỘC*** transition sang [Development Rules](development-rules.mdc) sau task generation
+- ***BẮT BUỘC*** apply [Auto Task Execution](auto-task-execution.mdc) cho generated tasks
+- ***BẮT BUỘC*** maintain consistency với existing development practices
+
+---
+
+**Lưu ý quan trọng**: Workflow này chỉ được sử dụng khi Kiro tools không available hoặc không thể tạo được required files. Luôn ưu tiên sử dụng Kiro native tools trước khi fallback to manual process này.
