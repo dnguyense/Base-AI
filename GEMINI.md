@@ -77,6 +77,13 @@
 - **[Review Gate V2](./.cursor/rules/ReviewGateV2.mdc)** - Cổng review code
 - **[Four Role Development](./.cursor/rules/four-role-development.mdc)** - Phát triển 4 vai trò
 
+### Kiro Task Execution System
+
+- **[Kiro Task Execution](./.cursor/rules/kiro-task-execution.mdc)** - 🔴 BẮT BUỘC: Hệ thống thực thi task tự động
+- **[Kiro Fallback Workflow](./.cursor/rules/kiro-fallback-workflow.mdc)** - Quy trình dự phòng khi thiếu Kiro files
+- **[Kiro System Overview](./.cursor/rules/kiro-system-overview.mdc)** - Tổng quan hệ thống Kiro
+- **[Auto Task Execution](./.cursor/rules/auto-task-execution.mdc)** - Thực thi task tự động
+
 ## ⚠️ CRITICAL ENFORCEMENT RULES FOR GEMINI IDE
 
 ### Mandatory Compliance
@@ -85,6 +92,8 @@
 2. **NGHIÊM CẤM** tạo rules mới mà không sync với `.cursor/rules/`
 3. **BẮT BUỘC** sử dụng relative paths để đảm bảo tính di động
 4. **BẮT BUỘC** kiểm tra `.project-identity` trước mọi task
+5. **🔴 BẮT BUỘC** sử dụng Kiro Task Execution System cho mọi project
+6. **🔴 BẮT BUỘC** kích hoạt Kiro Fallback Workflow khi thiếu files
 
 ### Gemini IDE Specific Configuration
 
@@ -99,12 +108,48 @@
 - File này chỉ được cập nhật để sync alias links
 - Không được override hoặc modify nội dung rules gốc
 
+## 🎯 Kiro Task Execution System for Gemini IDE
+
+### Core Features
+
+- **🔴 MANDATORY**: Automatic task detection từ `.kiro/specs/{project}/tasks.md`
+- **🔴 MANDATORY**: Smart execution theo priority và dependencies
+- **🔴 MANDATORY**: Real-time status tracking (pending, in-progress, completed, failed)
+- **🔴 MANDATORY**: Fallback workflow khi thiếu Kiro files
+- **🔴 MANDATORY**: Quality gates với acceptance criteria validation
+
+### Kiro Task Detection Algorithm
+
+```bash
+# Gemini IDE sẽ tự động kiểm tra:
+1. Kiểm tra .kiro/specs/{project}/tasks.md
+2. Nếu thiếu → Kích hoạt Kiro Fallback Workflow
+3. Nếu có → Parse và execute tasks theo priority
+4. Update status real-time trong Gemini IDE
+```
+
+### Fallback Workflow Integration
+
+1. **Brainstorm Stage**: Tạo insights từ user input
+2. **Requirements Stage**: Generate structured requirements.md
+3. **Design Stage**: Create technical design.md
+4. **Tasks Stage**: Convert design thành Kiro tasks.md
+
+### Gemini IDE Specific Benefits
+
+- **Seamless Integration**: Tích hợp mượt mà với Gemini IDE workflow
+- **Visual Task Tracking**: Hiển thị task progress trong IDE
+- **Auto-completion**: Smart suggestions cho Kiro task format
+- **Error Prevention**: Validate task format trước khi execute
+- **Dependency Resolution**: Automatic task ordering trong IDE
+
 ## 🔄 Rules Hierarchy Priority
 
 1. `.cursor/rules/` - **PRIMARY SOURCE** (Highest Priority)
-2. `.appdexer/rules/` - Secondary reference
-3. `.trae/rules/` - Alias/Link layer
-4. `GEMINI.md` - Gemini IDE specific alias (Lowest Priority)
+2. **🔴 Kiro Task System** - Automatic execution layer (Critical Priority)
+3. `.appdexer/rules/` - Secondary reference
+4. `.trae/rules/` - Alias/Link layer
+5. `GEMINI.md` - Gemini IDE specific alias (Lowest Priority)
 
 ## 🎯 Core Working Principles for Gemini IDE
 
@@ -381,13 +426,45 @@ com.base.app/
 
 ---
 
+## 🔧 Kiro System Commands for Gemini IDE
+
+### Project Analysis Commands
+
+```bash
+# Kiểm tra Kiro system status
+ls -la .kiro/specs/*/
+cat .kiro/specs/{project}/tasks.md
+cat .kiro/specs/{project}/requirements.md
+cat .kiro/specs/{project}/design.md
+
+# Validate Kiro task format
+grep -E "^## TASK-[0-9]+:" .kiro/specs/{project}/tasks.md
+grep -E "\*\*Status\*\*:" .kiro/specs/{project}/tasks.md
+```
+
+### Kiro Task Management
+
+```bash
+# Check task dependencies
+grep -A 5 "Dependencies:" .kiro/specs/{project}/tasks.md
+
+# Monitor task progress
+grep -E "Status.*completed" .kiro/specs/{project}/tasks.md
+grep -E "Status.*pending" .kiro/specs/{project}/tasks.md
+
+# Validate acceptance criteria
+grep -A 10 "Acceptance Criteria" .kiro/specs/{project}/tasks.md
+```
+
 ## 🚀 Getting Started with Gemini IDE
 
-1. **Đọc .project-identity** để hiểu context dự án
-2. **Load appropriate workflow rules** từ `.cursor/rules/`
-3. **Kiểm tra project stage** và áp dụng rules phù hợp
-4. **Tuân thủ file organization** và documentation standards
-5. **Sử dụng backup protocols** khi thay đổi files
+1. **🔴 MANDATORY: Kiểm tra Kiro system** trước mọi task
+2. **Đọc .project-identity** để hiểu context dự án
+3. **Load appropriate workflow rules** từ `.cursor/rules/`
+4. **Kích hoạt Kiro Fallback** nếu thiếu files
+5. **Tuân thủ file organization** và documentation standards
+6. **Sử dụng backup protocols** khi thay đổi files
+7. **Execute Kiro tasks** theo priority và dependencies
 
 ---
 

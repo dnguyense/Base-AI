@@ -71,6 +71,13 @@ Base-AI-Project là framework template AI-powered được thiết kế cho Curs
 @.cursor/rules/ReviewGateV2.mdc
 @.cursor/rules/four-role-development.mdc
 
+### Kiro Task Execution System
+
+@.cursor/rules/kiro-task-execution.mdc
+@.cursor/rules/kiro-fallback-workflow.mdc
+@.cursor/rules/kiro-system-overview.mdc
+@.cursor/rules/auto-task-execution.mdc
+
 ## ⚠️ CRITICAL ENFORCEMENT RULES
 
 ### Mandatory Compliance
@@ -95,20 +102,31 @@ Base-AI-Project là framework template AI-powered được thiết kế cho Curs
 # ALWAYS start by checking project identity
 cat .project-identity
 cat .project-personality
+
+# Check for Kiro system files
+ls -la .kiro/specs/*/
 ```
 
-### 2. Brainstorm Phase (MANDATORY for new projects)
+### 2. Kiro Task System Detection
+
+- **AUTOMATIC**: Claude tự động phát hiện và thực thi Kiro tasks từ `.kiro/specs/{project}/tasks.md`
+- **FALLBACK**: Nếu thiếu files Kiro, tự động kích hoạt Kiro Fallback Workflow
+- **PRIORITY**: Kiro system có ưu tiên cao nhất trong task execution
+
+### 3. Brainstorm Phase (MANDATORY for new projects)
 
 - **NEVER skip brainstorming** for new projects
 - Use: "Tôi muốn brainstorm ý tưởng [your app idea]"
 - Creates structured plan and updates .project-identity
+- **KIRO INTEGRATION**: Tự động tạo Kiro tasks từ brainstorm results
 
-### 3. 4-Role Development Process
+### 4. 4-Role Development Process
 
 - **Planner**: Analyzes requirements and creates plan
 - **Architect**: Designs technical architecture
 - **Builder**: Implements the solution
 - **Tester**: Validates and tests implementation
+- **KIRO ENHANCED**: Mỗi role tuân thủ Kiro task specifications
 
 ### Communication Style
 
@@ -181,9 +199,55 @@ cat .project-personality
 - Test các thay đổi trước khi commit
 - Có kế hoạch rollback khi cần thiết
 
+## 🎯 Kiro Task Execution System
+
+### Core Features
+
+- **Automatic Task Detection**: Tự động phát hiện tasks từ `.kiro/specs/{project}/tasks.md`
+- **Smart Execution**: Thực thi tasks theo thứ tự priority và dependencies
+- **Real-time Status Tracking**: Theo dõi trạng thái task (pending, in-progress, completed, failed)
+- **Fallback Workflow**: Tự động tạo missing files (requirements.md, design.md, tasks.md)
+- **Quality Gates**: Xác thực acceptance criteria cho mỗi task
+
+### Kiro Task Format
+
+```markdown
+## TASK-001: Task Title
+**Status**: pending | in-progress | completed | failed
+**Priority**: high | medium | low
+**Dependencies**: TASK-XXX, TASK-YYY
+**Estimated Time**: 2h
+
+### Description
+Detailed task description...
+
+### Acceptance Criteria
+- [ ] Criterion 1
+- [ ] Criterion 2
+
+### Implementation Notes
+Technical notes and considerations...
+```
+
+### Fallback Workflow Stages
+
+1. **Brainstorm**: Tạo insights và requirements từ user input
+2. **Requirements**: Chuyển đổi insights thành structured requirements
+3. **Design**: Tạo technical design và architecture
+4. **Tasks**: Phân chia design thành executable Kiro tasks
+
+### Integration Benefits
+
+- **Automation**: Giảm manual task management
+- **Standardization**: Consistent task format across projects
+- **Traceability**: Clear task history và progress tracking
+- **Quality Control**: Built-in validation và acceptance criteria
+- **Dependency Management**: Automatic task ordering
+
 ## 🔄 Rules Hierarchy Priority
 
 1. `.cursor/rules/` - **PRIMARY SOURCE** (Highest Priority)
+2. **Kiro Task System** - Automatic task execution layer
 
 ## 📁 Critical File Locations
 
