@@ -67,6 +67,13 @@
 - **[Review Gate V2](../../.cursor/rules/ReviewGateV2.mdc)** - Cổng review code
 - **[Four Role Development](../../.cursor/rules/four-role-development.mdc)** - Phát triển 4 vai trò
 
+### Kiro Task Execution System
+
+- **[Kiro Task Execution](../../.cursor/rules/kiro-task-execution.mdc)** - Hệ thống thực thi task tự động
+- **[Kiro Fallback Workflow](../../.cursor/rules/kiro-fallback-workflow.mdc)** - Quy trình dự phòng khi thiếu file Kiro
+- **[Kiro System Overview](../../.cursor/rules/kiro-system-overview.mdc)** - Tổng quan hệ thống Kiro
+- **[Auto Task Execution](../../.cursor/rules/auto-task-execution.mdc)** - Thực thi task tự động
+
 ## ⚠️ CRITICAL ENFORCEMENT RULES
 
 ### Mandatory Compliance
@@ -75,6 +82,8 @@
 2. **NGHIÊM CẤM** tạo rules mới trong `.trae/rules/` mà không sync với `.cursor/rules/`
 3. **BẮT BUỘC** cập nhật alias links khi có thay đổi trong `.cursor/rules/`
 4. **BẮT BUỘC** sử dụng relative paths để đảm bảo tính di động
+5. **BẮT BUỘC** sử dụng Kiro Task Execution System cho mọi dự án
+6. **BẮT BUỘC** kích hoạt Kiro Fallback Workflow khi thiếu file Kiro
 
 ### Synchronization Protocol
 
@@ -84,15 +93,62 @@
 
 ## 🔄 Rules Hierarchy Priority
 
-1. `.cursor/rules/` - **PRIMARY SOURCE** (Highest Priority)
-2. `.appdexer/rules/` - Secondary reference
-3. `.trae/rules/` - Alias/Link layer only (Lowest Priority)
+1. **Kiro Task System** - Critical Priority (Must Execute)
+2. `.cursor/rules/` - **PRIMARY SOURCE** (Highest Priority)
+3. `.appdexer/rules/` - Secondary reference
+4. `.trae/rules/` - Alias/Link layer only (Lowest Priority)
 
 ## Trae AI Specific Configuration
 
 - **BẮT BUỘC** sử dụng rules từ `.cursor/rules/` làm nguồn chính thức
 - File này chỉ chứa alias links và không được chứa rules độc lập
 - Mọi customization phải được thực hiện trong `.cursor/rules/`
+
+## 🎯 Kiro Task Execution System for Trae AI
+
+### Core Features
+
+- **Automatic Task Detection & Execution**: Tự động phát hiện và thực thi các Kiro tasks
+- **Status Tracking**: Theo dõi trạng thái thực thi từng task
+- **Fallback Workflow**: Quy trình dự phòng khi thiếu file Kiro
+- **Quality Gates**: Cổng chất lượng tại mỗi giai đoạn
+
+### Kiro Task Detection Algorithm
+
+1. **Kiểm tra file Kiro**: `requirements.md`, `design.md`, `tasks.md`
+2. **Phân tích trạng thái**: Xác định file nào thiếu hoặc không đầy đủ
+3. **Kích hoạt workflow**: Primary flow hoặc Fallback flow
+4. **Thực thi tasks**: Theo thứ tự ưu tiên và phụ thuộc
+
+### Fallback Workflow Stages
+
+#### 1. Brainstorm Stage
+- Phân tích yêu cầu dự án từ context hiện có
+- Tạo ý tưởng và định hướng phát triển
+- Output: Brainstorm document với các ý tưởng chính
+
+#### 2. Requirements Stage
+- Chuyển đổi brainstorm thành requirements cụ thể
+- Định nghĩa functional và non-functional requirements
+- Output: `requirements.md` hoàn chỉnh
+
+#### 3. Design Stage
+- Thiết kế kiến trúc và UI/UX dựa trên requirements
+- Tạo wireframes và system design
+- Output: `design.md` với thiết kế chi tiết
+
+#### 4. Tasks Stage
+- Phân tích design và tạo danh sách tasks cụ thể
+- Định nghĩa dependencies và priorities
+- Output: `tasks.md` với action items
+
+### Integration Benefits for Trae AI
+
+- **Seamless Integration**: Tích hợp mượt mà với Trae AI workflow
+- **Visual Task Tracking**: Theo dõi tasks trực quan trong IDE
+- **Auto-completion**: Tự động hoàn thành tasks khi điều kiện đáp ứng
+- **Error Prevention**: Ngăn ngừa lỗi thông qua quality gates
+- **Dependency Resolution**: Tự động giải quyết phụ thuộc giữa tasks
 
 ## Android Development Workflow
 
@@ -272,3 +328,36 @@ com.base.app/
 - Tổ chức strings theo feature hoặc screen
 - Sử dụng plurals cho các string có số lượng
 - Implement proper formatting cho dates, numbers, currencies
+
+## Common Kiro System Commands
+
+### Project Analysis
+
+```bash
+# Kiểm tra trạng thái Kiro system
+kiro status
+
+# Phân tích định dạng task
+kiro analyze tasks
+```
+
+### Task Management
+
+```bash
+# Kiểm tra phụ thuộc task
+kiro check dependencies
+
+# Theo dõi tiến độ
+kiro track progress
+
+# Xác thực tiêu chí chấp nhận
+kiro validate acceptance-criteria
+```
+
+## Getting Started with Trae AI + Kiro
+
+1. **BẮT BUỘC**: Kiểm tra Kiro system khi bắt đầu dự án
+2. **BẮT BUỘC**: Kích hoạt Kiro Fallback nếu thiếu file
+3. Theo dõi task execution thông qua Trae AI interface
+4. Sử dụng quality gates để đảm bảo chất lượng
+5. Tận dụng auto-completion và dependency resolution
