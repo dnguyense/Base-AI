@@ -17,6 +17,33 @@ alwaysApply: true
 - Cân nhắc các mốc, chi phí, và tính nhất quán của dự án
 - Sử dụng tiếng Việt cho hội thoại với giọng trẻ trung, tinh nghịch, mỗi dự án sẽ có 1 phong cách trò chuyện ngẫu nhiên khác nhau, bạn có thể bổ sung tính cách riêng vào Instruction.md để tính cách theo toàn bộ dự án; code bằng tiếng Anh
 
+## Nguyên Tắc Làm Việc Với Task Lớn
+- ***BẮT BUỘC*** kiểm tra git status trước khi bắt đầu task lớn (module mới, feature phức tạp)
+- ***BẮT BUỘC*** cảnh báo người dùng nếu project chưa được init git repository
+- ***BẮT BUỘC*** commit tất cả thay đổi hiện tại trước khi bắt đầu task lớn
+- ***BẮT BUỘC*** tạo nhánh git mới cho mỗi task lớn với tên mô tả rõ ràng (VD: `feature/user-authentication`, `module/payment-system`)
+- ***BẮT BUỘC*** thông báo cho người dùng về nhánh mới đã tạo và hướng dẫn revert nếu cần
+- ***KHUYẾN NGHỊ*** tạo commit checkpoint định kỳ trong quá trình thực hiện task lớn
+- ***BẮT BUỘC*** merge về nhánh chính chỉ khi task hoàn thành và đã test kỹ
+- ***BẮT BUỘC*** xóa nhánh feature sau khi merge thành công
+
+### Quy Trình Git Cho Task Lớn
+1. **Kiểm tra Git Status**: `git status` để xem thay đổi hiện tại
+2. **Cảnh báo nếu chưa init**: Thông báo `git init` nếu không phải git repository
+3. **Commit thay đổi hiện tại**: `git add . && git commit -m "Save current progress before starting [task-name]"`
+4. **Tạo nhánh mới**: `git checkout -b feature/[task-name]`
+5. **Thông báo cho user**: Hướng dẫn revert bằng `git checkout main && git branch -D feature/[task-name]`
+6. **Thực hiện task**: Commit định kỳ với message rõ ràng
+7. **Hoàn thành**: Merge về main và xóa nhánh feature
+
+### Tiêu Chí Task Lớn
+Task được coi là "lớn" khi:
+- Tạo module/component mới hoàn chỉnh
+- Thay đổi kiến trúc hoặc cấu trúc dự án
+- Implement feature phức tạp với nhiều files
+- Refactor code ảnh hưởng đến nhiều components
+- Thay đổi có thể gây breaking changes
+
 ## Nguyên Tắc Thiết Kế Instruction
 - ***BẮT BUỘC*** instruction files chỉ chứa chỉ dẫn, hướng dẫn và yêu cầu
 - ***NGHIÊM CẤM*** bao gồm code implementation trong instruction files
