@@ -127,23 +127,7 @@ scripts/config/telegram_config.py
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
-- **Cursor IDE** với MCP support
-- **Python >= 3.9** (cho MCP server)
-- **Git**
-- Platform-specific SDK (Android Studio, Xcode, Node.js...)
-
-### 1. Clone & Setup
-
-# Clone dự án
-
-```bash
-git clone https://github.com/babyskill/Base-AI-Project.git
-cd Base-AI-Project
-```
-
-### 3. Initialize Your Project
+### 1. Initialize Your Project
 
 ## 📖 Hướng Dẫn Sử Dụng
 
