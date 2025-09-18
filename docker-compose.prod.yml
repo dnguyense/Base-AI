@@ -1,0 +1,141 @@
+# Production Docker Compose Configuration
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: pdf-compressor-db-prod
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-pdf_compressor_prod}
+      POSTGRES_USER: ${POSTGRES_USER:-pdf_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pdf_password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+      - ./server/src/migrations:/docker-entrypoint-initdb.d
+    networks:
+      - pdf-network-prod
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-pdf_user} -d ${POSTGRES_DB:-pdf_compressor_prod}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: pdf-compressor-redis-prod
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis_password}
+    volumes:
+      - redis_data_prod:/data
+    networks:
+      - pdf-network-prod
+    healthcheck:
+      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "${REDIS_PASSWORD:-redis_password}", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Backend Server
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      target: production
+    container_name: pdf-compressor-server-prod
+    environment:
+      - NODE_ENV=production
+      - PORT=8000
+      - DATABASE_URL=postgres://${POSTGRES_USER:-pdf_user}:${POSTGRES_PASSWORD:-pdf_password}@postgres:5432/${POSTGRES_DB:-pdf_compressor_prod}
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-redis_password}@redis:6379
+      - CLIENT_URL=${CLIENT_URL:-https://yourapp.com}
+      - FRONTEND_URL=${FRONTEND_URL:-https://yourapp.com}
+      - JWT_SECRET=${JWT_SECRET}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT:-587}
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASS=${EMAIL_PASS}
+      - PROCESSING_TIMEOUT=300000
+      - MAX_FILE_SIZE=52428800
+      - CLEANUP_INTERVAL=3600000
+      - LOG_LEVEL=info
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server/uploads:/app/uploads
+      - ./server/compressed:/app/compressed
+      - ./server/temp:/app/temp
+      - ./server/processed:/app/processed
+      - ./server/batch-output:/app/batch-output
+      - ./server/logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - pdf-network-prod
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+
+  # Frontend Client (Production Build)
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      target: production
+      args:
+        - REACT_APP_API_URL=${REACT_APP_API_URL:-https://api.yourapp.com}
+        - REACT_APP_STRIPE_PUBLISHABLE_KEY=${REACT_APP_STRIPE_PUBLISHABLE_KEY}
+    container_name: pdf-compressor-client-prod
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - server
+    networks:
+      - pdf-network-prod
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Nginx Reverse Proxy (Optional - for SSL termination and load balancing)
+  nginx:
+    image: nginx:alpine
+    container_name: pdf-compressor-nginx-prod
+    ports:
+      - "8081:8080"
+      - "8443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - server
+      - client
+    networks:
+      - pdf-network-prod
+    restart: unless-stopped
+
+volumes:
+  postgres_data_prod:
+  redis_data_prod:
+
+networks:
+  pdf-network-prod:
+    driver: bridge

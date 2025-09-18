@@ -1,0 +1,120 @@
+# Development Docker Compose Configuration
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: pdf-compressor-db-dev
+    environment:
+      POSTGRES_DB: pdf_compressor_dev
+      POSTGRES_USER: pdf_user
+      POSTGRES_PASSWORD: pdf_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+      - ./server/src/migrations:/docker-entrypoint-initdb.d
+    networks:
+      - pdf-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pdf_user -d pdf_compressor_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: pdf-compressor-redis-dev
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data_dev:/data
+    networks:
+      - pdf-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend Server
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      target: development
+    container_name: pdf-compressor-server-dev
+    environment:
+      - NODE_ENV=development
+      - PORT=5001
+      - DATABASE_URL=postgres://pdf_user:pdf_password@postgres:5432/pdf_compressor_dev
+      - REDIS_URL=redis://redis:6379
+      - CLIENT_URL=http://localhost:3000
+      - FRONTEND_URL=http://localhost:3000
+      - JWT_SECRET=your-dev-jwt-secret-here
+      - STRIPE_SECRET_KEY=your-stripe-secret-key
+      - STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
+      - EMAIL_HOST=smtp.gmail.com
+      - EMAIL_PORT=587
+      - EMAIL_USER=your-email@gmail.com
+      - EMAIL_PASS=your-email-password
+      - PROCESSING_TIMEOUT=300000
+      - MAX_FILE_SIZE=52428800
+      - CLEANUP_INTERVAL=3600000
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./server/src:/app/src
+      - ./server/uploads:/app/uploads
+      - ./server/compressed:/app/compressed
+      - ./server/temp:/app/temp
+      - ./server/processed:/app/processed
+      - ./server/batch-output:/app/batch-output
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - pdf-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend Client
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      target: development
+    container_name: pdf-compressor-client-dev
+    environment:
+      - REACT_APP_API_URL=http://localhost:5001
+      - REACT_APP_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
+      - REACT_APP_ENABLE_COMPRESSION_ANALYTICS=true
+      - REACT_APP_MAX_FILE_SIZE=52428800
+      - WDS_SOCKET_HOST=0.0.0.0
+      - WATCHPACK_POLLING=true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client/src:/app/src
+      - ./client/public:/app/public
+      - /app/node_modules
+    depends_on:
+      - server
+    networks:
+      - pdf-network
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres_data_dev:
+  redis_data_dev:
+
+networks:
+  pdf-network:
+    driver: bridge

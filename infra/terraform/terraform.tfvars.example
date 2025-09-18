@@ -1,0 +1,42 @@
+project_name = "pdf-compressor"
+environment  = "production"
+aws_region   = "us-east-1"
+
+availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+
+vpc_cidr        = "10.10.0.0/16"
+public_subnets  = ["10.10.0.0/24", "10.10.1.0/24", "10.10.2.0/24"]
+private_subnets = ["10.10.10.0/24", "10.10.11.0/24", "10.10.12.0/24"]
+
+db_name                   = "pdf_compressor_pro"
+db_username               = "app_admin"
+db_password               = "CHANGE_ME"
+db_engine_version         = "15.5"
+db_parameter_group_family = "postgres15"
+db_instance_class         = "db.m6g.large"
+db_storage_gb             = 100
+db_max_storage_gb         = 500
+db_multi_az               = true
+
+db_backup_retention       = 7
+db_backup_window          = "03:00-04:00"
+db_maintenance_window     = "sun:05:00-sun:06:00"
+db_allowed_cidrs          = ["10.10.10.0/23"]
+db_enable_read_replica    = true
+db_read_replica_instance_class = "db.r6g.large"
+
+redis_engine_version   = "7.1"
+redis_node_type        = "cache.t4g.small"
+redis_num_nodes        = 2
+redis_parameter_group  = "default.redis7"
+redis_maintenance_window = "sun:07:00-sun:08:00"
+redis_allowed_cidrs      = ["10.10.10.0/23"]
+redis_auth_token         = "CHANGE_ME_SECURELY"
+
+storage_bucket_name    = "pdf-compressor-production-files"
+storage_logging_bucket = "central-logging-bucket"
+
+extra_tags = {
+  Owner       = "platform-team"
+  CostCenter  = "12345"
+}

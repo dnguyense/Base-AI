@@ -1,11 +1,11 @@
 {
-  "projectName": "Tên dự án, cần điều chỉnh khi setup project",
-  "projectType": "template|android|ios|flutter|react-native|web|desktop",
-  "projectStage": "setup|brainstorm|development|production",
-  "mainLanguages": [],
-  "mainFrameworks": [],
-  "keyTechnologies": [],
-  "keyFeatures": [],
+  "projectName": "PDF Compressor Pro",
+  "projectType": "web",
+  "projectStage": "setup",
+  "mainLanguages": ["JavaScript", "TypeScript"],
+  "mainFrameworks": ["React", "Node.js", "Express"],
+  "keyTechnologies": ["Tailwind CSS", "shadcn/ui", "Stripe", "PDF processing"],
+  "keyFeatures": ["PDF compression", "Subscription system", "Payment integration", "User authentication", "File management"],
   "projectLifecycle": {
     "stage1_brainstorm": {
       "description": "Giai đoạn brainstorm và lên ý tưởng",
