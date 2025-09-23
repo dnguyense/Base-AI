@@ -1,11 +1,18 @@
-// @ts-nocheck
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs-extra';
-import { batchProcessor } from '../services/batchProcessor';
-import { pdfService } from '../services/pdfService';
 import { v4 as uuidv4 } from 'uuid';
+import { batchProcessor } from '../services/batchProcessor';
+import { PDFCompressionService } from '../services/pdfService';
+import {
+  ALLOWED_PDF_MIME_TYPES,
+  MAX_BATCH_FILE_SIZE_BYTES,
+  MAX_BATCH_FILES_PER_REQUEST,
+  MAX_BATCH_TOTAL_UPLOAD_SIZE_BYTES,
+} from '../config/upload';
+import { calculateTotalUploadSize, cleanupUploadedFiles } from '../utils/upload';
+import { validateAndNormalizeBatchOptions } from '../utils/batchOptions';
 
 const router = express.Router();
 
@@ -25,11 +32,11 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage,
   limits: {
-    fileSize: 50 * 1024 * 1024, // 50MB per file
-    files: 10 // Maximum 10 files per batch
+    fileSize: MAX_BATCH_FILE_SIZE_BYTES,
+    files: MAX_BATCH_FILES_PER_REQUEST,
   },
   fileFilter: (req, file, cb) => {
-    if (file.mimetype === 'application/pdf') {
+    if (ALLOWED_PDF_MIME_TYPES.includes(file.mimetype as (typeof ALLOWED_PDF_MIME_TYPES)[number])) {
       cb(null, true);
     } else {
       cb(new Error('Only PDF files are allowed'));
@@ -41,44 +48,102 @@ const upload = multer({
  * POST /api/v1/batch/upload
  * Upload multiple PDF files and start batch processing
  */
-router.post('/upload', upload.array('files', 10), async (req, res) => {
+router.post('/upload', upload.array('files', MAX_BATCH_FILES_PER_REQUEST), async (req: Request, res: Response): Promise<void> => {
   try {
-    const files = req.files as Express.Multer.File[];
-    const userId = req.body.userId || 'anonymous'; // In real app, get from auth
-    const options = {
-      quality: req.body.quality || 'medium',
-      removeMetadata: req.body.removeMetadata === 'true',
-      removeAnnotations: req.body.removeAnnotations === 'true',
-      optimizeImages: req.body.optimizeImages === 'true',
-      imageQuality: parseInt(req.body.imageQuality) || 60,
-      customDPI: parseInt(req.body.customDPI) || 150
-    };
+    const files = (req.files as Express.Multer.File[]) ?? [];
 
-    if (!files || files.length === 0) {
-      return res.status(400).json({
+    if (!files.length) {
+      res.status(400).json({
         success: false,
         error: 'No files uploaded'
       });
+      return;
     }
 
-    // Validate all uploaded files
+    const { options, errors: baseErrors } = validateAndNormalizeBatchOptions(req.body as Record<string, unknown>);
+    const validationErrors = [...baseErrors];
+
+    let userId = 'anonymous';
+    if (Object.prototype.hasOwnProperty.call(req.body ?? {}, 'userId')) {
+      const userIdValue = (req.body as Record<string, unknown>).userId;
+      if (typeof userIdValue === 'string') {
+        const trimmed = userIdValue.trim();
+        if (!trimmed) {
+          validationErrors.push({ field: 'userId', message: 'userId cannot be empty' });
+        } else {
+          userId = trimmed;
+        }
+      } else if (userIdValue !== undefined && userIdValue !== null) {
+        validationErrors.push({ field: 'userId', message: 'userId must be a string' });
+      }
+    }
+
+    if (validationErrors.length > 0) {
+      await cleanupUploadedFiles(files);
+      res.status(400).json({
+        success: false,
+        error: 'Invalid batch options',
+        details: validationErrors
+      });
+      return;
+    }
+
+    const totalUploadSize = calculateTotalUploadSize(files);
+    if (totalUploadSize > MAX_BATCH_TOTAL_UPLOAD_SIZE_BYTES) {
+      await cleanupUploadedFiles(files);
+      res.status(413).json({
+        success: false,
+        error: `Total upload size ${PDFCompressionService.formatFileSize(totalUploadSize)} exceeds limit of ${PDFCompressionService.formatFileSize(MAX_BATCH_TOTAL_UPLOAD_SIZE_BYTES)}`,
+        totalSize: totalUploadSize,
+        maxTotalSize: MAX_BATCH_TOTAL_UPLOAD_SIZE_BYTES
+      });
+      return;
+    }
+
+    for (const file of files) {
+      if (!ALLOWED_PDF_MIME_TYPES.includes(file.mimetype as (typeof ALLOWED_PDF_MIME_TYPES)[number])) {
+        await cleanupUploadedFiles(files);
+        res.status(400).json({
+          success: false,
+          error: `File ${file.originalname} must be a PDF`
+        });
+        return;
+      }
+
+      if (!file.size || file.size <= 0) {
+        await cleanupUploadedFiles(files);
+        res.status(400).json({
+          success: false,
+          error: `File ${file.originalname} is empty`
+        });
+        return;
+      }
+
+      if (file.size > MAX_BATCH_FILE_SIZE_BYTES) {
+        await cleanupUploadedFiles(files);
+        res.status(413).json({
+          success: false,
+          error: `File ${file.originalname} exceeds the ${PDFCompressionService.formatFileSize(MAX_BATCH_FILE_SIZE_BYTES)} size limit`,
+          file: file.originalname,
+          size: file.size,
+          maxFileSize: MAX_BATCH_FILE_SIZE_BYTES
+        });
+        return;
+      }
+    }
+
     const validationResults = await Promise.all(
       files.map(async (file) => {
-        const validation = await pdfService.validatePDFFile(file.path);
-        return {
-          file,
-          validation
-        };
+        const validation = await PDFCompressionService.validatePDFFile(file.path);
+        return { file, validation };
       })
     );
 
-    // Check for validation errors
     const invalidFiles = validationResults.filter(result => !result.validation.valid);
     if (invalidFiles.length > 0) {
-      // Clean up uploaded files
-      await Promise.all(files.map(file => fs.remove(file.path)));
-      
-      return res.status(400).json({
+      await cleanupUploadedFiles(files);
+
+      res.status(400).json({
         success: false,
         error: 'Some files are invalid',
         invalidFiles: invalidFiles.map(result => ({
@@ -86,9 +151,9 @@ router.post('/upload', upload.array('files', 10), async (req, res) => {
           error: result.validation.error
         }))
       });
+      return;
     }
 
-    // Create batch job
     const batchFiles = files.map(file => ({
       originalName: file.originalname,
       filePath: file.path,
@@ -106,11 +171,9 @@ router.post('/upload', upload.array('files', 10), async (req, res) => {
 
   } catch (error) {
     console.error('Batch upload error:', error);
-    
-    // Clean up files if there was an error
+
     if (req.files) {
-      const files = req.files as Express.Multer.File[];
-      await Promise.all(files.map(file => fs.remove(file.path)));
+      await cleanupUploadedFiles(req.files as Express.Multer.File[]);
     }
 
     res.status(500).json({
@@ -130,10 +193,11 @@ router.get('/status/:jobId', (req, res) => {
     const job = batchProcessor.getJobStatus(jobId);
 
     if (!job) {
-      return res.status(404).json({
+      res.status(404).json({
         success: false,
         error: 'Job not found'
       });
+      return;
     }
 
     // Get job statistics
@@ -175,16 +239,17 @@ router.get('/status/:jobId', (req, res) => {
  * POST /api/v1/batch/cancel/:jobId
  * Cancel a batch processing job
  */
-router.post('/cancel/:jobId', async (req, res) => {
+router.post('/cancel/:jobId', async (req, res): Promise<void> => {
   try {
     const jobId = req.params.jobId;
     const cancelled = await batchProcessor.cancelJob(jobId);
 
     if (!cancelled) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         error: 'Cannot cancel job (job not found or not cancellable)'
       });
+      return;
     }
 
     res.json({
@@ -205,33 +270,36 @@ router.post('/cancel/:jobId', async (req, res) => {
  * GET /api/v1/batch/download/:jobId
  * Create and download batch archive
  */
-router.get('/download/:jobId', async (req, res) => {
+router.get('/download/:jobId', async (req, res): Promise<void> => {
   try {
     const jobId = req.params.jobId;
     const job = batchProcessor.getJobStatus(jobId);
 
     if (!job) {
-      return res.status(404).json({
+      res.status(404).json({
         success: false,
         error: 'Job not found'
       });
+      return;
     }
 
     if (job.status !== 'completed') {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         error: 'Job not completed yet'
       });
+      return;
     }
 
     // Create batch download archive
     const downloadResult = await batchProcessor.createBatchDownload(jobId);
 
     if (!downloadResult.success) {
-      return res.status(500).json({
+      res.status(500).json({
         success: false,
         error: downloadResult.error
       });
+      return;
     }
 
     // Send the archive file
@@ -348,6 +416,48 @@ router.get('/events/:jobId', (req, res) => {
     batchProcessor.off('jobProgress', onJobProgress);
     batchProcessor.off('jobCompleted', onJobCompleted);
     batchProcessor.off('fileCompleted', onFileCompleted);
+  });
+});
+
+router.use((error: any, req: Request, res: Response, next: NextFunction) => {
+  if (error instanceof multer.MulterError) {
+    if (error.code === 'LIMIT_FILE_SIZE') {
+      res.status(413).json({
+        success: false,
+        error: `File size exceeds the ${PDFCompressionService.formatFileSize(MAX_BATCH_FILE_SIZE_BYTES)} limit`
+      });
+      return;
+    }
+
+    if (error.code === 'LIMIT_FILE_COUNT') {
+      res.status(400).json({
+        success: false,
+        error: `Too many files. Maximum is ${MAX_BATCH_FILES_PER_REQUEST} files per request.`
+      });
+      return;
+    }
+
+    if (error.code === 'LIMIT_UNEXPECTED_FILE') {
+      res.status(400).json({
+        success: false,
+        error: 'Unexpected file field. Use "files" as the field name.'
+      });
+      return;
+    }
+  }
+
+  if (error?.message === 'Only PDF files are allowed') {
+    res.status(400).json({
+      success: false,
+      error: 'Only PDF files are allowed.'
+    });
+    return;
+  }
+
+  console.error('Batch router error:', error);
+  res.status(500).json({
+    success: false,
+    error: 'Internal server error during batch upload.'
   });
 });
 

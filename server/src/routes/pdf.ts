@@ -2,8 +2,13 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs-extra';
-import { PDFController } from '../controllers/pdfController';
 import { v4 as uuidv4 } from 'uuid';
+import { PDFController } from '../controllers/pdfController';
+import {
+  ALLOWED_PDF_MIME_TYPES,
+  MAX_PDF_FILE_SIZE_BYTES,
+  MAX_PDF_FILES_PER_REQUEST,
+} from '../config/upload';
 
 const router = express.Router();
 
@@ -23,7 +28,7 @@ const storage = multer.diskStorage({
 
 // File filter to only allow PDF files
 const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-  if (file.mimetype === 'application/pdf') {
+  if (ALLOWED_PDF_MIME_TYPES.includes(file.mimetype as (typeof ALLOWED_PDF_MIME_TYPES)[number])) {
     cb(null, true);
   } else {
     cb(new Error('Only PDF files are allowed'));
@@ -35,8 +40,8 @@ const upload = multer({
   storage,
   fileFilter,
   limits: {
-    fileSize: 50 * 1024 * 1024, // 50MB per file
-    files: 5 // Maximum 5 files per request
+    fileSize: MAX_PDF_FILE_SIZE_BYTES,
+    files: MAX_PDF_FILES_PER_REQUEST,
   }
 });
 

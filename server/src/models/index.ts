@@ -2,6 +2,7 @@ import sequelize from '../config/database';
 import User from './User';
 import Subscription from './Subscription';
 import ProcessedFiles from './ProcessedFiles';
+import AuditLog from './AuditLog';
 import { env } from '../config/env';
 
 // Define model associations
@@ -29,18 +30,27 @@ ProcessedFiles.belongsTo(User, {
   as: 'user',
 });
 
+AuditLog.belongsTo(User, {
+  foreignKey: 'userId',
+  as: 'user',
+  onDelete: 'SET NULL',
+  onUpdate: 'CASCADE',
+});
+
 // Export models and sequelize instance
 export {
   sequelize,
   User,
   Subscription,
   ProcessedFiles,
+  AuditLog,
 };
 
 // Export model types for use in other files
 export type { UserAttributes } from './User';
 export type { SubscriptionAttributes } from './Subscription';
 export type { ProcessedFilesAttributes } from './ProcessedFiles';
+export type { AuditLogAttributes } from './AuditLog';
 
 // Initialize all models
 export const initializeDatabase = async (): Promise<void> => {
@@ -68,5 +78,6 @@ export default {
   User,
   Subscription,
   ProcessedFiles,
+  AuditLog,
   initializeDatabase,
 };

@@ -108,4 +108,27 @@ if (missingVariables.length > 0) {
   process.exit(1);
 }
 
+const isWeakSecret = (secret: string): boolean => {
+  if (!secret) return true;
+  const normalized = secret.toLowerCase();
+  const blacklist = ['test', 'secret', 'changeme', 'default'];
+  return secret.length < 32 || blacklist.some(term => normalized.includes(term));
+};
+
+const secretChecks = [
+  { key: 'JWT_SECRET', value: env.jwt.secret },
+  { key: 'JWT_REFRESH_SECRET', value: env.jwt.refreshSecret },
+];
+
+secretChecks.forEach(({ key, value }) => {
+  if (env.isProduction && isWeakSecret(value)) {
+    console.error(`\n❌ ${key} must be at least 32 characters and not use common placeholder values.`);
+    process.exit(1);
+  }
+
+  if (!env.isProduction && !env.isTest && isWeakSecret(value)) {
+    console.warn(`⚠️  ${key} appears weak. Use at least 32 characters with mixed complexity before deploying.`);
+  }
+});
+
 export type AppConfig = typeof env;

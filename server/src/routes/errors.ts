@@ -1,6 +1,8 @@
 import express from 'express';
+import type { Response } from 'express';
 import { errorTrackingService } from '../services/errorTrackingService';
-import { authenticateToken } from '../middleware/auth';
+import { authenticateToken, requireAdmin, AuthRequest } from '../middleware/auth';
+import { auditLogService } from '../services/auditLogService';
 
 const router = express.Router();
 
@@ -99,7 +101,10 @@ router.post('/feedback', async (req, res) => {
 });
 
 // Get error logs (admin only)
-router.get('/logs', authenticateToken, async (req, res) => {
+router.get('/logs', authenticateToken, requireAdmin, async (req: AuthRequest, res: Response) => {
+  const actorId = (req.user as any)?.id;
+  const actorEmail = (req.user as any)?.email;
+
   try {
     const {
       level,
@@ -117,11 +122,39 @@ router.get('/logs', authenticateToken, async (req, res) => {
 
     const logs = errorTrackingService.getErrorLogs(options);
 
+    await auditLogService.logAdminAction({
+      userId: actorId,
+      actorEmail,
+      success: true,
+      ipAddress: req.ip || req.connection?.remoteAddress || null,
+      userAgent: typeof req.get === 'function' ? req.get('User-Agent') || null : null,
+      metadata: {
+        actionName: 'VIEW_ERROR_LOGS',
+        route: req.originalUrl,
+        entityType: 'error_logs',
+        filters: options,
+      },
+    });
+
     res.json({
       success: true,
       data: logs
     });
   } catch (error) {
+    await auditLogService.logAdminAction({
+      userId: actorId,
+      actorEmail,
+      success: false,
+      ipAddress: req.ip || req.connection?.remoteAddress || null,
+      userAgent: typeof req.get === 'function' ? req.get('User-Agent') || null : null,
+      metadata: {
+        actionName: 'VIEW_ERROR_LOGS',
+        route: req.originalUrl,
+        entityType: 'error_logs',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+    }).catch(() => {});
+
     res.status(500).json({
       success: false,
       error: 'Failed to get error logs',
@@ -131,7 +164,10 @@ router.get('/logs', authenticateToken, async (req, res) => {
 });
 
 // Get feedback entries (admin only)
-router.get('/feedback', authenticateToken, async (req, res) => {
+router.get('/feedback', authenticateToken, requireAdmin, async (req: AuthRequest, res: Response) => {
+  const actorId = (req.user as any)?.id;
+  const actorEmail = (req.user as any)?.email;
+
   try {
     const {
       type,
@@ -151,11 +187,39 @@ router.get('/feedback', authenticateToken, async (req, res) => {
 
     const feedback = errorTrackingService.getFeedback(options);
 
+    await auditLogService.logAdminAction({
+      userId: actorId,
+      actorEmail,
+      success: true,
+      ipAddress: req.ip || req.connection?.remoteAddress || null,
+      userAgent: typeof req.get === 'function' ? req.get('User-Agent') || null : null,
+      metadata: {
+        actionName: 'VIEW_FEEDBACK',
+        route: req.originalUrl,
+        entityType: 'feedback',
+        filters: options,
+      },
+    });
+
     res.json({
       success: true,
       data: feedback
     });
   } catch (error) {
+    await auditLogService.logAdminAction({
+      userId: actorId,
+      actorEmail,
+      success: false,
+      ipAddress: req.ip || req.connection?.remoteAddress || null,
+      userAgent: typeof req.get === 'function' ? req.get('User-Agent') || null : null,
+      metadata: {
+        actionName: 'VIEW_FEEDBACK',
+        route: req.originalUrl,
+        entityType: 'feedback',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+    }).catch(() => {});
+
     res.status(500).json({
       success: false,
       error: 'Failed to get feedback',

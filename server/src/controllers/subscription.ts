@@ -6,6 +6,7 @@ import User from '../models/User';
 import Subscription from '../models/Subscription';
 import { SUBSCRIPTION_LIMITS } from '../middleware/subscription';
 import { env } from '../config/env';
+import { auditLogService } from '../services/auditLogService';
 
 
 // Stripe configuration
@@ -318,6 +319,20 @@ export const cancelSubscription = async (req: AuthRequest, res: Response): Promi
       }),
     });
 
+    await auditLogService.logSubscriptionChange({
+      userId: subscription.userId,
+      actorEmail: req.user?.email,
+      success: true,
+      metadata: {
+        subscriptionId: subscription.id,
+        stripeSubscriptionId: subscription.stripeSubscriptionId,
+        plan: subscription.plan,
+        status: immediately ? 'canceled' : subscription.status,
+        interval: subscription.interval,
+        reason: immediately ? 'cancel_immediate' : 'cancel_period_end',
+      },
+    });
+
     // Update user subscription status if canceled immediately
     if (immediately) {
       const user = await User.findByPk(req.user.id);
@@ -340,6 +355,15 @@ export const cancelSubscription = async (req: AuthRequest, res: Response): Promi
     });
   } catch (error) {
     console.error('Cancel subscription error:', error);
+    await auditLogService.logSubscriptionChange({
+      userId: req.user?.id,
+      actorEmail: req.user?.email,
+      success: false,
+      metadata: {
+        reason: 'cancel_subscription_failed',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+    }).catch(() => {});
     res.status(500).json({
       success: false,
       message: 'Failed to cancel subscription',
@@ -382,6 +406,20 @@ export const reactivateSubscription = async (req: AuthRequest, res: Response): P
       canceledAt: undefined,
     });
 
+    await auditLogService.logSubscriptionChange({
+      userId: subscription.userId,
+      actorEmail: req.user?.email,
+      success: true,
+      metadata: {
+        subscriptionId: subscription.id,
+        stripeSubscriptionId: subscription.stripeSubscriptionId,
+        plan: subscription.plan,
+        status: subscription.status,
+        interval: subscription.interval,
+        reason: 'reactivate_subscription',
+      },
+    });
+
     res.json({
       success: true,
       message: 'Subscription reactivated successfully',
@@ -391,6 +429,15 @@ export const reactivateSubscription = async (req: AuthRequest, res: Response): P
     });
   } catch (error) {
     console.error('Reactivate subscription error:', error);
+    await auditLogService.logSubscriptionChange({
+      userId: req.user?.id,
+      actorEmail: req.user?.email,
+      success: false,
+      metadata: {
+        reason: 'reactivate_subscription_failed',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+    }).catch(() => {});
     res.status(500).json({
       success: false,
       message: 'Failed to reactivate subscription',
@@ -471,6 +518,21 @@ export const updateSubscriptionPlan = async (req: AuthRequest, res: Response): P
       metadata: updatedSubscription.metadata,
     });
 
+    await auditLogService.logSubscriptionChange({
+      userId: subscription.userId,
+      actorEmail: req.user?.email,
+      success: true,
+      metadata: {
+        subscriptionId: subscription.id,
+        stripeSubscriptionId: subscription.stripeSubscriptionId,
+        plan: newPlan,
+        interval,
+        status: subscription.status,
+        reason: 'update_subscription_plan',
+        metadata: updatedSubscription.metadata,
+      },
+    });
+
     // Update user subscription plan
     await user.update({
       subscriptionPlan: newPlan,
@@ -485,6 +547,15 @@ export const updateSubscriptionPlan = async (req: AuthRequest, res: Response): P
     });
   } catch (error) {
     console.error('Update subscription plan error:', error);
+    await auditLogService.logSubscriptionChange({
+      userId: req.user?.id,
+      actorEmail: req.user?.email,
+      success: false,
+      metadata: {
+        reason: 'update_subscription_plan_failed',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+    }).catch(() => {});
     res.status(500).json({
       success: false,
       message: 'Failed to update subscription plan',

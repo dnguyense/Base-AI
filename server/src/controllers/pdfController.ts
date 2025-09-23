@@ -2,6 +2,12 @@ import { Request, Response } from 'express';
 import { pdfService, CompressionOptions, PDFCompressionService } from '../services/pdfService';
 import fs from 'fs-extra';
 import path from 'path';
+import {
+  ALLOWED_PDF_MIME_TYPES,
+  MAX_PDF_FILE_SIZE_BYTES,
+  MAX_PDF_TOTAL_UPLOAD_SIZE_BYTES,
+} from '../config/upload';
+import { calculateTotalUploadSize, cleanupUploadedFiles } from '../utils/upload';
 
 export interface UploadedFile {
   fieldname: string;
@@ -42,15 +48,49 @@ export class PDFController {
       }
 
       const uploadedFiles = Array.isArray(files) ? files : Object.values(files).flat();
+      const totalUploadSize = calculateTotalUploadSize(uploadedFiles);
+
+      if (totalUploadSize > MAX_PDF_TOTAL_UPLOAD_SIZE_BYTES) {
+        await cleanupUploadedFiles(uploadedFiles);
+        res.status(413).json({
+          success: false,
+          error: `Total upload size ${PDFCompressionService.formatFileSize(totalUploadSize)} exceeds limit of ${PDFCompressionService.formatFileSize(MAX_PDF_TOTAL_UPLOAD_SIZE_BYTES)}`,
+          totalSize: totalUploadSize,
+          maxTotalSize: MAX_PDF_TOTAL_UPLOAD_SIZE_BYTES
+        });
+        return;
+      }
+
       const processedFiles = [];
 
       for (const file of uploadedFiles) {
         // Validate file type
-        if (file.mimetype !== 'application/pdf') {
+        if (!ALLOWED_PDF_MIME_TYPES.includes(file.mimetype as (typeof ALLOWED_PDF_MIME_TYPES)[number])) {
           await fs.remove(file.path);
           res.status(400).json({
             success: false,
-            error: `File ${file.originalname} is not a PDF`
+            error: `File ${file.originalname} must be a PDF`
+          });
+          return;
+        }
+
+        if (!file.size || file.size <= 0) {
+          await fs.remove(file.path);
+          res.status(400).json({
+            success: false,
+            error: `File ${file.originalname} is empty`
+          });
+          return;
+        }
+
+        if (file.size > MAX_PDF_FILE_SIZE_BYTES) {
+          await fs.remove(file.path);
+          res.status(413).json({
+            success: false,
+            error: `File ${file.originalname} exceeds the ${PDFCompressionService.formatFileSize(MAX_PDF_FILE_SIZE_BYTES)} size limit`,
+            file: file.originalname,
+            size: file.size,
+            maxFileSize: MAX_PDF_FILE_SIZE_BYTES
           });
           return;
         }

@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import * as fsPromises from 'fs/promises';
 import User from '../../models/User';
 import { generateDownloadToken, secureDownload, stopDownloadCleanupScheduler } from '../../controllers/download';
+import AuditLog from '../../models/AuditLog';
 
 jest.mock('fs/promises', () => {
   const access = jest.fn();
@@ -58,8 +59,9 @@ const createUser = async (overrides: Record<string, any> = {}) => {
 };
 
 describe('Download Controller', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     jest.resetAllMocks();
+    await AuditLog.destroy({ where: {} });
   });
 
   afterAll(() => {

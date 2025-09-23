@@ -60,8 +60,17 @@ describeIfServerAllowed('Download Routes Integration', () => {
 
     expect(analyticsResponse.body.data.statistics.totalDownloads).toBeGreaterThanOrEqual(1);
 
+    const adminEmail = `admin-${Date.now()}-${Math.random().toString(36).slice(2)}@example.com`;
+    const adminRegister = await request(app)
+      .post('/api/auth/register')
+      .send({ email: adminEmail, password, firstName: 'Admin', lastName: 'User' })
+      .expect(201);
+
+    const adminToken = adminRegister.body.data.tokens.accessToken as string;
+
     const auditResponse = await request(app)
       .get('/api/v1/download/audit/trail')
+      .set('Authorization', `Bearer ${adminToken}`)
       .expect(200);
 
     expect(auditResponse.body.data.auditTrail.length).toBeGreaterThan(0);

@@ -6,6 +6,8 @@ import {
   login,
   loginValidation,
   refreshToken,
+  refreshTokenValidation,
+  validateToken,
   verifyEmail,
   requestPasswordReset,
   passwordResetValidation,
@@ -48,7 +50,7 @@ const passwordResetLimiter = rateLimit({
 // Public routes (no authentication required)
 router.post('/register', registerValidation, register);
 router.post('/login', authLimiter, loginValidation, login);
-router.post('/refresh-token', refreshToken);
+router.post('/refresh-token', refreshTokenValidation, refreshToken);
 router.get('/verify-email/:token', verifyEmail);
 router.post('/forgot-password', passwordResetLimiter, passwordResetValidation, requestPasswordReset);
 router.post('/reset-password', newPasswordValidation, resetPassword);
@@ -57,6 +59,7 @@ router.post('/reset-password', newPasswordValidation, resetPassword);
 router.get('/profile', authenticateToken, getProfile);
 router.put('/profile', authenticateToken, updateProfile);
 router.post('/logout', authenticateToken, logout);
+router.get('/validate', authenticateToken, validateToken);
 
 // Test endpoint for development
 router.get('/test', (req, res) => {

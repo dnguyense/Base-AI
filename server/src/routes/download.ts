@@ -1,5 +1,5 @@
 import express from 'express';
-import { authenticateToken } from '../middleware/auth';
+import { authenticateToken, requireAdmin } from '../middleware/auth';
 import { 
   generateDownloadToken, 
   secureDownload, 
@@ -36,6 +36,6 @@ router.get('/analytics/user', authenticateToken, getDownloadAnalytics);
  * @access Private (admin authentication required)
  * @note This endpoint should have admin middleware in production
  */
-router.get('/audit/trail', getDownloadAuditTrail);
+router.get('/audit/trail', authenticateToken, requireAdmin, getDownloadAuditTrail);
 
 export default router;

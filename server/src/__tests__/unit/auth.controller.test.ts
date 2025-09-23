@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { register, login } from '../../controllers/auth';
+import { register, login, refreshToken as refreshTokenController, validateToken } from '../../controllers/auth';
 import User from '../../models/User';
 import { sendVerificationEmail, sendPasswordResetEmail } from '../../services/email';
 import * as expressValidator from 'express-validator';
@@ -231,6 +231,85 @@ describe('Auth Controller', () => {
       expect(responsePayload.data.tokens).toMatchObject({
         accessToken: expect.any(String),
         refreshToken: expect.any(String),
+      });
+    });
+  });
+
+  describe('refreshToken', () => {
+    it('returns 401 when refresh token missing', async () => {
+      const req = { body: {} } as Request;
+      const res = mockResponse();
+
+      await refreshTokenController(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(401);
+      expect(res.json).toHaveBeenCalledWith({
+        success: false,
+        message: 'Refresh token is required',
+      });
+    });
+
+    it('issues new tokens when refresh token valid', async () => {
+      const req = { body: {} } as Request;
+      const res = mockResponse();
+
+      const userId = 999;
+      const refreshTokenValue = jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET || 'test_refresh_secret_key');
+      req.body.refreshToken = refreshTokenValue;
+
+      (User.findByPk as jest.Mock).mockResolvedValueOnce({ id: userId });
+
+      await refreshTokenController(req, res);
+
+      expect(User.findByPk).toHaveBeenCalledWith(userId);
+      expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+        success: true,
+        data: {
+          tokens: {
+            accessToken: expect.any(String),
+            refreshToken: expect.any(String),
+          },
+        },
+      }));
+    });
+  });
+
+  describe('validateToken', () => {
+    it('returns user details when token valid', async () => {
+      const req = {
+        user: { id: 777 },
+      } as unknown as Request;
+      const res = mockResponse();
+
+      (User.findByPk as jest.Mock).mockResolvedValueOnce({
+        toJSONBasic: () => ({ id: 777, email: userEmail }),
+      });
+
+      await validateToken(req as any, res);
+
+      expect(User.findByPk).toHaveBeenCalledWith(777);
+      expect(res.json).toHaveBeenCalledWith({
+        success: true,
+        data: {
+          user: { id: 777, email: userEmail },
+        },
+      });
+    });
+
+    it('returns 404 when user missing', async () => {
+      const req = {
+        user: { id: 12345 },
+      } as unknown as Request;
+      const res = mockResponse();
+
+      (User.findByPk as jest.Mock).mockResolvedValueOnce(null);
+
+      await validateToken(req as any, res);
+
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({
+        success: false,
+        message: 'User not found',
       });
     });
   });

@@ -6,6 +6,7 @@ import User from '../models/User';
 import Subscription from '../models/Subscription';
 import { sendSubscriptionEmail } from '../services/email';
 import { subscriptionService } from '../services/subscriptionService';
+import { auditLogService } from '../services/auditLogService';
 import { env } from '../config/env';
 
 // Stripe configuration
@@ -287,10 +288,24 @@ export const cancelSubscription = async (req: AuthRequest, res: Response): Promi
     // Update local subscription
     await subscription.update({
       cancelAtPeriodEnd: !immediately,
-      ...(immediately && { 
+      ...(immediately && {
         status: 'canceled',
         canceledAt: new Date()
       }),
+    });
+
+    await auditLogService.logSubscriptionChange({
+      userId: subscription.userId,
+      actorEmail: req.user?.email,
+      success: true,
+      metadata: {
+        subscriptionId: subscription.id,
+        stripeSubscriptionId: subscription.stripeSubscriptionId,
+        plan: subscription.plan,
+        status: immediately ? 'canceled' : subscription.status,
+        interval: subscription.interval,
+        reason: immediately ? 'cancel_immediate' : 'cancel_period_end',
+      },
     });
 
     res.json({
@@ -304,6 +319,15 @@ export const cancelSubscription = async (req: AuthRequest, res: Response): Promi
     });
   } catch (error) {
     console.error('Cancel subscription error:', error);
+    await auditLogService.logSubscriptionChange({
+      userId: req.user?.id,
+      actorEmail: req.user?.email,
+      success: false,
+      metadata: {
+        reason: 'cancel_subscription_failed',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+    }).catch(() => {});
     res.status(500).json({
       success: false,
       message: 'Failed to cancel subscription',
@@ -346,6 +370,20 @@ export const reactivateSubscription = async (req: AuthRequest, res: Response): P
       canceledAt: undefined,
     });
 
+    await auditLogService.logSubscriptionChange({
+      userId: subscription.userId,
+      actorEmail: req.user?.email,
+      success: true,
+      metadata: {
+        subscriptionId: subscription.id,
+        stripeSubscriptionId: subscription.stripeSubscriptionId,
+        plan: subscription.plan,
+        status: subscription.status,
+        interval: subscription.interval,
+        reason: 'reactivate_subscription',
+      },
+    });
+
     res.json({
       success: true,
       message: 'Subscription reactivated successfully',
@@ -355,6 +393,15 @@ export const reactivateSubscription = async (req: AuthRequest, res: Response): P
     });
   } catch (error) {
     console.error('Reactivate subscription error:', error);
+    await auditLogService.logSubscriptionChange({
+      userId: req.user?.id,
+      actorEmail: req.user?.email,
+      success: false,
+      metadata: {
+        reason: 'reactivate_subscription_failed',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+    }).catch(() => {});
     res.status(500).json({
       success: false,
       message: 'Failed to reactivate subscription',
@@ -490,6 +537,21 @@ const handleSubscriptionUpdate = async (stripeSubscription: Stripe.Subscription)
       console.error('Failed to send subscription email:', emailError);
     }
   }
+
+  await auditLogService.logSubscriptionChange({
+    userId: user.id,
+    success: true,
+    metadata: {
+      subscriptionId: subscription.id,
+      stripeSubscriptionId: subscription.stripeSubscriptionId,
+      plan,
+      interval,
+      status: stripeSubscription.status,
+      amount: subscription.amount,
+      currency: subscription.currency,
+      metadata: stripeSubscription.metadata,
+    },
+  }).catch(() => {});
 };
 
 // Handle subscription deletion
@@ -517,6 +579,18 @@ const handleSubscriptionDeleted = async (stripeSubscription: Stripe.Subscription
       subscriptionPlan: 'free',
     });
   }
+
+  await auditLogService.logSubscriptionChange({
+    userId: subscription.userId,
+    success: true,
+    metadata: {
+      subscriptionId: subscription.id,
+      stripeSubscriptionId: subscription.stripeSubscriptionId,
+      status: 'canceled',
+      plan: subscription.plan,
+      reason: 'subscription_deleted',
+    },
+  }).catch(() => {});
 };
 
 // Handle successful payment
@@ -528,7 +602,19 @@ const handlePaymentSucceeded = async (invoice: Stripe.Invoice) => {
 
     if (subscription) {
       console.log(`Payment succeeded for subscription: ${subscription.id}`);
-      // Additional logic for successful payment can be added here
+      await auditLogService.logSubscriptionChange({
+        userId: subscription.userId,
+        success: true,
+        metadata: {
+          subscriptionId: subscription.id,
+          stripeSubscriptionId: subscription.stripeSubscriptionId,
+          plan: subscription.plan,
+          status: subscription.status,
+          reason: 'invoice_payment_succeeded',
+          amount: invoice.amount_paid,
+          currency: invoice.currency || subscription.currency,
+        },
+      }).catch(() => {});
     }
   }
 };
@@ -542,8 +628,19 @@ const handlePaymentFailed = async (invoice: Stripe.Invoice) => {
 
     if (subscription) {
       console.log(`Payment failed for subscription: ${subscription.id}`);
-      // Additional logic for failed payment can be added here
-      // e.g., send notification email, update subscription status
+      await auditLogService.logSubscriptionChange({
+        userId: subscription.userId,
+        success: false,
+        metadata: {
+          subscriptionId: subscription.id,
+          stripeSubscriptionId: subscription.stripeSubscriptionId,
+          plan: subscription.plan,
+          status: subscription.status,
+          reason: 'invoice_payment_failed',
+          amount: invoice.amount_due,
+          currency: invoice.currency || subscription.currency,
+        },
+      }).catch(() => {});
     }
   }
 };

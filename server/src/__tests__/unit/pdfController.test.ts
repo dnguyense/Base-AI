@@ -2,6 +2,10 @@ import { Request, Response } from 'express';
 import { PDFController } from '../../controllers/pdfController';
 import { pdfService, PDFCompressionService } from '../../services/pdfService';
 import fs from 'fs-extra';
+import {
+  MAX_PDF_FILE_SIZE_BYTES,
+  MAX_PDF_TOTAL_UPLOAD_SIZE_BYTES,
+} from '../../config/upload';
 
 // Mock dependencies
 jest.mock('../../services/pdfService');
@@ -10,6 +14,7 @@ jest.mock('fs-extra');
 const mockPdfService = pdfService as jest.Mocked<typeof pdfService>;
 const mockFs = fs as jest.Mocked<typeof fs>;
 const mockPDFCompressionService = PDFCompressionService as jest.MockedClass<typeof PDFCompressionService>;
+const { PDFCompressionService: ActualPDFCompressionService } = jest.requireActual('../../services/pdfService');
 
 describe('PDFController', () => {
   let mockReq: Partial<Request>;
@@ -36,9 +41,8 @@ describe('PDFController', () => {
 
     jest.clearAllMocks();
     mockFs.remove.mockResolvedValue();
-    
-    // Reset all fs spies
-    jest.restoreAllMocks();
+    mockPDFCompressionService.validatePDFFile = jest.fn();
+    mockPDFCompressionService.formatFileSize.mockImplementation(ActualPDFCompressionService.formatFileSize);
   });
 
   describe('uploadFiles', () => {
@@ -72,7 +76,7 @@ describe('PDFController', () => {
       expect(mockStatus).toHaveBeenCalledWith(400);
       expect(mockJson).toHaveBeenCalledWith({
         success: false,
-        error: 'File test.txt is not a PDF'
+        error: 'File test.txt must be a PDF'
       });
     });
 
@@ -177,6 +181,75 @@ describe('PDFController', () => {
           expect.objectContaining({ originalName: 'test2.pdf', size: 2000 })
         ])
       });
+    });
+
+    it('should reject when total upload size exceeds the limit', async () => {
+      const oversized = Math.floor(MAX_PDF_TOTAL_UPLOAD_SIZE_BYTES / 2) + 1;
+      const mockFiles = [
+        {
+          fieldname: 'file',
+          originalname: 'large1.pdf',
+          encoding: '7bit',
+          mimetype: 'application/pdf',
+          path: '/temp/large1.pdf',
+          size: oversized,
+          filename: 'large1.pdf',
+          destination: '/temp'
+        },
+        {
+          fieldname: 'file',
+          originalname: 'large2.pdf',
+          encoding: '7bit',
+          mimetype: 'application/pdf',
+          path: '/temp/large2.pdf',
+          size: oversized,
+          filename: 'large2.pdf',
+          destination: '/temp'
+        }
+      ];
+
+      mockReq.files = mockFiles as Express.Multer.File[];
+
+      await PDFController.uploadFiles(mockReq as Request, mockRes as Response);
+
+      expect(mockStatus).toHaveBeenCalledWith(413);
+      expect(mockJson).toHaveBeenCalledWith({
+        success: false,
+        error: expect.stringContaining('Total upload size'),
+        totalSize: expect.any(Number),
+        maxTotalSize: MAX_PDF_TOTAL_UPLOAD_SIZE_BYTES
+      });
+      expect(mockFs.remove).toHaveBeenCalledTimes(mockFiles.length);
+      expect(mockPDFCompressionService.validatePDFFile).not.toHaveBeenCalled();
+    });
+
+    it('should reject when an individual file exceeds the size limit', async () => {
+      const largeFileSize = MAX_PDF_FILE_SIZE_BYTES + 1;
+      const mockFile = {
+        fieldname: 'file',
+        originalname: 'huge.pdf',
+        encoding: '7bit',
+        mimetype: 'application/pdf',
+        path: '/temp/huge.pdf',
+        size: largeFileSize,
+        filename: 'huge.pdf',
+        destination: '/temp'
+      };
+
+      mockReq.files = [mockFile as Express.Multer.File];
+
+      await PDFController.uploadFiles(mockReq as Request, mockRes as Response);
+
+      expect(mockStatus).toHaveBeenCalledWith(413);
+      expect(mockJson).toHaveBeenCalledWith({
+        success: false,
+        error: `File huge.pdf exceeds the ${ActualPDFCompressionService.formatFileSize(MAX_PDF_FILE_SIZE_BYTES)} size limit`,
+        file: 'huge.pdf',
+        size: largeFileSize,
+        maxFileSize: MAX_PDF_FILE_SIZE_BYTES
+      });
+      expect(mockFs.remove).toHaveBeenCalledWith(mockFile.path);
+      expect(mockPDFCompressionService.validatePDFFile).not.toHaveBeenCalled();
     });
   });
 

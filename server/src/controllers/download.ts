@@ -4,10 +4,11 @@ import path from 'path';
 import fs from 'fs/promises';
 import { Op } from 'sequelize';
 import User from '../models/User';
-import Subscription from '../models/Subscription';
 import { SUBSCRIPTION_LIMITS } from '../middleware/subscription';
 import { subscriptionService } from '../services/subscriptionService';
 import { env } from '../config/env';
+import AuditLog from '../models/AuditLog';
+import { auditLogService } from '../services/auditLogService';
 
 const JWT_SECRET = env.jwt.secret;
 
@@ -24,21 +25,18 @@ interface DownloadToken {
   expiresAt: number;
 }
 
-interface DownloadAttempt {
-  userId: number;
-  fileId: string;
-  fileName: string;
-  success: boolean;
-  ipAddress: string;
-  userAgent: string;
-  timestamp: Date;
-  subscriptionPlan: string;
-  downloadSize?: number;
-}
-
-// In-memory storage for download attempts (in production, use database)
-const downloadAttempts: DownloadAttempt[] = [];
 const downloadTokens: Map<string, DownloadToken> = new Map();
+
+const resolveClientIp = (req: Request): string => {
+  return req.ip || (req.socket && req.socket.remoteAddress) || (req as any).connection?.remoteAddress || 'unknown';
+};
+
+const resolveUserAgent = (req: Request): string => {
+  if (typeof (req as any).get === 'function') {
+    return (req as any).get('User-Agent') || 'unknown';
+  }
+  return 'unknown';
+};
 
 // Generate secure download token
 export const generateDownloadToken = async (req: AuthRequest, res: Response): Promise<void> => {
@@ -71,19 +69,32 @@ export const generateDownloadToken = async (req: AuthRequest, res: Response): Pr
     if (user.subscriptionPlan === 'free') {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      
-      const todayAttempts = downloadAttempts.filter(attempt => 
-        attempt.userId === user.id && 
-        attempt.success && 
-        attempt.timestamp >= today
-      ).length;
 
-      if (todayAttempts >= currentPlan.dailyCompressions) {
+      const todayDownloads = await auditLogService.countDownloadAttempts({
+        userId: user.id,
+        success: true,
+        start: today,
+      });
+
+      if (todayDownloads >= currentPlan.dailyCompressions) {
+        await auditLogService.logDownloadAttempt({
+          userId: user.id,
+          actorEmail: user.email,
+          success: false,
+          ipAddress: resolveClientIp(req),
+          userAgent: resolveUserAgent(req),
+          metadata: {
+            fileId,
+            fileName,
+            subscriptionPlan: user.subscriptionPlan,
+            reason: 'DAILY_LIMIT_EXCEEDED',
+          },
+        });
         res.status(403).json({
           success: false,
           message: 'Daily download limit exceeded. Please upgrade your subscription.',
           code: 'DAILY_LIMIT_EXCEEDED',
-          currentUsage: todayAttempts,
+          currentUsage: todayDownloads,
           limit: currentPlan.dailyCompressions,
         });
         return;
@@ -94,6 +105,19 @@ export const generateDownloadToken = async (req: AuthRequest, res: Response): Pr
     const hasActiveSubscription = subscription && subscription.isActive();
     
     if (user.subscriptionPlan !== 'free' && !hasActiveSubscription) {
+      await auditLogService.logDownloadAttempt({
+        userId: user.id,
+        actorEmail: user.email,
+        success: false,
+        ipAddress: resolveClientIp(req),
+        userAgent: resolveUserAgent(req),
+        metadata: {
+          fileId,
+          fileName,
+          subscriptionPlan: user.subscriptionPlan,
+          reason: 'SUBSCRIPTION_REQUIRED',
+        },
+      });
       res.status(403).json({
         success: false,
         message: 'Active subscription required for download access',
@@ -106,6 +130,19 @@ export const generateDownloadToken = async (req: AuthRequest, res: Response): Pr
     try {
       await fs.access(filePath);
     } catch (error) {
+      await auditLogService.logDownloadAttempt({
+        userId: user.id,
+        actorEmail: user.email,
+        success: false,
+        ipAddress: resolveClientIp(req),
+        userAgent: resolveUserAgent(req),
+        metadata: {
+          fileId,
+          fileName,
+          subscriptionPlan: user.subscriptionPlan,
+          reason: 'FILE_NOT_FOUND',
+        },
+      });
       res.status(404).json({
         success: false,
         message: 'File not found',
@@ -167,19 +204,15 @@ export const secureDownload = async (req: Request, res: Response): Promise<void>
     try {
       tokenData = jwt.verify(token, JWT_SECRET) as DownloadToken;
     } catch (jwtError) {
-      // Log unauthorized access attempt
-      const attempt: DownloadAttempt = {
-        userId: 0, // Unknown user
-        fileId: 'unknown',
-        fileName: 'unknown',
+      await auditLogService.logDownloadAttempt({
         success: false,
-        ipAddress: req.ip || req.connection.remoteAddress || 'unknown',
-        userAgent: req.get('User-Agent') || 'unknown',
-        timestamp: new Date(),
-        subscriptionPlan: 'unknown',
-      };
-      downloadAttempts.push(attempt);
-
+        ipAddress: resolveClientIp(req),
+        userAgent: resolveUserAgent(req),
+        metadata: {
+          reason: 'TOKEN_INVALID',
+          token,
+        },
+      });
       res.status(401).json({
         success: false,
         message: 'Invalid or expired download token',
@@ -213,19 +246,19 @@ export const secureDownload = async (req: Request, res: Response): Promise<void>
     try {
       fileStats = await fs.stat(tokenData.filePath);
     } catch (error) {
-      // Log failed download attempt
-      const attempt: DownloadAttempt = {
+      await auditLogService.logDownloadAttempt({
         userId: user.id,
-        fileId: tokenData.fileId,
-        fileName: tokenData.fileName,
+        actorEmail: user.email,
         success: false,
-        ipAddress: req.ip || req.connection.remoteAddress || 'unknown',
-        userAgent: req.get('User-Agent') || 'unknown',
-        timestamp: new Date(),
-        subscriptionPlan: user.subscriptionPlan,
-      };
-      downloadAttempts.push(attempt);
-
+        ipAddress: resolveClientIp(req),
+        userAgent: resolveUserAgent(req),
+        metadata: {
+          fileId: tokenData.fileId,
+          fileName: tokenData.fileName,
+          subscriptionPlan: user.subscriptionPlan,
+          reason: 'FILE_MISSING',
+        },
+      });
       res.status(404).json({
         success: false,
         message: 'File no longer available',
@@ -239,6 +272,19 @@ export const secureDownload = async (req: Request, res: Response): Promise<void>
     const hasActiveSubscription = subscription && subscription.isActive();
     
     if (user.subscriptionPlan !== 'free' && !hasActiveSubscription) {
+      await auditLogService.logDownloadAttempt({
+        userId: user.id,
+        actorEmail: user.email,
+        success: false,
+        ipAddress: resolveClientIp(req),
+        userAgent: resolveUserAgent(req),
+        metadata: {
+          fileId: tokenData.fileId,
+          fileName: tokenData.fileName,
+          subscriptionPlan: user.subscriptionPlan,
+          reason: 'SUBSCRIPTION_EXPIRED',
+        },
+      });
       res.status(403).json({
         success: false,
         message: 'Active subscription required',
@@ -247,19 +293,19 @@ export const secureDownload = async (req: Request, res: Response): Promise<void>
       return;
     }
 
-    // Log successful download attempt
-    const successfulAttempt: DownloadAttempt = {
+    await auditLogService.logDownloadAttempt({
       userId: user.id,
-      fileId: tokenData.fileId,
-      fileName: tokenData.fileName,
+      actorEmail: user.email,
       success: true,
-      ipAddress: req.ip || req.connection.remoteAddress || 'unknown',
-      userAgent: req.get('User-Agent') || 'unknown',
-      timestamp: new Date(),
-      subscriptionPlan: user.subscriptionPlan,
-      downloadSize: fileStats.size,
-    };
-    downloadAttempts.push(successfulAttempt);
+      ipAddress: resolveClientIp(req),
+      userAgent: resolveUserAgent(req),
+      metadata: {
+        fileId: tokenData.fileId,
+        fileName: tokenData.fileName,
+        subscriptionPlan: user.subscriptionPlan,
+        downloadSize: fileStats.size,
+      },
+    });
 
     // Remove token after use (one-time use)
     downloadTokens.delete(token);
@@ -302,28 +348,28 @@ export const getDownloadAnalytics = async (req: AuthRequest, res: Response): Pro
       return;
     }
 
-    const userAttempts = downloadAttempts.filter(attempt => attempt.userId === user.id);
-    
-    // Calculate analytics
-    const totalDownloads = userAttempts.filter(a => a.success).length;
-    const failedAttempts = userAttempts.filter(a => !a.success).length;
-    
+    const userAttempts = await AuditLog.findAll({
+      where: {
+        action: 'DOWNLOAD_ATTEMPT',
+        userId: user.id,
+      },
+      order: [['createdAt', 'DESC']],
+    });
+
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const todayDownloads = userAttempts.filter(a => 
-      a.success && a.timestamp >= today
-    ).length;
-
     const thisMonth = new Date();
     thisMonth.setDate(1);
     thisMonth.setHours(0, 0, 0, 0);
-    const monthlyDownloads = userAttempts.filter(a => 
-      a.success && a.timestamp >= thisMonth
-    ).length;
+
+    const totalDownloads = userAttempts.filter(a => a.success).length;
+    const failedAttempts = userAttempts.filter(a => !a.success).length;
+    const todayDownloads = userAttempts.filter(a => a.success && a.createdAt >= today).length;
+    const monthlyDownloads = userAttempts.filter(a => a.success && a.createdAt >= thisMonth).length;
 
     const totalDataTransferred = userAttempts
-      .filter(a => a.success && a.downloadSize)
-      .reduce((sum, a) => sum + (a.downloadSize || 0), 0);
+      .filter(a => a.success && a.metadata?.downloadSize)
+      .reduce((sum, a) => sum + Number(a.metadata?.downloadSize || 0), 0);
 
     const currentPlan = SUBSCRIPTION_LIMITS[user.subscriptionPlan as keyof typeof SUBSCRIPTION_LIMITS] || SUBSCRIPTION_LIMITS.free;
 
@@ -352,13 +398,14 @@ export const getDownloadAnalytics = async (req: AuthRequest, res: Response): Pro
         averageFileSize: totalDownloads > 0 ? Math.round(totalDataTransferred / totalDownloads / (1024 * 1024)) : 0, // MB
       },
       recentActivity: userAttempts
-        .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
         .slice(0, 10)
         .map(attempt => ({
-          fileName: attempt.fileName,
+          fileName: attempt.metadata?.fileName || attempt.entityId || 'unknown',
           success: attempt.success,
-          timestamp: attempt.timestamp,
-          fileSize: attempt.downloadSize ? Math.round(attempt.downloadSize / (1024 * 1024)) : null, // MB
+          timestamp: attempt.createdAt,
+          fileSize: attempt.metadata?.downloadSize
+            ? Math.round(Number(attempt.metadata.downloadSize) / (1024 * 1024))
+            : null,
         })),
     };
 
@@ -377,53 +424,80 @@ export const getDownloadAnalytics = async (req: AuthRequest, res: Response): Pro
 };
 
 // Admin endpoint to get download audit trail
-export const getDownloadAuditTrail = async (req: Request, res: Response) => {
+export const getDownloadAuditTrail = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    // This would typically require admin authentication middleware
     const { userId, startDate, endDate, limit = 100 } = req.query;
 
-    let filteredAttempts = downloadAttempts;
+    const where: any = {
+      action: 'DOWNLOAD_ATTEMPT',
+    };
 
     if (userId) {
-      filteredAttempts = filteredAttempts.filter(a => a.userId === parseInt(userId as string));
+      where.userId = parseInt(userId as string, 10);
     }
 
-    if (startDate) {
-      const start = new Date(startDate as string);
-      filteredAttempts = filteredAttempts.filter(a => a.timestamp >= start);
+    if (startDate || endDate) {
+      where.createdAt = {};
+      if (startDate) {
+        where.createdAt[Op.gte] = new Date(startDate as string);
+      }
+      if (endDate) {
+        where.createdAt[Op.lte] = new Date(endDate as string);
+      }
     }
 
-    if (endDate) {
-      const end = new Date(endDate as string);
-      filteredAttempts = filteredAttempts.filter(a => a.timestamp <= end);
-    }
+    const attempts = await AuditLog.findAll({
+      where,
+      order: [['createdAt', 'DESC']],
+    });
 
-    const auditTrail = filteredAttempts
-      .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
-      .slice(0, parseInt(limit as string))
+    const limitNumber = Number(limit) > 0 ? Math.min(Number(limit), 1000) : 100;
+
+    const auditTrail = attempts
+      .slice(0, limitNumber)
       .map(attempt => ({
         userId: attempt.userId,
-        fileId: attempt.fileId,
-        fileName: attempt.fileName,
+        fileId: attempt.metadata?.fileId ?? attempt.entityId ?? null,
+        fileName: attempt.metadata?.fileName ?? null,
         success: attempt.success,
-        timestamp: attempt.timestamp,
+        timestamp: attempt.createdAt,
         ipAddress: attempt.ipAddress,
         userAgent: attempt.userAgent,
-        subscriptionPlan: attempt.subscriptionPlan,
-        downloadSize: attempt.downloadSize,
+        subscriptionPlan: attempt.metadata?.subscriptionPlan ?? null,
+        downloadSize: attempt.metadata?.downloadSize,
+        reason: attempt.metadata?.reason,
       }));
 
     const summary = {
-      totalAttempts: filteredAttempts.length,
-      successfulDownloads: filteredAttempts.filter(a => a.success).length,
-      failedAttempts: filteredAttempts.filter(a => !a.success).length,
-      uniqueUsers: new Set(filteredAttempts.map(a => a.userId)).size,
+      totalAttempts: attempts.length,
+      successfulDownloads: attempts.filter(a => a.success).length,
+      failedAttempts: attempts.filter(a => !a.success).length,
+      uniqueUsers: new Set(attempts.map(a => a.userId).filter(Boolean)).size,
       totalDataTransferred: Math.round(
-        filteredAttempts
-          .filter(a => a.success && a.downloadSize)
-          .reduce((sum, a) => sum + (a.downloadSize || 0), 0) / (1024 * 1024)
-      ), // MB
+        attempts
+          .filter(a => a.success && a.metadata?.downloadSize)
+          .reduce((sum, a) => sum + Number(a.metadata?.downloadSize || 0), 0) / (1024 * 1024)
+      ),
     };
+
+    await auditLogService.logAdminAction({
+      userId: req.user?.id,
+      actorEmail: req.user?.email,
+      success: true,
+      ipAddress: resolveClientIp(req),
+      userAgent: resolveUserAgent(req),
+      metadata: {
+        actionName: 'VIEW_DOWNLOAD_AUDIT',
+        route: req.originalUrl,
+        entityType: 'download_audit',
+        filters: {
+          userId,
+          startDate,
+          endDate,
+          limit: limitNumber,
+        },
+      },
+    });
 
     res.json({
       success: true,
@@ -435,6 +509,21 @@ export const getDownloadAuditTrail = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('Get download audit trail error:', error);
+
+    await auditLogService.logAdminAction({
+      userId: req.user?.id,
+      actorEmail: req.user?.email,
+      success: false,
+      ipAddress: resolveClientIp(req),
+      userAgent: resolveUserAgent(req),
+      metadata: {
+        actionName: 'VIEW_DOWNLOAD_AUDIT',
+        route: req.originalUrl,
+        entityType: 'download_audit',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+    }).catch(() => {});
+
     res.status(500).json({
       success: false,
       message: 'Failed to fetch audit trail',

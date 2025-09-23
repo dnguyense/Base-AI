@@ -4,6 +4,7 @@ import path from 'path';
 import { spawn } from 'child_process';
 import { EventEmitter } from 'events';
 import { v4 as uuidv4 } from 'uuid';
+import { MAX_PDF_FILE_SIZE_BYTES } from '../config/upload';
 
 export interface CompressionOptions {
   quality: 'low' | 'medium' | 'high' | 'custom';
@@ -355,7 +356,7 @@ export class PDFCompressionService {
       const fileStats = await fs.stat(filePath);
       
       // Check file size (max 50MB)
-      if (fileStats.size > 50 * 1024 * 1024) {
+      if (fileStats.size > MAX_PDF_FILE_SIZE_BYTES) {
         return { valid: false, error: 'File size exceeds 50MB limit' };
       }
 

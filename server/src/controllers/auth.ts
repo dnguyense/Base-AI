@@ -15,6 +15,15 @@ const JWT_EXPIRES_IN: StringValue = env.jwt.expiresIn as StringValue;
 const JWT_REFRESH_SECRET: string = env.jwt.refreshSecret;
 const JWT_REFRESH_EXPIRES_IN: StringValue = env.jwt.refreshExpiresIn as StringValue;
 
+const logAuthError = (context: string, error: unknown): void => {
+  const message = error instanceof Error ? error.message : 'Unknown error';
+  if (env.isProduction) {
+    console.error(`${context}: ${message}`);
+  } else {
+    console.error(`${context}:`, error);
+  }
+};
+
 interface AuthRequest extends Request {
   user?: any;
 }
@@ -30,14 +39,17 @@ const generateTokens = (userId: number): { accessToken: string; refreshToken: st
 };
 
 // Validation rules
+const strongPasswordValidator = () =>
+  body('password')
+    .isStrongPassword({ minLength: 10, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 })
+    .withMessage('Password must be at least 10 characters and include upper, lower, number, and symbol characters');
+
 export const registerValidation = [
   body('email')
     .isEmail()
     .normalizeEmail()
     .withMessage('Please provide a valid email address'),
-  body('password')
-    .isLength({ min: 6 })
-    .withMessage('password must be at least 6 characters'),
+  strongPasswordValidator(),
   body('firstName')
     .optional()
     .trim()
@@ -71,9 +83,14 @@ export const newPasswordValidation = [
   body('token')
     .notEmpty()
     .withMessage('Reset token is required'),
-  body('password')
-    .isLength({ min: 6 })
-    .withMessage('password must be at least 6 characters'),
+  strongPasswordValidator(),
+];
+
+export const refreshTokenValidation = [
+  body('refreshToken')
+    .isString()
+    .notEmpty()
+    .withMessage('Refresh token is required'),
 ];
 
 // Register new user
@@ -120,9 +137,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     try {
       await sendVerificationEmail(email, emailVerificationToken);
     } catch (emailError) {
-      if (!env.isProduction) {
-        console.error('Failed to send verification email:', emailError);
-      }
+      logAuthError('Failed to send verification email', emailError);
       // Don't fail registration if email sending fails
     }
 
@@ -144,7 +159,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       }
     });
   } catch (error) {
-    console.error('Registration error:', error);
+    logAuthError('Registration error', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error',
@@ -206,7 +221,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       }
     });
   } catch (error) {
-    console.error('Login error:', error);
+    logAuthError('Login error', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error',
@@ -217,9 +232,9 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 // Refresh access token
 export const refreshToken = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { refreshToken } = req.body;
+    const { refreshToken: refreshTokenInput } = req.body as { refreshToken?: string };
 
-    if (!refreshToken) {
+    if (!refreshTokenInput || typeof refreshTokenInput !== 'string') {
       res.status(401).json({
         success: false,
         message: 'Refresh token is required',
@@ -228,7 +243,7 @@ export const refreshToken = async (req: Request, res: Response): Promise<void> =
     }
 
     // Verify refresh token
-    const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET) as { userId: number };
+    const decoded = jwt.verify(refreshTokenInput, JWT_REFRESH_SECRET) as { userId: number };
     
     // Check if user still exists
     const user = await User.findByPk(decoded.userId);
@@ -251,10 +266,38 @@ export const refreshToken = async (req: Request, res: Response): Promise<void> =
       },
     });
   } catch (error) {
-    console.error('Token refresh error:', error);
+    logAuthError('Token refresh error', error);
     res.status(401).json({
       success: false,
       message: 'Invalid refresh token',
+    });
+  }
+};
+
+export const validateToken = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const userRecord = await User.findByPk(req.user.id);
+    if (!userRecord) {
+      res.status(404).json({
+        success: false,
+        message: 'User not found',
+      });
+      return;
+    }
+
+    const userResponse = userRecord.toJSONBasic();
+
+    res.json({
+      success: true,
+      data: {
+        user: userResponse,
+      },
+    });
+  } catch (error) {
+    logAuthError('Validate token error', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error',
     });
   }
 };
@@ -296,7 +339,7 @@ export const verifyEmail = async (req: Request, res: Response): Promise<void> =>
       message: 'Email verified successfully',
     });
   } catch (error) {
-    console.error('Email verification error:', error);
+    logAuthError('Email verification error', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error',
@@ -345,7 +388,7 @@ export const requestPasswordReset = async (req: Request, res: Response): Promise
     try {
       await sendPasswordResetEmail(email, resetToken);
     } catch (emailError) {
-      console.error('Failed to send password reset email:', emailError);
+      logAuthError('Failed to send password reset email', emailError);
       res.status(500).json({
         success: false,
         message: 'Failed to send password reset email',
@@ -358,7 +401,7 @@ export const requestPasswordReset = async (req: Request, res: Response): Promise
       message: 'Password reset instructions sent to your email',
     });
   } catch (error) {
-    console.error('Password reset request error:', error);
+    logAuthError('Password reset request error', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error',
@@ -412,7 +455,7 @@ export const resetPassword = async (req: Request, res: Response): Promise<void> 
       message: 'Password reset successfully',
     });
   } catch (error) {
-    console.error('Password reset error:', error);
+    logAuthError('Password reset error', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error',
@@ -441,7 +484,7 @@ export const getProfile = async (req: AuthRequest, res: Response): Promise<void>
       },
     });
   } catch (error) {
-    console.error('Get profile error:', error);
+    logAuthError('Get profile error', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error',
@@ -479,7 +522,7 @@ export const updateProfile = async (req: AuthRequest, res: Response): Promise<vo
       },
     });
   } catch (error) {
-    console.error('Update profile error:', error);
+    logAuthError('Update profile error', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error',
@@ -498,7 +541,7 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
       message: 'Logout successful',
     });
   } catch (error) {
-    console.error('Logout error:', error);
+    logAuthError('Logout error', error);
     res.status(500).json({
       success: false,
       message: 'Internal server error',

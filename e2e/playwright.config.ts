@@ -75,10 +75,21 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: [
     {
-      command: 'npm run server',
-      port: 3001,
+      command: 'npm run start:test',
+      port: 3000,
       cwd: '../server',
       reuseExistingServer: !process.env.CI,
+      env: {
+        NODE_ENV: 'test',
+        PORT: '3000',
+        DATABASE_URL: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/test_db',
+        REDIS_URL: process.env.REDIS_URL || 'redis://localhost:6379',
+        STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY || 'sk_test_dummy',
+        STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET || 'whsec_dummy',
+        JWT_SECRET: process.env.JWT_SECRET || 'test-jwt-secret',
+        CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:3000',
+        FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:3000',
+      },
     },
     {
       command: 'npm start',
